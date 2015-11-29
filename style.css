@@ -1,0 +1,71 @@
+ul
+{
+	margin-left:1em;
+	list-style: none;
+}
+
+li
+{
+
+	margin-bottom: 0.2em;
+}
+
+body
+{
+	margin-left: 1.5em;
+}
+
+hr
+{
+	margin-left: -1.5em;
+}
+
+h1
+{
+	font-size: large;
+}
+
+h2
+{
+	font-size: medium;
+	border-top: 1px solid black;
+	margin-left: -1em;
+	margin-top: 2.5em;
+	padding-top: 1.5em;
+	padding-left: 1em;
+}
+
+h3
+{
+	font-size: small;
+	margin-bottom: 1em;
+}
+
+.profile
+{
+	margin-left: 1em;
+}
+
+.month
+{
+	text-align: right;
+}
+
+
+.navigator
+{
+	margin-left: -1em;
+	font-size: x-small;
+	padding-bottom:0.1em;
+	border-bottom: 3px double black;
+}
+
+.furikae
+{
+	color: red;
+}
+
+td
+{
+	padding-left: 1em;
+}
