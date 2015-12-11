@@ -1,0 +1,187 @@
+\documentclass[dvipdfmx,22pt,notheorems]{beamer}
+%%%% 和文用 %%%%%
+\usepackage{bxdpx-beamer}
+\usepackage{pxjahyper}
+\usepackage{minijs}%和文用
+\renewcommand{\kanjifamilydefault}{\gtdefault}%和文用
+
+%%%% スライドの見た目 %%%%%
+\usetheme{Madrid}
+\usefonttheme{professionalfonts}
+\setbeamertemplate{frametitle}[default][center]
+\setbeamertemplate{navigation symbols}{}
+\setbeamercovered{transparent}%好みに応じてどうぞ）
+\setbeamertemplate{footline}[page number]
+\setbeamerfont{footline}{size=\normalsize,series=\bfseries}
+\setbeamercolor{footline}{fg=black,bg=black}
+%%%%
+
+%%%% 定義環境 %%%%%
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{theorem}{定理}
+\newtheorem{definition}{定義}
+\newtheorem{proposition}{命題}
+\newtheorem{lemma}{補題}
+\newtheorem{corollary}{系}
+\newtheorem{conjecture}{予想}
+\newtheorem*{remark}{Remark}
+\renewcommand{\proofname}{}
+%%%%%%%%%
+
+%%%%% フォント基本設定 %%%%%
+\usepackage[T1]{fontenc}%8bit フォント
+\usepackage{textcomp}%欧文フォントの追加
+\usepackage[utf8]{inputenc}%文字コードをUTF-8
+\usepackage{otf}%otfパッケージ
+\usepackage{bm}%数式太字
+\setbeamerfont{normal text}{size=\Large} 
+%%%%%%%%%%
+ 
+\title[略タイトル]{グレブナー基底と代数多様体}%[略タイトル]{タイトル}
+\author[]{伊藤克哉@WeLoveBuddha}%[略名前]{名前}
+\date{\today}%日付
+\begin{document}
+
+\begin{frame}[plain]\frametitle{}
+\titlepage %表紙
+\end{frame}
+
+\begin{frame}\frametitle{目次}
+\tableofcontents %目次
+\end{frame}
+
+\section{6学期はじめの私}
+\begin{frame}
+	\frametitle{6学期はじめの私}
+		\begin{itemize}
+			\item　\Large 谷村大先輩と荒田大先輩の煽りを受けてこの教室に。
+			\item　\Large グレブナー基底に興味はあったが知識は0。
+			\item　\Large 代数幾何の知識は僅かにあった。
+		\end{itemize}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{6学期はじめの目標}
+		\begin{itemize}
+			\item　\Large グレブナー基底と代数幾何の関わりを見たい。
+			\item　\Large 具体的な代数多様体を愛でたい。
+		\end{itemize}
+	
+\end{frame}
+\section{結果}
+\begin{frame}
+	\frametitle{今学期読んだ本}
+	Cox, David A, Little, John, O'Shea, Donal著のIdeals, Varieties, and Algorithms
+	(邦題:グレブナー基底と代数多様体)を主に読んだ.その他この本で参照されている論文などを読んだ.グレブナー基底についてはそんなに書いてないけど代数幾何  (古典論)を勉強するにはとても良い本だった.
+\end{frame}
+\begin{frame}
+	\frametitle{グレブナー基底とは}
+	$R=K[X_1,\cdots,X_n]$という多項式と$I \subset R$イデアルを考える.\\
+	$g \in I$であることの判定法を与えるのがグレブナー基底.
+	\begin{theorem}
+	$\{ f_1, \cdots , f_n \}$を$I$のグレブナー基底とする\\
+	$g \in I \Leftrightarrow g$を $\{f_1, \cdots , f_n \}$で割った余りが$0$\\
+	\end{theorem}
+\end{frame}
+\begin{frame}
+	\frametitle{Computer Algebra System}
+	コンピューター上で数式を処理するためのソフトをComputer Algebra Systemという.グレブナー基底を計算するのにも必要.
+	\begin{table}[htb]
+  \begin{tabular}{|l|c|l|} \hline
+    名前 & ライセンス & 特徴  \\ \hline 
+    Mathematica & 学生\$140 & 代表格 \\
+    Maxima & Free & Mathematicaに引けをとらない\\
+	Axiom & Free & 代数もできる\\
+	Macaulay2 & Free & 代数幾何に強い\\
+	Sympy & Free & Pythonベースで書きやすい\\ \hline
+  \end{tabular}
+\end{table}
+\end{frame}
+\begin{frame}
+	\frametitle{6学期中の私}
+		\begin{itemize}
+			\item \large 初め：Cox.et.alの「グレブナー基底と代数多様体」を読む\pause
+			\item \large その後：Cox「素イデアルを判定するアルゴリズムがあるよ」\pause
+			\item \large $\to$ 論文をあさりPythonで実装をしようとする。\pause
+			\item \large ar$\chi$iv 「グレブナー基底を使ってコホモロジーが計算できるよ」\pause
+			\item \large$\to$ 論文をあさりMacaulay2で実装しようとする。\pause
+			\item \Huge 実装は辛い。
+		\end{itemize}
+\end{frame}
+\subsection{結果1}
+\begin{frame}
+	\frametitle{結果1:グレブナー基底に関する知見を得た}
+		\begin{itemize}
+		\item \Large グレブナー基底のキーとなる性質は最初に述べた
+		\item \Large 可換環:準素分解・素イデアルの判定
+		\item \Large 代数幾何:次元の計算・コホモロジーの計算
+		\item \Large 暗号理論:多変数公開鍵暗号
+		\end{itemize}
+\end{frame}
+\subsection{結果2}
+\begin{frame}
+	\frametitle{結果2:準素分解のアルゴリズムをしった}
+		\begin{itemize}
+		\item Gianni, P.; Trager, B.; Zacharias, G.: Gröbner Bases and
+Primary Decomposition of Polynomial Ideals. J. Symb. Comp.
+6, 149–167 (1988).
+		\item Shimoyama, T.; Yokoyama, K.: Localization and Primary
+Decomposition of Polynomial ideals. J. Symb. Comp. 22,
+247–277 (1996).
+		\end{itemize}
+		などのアルゴリズムを勉強した.実装は出来なかった.
+\end{frame}
+\section{まとめ}
+\begin{frame}
+	\frametitle{まとめ}
+			\begin{itemize}
+			\item \Huge グレブナー基底はすごい.
+			\item \Huge 代数幾何は楽しい.
+		\end{itemize}
+\end{frame}
+\section{今後}
+\begin{frame}
+	\frametitle{今後}
+		\begin{itemize}
+			\item \Large 論文はたくさん書かれているけど実装はされてない。
+			\item \Large SymPyを完成させたい。
+			\item \Large 実装力がほしい。
+		\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{おまけ}
+	\begin{block}{問題}
+	$x^2+y^2=16,x^3+y^3=44$という条件下で$x+y$の値を求めよ.
+	\end{block}
+	という問題をグレブナー基底を使って解いてみる.\\
+	$I=\langle x^2+y^2=16,x^3+y^3=44,s-(x+y) \rangle$の生成元を求める\par
+	その生成元で$s$だけで生成されているものを見れば$x+y$の値が求まる.
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\begin{verbatim}
+i1 : R=RR[x,y,s]
+o1 = R
+o1 : PolynomialRing 
+\end{verbatim}
+\begin{verbatim}
+i2 : I=ideal(x^2+y^2-16,x^3+y^3-44,s-(x+y))
+             2    2        3    3
+o2 = ideal (x  + y  - 16, x  + y  - 44, - x - y + s)
+o2 : Ideal of R
+\end{verbatim}
+\begin{verbatim}
+i3 : gens gb I
+o3 = | x+y-s y2-ys+.5s2-8 s3-48s+88 |
+             1       3
+o3 : Matrix R  <--- R
+\end{verbatim}
+より$s^3-48s+88 = (s-2)(s^2+2s-44)=0$を解くと$x+y=2$
+\end{frame}
+\end{document}
+
+
