@@ -1,0 +1,8 @@
+- 2016/10/20
+  - PDEの授業に出てフーリエについて学びました.
+  - 代数幾何のような話を幾つかしました.複素代数幾何をやりたいからOtto Forsterの "Lectures on Riemann Surfaces"を読むというのはどうなんでしょう.私は読んだことがないのでわかりません.
+  - Shigeo Kusuoka, Approximation of Expectation of Diffusion Process and Mathematical Finance, Advanced Studies in Pure Mathematics, Proceedings of Final Taniguchi Symposium, Nara 1998 (T. Sunada, ed.), vol. 31, 2001, pp. 147–165.が面白いです.
+- 2016/10/21
+  - 大阪に来ました.昼まで寝ていました.
+  - フーリエ変換の実装をしました.numpy.argmaxを使いました.
+  - 桜の木の上で寝ている白い鳥の群れを見つけました.
