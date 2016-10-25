@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: top
 ---
 
 ## 伊藤 克哉
@@ -78,6 +78,10 @@ layout: default
 
 ---
 
+## 日記  <a name="diary"></a>
+- [2016年10月の日記](diary_2016_10.html)
+
+---
 
 ## リンク <a name="link"></a>
 

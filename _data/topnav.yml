@@ -1,7 +1,10 @@
 
 - name: "Links"
   link: "index.html#link"
-
+  
+- name: "Diary"
+  link: "index.html#diary"
+  
 - name: "Address"
   link: "index.html#address"
 
