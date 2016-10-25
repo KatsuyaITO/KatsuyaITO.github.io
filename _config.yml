@@ -1,0 +1,10 @@
+title: Researcher
+url: "http://http://katsuyaito.github.io/"
+
+markdown: kramdown
+
+tracking_id: #
+
+sass:
+    style: compressed
+    sass_dir: _sass
