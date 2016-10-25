@@ -73,7 +73,7 @@ layout: top
 
 
 
-## 連絡先 <a name="address"></a>
+## 連絡先 <a name="contact"></a>
 - メールアドレス: k1ito[atmark]ms.u-tokyo.ac.jp ( [atmark] の部分を @ に)
 - Twitter: <a href="https://twitter.com/k1ito">@k1ito</a>
 

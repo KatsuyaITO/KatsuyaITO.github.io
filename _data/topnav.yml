@@ -5,8 +5,8 @@
 - name: "Diary"
   link: "index.html#diary"
   
-- name: "Address"
-  link: "index.html#address"
+- name: "Contact"
+  link: "index.html#contact"
 
 - name: "Works"
   link: "index.html#works"
