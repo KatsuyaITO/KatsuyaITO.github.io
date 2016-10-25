@@ -3,8 +3,10 @@ url: "http://katsuyaito.github.io"
 
 markdown: kramdown
 
-tracking_id: #
+tracking_id: UA-86282954-1
+
 
 sass:
     style: compressed
     sass_dir: _sass
+
