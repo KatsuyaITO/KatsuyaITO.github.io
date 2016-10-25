@@ -1,8 +1,17 @@
-- name: "Contact"
-  link: "contact"
 
-- name: "Resume"
-  link: "resume.pdf"
+- name: "Links"
+  link: "index.html#link"
 
-- name: "About"
-  link: "/researcher/"
+- name: "Address"
+  link: "index.html#address"
+
+- name: "Works"
+  link: "index.html#works"
+    
+- name: "History"
+  link: "index.html#history"
+  
+
+
+  
+
