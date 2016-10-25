@@ -80,6 +80,7 @@ layout: default
 
 
 ## リンク <a name="link"></a>
+
 ### 東京大学
 - <a href="http://www.u-tokyo.ac.jp/index_j.html" target="_blank">東京大学</a>
 - <a href="http://www.ms.u-tokyo.ac.jp/index-j.html" target="_blank">東京大学大学院数理科学研究科/理学部数学科</a>
