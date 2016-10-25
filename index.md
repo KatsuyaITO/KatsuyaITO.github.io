@@ -23,7 +23,8 @@ layout: top
 年|月|学歴
 --|--|----
 2013年|3月|[白陵高等学校](http://www.hakuryo.ed.jp/) 卒業
-2013年|4月|[東京大学理科一類](http://www.c.u-tokyo.ac.jp/) 入学
+2013年|4月|[東京大学教養学部理科一類](http://www.c.u-tokyo.ac.jp/) 入学
+2015年|3月|[東京大学教養学部理科一類](http://www.c.u-tokyo.ac.jp/) 修了
 2015年|4月|[東京大学理学部数学科](http://www.ms.u-tokyo.ac.jp/index-j.html) 進学
 
 
