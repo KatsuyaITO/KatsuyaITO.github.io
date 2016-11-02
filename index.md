@@ -81,6 +81,7 @@ layout: top
 
 ## 日記  <a name="diary"></a>
 - [2016年10月の日記](diary_2016_10.html)
+- [2016年11月の日記](diary_2016_11.html)
 
 ---
 
