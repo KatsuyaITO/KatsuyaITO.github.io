@@ -16,7 +16,7 @@ layout: top
 
 
 
-## 私の履歴<a name="history"></a>
+## 経歴 <a name="history"></a>
 
 ### 学歴 
 
