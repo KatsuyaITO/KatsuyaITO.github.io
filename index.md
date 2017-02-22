@@ -47,8 +47,8 @@ layout: top
 --|--|----
 2009年|12月|[応用情報技術者試験](https://www.jitec.ipa.go.jp/1_11seido/ap.html)
 2013年|12月|[HSK](https://www.hskj.jp/) 4級
-2016年|4月|[TOEIC](http://www.toeic.or.jp/)公開テスト　スコア885点取得
 2016年|7月|[TOEFL](https://www.ets.org/jp/toefl) iBTテストスコア87点取得
+2017年|1月|[TOEIC](http://www.toeic.or.jp/)公開テスト　スコア935点取得
 
 
 
