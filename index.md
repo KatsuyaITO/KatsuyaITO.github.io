@@ -78,14 +78,8 @@ layout: top
 
 
 ## 連絡先 <a name="contact"></a>
-- メールアドレス: k1ito[atmark]ms.u-tokyo.ac.jp ( [atmark] の部分を @ に)
+- メールアドレス: katsuya1ito[atmark]gmail.com( [atmark] の部分を @ に)
 - Twitter: <a href="https://twitter.com/k1ito">@k1ito</a>
-
----
-
-## 日記  <a name="diary"></a>
-- [2016年10月の日記](diary_2016_10.html)
-- [2016年11月の日記](diary_2016_11.html)
 
 ---
 
