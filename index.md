@@ -7,10 +7,10 @@ layout: top
 <img class="profile-picture" src="k1ito.png">
 
 東京大学理学部数学科４年  
-関心分野:ファイナンス（Quantitaive Finance・Computational Finance・Corporate Finance）・数学（確率解析・代数幾何学・数値解析）・情報科学（機械学習・深層学習・情報幾何学）・法律（民法・会社法・金商法）
+関心分野:ファイナンス（Quantitaive Finance・Computational Finance・Corporate Finance）・数学（確率解析・代数幾何学・数値解析）・情報科学（機械学習・深層学習・情報幾何学）・法律（民法・会社法・金商法）<br>
   
-指導教官:大学4年夏:三枝 洋一先生(代数的サイクルの交叉理論)
-大学4年冬:齊藤 宣一先生(確率微分方程式の数値解析)
+指導教官:大学4年夏:三枝 洋一先生(代数的サイクルの交叉理論)<br>
+大学4年冬:齊藤 宣一先生(確率微分方程式の数値解析)<br>
 修士：高橋明彦先生
 
 ---
