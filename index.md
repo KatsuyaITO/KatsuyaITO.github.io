@@ -7,18 +7,11 @@ layout: top
 <img class="profile-picture" src="k1ito.png">
 
 東京大学理学部数学科４年  
-関心分野:代数幾何学・整数論・数値解析・確率論・数理ファイナンス・情報幾何学・データサイエンス・会計・監査  
-
-確率論と数値解析をメインに研究している東大B4です.
-主に,楠岡近似と呼ばれる確率微分方程式の近似法について,
-その基礎となるマリアバン解析からアプローチをしてみたり,
-楠岡近似の応用であるNinomiya-Victoir近似やTakahashi-Yamadaの手法などの研究してみたり,
-数理ファイナンスからのアプローチを模索したりしています.
-その他,幅広く関心を持って,上記のような関心分野に首を突っ込んだり,突っ込まなかったりしています.
-
-  
+関心分野:ファイナンス（Quantitaive Finance・Computational Finance・Corporate Finance）・数学（確率解析・代数幾何学・数値解析）・情報科学（機械学習・深層学習・情報幾何学）・法律（民法・会社法・金商法）
+  
 指導教官:大学4年夏:三枝 洋一先生(代数的サイクルの交叉理論)
 大学4年冬:齊藤 宣一先生(確率微分方程式の数値解析)
+修士：高橋明彦先生
 
 ---
 
@@ -34,6 +27,9 @@ layout: top
 2013年|4月|[東京大学教養学部理科一類](http://www.c.u-tokyo.ac.jp/) 入学
 2015年|3月|[東京大学教養学部理科一類](http://www.c.u-tokyo.ac.jp/) 修了
 2015年|4月|[東京大学理学部数学科](http://www.ms.u-tokyo.ac.jp/index-j.html) 進学
+2017年|3月|[東京大学理学部数学科](http://www.ms.u-tokyo.ac.jp/index-j.html) 卒業
+2017年|4月|[東京大学大学院経済学研究科](http://www.e.u-tokyo.ac.jp/) 卒業
+
 
 
 ### その他の所属
@@ -117,10 +113,7 @@ layout: top
 - <a href="http://www.infsup.jp/saito/" target="_blank">齊藤宣一先生</a>                                                                             
 
 ### 知人のウェブサイト
-- <a href="http://www.ms.u-tokyo.ac.jp/~hosaka/" target="_blank">Hideaki HOSAKA</a>
-- <a href="https://sites.google.com/site/tomoyakemmochi/" target="_blank">Tomoya KEMMOCHI</a>
 - <a href="http://d-poppo.nazo.cc/" target="_blank">D-poppo</a>
 - <a href="http://qnighy.github.io/" target="_blank">原 将己</a>
-- <a href="http://www.misscolle.com/misstokyo2014/profile/1"  target="_blank">後藤夢乃</a>
 
 
