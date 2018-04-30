@@ -6,12 +6,20 @@ layout: top
 
 <img class="profile-picture" src="k1ito.png">
 
-東京大学大学院経済学研究科修士課程2年
-関心分野:ファイナンス（Quantitaive Finance・Computational Finance・Corporate Finance）・数学（確率解析・代数幾何学・数値解析）・情報科学（機械学習・深層学習・情報幾何学）・法律（民法・会社法・金商法）<br>
+東京大学大学院経済学研究科マネジメント専攻数量ファイナンスコース修士課程2年
+関心分野:
+
+- ファイナンス（Quantitaive Finance・Computational Finance・Corporate Finance）
+- 数学（確率解析・代数幾何学・数値解析）
+- 情報科学（機械学習・深層学習・情報幾何学）
+- 法律（民法・会社法・金商法）
+<br>
   
-指導教官:大学4年夏:三枝 洋一先生(代数的サイクルの交叉理論)<br>
-大学4年冬:齊藤 宣一先生(確率微分方程式の数値解析)<br>
-修士：高橋明彦先生
+指導教官:
+
+- 大学4年夏:三枝 洋一先生(代数的サイクルの交叉理論)<br>
+- 大学4年冬:齊藤 宣一先生(確率微分方程式の数値解析)<br>
+- 修士1年：高橋明彦先生
 
 ---
 
@@ -30,6 +38,11 @@ layout: top
 2017年|3月|[東京大学理学部数学科](http://www.ms.u-tokyo.ac.jp/index-j.html) 卒業
 2017年|4月|[東京大学大学院経済学研究科](http://www.e.u-tokyo.ac.jp/) 入学
 
+
+###　インターン歴等
+--|--|----
+2016年8月|～2017年8月|[3idea Inc.](http://www.3idea.jp) Python・MySQL等を用いたデータサイエンティスト
+2017年8月|～|[YJFX from Yahoo!Japan](https://www.yjfx.jp) Python・R・Redshift等を用いたクオンツアナリスト
 
 
 ### その他の所属
@@ -61,6 +74,9 @@ layout: top
 2015年|10月|[平成27年度中学生のための玉原数学教室](http://tambara.ms.u-tokyo.ac.jp/classroom_for_junior_highschool.html).ジュニアTA
 2015年|11月|[第66回駒場祭企画](http://www.komabasai.net/66/visitor/)[｢数学科展示ますらぼ｣](http://www.komabasai.net/66/visitor/event/search/view/?id=731&area=indoor5)正責任者. <br>冊子[｢eπisode vol3.5｣](http://bit.ly/epiKF66)発行責任者･寄稿
 2016年|10月|[数学特別講究](https://github.com/KatsuyaITO/NSofSDE)
+2017年|4月|[計算数学I TA](https://github.com/utmsks/KSImaterial)
+2017年|10月|[計算数学II TA](https://github.com/utmsks/KSImaterial)
+2018年|4月|[計算数学I TA](https://github.com/utmsks/KSImaterial)
 
 
 ### 個人的な活動
@@ -69,7 +85,6 @@ layout: top
 --|--|----
 2013年|4月|<a href="seminar.html">自主ゼミの記録はこちら</a>
 2014年|9月|発表<a href="http://www.slideshare.net/k1ito/ss-39036481">｢とぽろじー入門｣</a>@<a href="http://kansaimath.tenasaku.com/?page_id=734">第5回関西すうがく徒のつどい</a>
-2014年|4月|<a href="acu.html">アクチュアリーゼミ代表</a>
 2014年|9月|発表<a href="http://togetter.com/li/878845">｢代数学の基本定理で見る数学の世界｣</a>@<a href="http://kansaimath.tenasaku.com/?page_id=1106">第7回関西すうがく徒のつどい</a>
 
 
@@ -80,6 +95,8 @@ layout: top
 ## 連絡先 <a name="contact"></a>
 - メールアドレス: katsuya1ito[atmark]gmail.com( [atmark] の部分を @ に)
 - Twitter: <a href="https://twitter.com/k1ito">@k1ito</a>
+- LinkedIn: <a href="https://www.linkedin.com/in/katsuya-ito-46348a129/">Katsuya Ito</a>
+- Slideshare: <a href="https://www.slideshare.net/k1ito">@k1ito</a>
 
 ---
 
