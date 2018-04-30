@@ -40,6 +40,8 @@ layout: top
 
 
 ###　インターン歴等
+
+年|月|所属・職務内容
 --|--|----
 2016年8月|～2017年8月|[3idea Inc.](http://www.3idea.jp) Python・MySQL等を用いたデータサイエンティスト
 2017年8月|～|[YJFX from Yahoo!Japan](https://www.yjfx.jp) Python・R・Redshift等を用いたクオンツアナリスト
