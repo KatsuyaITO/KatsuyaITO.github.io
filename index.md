@@ -6,7 +6,7 @@ layout: top
 
 <img class="profile-picture" src="k1ito.png">
 
-東京大学大学院経済学研究科修士課程1年
+東京大学大学院経済学研究科修士課程2年
 関心分野:ファイナンス（Quantitaive Finance・Computational Finance・Corporate Finance）・数学（確率解析・代数幾何学・数値解析）・情報科学（機械学習・深層学習・情報幾何学）・法律（民法・会社法・金商法）<br>
   
 指導教官:大学4年夏:三枝 洋一先生(代数的サイクルの交叉理論)<br>
