@@ -23,6 +23,7 @@ layout: top
 - 修士2年：佐藤整尚先生(高頻度取引)
 <br>
 
+2018年11月09日更新
 ---
 
 
@@ -136,9 +137,14 @@ layout: top
 - <a href="http://www.ms.u-tokyo.ac.jp/~stakagi/" target="_blank">高木俊介先生</a>
 - <a href="http://www.ms.u-tokyo.ac.jp/~kohno/index_j.html" target="_blank">河野俊丈先生</a>
 - <a href="http://www.ms.u-tokyo.ac.jp/~mieda/index-j.html" target="_blank">三枝洋一先生</a>
-- <a href="https://about.me/kenichiro" target="_blank">西岡賢一郎CEO</a>
-- <a href="http://www.infsup.jp/saito/" target="_blank">齊藤宣一先生</a>                                                                             
-
+- <a href="https://about.me/kenichiro" target="_blank">西岡賢一郎先生</a>
+- <a href="http://www.infsup.jp/saito/" target="_blank">齊藤宣一先生</a>     
+- <a href="http://park.itc.u-tokyo.ac.jp/takahashi-lab/home.html" target="_blank">高橋明彦先生</a>      
+- <a href="https://sites.google.com/site/rsakemotohomepage/">酒本隆太先生</a>
+- <a href="http://tswww.ism.ac.jp/sato/index_J_SJIS.html">佐藤整尚先生</a>
+- <a href="http://rootf.co.jp/top.html">大庫直樹先生</a>
+- <a href="http://jp.milliman.com/Consultants/?cid=82614">岩崎宏介先生</a>
+ 
 ### 知人のウェブサイト
 - <a href="http://d-poppo.nazo.cc/" target="_blank">D-poppo</a>
 - <a href="http://qnighy.github.io/" target="_blank">原 将己</a>
