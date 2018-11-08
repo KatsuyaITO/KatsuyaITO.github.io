@@ -11,16 +11,16 @@ layout: top
 
 - ファイナンス（Quantitaive Finance・Computational Finance・Corporate Finance）
 - 数学（確率解析・代数幾何学・数値解析）
-- 情報科学（機械学習・深層学習・情報幾何学）
-- 法律（民法・会社法・金商法）
+- 情報科学（機械学習・深層学習・生成モデル・情報幾何学・異常検知）
+- 法律（民法・会社法・金商法・行政法）
 <br>
   
 指導教官:
 
 - 大学4年夏:三枝 洋一先生(代数的サイクルの交叉理論)<br>
 - 大学4年冬:齊藤 宣一先生(確率微分方程式の数値解析)<br>
-- 修士1年：高橋明彦先生
-
+- 修士1年：高橋明彦先生<br>
+- 修士2年：佐藤整尚先生(高頻度取引)
 ---
 
 
@@ -45,6 +45,10 @@ layout: top
 --|--|----
 2016年8月|～2017年8月|[3idea Inc.](http://www.3idea.jp) Python・MySQL等を用いたデータサイエンティスト
 2017年8月|～|[YJFX from Yahoo!Japan](https://www.yjfx.jp) Python・R・Redshift等を用いたクオンツアナリスト
+2018年5月|～|[Milliman](http://jp.milliman.com/) SASを用いたヘルスケア・データサイエンティスト
+2018年5月|～|[Rootf-Datum](http://www.rootf-datum.com/) Python・Rを用いた地方金融期間向けデータサイエンティスト・コンサルタント
+2018年7月|～|[Preferred Networks](https://www.preferred-networks.jp/ja/)リサーチインターン・パートタイムエンジニア。異常検知。
+
 
 
 ### その他の所属
@@ -79,6 +83,13 @@ layout: top
 2017年|4月|[計算数学I TA](https://github.com/utmsks/KSImaterial)
 2017年|10月|[計算数学II TA](https://github.com/utmsks/KSImaterial)
 2018年|4月|[計算数学I TA](https://github.com/utmsks/KSImaterial)
+
+### 論文
+年|月|学会名|内容
+--|--|--|--
+2018年|11月|[ISPOR Europe 2018](https://ispor.org/conferences-education/conferences/upcoming-conferences/europe-2018)|[ASSOCIATION BETWEEN CLASS OF ANTIDIABETIC DRUGS AND INCIDENCE OF MYOCARDIAL INFARCTION IN PATIENTS WITH TYPE 2 DIABETES MELITUS: A PROPORTIONAL HAZARD ANALYSIS USING DEEP LEARNING FOR RISK ADJUSTMENT by Yamada T, ITO K, Takeshima T, Iwasaki K
+](https://myisporbarcelona.zerista.com/poster/member/132982)
+2018年|11月|[IBIS 2018](http://ibisml.org/ibis2018/)|[D1-05: 巨大ランダム行列を用いた構造の変化点検知 by 伊藤 克哉; 木下 僚; 小松 智希; 吉川 真史 ](http://ibisml.org/ibis2018/discussion/)
 
 
 ### 個人的な活動
