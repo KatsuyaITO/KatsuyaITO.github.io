@@ -24,6 +24,7 @@ layout: top
 <br>
 
 2018年11月09日更新
+
 ---
 
 
@@ -49,7 +50,7 @@ layout: top
 2016年8月|～2017年8月|[3idea Inc.](http://www.3idea.jp) Python・MySQL等を用いたデータサイエンティスト
 2017年8月|～|[YJFX from Yahoo!Japan](https://www.yjfx.jp) Python・R・Redshift等を用いたクオンツアナリスト
 2018年5月|～|[Milliman](http://jp.milliman.com/) SASを用いたヘルスケア・データサイエンティスト
-2018年5月|～|[Rootf-Datum](http://www.rootf-datum.com/) Python・Rを用いた地方金融期間向けデータサイエンティスト・コンサルタント
+2018年5月|～|[Rootf-Datum](http://www.rootf-datum.com/) Python・Rを用いた地方金融機関向けデータサイエンティスト・コンサルタント
 2018年7月|～|[Preferred Networks](https://www.preferred-networks.jp/ja/)リサーチインターン・パートタイムエンジニア。異常検知。
 
 
