@@ -57,6 +57,7 @@ layout: top
 ### その他の所属
 [東京大学物理研究会(Atoms)](http://ut-atoms.sakura.ne.jp/)  
 [東京大学理論科学グループ(TSG)](http://www.tsg.ne.jp)
+[Deepcore カーネルメンバー](http://deepcore.jp/)
 
 
 ### 資格等
