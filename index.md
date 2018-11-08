@@ -19,8 +19,10 @@ layout: top
 
 - 大学4年夏:三枝 洋一先生(代数的サイクルの交叉理論)<br>
 - 大学4年冬:齊藤 宣一先生(確率微分方程式の数値解析)<br>
-- 修士1年：高橋明彦先生<br>
+- 修士1年：高橋明彦先生 <br>
 - 修士2年：佐藤整尚先生(高頻度取引)
+<br>
+
 ---
 
 
@@ -75,7 +77,7 @@ layout: top
 ### 大学関連の活動
 
 年|月|内容
---|--|---
+--|--|----
 2015年| 5月|[第88回五月祭企画](http://gogatsusai.jp/88/visitor/).[｢数学科展示ますらぼ｣](http://gogatsusai.jp/88/visitor/event/detail/425)正責任者.<br>冊子[｢eπisode vol3｣](https://www.dropbox.com/s/32srb4oayhpwssz/main.pdf?dl=0)発行責任者
 2015年|10月|[平成27年度中学生のための玉原数学教室](http://tambara.ms.u-tokyo.ac.jp/classroom_for_junior_highschool.html).ジュニアTA
 2015年|11月|[第66回駒場祭企画](http://www.komabasai.net/66/visitor/)[｢数学科展示ますらぼ｣](http://www.komabasai.net/66/visitor/event/search/view/?id=731&area=indoor5)正責任者. <br>冊子[｢eπisode vol3.5｣](http://bit.ly/epiKF66)発行責任者･寄稿
@@ -86,7 +88,7 @@ layout: top
 
 ### 論文
 年|月|学会名|内容
---|--|--|--
+--|--|--|----
 2018年|11月|[ISPOR Europe 2018](https://ispor.org/conferences-education/conferences/upcoming-conferences/europe-2018)|[ASSOCIATION BETWEEN CLASS OF ANTIDIABETIC DRUGS AND INCIDENCE OF MYOCARDIAL INFARCTION IN PATIENTS WITH TYPE 2 DIABETES MELITUS: A PROPORTIONAL HAZARD ANALYSIS USING DEEP LEARNING FOR RISK ADJUSTMENT by Yamada T, ITO K, Takeshima T, Iwasaki K](https://myisporbarcelona.zerista.com/poster/member/132982)
 2018年|11月|[IBIS 2018](http://ibisml.org/ibis2018/)|[D1-05: 巨大ランダム行列を用いた構造の変化点検知 by 伊藤 克哉; 木下 僚; 小松 智希; 吉川 真史](http://ibisml.org/ibis2018/discussion/)
 
