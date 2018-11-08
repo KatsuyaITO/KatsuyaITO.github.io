@@ -87,10 +87,9 @@ layout: top
 2018年|4月|[計算数学I TA](https://github.com/utmsks/KSImaterial)
 
 ### 論文
-年月|学会名|内容
---|--|----
-2018年11月 |[ISPOR Europe 2018](https://ispor.org/conferences-education/conferences/upcoming-conferences/europe-2018) | [ASSOCIATION BETWEEN CLASS OF ANTIDIABETIC DRUGS AND INCIDENCE OF MYOCARDIAL INFARCTION IN PATIENTS WITH TYPE 2 DIABETES MELITUS: A PROPORTIONAL HAZARD ANALYSIS USING DEEP LEARNING FOR RISK ADJUSTMENT by Yamada T, ITO K, Takeshima T, Iwasaki K](https://myisporbarcelona.zerista.com/poster/member/132982)
-2018年11月 | [IBIS 2018](http://ibisml.org/ibis2018/) | [D1-05: 巨大ランダム行列を用いた構造の変化点検知 by 伊藤 克哉; 木下 僚; 小松 智希; 吉川 真史](http://ibisml.org/ibis2018/discussion/)
+
+- 2018年11月  [ASSOCIATION BETWEEN CLASS OF ANTIDIABETIC DRUGS AND INCIDENCE OF MYOCARDIAL INFARCTION IN PATIENTS WITH TYPE 2 DIABETES MELITUS: A PROPORTIONAL HAZARD ANALYSIS USING DEEP LEARNING FOR RISK ADJUSTMENT by Yamada T, ITO K, Takeshima T, Iwasaki K](https://myisporbarcelona.zerista.com/poster/member/132982) @  [ISPOR Europe 2018](https://ispor.org/conferences-education/conferences/upcoming-conferences/europe-2018)
+- 2018年11月  [D1-05: 巨大ランダム行列を用いた構造の変化点検知 by 伊藤 克哉; 木下 僚; 小松 智希; 吉川 真史](http://ibisml.org/ibis2018/discussion/) @ [IBIS 2018](http://ibisml.org/ibis2018/) 
 
 
 ---
