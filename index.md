@@ -113,7 +113,6 @@ layout: top
 
 ## 連絡先 <a name="contact"></a>
 - メールアドレス: katsuya1ito[atmark]gmail.com( [atmark] の部分を @ に)
-- Twitter: <a href="https://twitter.com/k1ito">@k1ito</a>
 - LinkedIn: <a href="https://www.linkedin.com/in/katsuya-ito-46348a129/">Katsuya Ito</a>
 - Slideshare: <a href="https://www.slideshare.net/k1ito">@k1ito</a>
 
