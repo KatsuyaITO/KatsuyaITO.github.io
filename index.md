@@ -7,14 +7,16 @@ layout: top
 <img class="profile-picture" src="k1ito.png">
 
 東京大学大学院経済学研究科マネジメント専攻数量ファイナンスコース修士課程2年
-関心分野:
+
+### 関心分野
 
 - ファイナンス（Quantitaive Finance・Computational Finance・Corporate Finance）
 - 数学（確率解析・代数幾何学・数値解析）
 - 情報科学（機械学習・深層学習・生成モデル・情報幾何学・異常検知）
 - 法律（民法・会社法・金商法・行政法）
 <br>
-指導教官
+
+### 指導教官
 
 - 大学4年夏:三枝 洋一先生(代数的サイクルの交叉理論)<br>
 - 大学4年冬:齊藤 宣一先生(確率微分方程式の数値解析)<br>
@@ -22,12 +24,13 @@ layout: top
 - 修士2年：佐藤整尚先生(高頻度取引)
 <br>
 
-更新履歴 
+### 更新履歴 
 - 2019/01/01 インターン歴更新
 - 2018/12/23 スライド　[量子プログラミング入門](https://www.slideshare.net/k1ito/ss-126565732)を公開
 - 2018/11/15 スライド　[強化学習入門](https://www.slideshare.net/k1ito/ss-123088713)を公開
 - 2018/11/10 [ISPOR Europe](https://www.ispor.org/conferences-education/conferences/past-conferences/europe-2018)で発表
 - 2018/11/04 [情報論的学習理論と機械学習 (IBISML) 研究会](http://ibisml.org/ibis2018/)で発表 
+- 2018/07/25 インターン歴更新
 - 2018/06/10 スライド　[異常検知と変化点検知で復讐するPRML](https://www.slideshare.net/k1ito/prml-101740429)を公開
 - 2018/05/05 スライド [ICLR 2018 Best papers 3本を紹介](https://www.slideshare.net/k1ito/iclr-2018-best-papers-3)を公開
 - 2018/05/01 インターン歴更新
