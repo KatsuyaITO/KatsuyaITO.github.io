@@ -45,14 +45,14 @@ layout: top
 
 ### インターン歴等
 
-年|月|所属・職務内容
+開始|終了|所属・職務内容
 --|--|----
 2016年8月|～2017年8月|[3idea Inc.](http://www.3idea.jp) Python・MySQL等を用いたデータサイエンティスト
 2017年8月|～|[YJFX from Yahoo!Japan](https://www.yjfx.jp) Python・R・Redshift等を用いたクオンツアナリスト
 2018年5月|～|[Milliman](http://jp.milliman.com/) SASを用いたヘルスケア・データサイエンティスト
-2018年5月|～|[Rootf-Datum](http://www.rootf-datum.com/) Python・Rを用いた地方金融機関向けデータサイエンティスト・コンサルタント
+2018年5月|2018年12月|[Rootf-Datum](http://www.rootf-datum.com/) Python・Rを用いた地方金融機関向けデータサイエンティスト・コンサルタント
 2018年7月|～|[Preferred Networks](https://www.preferred-networks.jp/ja/)リサーチインターン・パートタイムエンジニア。異常検知。
-
+2019年1月|～|[独立行政法人経済産業研究所](https://www.rieti.go.jp/jp/)リサーチアシスタント・Stataを用いたEBPM
 
 
 ### その他の所属
