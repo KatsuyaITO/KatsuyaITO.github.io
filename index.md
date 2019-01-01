@@ -23,8 +23,15 @@ layout: top
 - 修士2年：佐藤整尚先生(高頻度取引)
 <br>
 
-2018年11月09日更新
-
+更新履歴 
+- 2019/01/01 インターン歴更新
+- 2018/12/23 スライド　[量子プログラミング入門](https://www.slideshare.net/k1ito/ss-126565732)を公開
+- 2018/11/15 スライド　[強化学習入門](https://www.slideshare.net/k1ito/ss-123088713)を公開
+- 2018/11/10 [ISPOR Europe](https://www.ispor.org/conferences-education/conferences/past-conferences/europe-2018)
+- 2018/11/04 [情報論的学習理論と機械学習 (IBISML) 研究会](http://ibisml.org/ibis2018/)で発表 
+- 2018/06/10 スライド　[異常検知と変化点検知で復讐するPRML](https://www.slideshare.net/k1ito/prml-101740429)を公開
+- 2018/05/05 スライド [ICLR 2018 Best papers 3本を紹介]https://www.slideshare.net/k1ito/iclr-2018-best-papers-3)を公開
+- 2018/05/01 インターン歴更新
 ---
 
 
