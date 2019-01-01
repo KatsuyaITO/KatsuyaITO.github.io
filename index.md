@@ -25,15 +25,18 @@ layout: top
 <br>
 
 ### 更新履歴 
-- 2019/01/01 インターン歴更新
+- 2019/01/01 インターン　独立行政法人経済産業研究所でリサーチアシスタントを開始しました。
+- 2018/12/31 インターン　ルートエフ・データム株式会社でのインターンを終了しました。
 - 2018/12/23 スライド　[量子プログラミング入門](https://www.slideshare.net/k1ito/ss-126565732)を公開
 - 2018/11/15 スライド　[強化学習入門](https://www.slideshare.net/k1ito/ss-123088713)を公開
-- 2018/11/10 [ISPOR Europe](https://www.ispor.org/conferences-education/conferences/past-conferences/europe-2018)で発表
-- 2018/11/04 [情報論的学習理論と機械学習 (IBISML) 研究会](http://ibisml.org/ibis2018/)で発表 
-- 2018/07/25 インターン歴更新
+- 2018/11/10 論文　[ISPOR Europe](https://www.ispor.org/conferences-education/conferences/past-conferences/europe-2018)で発表しました。
+- 2018/11/04 論文　[情報論的学習理論と機械学習 (IBISML) 研究会](http://ibisml.org/ibis2018/)で発表しました。
+- 2018/07/25 インターン　株式会社Preferred Networksでのインターンを開始しました。
 - 2018/06/10 スライド　[異常検知と変化点検知で復讐するPRML](https://www.slideshare.net/k1ito/prml-101740429)を公開
 - 2018/05/05 スライド [ICLR 2018 Best papers 3本を紹介](https://www.slideshare.net/k1ito/iclr-2018-best-papers-3)を公開
-- 2018/05/01 インターン歴更新
+- 2018/05/01 インターン　ルートエフ・データム株式会社でのインターンを開始しました
+- 2018/05/01 インターン　Milliman Incでのインターンを開始しました
+
 <br>
 
 ---
