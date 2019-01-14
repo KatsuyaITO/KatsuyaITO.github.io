@@ -32,7 +32,7 @@ layout: top
 - 2018/11/10 論文　[ISPOR Europe](https://www.ispor.org/conferences-education/conferences/past-conferences/europe-2018)で発表
 - 2018/11/04 論文　[情報論的学習理論と機械学習 (IBISML) 研究会](http://ibisml.org/ibis2018/)で発表
 - 2018/07/25 インターン　株式会社Preferred Networksでのインターンを開始
-- 2018/06/10 スライド　[異常検知と変化点検知で復讐するPRML](https://www.slideshare.net/k1ito/prml-101740429)を公開
+- 2018/06/10 スライド　[異常検知と変化点検知で復習するPRML](https://www.slideshare.net/k1ito/prml-101740429)を公開
 - 2018/05/05 スライド [ICLR 2018 Best papers 3本を紹介](https://www.slideshare.net/k1ito/iclr-2018-best-papers-3)を公開
 - 2018/05/01 インターン　ルートエフ・データム株式会社でのインターンを開始
 - 2018/05/01 インターン　Milliman Incでのインターンを開始
@@ -103,7 +103,7 @@ layout: top
 2017年|10月|[計算数学II TA](https://github.com/utmsks/KSImaterial)
 2018年|4月|[計算数学I TA](https://github.com/utmsks/KSImaterial)
 
-### 論文
+### 論文・学会発表
 
 - 2018年11月  [ASSOCIATION BETWEEN CLASS OF ANTIDIABETIC DRUGS AND INCIDENCE OF MYOCARDIAL INFARCTION IN PATIENTS WITH TYPE 2 DIABETES MELITUS: A PROPORTIONAL HAZARD ANALYSIS USING DEEP LEARNING FOR RISK ADJUSTMENT by Yamada T, ITO K, Takeshima T, Iwasaki K](https://myisporbarcelona.zerista.com/poster/member/132982) @  [ISPOR Europe 2018](https://ispor.org/conferences-education/conferences/upcoming-conferences/europe-2018)
 - 2018年11月  [D1-05: 巨大ランダム行列を用いた構造の変化点検知 by 伊藤 克哉; 木下 僚; 小松 智希; 吉川 真史](http://ibisml.org/ibis2018/discussion/) @ [IBIS 2018](http://ibisml.org/ibis2018/) 
