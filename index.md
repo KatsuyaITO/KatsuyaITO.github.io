@@ -30,6 +30,7 @@ layout: top
 - 2019/01/01 インターン　独立行政法人経済産業研究所でリサーチアシスタントを開始
 - 2018/12/31 インターン　ルートエフ・データム株式会社でのインターンを終了
 - 2018/12/23 スライド　[量子プログラミング入門](https://www.slideshare.net/k1ito/ss-126565732)を公開
+- 2018/12/21 学会発表　Dynamic Time Warping を用いた高頻度取引データの Lead-Lag 効果の推定が採択
 - 2018/11/15 スライド　[強化学習入門](https://www.slideshare.net/k1ito/ss-123088713)を公開
 - 2018/11/10 論文　[ISPOR Europe](https://www.ispor.org/conferences-education/conferences/past-conferences/europe-2018)で発表
 - 2018/11/04 ポスター発表　[情報論的学習理論と機械学習 (IBISML) 研究会](http://ibisml.org/ibis2018/)で発表
@@ -137,6 +138,11 @@ layout: top
 ---
 
 ## リンク <a name="link"></a>
+
+### 個人的におすすめなWeb記事等
+- <a href="http://www.ms.u-tokyo.ac.jp/~yasuyuki/sem.htm">セミナーの準備のしかたについて</a>
+- <a href="http://www.infsup.jp/saito/">齊藤宣一先生の講義ノートとメモ</a>
+- <a href="https://drive.google.com/file/d/0B7C_CufYq6j6VXN5NDJjNF9XdTA/view">加藤 賢悟先生の測度論的確率論の講義ノート</a>
 
 ### 東京大学
 - <a href="http://www.u-tokyo.ac.jp/index_j.html" target="_blank">東京大学</a>
