@@ -25,7 +25,7 @@ layout: top
 <br>
 
 ### 更新履歴 
-- 2019/01/24 論文　Structural Change Point Detection Using A Large Random Matrix and Sparse ModelingがEDBT/ICDT DARLI-APワークショップに採択
+- 2019/01/24 論文　Structural Change Point Detection Using A Large Random Matrix and Sparse Modelingが[EDBT/ICDT] (http://edbticdt2019.inesc-id.pt/)ワークショップ[DARLI-AP](http://dbdmg.polito.it/darli-ap2019/)に採択
 - 2019/01/01 インターン　独立行政法人経済産業研究所でリサーチアシスタントを開始
 - 2018/12/31 インターン　ルートエフ・データム株式会社でのインターンを終了
 - 2018/12/23 スライド　[量子プログラミング入門](https://www.slideshare.net/k1ito/ss-126565732)を公開
