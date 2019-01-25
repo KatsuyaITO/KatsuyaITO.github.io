@@ -106,8 +106,9 @@ layout: top
 2018年|4月|[計算数学I TA](https://github.com/utmsks/KSImaterial)
 
 ### 論文・学会発表
-
-- 2019年1月　Structural Change Point Detection Using A Large Random Matrix and Sparse Modeling by Katsuya ITO, Akira Kinoshita, Masashi Kinoshita @ [DARLI-AP](http://dbdmg.polito.it/darli-ap2019/index.php)   EDBT/ICDT 2019 Joint Conference
+- 2019年3月　Dynamic Time Warping を用いた高頻度取引データの Lead-Lag 効果の推定 by 伊藤克哉, 酒本隆太 @ [第50回（2018年度冬季）JAFEE大会](http://www.jafee.gr.jp/01rally/rally-top.html) 
+- 2019年1月　Structural Change Point Detection Using A Large Random Matrix and Sparse Modeling by Katsuya ITO, Akira Kinoshita, Masashi Yoshikawa @ [DARLI-AP](http://dbdmg.polito.it/darli-ap2019/index.php)   EDBT/ICDT 2019 Joint Conference
+- 2019年1月　高頻度取引におけるLead-Lag効果の直接推定　修士論文 @　東京大学
 - 2018年11月  [ASSOCIATION BETWEEN CLASS OF ANTIDIABETIC DRUGS AND INCIDENCE OF MYOCARDIAL INFARCTION IN PATIENTS WITH TYPE 2 DIABETES MELITUS: A PROPORTIONAL HAZARD ANALYSIS USING DEEP LEARNING FOR RISK ADJUSTMENT by Yamada T, ITO K, Takeshima T, Iwasaki K](https://myisporbarcelona.zerista.com/poster/member/132982) @  [ISPOR Europe 2018](https://ispor.org/conferences-education/conferences/upcoming-conferences/europe-2018)
 - 2018年11月  [D1-05: 巨大ランダム行列を用いた構造の変化点検知 by 伊藤 克哉; 木下 僚; 小松 智希; 吉川 真史](http://ibisml.org/ibis2018/discussion/) @ [IBIS 2018](http://ibisml.org/ibis2018/) 
 
@@ -162,6 +163,8 @@ layout: top
 - <a href="http://tswww.ism.ac.jp/sato/index_J_SJIS.html">佐藤整尚先生</a>
 - <a href="http://rootf.co.jp/top.html">大庫直樹先生</a>
 - <a href="http://jp.milliman.com/Consultants/?cid=82614">岩崎宏介先生</a>
+- <a href="https://researchmap.jp/akinoshita/">木下僚先生</a>
+- <a href="https://github.com/YoshikawaMasashi">吉川真史先生</a>
  
 ### 知人のウェブサイト
 - <a href="http://d-poppo.nazo.cc/" target="_blank">D-poppo</a>
