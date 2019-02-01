@@ -153,14 +153,18 @@ layout: top
 - <a href="http://www.ecc.u-tokyo.ac.jp/" target="_blank">東京大学情報基盤センター</a>
 
 ### お世話になった先生のウェブサイト(お世話になった年度順)
+<!-- 
 - <a href="http://www.ms.u-tokyo.ac.jp/~sakasai/index-j.html" target="_blank">逆井卓也先生</a>
 - <a href="http://www.ms.u-tokyo.ac.jp/~afutaki/welcome-jtodai.html" target="_blank">二木昭人先生</a>
 - <a href="http://www.ms.u-tokyo.ac.jp/~matsuo/index-j.html" target="_blank">松尾厚先生</a>
 - <a href="http://www.ms.u-tokyo.ac.jp/~hirachi/" target="_blank">平地健吾先生</a>
 - <a href="http://www.ms.u-tokyo.ac.jp/~yasuyuki/" target="_blank">河東泰之先生</a>
+-->
 - <a href="http://www.ms.u-tokyo.ac.jp/~ichii/" target="_blank">一井信吾先生</a>
+<!-- 
 - <a href="http://www.ms.u-tokyo.ac.jp/~stakagi/" target="_blank">高木俊介先生</a>
 - <a href="http://www.ms.u-tokyo.ac.jp/~kohno/index_j.html" target="_blank">河野俊丈先生</a>
+-->
 - <a href="http://www.ms.u-tokyo.ac.jp/~mieda/index-j.html" target="_blank">三枝洋一先生</a>
 - <a href="https://about.me/kenichiro" target="_blank">西岡賢一郎先生</a>
 - <a href="http://www.infsup.jp/saito/" target="_blank">齊藤宣一先生</a>     
