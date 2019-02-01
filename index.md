@@ -182,6 +182,6 @@ layout: top
 ### ［n］<a name="N"></a>知人のウェブサイト
 
 - ［n1］<a name="N1"></a> <a href="http://d-poppo.nazo.cc/" target="_blank">D-poppo</a> [g1](#G1) [g3](#G3)
-- ［n2］<a name="N2"></a> <a href="http://qnighy.github.io/" target="_blank">原 将己</a> [e2)(#E2)
+- ［n2］<a name="N2"></a> <a href="http://qnighy.github.io/" target="_blank">原 将己</a> [e2](#E2)
 
 
