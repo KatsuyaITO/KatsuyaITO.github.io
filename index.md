@@ -107,7 +107,7 @@ layout: top
 ［g7］<a name="G7"></a>|2018年|4月|[計算数学I TA](https://github.com/utmsks/KSImaterial)
 
 ### ［h］<a name="H"></a>論文・学会発表
--［h1］<a name="H1"></a> 2018年11月  [D1-05: 巨大ランダム行列を用いた構造の変化点検知 by 伊藤 克哉; 木下 僚; 小松 智希; 吉川 真史](http://ibisml.org/ibis2018/discussion/) @ [IBIS 2018](http://ibisml.org/ibis2018/) 
+- ［h1］<a name="H1"></a> 2018年11月  [D1-05: 巨大ランダム行列を用いた構造の変化点検知 by 伊藤 克哉; 木下 僚; 小松 智希; 吉川 真史](http://ibisml.org/ibis2018/discussion/) @ [IBIS 2018](http://ibisml.org/ibis2018/) 
 - ［h2］<a name="H2"></a> 2018年11月  [ASSOCIATION BETWEEN CLASS OF ANTIDIABETIC DRUGS AND INCIDENCE OF MYOCARDIAL INFARCTION IN PATIENTS WITH TYPE 2 DIABETES MELITUS: A PROPORTIONAL HAZARD ANALYSIS USING DEEP LEARNING FOR RISK ADJUSTMENT by Yamada T, ITO K, Takeshima T, Iwasaki K](https://myisporbarcelona.zerista.com/poster/member/132982) @  [ISPOR Europe 2018](https://ispor.org/conferences-education/conferences/upcoming-conferences/europe-2018)
 - ［h3］<a name="H3"></a> 2019年1月　高頻度取引におけるLead-Lag効果の直接推定　修士論文 @　東京大学
 - ［h4］<a name="H4"></a> 2019年1月　Structural Change Point Detection Using A Large Random Matrix and Sparse Modeling by Katsuya ITO, Akira Kinoshita, Masashi Yoshikawa @ [DARLI-AP](http://dbdmg.polito.it/darli-ap2019/index.php)   EDBT/ICDT 2019 Joint Conference
@@ -176,7 +176,8 @@ layout: top
 - ［m11］<a name="M11"></a><a href="https://github.com/YoshikawaMasashi">吉川真史先生</a>
  
 ### ［n］<a name="N"></a>知人のウェブサイト
--［n1］<a name="N1"></a> <a href="http://d-poppo.nazo.cc/" target="_blank">D-poppo</a>
--［n2］<a name="N2"></a> <a href="http://qnighy.github.io/" target="_blank">原 将己</a>
+
+- ［n1］<a name="N1"></a> <a href="http://d-poppo.nazo.cc/" target="_blank">D-poppo</a>
+- ［n2］<a name="N2"></a> <a href="http://qnighy.github.io/" target="_blank">原 将己</a>
 
 
