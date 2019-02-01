@@ -29,9 +29,9 @@ layout: top
 [EDBT-ICDT](http://edbticdt2019.inesc-id.pt/) ワークショップ [DARLI-AP](http://dbdmg.polito.it/darli-ap2019/) に採択
 - 2019/01/01 [d6](#D6) インターン　独立行政法人経済産業研究所でリサーチアシスタントを開始
 - 2018/12/31 [d4](#D4) インターン　ルートエフ・データム株式会社でのインターンを終了
-- 2018/12/23 [i7](#i7) スライド　[量子プログラミング入門](https://www.slideshare.net/k1ito/ss-126565732)を公開
+- 2018/12/23 [i7](#I7) スライド　[量子プログラミング入門](https://www.slideshare.net/k1ito/ss-126565732)を公開
 - 2018/12/21 [h5](#H5) 学会発表　Dynamic Time Warping を用いた高頻度取引データの Lead-Lag 効果の推定が採択
-- 2018/11/15 [i6](#i6) スライド　[強化学習入門](https://www.slideshare.net/k1ito/ss-123088713)を公開
+- 2018/11/15 [i6](#I6) スライド　[強化学習入門](https://www.slideshare.net/k1ito/ss-123088713)を公開
 - 2018/11/10 [h2](#H2) 論文　[ISPOR Europe](https://www.ispor.org/conferences-education/conferences/past-conferences/europe-2018)で発表
 - 2018/11/04 [h1](#H1) ポスター発表　[情報論的学習理論と機械学習 (IBISML) 研究会](http://ibisml.org/ibis2018/)で発表
 - 2018/07/25 [d5](#D5) インターン　株式会社Preferred Networksでのインターンを開始
