@@ -25,6 +25,7 @@ layout: top
 <br>
 
 ### 更新履歴 
+- 2019/01/31 [d5](#D5) インターン　株式会社Preferred Networksでのインターンを終了
 - 2019/01/24 [h4](#H4) 論文　Structural Change Point Detection Using A Large Random Matrix and Sparse Modelingが 
 [EDBT-ICDT](http://edbticdt2019.inesc-id.pt/) ワークショップ [DARLI-AP](http://dbdmg.polito.it/darli-ap2019/) に採択
 - 2019/01/01 [d6](#D6) インターン　独立行政法人経済産業研究所でリサーチアシスタントを開始
@@ -65,11 +66,11 @@ layout: top
 番号|開始|終了|所属・職務内容
 --|--|--|----
 ［d1］<a name="D1"></a>|2016年8月|～2017年8月|[3idea Inc.](http://www.3idea.jp) Python・MySQL等を用いたデータサイエンティスト
-［d2］<a name="D1"></a>|2017年8月|～|[YJFX from Yahoo!Japan](https://www.yjfx.jp) Python・R・Redshift等を用いたクオンツアナリスト
-［d3］<a name="D1"></a>|2018年5月|～|[Milliman](http://jp.milliman.com/) SASを用いたヘルスケア・データサイエンティスト
-［d4］<a name="D1"></a>|2018年5月|2018年12月|[Rootf-Datum](http://www.rootf-datum.com/) Python・Rを用いた地方金融機関向けデータサイエンティスト・コンサルタント
-［d5］<a name="D1"></a>|2018年7月|～|[Preferred Networks](https://www.preferred-networks.jp/ja/)リサーチインターン・パートタイムエンジニア。異常検知。
-［d6］<a name="D1"></a>|2019年1月|～|[独立行政法人経済産業研究所](https://www.rieti.go.jp/jp/)リサーチアシスタント・Stataを用いたEBPM
+［d2］<a name="D2"></a>|2017年8月|～|[YJFX from Yahoo!Japan](https://www.yjfx.jp) Python・R・Redshift等を用いたクオンツアナリスト
+［d3］<a name="D3"></a>|2018年5月|～|[Milliman](http://jp.milliman.com/) SASを用いたヘルスケア・データサイエンティスト
+［d4］<a name="D4"></a>|2018年5月|2018年12月|[Rootf-Datum](http://www.rootf-datum.com/) Python・Rを用いた地方金融機関向けデータサイエンティスト・コンサルタント
+［d5］<a name="D5"></a>|2018年7月|2019年1月|[Preferred Networks](https://www.preferred-networks.jp/ja/)リサーチインターン・パートタイムエンジニア。異常検知。
+［d6］<a name="D6"></a>|2019年1月|～|[独立行政法人経済産業研究所](https://www.rieti.go.jp/jp/)リサーチアシスタント・Stataを用いたEBPM
 
 
 ### ［e］<a name="e"></a> その他の所属 
