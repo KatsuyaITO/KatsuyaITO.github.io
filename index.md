@@ -29,14 +29,14 @@ layout: top
 [EDBT-ICDT](http://edbticdt2019.inesc-id.pt/) ワークショップ [DARLI-AP](http://dbdmg.polito.it/darli-ap2019/) に採択
 - 2019/01/01 [d6](#D6) インターン　独立行政法人経済産業研究所でリサーチアシスタントを開始
 - 2018/12/31 [d4](#D4) インターン　ルートエフ・データム株式会社でのインターンを終了
-- 2018/12/23 スライド　[量子プログラミング入門](https://www.slideshare.net/k1ito/ss-126565732)を公開
+- 2018/12/23 [i7](#i7) スライド　[量子プログラミング入門](https://www.slideshare.net/k1ito/ss-126565732)を公開
 - 2018/12/21 [h5](#H5) 学会発表　Dynamic Time Warping を用いた高頻度取引データの Lead-Lag 効果の推定が採択
-- 2018/11/15 スライド　[強化学習入門](https://www.slideshare.net/k1ito/ss-123088713)を公開
+- 2018/11/15 [i6](#i6) スライド　[強化学習入門](https://www.slideshare.net/k1ito/ss-123088713)を公開
 - 2018/11/10 [h2](#H2) 論文　[ISPOR Europe](https://www.ispor.org/conferences-education/conferences/past-conferences/europe-2018)で発表
 - 2018/11/04 [h1](#H1) ポスター発表　[情報論的学習理論と機械学習 (IBISML) 研究会](http://ibisml.org/ibis2018/)で発表
 - 2018/07/25 [d5](#D5) インターン　株式会社Preferred Networksでのインターンを開始
-- 2018/06/10 スライド　[異常検知と変化点検知で復習するPRML](https://www.slideshare.net/k1ito/prml-101740429)を公開
-- 2018/05/05  スライド [ICLR 2018 Best papers 3本を紹介](https://www.slideshare.net/k1ito/iclr-2018-best-papers-3)を公開
+- 2018/06/10 [i5](#I5) スライド　[異常検知と変化点検知で復習するPRML](https://www.slideshare.net/k1ito/prml-101740429)を公開
+- 2018/05/05 [i4](#I4) スライド [ICLR 2018 Best papers 3本を紹介](https://www.slideshare.net/k1ito/iclr-2018-best-papers-3)を公開
 - 2018/05/01 [d4](#D4) インターン　ルートエフ・データム株式会社でのインターンを開始
 - 2018/05/01 [d3](#D3) インターン　Milliman Incでのインターンを開始
 
@@ -125,7 +125,10 @@ layout: top
 ［i1］<a name="I1"></a>|2013年|4月|<a href="seminar.html">自主ゼミの記録はこちら</a>
 ［i2］<a name="I2"></a>|2014年|9月|発表<a href="http://www.slideshare.net/k1ito/ss-39036481">｢とぽろじー入門｣</a>@<a href="http://kansaimath.tenasaku.com/?page_id=734">第5回関西すうがく徒のつどい</a>
 ［i3］<a name="I3"></a>|2014年|9月|発表<a href="http://togetter.com/li/878845">｢代数学の基本定理で見る数学の世界｣</a>@<a href="http://kansaimath.tenasaku.com/?page_id=1106">第7回関西すうがく徒のつどい</a>
-
+［i4］<a name="I4"></a>|2018年|5月|スライド　[ICLR 2018 Best papers 3本を紹介](https://www.slideshare.net/k1ito/iclr-2018-best-papers-3)
+［i5］<a name="I5"></a>|2018年|6月|スライド　[異常検知と変化点検知で復習するPRML](https://www.slideshare.net/k1ito/prml-101740429)
+［i6］<a name="I6"></a>|2018年|11月|スライド　[強化学習入門](https://www.slideshare.net/k1ito/ss-123088713)
+［i7］<a name="I7"></a>|2018年|12月|スライド　[量子プログラミング入門](https://www.slideshare.net/k1ito/ss-126565732)
 
 ---
 
