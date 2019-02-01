@@ -176,8 +176,8 @@ layout: top
 - ［m7］<a name="M7"></a><a href="http://tswww.ism.ac.jp/sato/index_J_SJIS.html">佐藤整尚先生</a> [b4](#B4) [h3](#H3)
 - ［m8］<a name="M8"></a><a href="http://rootf.co.jp/top.html">大庫直樹先生</a> [d4](#D4)
 - ［m9］<a name="M9"></a><a href="http://jp.milliman.com/Consultants/?cid=82614">岩崎宏介先生</a> [d3](#D3)
-- ［m10］<a name="M10"></a><a href="https://researchmap.jp/akinoshita/">木下僚先生</a> [d5](#D5) [h1](#h1) [h4](#h4)
-- ［m11］<a name="M11"></a><a href="https://github.com/YoshikawaMasashi">吉川真史先生</a> [d5](#D5) [h1](#h1) [h4](#h4)
+- ［m10］<a name="M10"></a><a href="https://researchmap.jp/akinoshita/">木下僚先生</a> [d5](#D5) [h1](#H1) [h4](#H4)
+- ［m11］<a name="M11"></a><a href="https://github.com/YoshikawaMasashi">吉川真史先生</a> [d5](#D5) [h1](#H1) [h4](#H4)
  
 ### ［n］<a name="N"></a>知人のウェブサイト
 
