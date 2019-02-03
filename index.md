@@ -8,6 +8,7 @@ layout: top
 
 A Japanese Master's Student at 
 The University of Tokyo , Graduate School of Economics, Department of Quantitative Finance.
+[日本語](http://katsuyaito.github.io/index_jp.html)
 
 ### ［a］Research Interests
 
@@ -176,7 +177,7 @@ Number|Year|Month|Details
 - ［m10］<a name="M10"></a><a href="https://researchmap.jp/akinoshita/">Dr. Akira Kinoshita</a> [d5](#D5) [h1](#H1) [h4](#H4)
 - ［m11］<a name="M11"></a><a href="https://github.com/YoshikawaMasashi">Mr. Yoshikawa Masashi</a> [d5](#D5) [h1](#H1) [h4](#H4)
  
-### ［n］<a name="N"></a>知人のウェブサイト
+### ［n］<a name="N"></a>　Acquaintances
 
 - ［n1］<a name="N1"></a> <a href="http://d-poppo.nazo.cc/" target="_blank">D-poppo</a> [g1](#G1) [g3](#G3)
 - ［n2］<a name="N2"></a> <a href="http://qnighy.github.io/" target="_blank">Masaki Hara</a> [e2](#E2)
