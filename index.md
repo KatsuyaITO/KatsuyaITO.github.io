@@ -117,7 +117,7 @@ Number|Year|Month|Qualifications
 ---
 
 
-### ［i］<a name="I"></a>Personal Activities
+### ［i］<a name="I"></a>Personal Activities in Japanese
 
 番号|年|月|内容
 --|--|--|----
