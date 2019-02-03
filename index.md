@@ -72,7 +72,7 @@ Number|Start|End|Detail
 
 
 ### ［e］<a name="e"></a> Affiliation
-［e1］<a name="E1"></a>[UT-Atoms)](http://ut-atoms.sakura.ne.jp/) <br>  
+［e1］<a name="E1"></a>[UT-Atoms](http://ut-atoms.sakura.ne.jp/) <br>  
 ［e2］<a name="E2"></a>[UT-TSG](http://www.tsg.ne.jp)<br>
 ［e3］<a name="E3"></a>[Deepcore Kernel](http://deepcore.jp/)<br>
 
@@ -95,22 +95,22 @@ Number|Year|Month|Qualifications
 
 ### ［g］<a name="G"></a>Activities at University
 
-番号|年|月|内容
+Number|Year|Month|Details
 --|--|--|----
-［g1］<a name="G1"></a>|2015年| 5月|[第88回五月祭企画](http://gogatsusai.jp/88/visitor/).[｢数学科展示ますらぼ｣](http://gogatsusai.jp/88/visitor/event/detail/425)正責任者.<br>冊子[｢eπisode vol3｣](https://www.dropbox.com/s/32srb4oayhpwssz/main.pdf?dl=0)発行責任者
-［g2］<a name="G2"></a>|2015年|10月|[平成27年度中学生のための玉原数学教室](http://tambara.ms.u-tokyo.ac.jp/classroom_for_junior_highschool.html).ジュニアTA
-［g3］<a name="G3"></a>|2015年|11月|[第66回駒場祭企画](http://www.komabasai.net/66/visitor/)[｢数学科展示ますらぼ｣](http://www.komabasai.net/66/visitor/event/search/view/?id=731&area=indoor5)正責任者. <br>冊子[｢eπisode vol3.5｣](http://bit.ly/epiKF66)発行責任者･寄稿
-［g4］<a name="G4"></a>|2016年|10月|[数学特別講究](https://github.com/KatsuyaITO/NSofSDE)
-［g5］<a name="G5"></a>|2017年|4月|[計算数学I TA](https://github.com/utmsks/KSImaterial)
-［g6］<a name="G6"></a>|2017年|10月|[計算数学II TA](https://github.com/utmsks/KSImaterial)
-［g7］<a name="G7"></a>|2018年|4月|[計算数学I TA](https://github.com/utmsks/KSImaterial)
+［g1］<a name="G1"></a>|2015|May|[第88回五月祭企画](http://gogatsusai.jp/88/visitor/).[｢数学科展示ますらぼ｣](http://gogatsusai.jp/88/visitor/event/detail/425)正責任者.<br>冊子[｢eπisode vol3｣](https://www.dropbox.com/s/32srb4oayhpwssz/main.pdf?dl=0)発行責任者
+［g2］<a name="G2"></a>|2015|Octorber|[平成27年度中学生のための玉原数学教室](http://tambara.ms.u-tokyo.ac.jp/classroom_for_junior_highschool.html).ジュニアTA
+［g3］<a name="G3"></a>|2015年|November|[第66回駒場祭企画](http://www.komabasai.net/66/visitor/)[｢数学科展示ますらぼ｣](http://www.komabasai.net/66/visitor/event/search/view/?id=731&area=indoor5)正責任者. <br>冊子[｢eπisode vol3.5｣](http://bit.ly/epiKF66)発行責任者･寄稿
+［g4］<a name="G4"></a>|2016|October|[数学特別講究](https://github.com/KatsuyaITO/NSofSDE)
+［g5］<a name="G5"></a>|2017|April|[計算数学I TA](https://github.com/utmsks/KSImaterial)
+［g6］<a name="G6"></a>|2017|October|[計算数学II TA](https://github.com/utmsks/KSImaterial)
+［g7］<a name="G7"></a>|2018|April|[計算数学I TA](https://github.com/utmsks/KSImaterial)
 
 ### ［h］<a name="H"></a>Publications and Conference Presentations
-- ［h1］<a name="H1"></a> 2018年11月  [D1-05: 巨大ランダム行列を用いた構造の変化点検知 by 伊藤 克哉; 木下 僚; 小松 智希; 吉川 真史](http://ibisml.org/ibis2018/discussion/) @ [IBIS 2018](http://ibisml.org/ibis2018/) 
-- ［h2］<a name="H2"></a> 2018年11月  [ASSOCIATION BETWEEN CLASS OF ANTIDIABETIC DRUGS AND INCIDENCE OF MYOCARDIAL INFARCTION IN PATIENTS WITH TYPE 2 DIABETES MELITUS: A PROPORTIONAL HAZARD ANALYSIS USING DEEP LEARNING FOR RISK ADJUSTMENT by Yamada T, ITO K, Takeshima T, Iwasaki K](https://myisporbarcelona.zerista.com/poster/member/132982) @  [ISPOR Europe 2018](https://ispor.org/conferences-education/conferences/upcoming-conferences/europe-2018)
-- ［h3］<a name="H3"></a> 2019年1月　高頻度取引におけるLead-Lag効果の直接推定　修士論文 @　東京大学
-- ［h4］<a name="H4"></a> 2019年1月　Structural Change Point Detection Using A Large Random Matrix and Sparse Modeling by Katsuya ITO, Akira Kinoshita, Masashi Yoshikawa @ [DARLI-AP](http://dbdmg.polito.it/darli-ap2019/index.php)   EDBT/ICDT 2019 Joint Conference
-- ［h5］<a name="H5"></a> 2019年3月　Dynamic Time Warping を用いた高頻度取引データの Lead-Lag 効果の推定 by 伊藤克哉, 酒本隆太 @ [第50回（2018年度冬季）JAFEE大会](http://www.jafee.gr.jp/01rally/rally-top.html) 
+- ［h1］<a name="H1"></a> November 2018  [D1-05: 巨大ランダム行列を用いた構造の変化点検知 by 伊藤 克哉; 木下 僚; 小松 智希; 吉川 真史](http://ibisml.org/ibis2018/discussion/) @ [IBIS 2018](http://ibisml.org/ibis2018/) 
+- ［h2］<a name="H2"></a> November 2018 [ASSOCIATION BETWEEN CLASS OF ANTIDIABETIC DRUGS AND INCIDENCE OF MYOCARDIAL INFARCTION IN PATIENTS WITH TYPE 2 DIABETES MELITUS: A PROPORTIONAL HAZARD ANALYSIS USING DEEP LEARNING FOR RISK ADJUSTMENT by Yamada T, ITO K, Takeshima T, Iwasaki K](https://myisporbarcelona.zerista.com/poster/member/132982) @  [ISPOR Europe 2018](https://ispor.org/conferences-education/conferences/upcoming-conferences/europe-2018)
+- ［h3］<a name="H3"></a> January 2019　高頻度取引におけるLead-Lag効果の直接推定　Master Thesis @　University of Tokyo
+- ［h4］<a name="H4"></a> January　2019　Structural Change Point Detection Using A Large Random Matrix and Sparse Modeling by Katsuya ITO, Akira Kinoshita, Masashi Yoshikawa @ [DARLI-AP](http://dbdmg.polito.it/darli-ap2019/index.php)   EDBT/ICDT 2019 Joint Conference
+- ［h5］<a name="H5"></a> March 2019　Dynamic Time Warping を用いた高頻度取引データの Lead-Lag 効果の推定 by 伊藤克哉, 酒本隆太 @ [第50回（2018年度冬季）JAFEE大会](http://www.jafee.gr.jp/01rally/rally-top.html) 
 
 
 
