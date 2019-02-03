@@ -32,7 +32,7 @@ The University of Tokyo , Graduate School of Economics, Department of Quantitati
 - 2019/01/01 [d6](#D6) Started Research Assistant at RIETI.
 - 2018/12/31 [d4](#D4) Finished Internship at Rootf-Datum.
 - 2018/12/23 [i7](#I7) Published My Slide "Introduction to Quantum Programming" [量子プログラミング入門](https://www.slideshare.net/k1ito/ss-126565732) in Japanese
-- 2018/12/21 [h5](#H5) Our paper "Lead-Lag Estimation In Ultra-High-Frequency Data Usingf Dynamic Time Warping " for JAFEE was accepted.
+- 2018/12/21 [h5](#H5) Our paper "Lead-Lag Estimation In Ultra-High-Frequency Data Using Dynamic Time Warping " for JAFEE was accepted.
 - 2018/11/15 [i6](#I6) Published My Slide "Introduction to Reinforcement Learning"　[強化学習入門](https://www.slideshare.net/k1ito/ss-123088713) in Japanese.
 - 2018/11/10 [h2](#H2) Our paper for　[ISPOR Europe](https://www.ispor.org/conferences-education/conferences/past-conferences/europe-2018) was accepted.
 - 2018/11/04 [h1](#H1) Our poster for [IBISML](http://ibisml.org/ibis2018/) was accepted.
@@ -71,29 +71,29 @@ Number|Start|End|Detail
 ［d6］<a name="D6"></a>|January 2018|～|[Research Institute of Economy, Trade and Industry](https://www.rieti.go.jp/jp/) EBPM Research Assistant
 
 
-### ［e］<a name="e"></a> その他の所属 
-［e1］<a name="E1"></a>[東京大学物理研究会(Atoms)](http://ut-atoms.sakura.ne.jp/) <br>  
-［e2］<a name="E2"></a>[東京大学理論科学グループ(TSG)](http://www.tsg.ne.jp)<br>
-［e3］<a name="E3"></a>[Deepcore カーネルメンバー](http://deepcore.jp/)<br>
+### ［e］<a name="e"></a> Affiliation
+［e1］<a name="E1"></a>[UT-Atoms)](http://ut-atoms.sakura.ne.jp/) <br>  
+［e2］<a name="E2"></a>[UT-TSG](http://www.tsg.ne.jp)<br>
+［e3］<a name="E3"></a>[Deepcore Kernel](http://deepcore.jp/)<br>
 
 
-### ［f］<a name="f"></a> 資格等
+### ［f］<a name="f"></a> Qualifications
 
-番号|年|月|資格等
+Number|Year|Month|Qualifications
 --|--|--|----
-［f1］<a name="F1"></a>|2009年|12月|[応用情報技術者試験](https://www.jitec.ipa.go.jp/1_11seido/ap.html)
-［f2］<a name="F2"></a>|2013年|12月|[HSK](https://www.hskj.jp/) 4級
-［f3］<a name="F3"></a>|2016年|7月|[TOEFL](https://www.ets.org/jp/toefl) iBTテストスコア87点取得
-［f4］<a name="F4"></a>|2017年|1月|[TOEIC](http://www.toeic.or.jp/)公開テスト　スコア935点取得
+［f1］<a name="F1"></a>|2009|December|[Applied Information Technology Engineer Examination](https://www.jitec.ipa.go.jp/1_11seido/ap.html)
+［f2］<a name="F2"></a>|2013|December|[Chinese Standard Exam　HSK](https://www.hskj.jp/) 4th Level
+［f3］<a name="F3"></a>|2016|July|[TOEFL](https://www.ets.org/jp/toefl) iBT Score 87
+［f4］<a name="F4"></a>|2017|January|[TOEIC](http://www.toeic.or.jp/)L&R Score 935
 
 
 
 ---
 
 
-## 活動 <a name="works"></a>
+## Works <a name="works"></a>
 
-### ［g］<a name="G"></a>大学関連の活動
+### ［g］<a name="G"></a>Activities at University
 
 番号|年|月|内容
 --|--|--|----
@@ -105,7 +105,7 @@ Number|Start|End|Detail
 ［g6］<a name="G6"></a>|2017年|10月|[計算数学II TA](https://github.com/utmsks/KSImaterial)
 ［g7］<a name="G7"></a>|2018年|4月|[計算数学I TA](https://github.com/utmsks/KSImaterial)
 
-### ［h］<a name="H"></a>論文・学会発表
+### ［h］<a name="H"></a>Publications and Conference Presentations
 - ［h1］<a name="H1"></a> 2018年11月  [D1-05: 巨大ランダム行列を用いた構造の変化点検知 by 伊藤 克哉; 木下 僚; 小松 智希; 吉川 真史](http://ibisml.org/ibis2018/discussion/) @ [IBIS 2018](http://ibisml.org/ibis2018/) 
 - ［h2］<a name="H2"></a> 2018年11月  [ASSOCIATION BETWEEN CLASS OF ANTIDIABETIC DRUGS AND INCIDENCE OF MYOCARDIAL INFARCTION IN PATIENTS WITH TYPE 2 DIABETES MELITUS: A PROPORTIONAL HAZARD ANALYSIS USING DEEP LEARNING FOR RISK ADJUSTMENT by Yamada T, ITO K, Takeshima T, Iwasaki K](https://myisporbarcelona.zerista.com/poster/member/132982) @  [ISPOR Europe 2018](https://ispor.org/conferences-education/conferences/upcoming-conferences/europe-2018)
 - ［h3］<a name="H3"></a> 2019年1月　高頻度取引におけるLead-Lag効果の直接推定　修士論文 @　東京大学
@@ -117,7 +117,7 @@ Number|Start|End|Detail
 ---
 
 
-### ［i］<a name="I"></a>個人的な活動
+### ［i］<a name="I"></a>Personal Activities
 
 番号|年|月|内容
 --|--|--|----
@@ -133,31 +133,30 @@ Number|Start|End|Detail
 
 
 
-## ［j］<a name="J"></a>連絡先 <a name="contact"></a>
--  ［j1］<a name="J1"></a> メールアドレス: katsuya1ito[atmark]gmail.com( [atmark] の部分を @ に)
+## ［j］<a name="J"></a>Contact <a name="contact"></a>
+-  ［j1］<a name="J1"></a> E-mail: katsuya1ito[atmark]gmail.com( [atmark] -> @ )
 -  ［j2］<a name="J2"></a> LinkedIn: <a href="https://www.linkedin.com/in/katsuya-ito-46348a129/">Katsuya Ito</a>
 -  ［j3］<a name="J3"></a> Slideshare: <a href="https://www.slideshare.net/k1ito">@k1ito</a>
 
 ---
 
-## リンク <a name="link"></a>
+## Links <a name="link"></a>
 
-### ［k］<a name="K"></a>個人的におすすめなWeb記事等
-- ［k1］<a name="K1"></a><a href="http://www.ms.u-tokyo.ac.jp/~yasuyuki/sem.htm">セミナーの準備のしかたについて</a>
-- ［k2］<a name="K2"></a><a href="http://www.infsup.jp/saito/">齊藤宣一先生の講義ノートとメモ</a>
-- ［k3］<a name="K3"></a><a href="https://drive.google.com/file/d/0B7C_CufYq6j6VXN5NDJjNF9XdTA/view">加藤 賢悟先生の測度論的確率論の講義ノート</a>
+### ［k］<a name="K"></a> Good Webpages in Japanese
+- ［k1］<a name="K1"></a><a href="http://www.ms.u-tokyo.ac.jp/~yasuyuki/">Website of Prof. Yasuyuki Kawahigashi</a>
+- ［k2］<a name="K2"></a><a href="http://www.infsup.jp/saito/">Website of Prof. Norikazu Saito</a>
+- ［k3］<a name="K3"></a><a href="https://sites.google.com/site/kkatostat/home">Website of Prof. Kato Kengo</a>
 
-### ［l］<a name="L"></a> 東京大学
-- ［l1］<a name="L1"></a><a href="http://www.u-tokyo.ac.jp/index_j.html" target="_blank">東京大学</a>
-- ［l2］<a name="L2"></a><a href="http://www.ms.u-tokyo.ac.jp/index-j.html" target="_blank">東京大学大学院数理科学研究科/理学部数学科</a>
-- ［l3］<a name="L3"></a><a href="http://www.ms.u-tokyo.ac.jp/library/" target="_blank">東京大学大学院数理科学研究科図書室</a>
-- ［l4］<a name="L4"></a><a href="http://www.s.u-tokyo.ac.jp/index-ja_ip.html" target="_blank">東京大学大学院理学系研究科/理学部</a>
-- ［l5］<a name="L5"></a><a href="http://www.lib.u-tokyo.ac.jp/" target="_blank">東京大学付属図書館</a>
-- ［l6］<a name="L6"></a><a href="http://www.ecc.u-tokyo.ac.jp/" target="_blank">東京大学情報基盤センター</a>
+### ［l］<a name="L"></a> University of Tokyo
+- ［l1］<a name="L1"></a><a href="http://www.u-tokyo.ac.jp/index_j.html" target="_blank">University of Tokyo</a>
+- ［l2］<a name="L2"></a><a href="http://www.ms.u-tokyo.ac.jp/index-j.html" target="_blank">Department of Mathematics</a>
+- ［l3］<a name="L3"></a><a href="http://www.ms.u-tokyo.ac.jp/library/" target="_blank"> Graduate School of Mathematical Sciences Library </a>
+- ［l4］<a name="L5"></a><a href="http://www.lib.u-tokyo.ac.jp/" target="_blank">Library System</a>
+- ［l5］<a name="L6"></a><a href="http://www.ecc.u-tokyo.ac.jp/" target="_blank">Information Technology Center</a>
 
-### ［m］<a name="M"></a>お世話になった先生のウェブサイト(お世話になった年度順)
+### ［m］<a name="M"></a> My former teachers
 <!-- 
-- <a href="http://www.ms.u-tokyo.ac.jp/~sakasai/index-j.html" target="_blank">逆井卓也先生</a>
+- <a href="http://www.ms.u-tokyo.ac.jp/~sakasai/index-j.html" target="_blank">Ta</a>
 - <a href="http://www.ms.u-tokyo.ac.jp/~afutaki/welcome-jtodai.html" target="_blank">二木昭人先生</a>
 - <a href="http://www.ms.u-tokyo.ac.jp/~matsuo/index-j.html" target="_blank">松尾厚先生</a>
 - <a href="http://www.ms.u-tokyo.ac.jp/~hirachi/" target="_blank">平地健吾先生</a>
@@ -165,21 +164,21 @@ Number|Start|End|Detail
 - <a href="http://www.ms.u-tokyo.ac.jp/~stakagi/" target="_blank">高木俊介先生</a>
 - <a href="http://www.ms.u-tokyo.ac.jp/~kohno/index_j.html" target="_blank">河野俊丈先生</a>
 -->
-- ［m1］<a name="M1"></a><a href="http://www.ms.u-tokyo.ac.jp/~ichii/" target="_blank">一井信吾先生</a>　[g5](#G5)
-- ［m2］<a name="M2"></a><a href="http://www.ms.u-tokyo.ac.jp/~mieda/index-j.html" target="_blank">三枝洋一先生</a> [b1](#B1)
-- ［m3］<a name="M3"></a><a href="https://about.me/kenichiro" target="_blank">西岡賢一郎先生</a> [d1](#D1)
-- ［m4］<a name="M4"></a><a href="http://www.infsup.jp/saito/" target="_blank">齊藤宣一先生</a> [b2](#B2)
-- ［m5］<a name="M5"></a><a href="http://park.itc.u-tokyo.ac.jp/takahashi-lab/home.html" target="_blank">高橋明彦先生</a> [b3](#B3)
-- ［m6］<a name="M6"></a><a href="https://sites.google.com/site/rsakemotohomepage/">酒本隆太先生</a> [d2](#D2) [h5](#H5)
-- ［m7］<a name="M7"></a><a href="http://tswww.ism.ac.jp/sato/index_J_SJIS.html">佐藤整尚先生</a> [b4](#B4) [h3](#H3)
-- ［m8］<a name="M8"></a><a href="http://rootf.co.jp/top.html">大庫直樹先生</a> [d4](#D4)
-- ［m9］<a name="M9"></a><a href="http://jp.milliman.com/Consultants/?cid=82614">岩崎宏介先生</a> [d3](#D3)
-- ［m10］<a name="M10"></a><a href="https://researchmap.jp/akinoshita/">木下僚先生</a> [d5](#D5) [h1](#H1) [h4](#H4)
-- ［m11］<a name="M11"></a><a href="https://github.com/YoshikawaMasashi">吉川真史先生</a> [d5](#D5) [h1](#H1) [h4](#H4)
+- ［m1］<a name="M1"></a><a href="http://www.ms.u-tokyo.ac.jp/~ichii/" target="_blank">Prof. Shingo Ichii</a>　[g5](#G5)
+- ［m2］<a name="M2"></a><a href="http://www.ms.u-tokyo.ac.jp/~mieda/index-j.html" target="_blank">Prof. Yoichi Mieda</a> [b1](#B1)
+- ［m3］<a name="M3"></a><a href="https://about.me/kenichiro" target="_blank">Ken'nichiro Nishioka Ph.D</a> [d1](#D1)
+- ［m4］<a name="M4"></a><a href="http://www.infsup.jp/saito/" target="_blank">Prof. Norikazu Saito</a> [b2](#B2)
+- ［m5］<a name="M5"></a><a href="http://park.itc.u-tokyo.ac.jp/takahashi-lab/home.html" target="_blank">Prof. Akihiko Takahashi</a> [b3](#B3)
+- ［m6］<a name="M6"></a><a href="https://sites.google.com/site/rsakemotohomepage/">Dr. Ryuta Sakemoto</a> [d2](#D2) [h5](#H5)
+- ［m7］<a name="M7"></a><a href="http://tswww.ism.ac.jp/sato/index_J_SJIS.html">Prof. Seicho Sato</a> [b4](#B4) [h3](#H3)
+- ［m8］<a name="M8"></a><a href="http://rootf.co.jp/top.html">Naoki Ougo CEO</a> [d4](#D4)
+- ［m9］<a name="M9"></a><a href="http://jp.milliman.com/Consultants/?cid=82614">Kosuke Iwasaki MBA</a> [d3](#D3)
+- ［m10］<a name="M10"></a><a href="https://researchmap.jp/akinoshita/">Dr. Akira Kinoshita</a> [d5](#D5) [h1](#H1) [h4](#H4)
+- ［m11］<a name="M11"></a><a href="https://github.com/YoshikawaMasashi">Mr. Yoshikawa Masashi</a> [d5](#D5) [h1](#H1) [h4](#H4)
  
 ### ［n］<a name="N"></a>知人のウェブサイト
 
 - ［n1］<a name="N1"></a> <a href="http://d-poppo.nazo.cc/" target="_blank">D-poppo</a> [g1](#G1) [g3](#G3)
-- ［n2］<a name="N2"></a> <a href="http://qnighy.github.io/" target="_blank">原 将己</a> [e2](#E2)
+- ［n2］<a name="N2"></a> <a href="http://qnighy.github.io/" target="_blank">Masaki Hara</a> [e2](#E2)
 
 
