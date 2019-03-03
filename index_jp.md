@@ -24,7 +24,8 @@ layout: top
 - ［b4］<a name="B4"></a>修士2年：佐藤整尚先生(高頻度取引)
 <br>
 
-### 更新履歴 
+### 更新履歴
+- 2019/02/22 [h5](#H5) 学会発表　[JAFEE](http://www.jafee.gr.jp/01rally/rally-past.html#20190223)での発表が優秀発表賞として日本金融・証券計量・工学学会より表彰されました。
 - 2019/01/31 [d5](#D5) インターン　株式会社Preferred Networksでのインターンを終了
 - 2019/01/24 [h4](#H4) 論文　Structural Change Point Detection Using A Large Random Matrix and Sparse Modelingが 
 [EDBT-ICDT](http://edbticdt2019.inesc-id.pt/) ワークショップ [DARLI-AP](http://dbdmg.polito.it/darli-ap2019/) に採択
@@ -112,7 +113,7 @@ layout: top
 - ［h2］<a name="H2"></a> 2018年11月  [ASSOCIATION BETWEEN CLASS OF ANTIDIABETIC DRUGS AND INCIDENCE OF MYOCARDIAL INFARCTION IN PATIENTS WITH TYPE 2 DIABETES MELITUS: A PROPORTIONAL HAZARD ANALYSIS USING DEEP LEARNING FOR RISK ADJUSTMENT by Yamada T, ITO K, Takeshima T, Iwasaki K](https://myisporbarcelona.zerista.com/poster/member/132982) @  [ISPOR Europe 2018](https://ispor.org/conferences-education/conferences/upcoming-conferences/europe-2018)
 - ［h3］<a name="H3"></a> 2019年1月　高頻度取引におけるLead-Lag効果の直接推定　修士論文 @　東京大学
 - ［h4］<a name="H4"></a> 2019年1月　Structural Change Point Detection Using A Large Random Matrix and Sparse Modeling by Katsuya ITO, Akira Kinoshita, Masashi Yoshikawa @ [DARLI-AP](http://dbdmg.polito.it/darli-ap2019/index.php)   EDBT/ICDT 2019 Joint Conference
-- ［h5］<a name="H5"></a> 2019年3月　Dynamic Time Warping を用いた高頻度取引データの Lead-Lag 効果の推定 by 伊藤克哉, 酒本隆太 @ [第50回（2018年度冬季）JAFEE大会](http://www.jafee.gr.jp/01rally/rally-top.html) 
+- ［h5］<a name="H5"></a> 2019年3月　Dynamic Time Warping を用いた高頻度取引データの Lead-Lag 効果の推定 by 伊藤克哉, 酒本隆太 @ [第50回（2018年度冬季）JAFEE大会](http://www.jafee.gr.jp/01rally/rally-top.html) <strong>優秀発表賞受賞</strong>
 
 
 
