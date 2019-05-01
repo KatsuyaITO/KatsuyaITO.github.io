@@ -6,8 +6,7 @@ layout: top
 
 <img class="profile-picture" src="k1ito.png">
 
-A Japanese Master's Student at 
-The University of Tokyo , Graduate School of Economics, Department of Quantitative Finance.
+An Engineer at Preferred Networks, Inc.
 [日本語](http://katsuyaito.github.io/index_jp.html)
 
 ### ［a］Research Interests
@@ -27,6 +26,7 @@ The University of Tokyo , Graduate School of Economics, Department of Quantitati
 <br>
 
 ### Update History
+- 2019/03/31 [c3](#C3) Graduated the University of Tokyo, Graduate School of Economics
 - 2019/01/31 [d5](#D5) Finished Internship at Preferred Networks Inc.
 - 2019/01/24 [h4](#H4) Our paper "Structural Change Point Detection Using A Large Random Matrix and Sparse Modeling" for 
 [EDBT-ICDT](http://edbticdt2019.inesc-id.pt/) Workshop [DARLI-AP](http://dbdmg.polito.it/darli-ap2019/) was accepted
@@ -57,7 +57,7 @@ Number|Start|End|School
 --|--|--|----
 ［c1］<a name="C1"></a>|April 2010|March 2013|[Hakuryo Highschool](http://www.hakuryo.ed.jp/) 
 ［c2］<a name="C2"></a>|April 2013|March 2017|[University of Tokyo, Department of Mathematics](http://www.ms.u-tokyo.ac.jp/index-j.html) 
-［c3］<a name="C3"></a>|April 2017| - |[University of Tokyo, Graduate School of Economics](http://www.e.u-tokyo.ac.jp/) 
+［c3］<a name="C3"></a>|April 2017|March 2019|[University of Tokyo, Graduate School of Economics](http://www.e.u-tokyo.ac.jp/) 
 
 
 ### ［d］<a name="d"></a> Internship Experience
