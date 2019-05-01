@@ -6,7 +6,7 @@ layout: top
 
 <img class="profile-picture" src="k1ito.png">
 
-東京大学大学院経済学研究科マネジメント専攻数量ファイナンスコース修士課程2年
+エンジニア @ 株式会社Preferred Networks
 
 ### ［a］関心分野
 
@@ -25,6 +25,7 @@ layout: top
 <br>
 
 ### 更新履歴
+- 2019/03/31 [d5](#D5) 東京大学大学院経済学研究科を修了しました。それに伴いすべてのインターンを終了しました。
 - 2019/02/22 [h5](#H5) 学会発表　[JAFEE](http://www.jafee.gr.jp/01rally/rally-past.html#20190223)での発表が優秀発表賞として日本金融・証券計量・工学学会より表彰されました。
 - 2019/01/31 [d5](#D5) インターン　株式会社Preferred Networksでのインターンを終了
 - 2019/01/24 [h4](#H4) 論文　Structural Change Point Detection Using A Large Random Matrix and Sparse Modelingが 
@@ -55,11 +56,12 @@ layout: top
 番号|年|月|学歴
 --|--|--|----
 ［c1］<a name="C1"></a>|2013年|3月|[白陵高等学校](http://www.hakuryo.ed.jp/) 卒業
-［c2］<a name="C1"></a>|2013年|4月|[東京大学教養学部理科一類](http://www.c.u-tokyo.ac.jp/) 入学
-［c3］<a name="C1"></a>|2015年|3月|[東京大学教養学部理科一類](http://www.c.u-tokyo.ac.jp/) 修了
-［c4］<a name="C1"></a>|2015年|4月|[東京大学理学部数学科](http://www.ms.u-tokyo.ac.jp/index-j.html) 進学
-［c5］<a name="C1"></a>|2017年|3月|[東京大学理学部数学科](http://www.ms.u-tokyo.ac.jp/index-j.html) 卒業
-［c6］<a name="C1"></a>|2017年|4月|[東京大学大学院経済学研究科](http://www.e.u-tokyo.ac.jp/) 入学
+［c2］<a name="C2"></a>|2013年|4月|[東京大学教養学部理科一類](http://www.c.u-tokyo.ac.jp/) 入学
+［c3］<a name="C3"></a>|2015年|3月|[東京大学教養学部理科一類](http://www.c.u-tokyo.ac.jp/) 修了
+［c4］<a name="C4"></a>|2015年|4月|[東京大学理学部数学科](http://www.ms.u-tokyo.ac.jp/index-j.html) 進学
+［c5］<a name="C5"></a>|2017年|3月|[東京大学理学部数学科](http://www.ms.u-tokyo.ac.jp/index-j.html) 卒業
+［c6］<a name="C6"></a>|2017年|4月|[東京大学大学院経済学研究科](http://www.e.u-tokyo.ac.jp/) 入学
+［c7］<a name="C7"></a>|2019年|3月|[東京大学大学院経済学研究科](http://www.e.u-tokyo.ac.jp/) 修了
 
 
 ### ［d］<a name="d"></a>インターン歴等（短期のものは除く）
@@ -67,11 +69,11 @@ layout: top
 番号|開始|終了|所属・職務内容
 --|--|--|----
 ［d1］<a name="D1"></a>|2016年8月|～2017年8月|[3idea Inc.](http://www.3idea.jp) Python・MySQL等を用いたデータサイエンティスト
-［d2］<a name="D2"></a>|2017年8月|～|[YJFX from Yahoo!Japan](https://www.yjfx.jp) Python・R・Redshift等を用いたクオンツアナリスト
-［d3］<a name="D3"></a>|2018年5月|～|[Milliman](http://jp.milliman.com/) SASを用いたヘルスケア・データサイエンティスト
-［d4］<a name="D4"></a>|2018年5月|2018年12月|[Rootf-Datum](http://www.rootf-datum.com/) Python・Rを用いた地方金融機関向けデータサイエンティスト・コンサルタント
-［d5］<a name="D5"></a>|2018年7月|2019年1月|[Preferred Networks](https://www.preferred-networks.jp/ja/)リサーチインターン・パートタイムエンジニア。異常検知。
-［d6］<a name="D6"></a>|2019年1月|～|[独立行政法人経済産業研究所](https://www.rieti.go.jp/jp/)リサーチアシスタント・Stataを用いたEBPM
+［d2］<a name="D2"></a>|2017年8月|〜2019年3月|[YJFX from Yahoo!Japan](https://www.yjfx.jp) Python・R・Redshift等を用いたクオンツアナリスト
+［d3］<a name="D3"></a>|2018年5月|〜2019年3月|[Milliman](http://jp.milliman.com/) SASを用いたヘルスケア・データサイエンティスト
+［d4］<a name="D4"></a>|2018年5月|〜2018年12月|[Rootf-Datum](http://www.rootf-datum.com/) Python・Rを用いた地方金融機関向けデータサイエンティスト・コンサルタント
+［d5］<a name="D5"></a>|2018年7月|〜2019年1月|[Preferred Networks](https://www.preferred-networks.jp/ja/)リサーチインターン・パートタイムエンジニア。異常検知。
+［d6］<a name="D6"></a>|2019年1月|〜2019年3月|[独立行政法人経済産業研究所](https://www.rieti.go.jp/jp/)リサーチアシスタント・Stataを用いたEBPM
 
 
 ### ［e］<a name="e"></a> その他の所属 
