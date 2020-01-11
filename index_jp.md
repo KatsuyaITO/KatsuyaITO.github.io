@@ -25,6 +25,7 @@ layout: top
 <br>
 
 ### 更新履歴
+- 2019/12/02 [h6](#H6) 論文 Direct Estimation of Lead–Lag Relationships Using Multinomial Dynamic Time Warping が Journal Asia-Pacific Financial Marketsに採択されました。
 - 2019/03/31 [d5](#D5) 東京大学大学院経済学研究科を修了しました。それに伴いすべてのインターンを終了しました。
 - 2019/02/22 [h5](#H5) 学会発表　[JAFEE](http://www.jafee.gr.jp/01rally/rally-past.html#20190223)での発表が優秀発表賞として日本金融・証券計量・工学学会より表彰されました。
 - 2019/01/31 [d5](#D5) インターン　株式会社Preferred Networksでのインターンを終了
@@ -116,7 +117,7 @@ layout: top
 - ［h3］<a name="H3"></a> 2019年1月　高頻度取引におけるLead-Lag効果の直接推定　修士論文 @　東京大学
 - ［h4］<a name="H4"></a> 2019年1月　Structural Change Point Detection Using A Large Random Matrix and Sparse Modeling by Katsuya ITO, Akira Kinoshita, Masashi Yoshikawa @ [DARLI-AP](http://dbdmg.polito.it/darli-ap2019/index.php)   EDBT/ICDT 2019 Joint Conference
 - ［h5］<a name="H5"></a> 2019年3月　Dynamic Time Warping を用いた高頻度取引データの Lead-Lag 効果の推定 by 伊藤克哉, 酒本隆太 @ [第50回（2018年度冬季）JAFEE大会](http://www.jafee.gr.jp/01rally/rally-top.html) <strong>優秀発表賞受賞</strong>
-
+- [h6]<a name="H6"></a> 2019年12月 [Direct Estimation of Lead–Lag Relationships Using Multinomial Dynamic Time Warping](https://doi.org/10.1007/s10690-019-09295-z) by Katsuya Ito and Ryuta Sakemoto @ Asia-Pacific Financial Markets 
 
 
 ---
