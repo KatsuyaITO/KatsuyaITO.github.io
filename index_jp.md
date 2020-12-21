@@ -69,8 +69,9 @@ layout: top
 ［c7］<a name="C7"></a>|2019年|3月|[東京大学大学院経済学研究科](http://www.e.u-tokyo.ac.jp/) 修了
 
 
-### ［d］<a name="d"></a>インターン歴等（短期のものは除く）
+### ［d］<a name="d"></a>職歴
 
+#### インターン歴
 番号|開始|終了|所属・職務内容
 --|--|--|----
 ［d1］<a name="D1"></a>|2016年8月|～2017年8月|[3idea Inc.](http://www.3idea.jp) Python・MySQL等を用いたデータサイエンティスト
@@ -80,6 +81,10 @@ layout: top
 ［d5］<a name="D5"></a>|2018年7月|〜2019年1月|[Preferred Networks](https://www.preferred-networks.jp/ja/)リサーチインターン・パートタイムエンジニア。異常検知。
 ［d6］<a name="D6"></a>|2019年1月|〜2019年3月|[独立行政法人経済産業研究所](https://www.rieti.go.jp/jp/)リサーチアシスタント・Stataを用いたEBPM
 
+#### 職歴
+番号|開始|終了|所属・職務内容
+--|--|--|----
+［d7］<a name="D7"></a>|2019年5月|～|[Preferred Networks](https://www.preferred-networks.jp/ja/) Engineer
 
 ### ［e］<a name="e"></a> その他の所属 
 ［e1］<a name="E1"></a>[東京大学物理研究会(Atoms)](http://ut-atoms.sakura.ne.jp/) <br>  
