@@ -25,6 +25,9 @@ layout: top
 <br>
 
 ### 更新履歴
+- 2020/12/18 [h11](#H11) 論文が国際会議AAMAS-2021に採択
+- 2020/12/02 [h10](#H10) 共著論文が国際会議AAAI-2021に採択
+- 2020/06/09 [h8,h9](#H8) 論文２本が人工知能学会に採択
 - 2020/01/06 [h7](#H7) 論文がCurrent Medical Research and Opinionに採択
 - 2019/12/02 [h6](#H6) 論文がJournal Asia-Pacific Financial Marketsに採択
 - 2019/03/31 [d5](#D5) 東京大学大学院経済学研究科を修了しました。それに伴いすべてのインターンを終了
@@ -120,6 +123,10 @@ layout: top
 - ［h5］<a name="H5"></a> 2019年3月　[Dynamic Time Warping を用いた高頻度取引データの Lead-Lag 効果の推定](https://www.slideshare.net/k1ito/dynamic-time-warping-leadlag) by 伊藤克哉, 酒本隆太 @ [第50回（2018年度冬季）JAFEE大会](http://www.jafee.gr.jp/01rally/rally-top.html) <strong>優秀発表賞受賞</strong>
 - [h6]<a name="H6"></a> 2019年12月 [Direct Estimation of Lead–Lag Relationships Using Multinomial Dynamic Time Warping](https://doi.org/10.1007/s10690-019-09295-z) by Katsuya Ito and Ryuta Sakemoto @ Asia-Pacific Financial Markets 
 - [h7]<a name="H7"></a> 2019年12月 [Myocardial infarction in type 2 diabetes using sodium-glucose co-transporter-2 inhibitors, dipeptidyl peptidase-4 inhibitors or glucagon-like peptide-1 receptor agonists: proportional hazards analysis by deep neural network based machine learning](https://doi.org/10.1080/03007995.2019.1706043) by Tomohide Yamada, Kosuke Iwasaki, Shotaro Maedera, Katsuya Ito, Tomomi Takeshima, Hisashi Noma &Nobuhiro Shojima @ Current Medical Research and Opinion 
+- [h8]<a name="H8"></a> 2020年6月 [Trader-Company法:メタヒューリスティクスを用いた株価予測](https://doi.org/10.11517/pjsai.JSAI2020.0_4Rin167) by 伊藤 克哉, 南 賢太郎, 今城 健太郎, 中川 慧 @ 第34回人工知能学会全国大会(2020) 
+- [h9]<a name="H9"></a> 2020年6月 [株価の残差リターンに注目した深層学習ポートフォリオ最適化](https://doi.org/10.11517/pjsai.JSAI2020.0_4Rin120) by　今城 健太郎, 南 賢太郎,  伊藤 克哉, 中川 慧 @ 第34回人工知能学会全国大会(2020) 
+- [h10]<a name="H10"></a> 2020年12月 [Deep Portfolio Optimization via Distributional Prediction of Residual Factors](https://arxiv.org/abs/2012.07245) by Kentaro Imajo, Kentaro Minami, Katsuya Ito, Kei Nakagawa @ AAAI-2021
+- [h11]<a name="H11"></a> 2020年12月 [Trader-Company Method: A Metaheuristic for Interpretable Stock Price Prediction](https://arxiv.org/abs/2012.10215) by Katsuya Ito, Kentaro Minami, Kentaro Imajo, Kei Nakagawa @ AAMAS-2021
 
 ---
 
