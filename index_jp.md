@@ -85,9 +85,14 @@ layout: top
 
 
 #### 職歴
+
+
 番号|開始|終了|所属・職務内容
 --|--|--|----
-［d7］<a name="D7"></a>|2019年5月|～|[Preferred Networks](https://www.preferred-networks.jp/ja/)Engineer
+［d7］<a name="D7"></a>|2019年5月|〜現在|[Preferred Networks](https://www.preferred-networks.jp/ja/) Engineer
+［d8］<a name="D8"></a>|〜|〜|以上
+
+
 
 ### ［e］<a name="e"></a> その他の所属 
 ［e1］<a name="E1"></a>[東京大学物理研究会(Atoms)](http://ut-atoms.sakura.ne.jp/) <br>  
