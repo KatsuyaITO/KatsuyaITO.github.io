@@ -71,8 +71,8 @@ layout: top
 
 ### ［d］<a name="d"></a>職歴
 
-
 #### インターン歴
+
 番号|開始|終了|所属・職務内容
 --|--|--|----
 ［d1］<a name="D1"></a>|2016年8月|～2017年8月|[3idea Inc.](http://www.3idea.jp)Python・MySQL等を用いたデータサイエンティスト
@@ -81,6 +81,7 @@ layout: top
 ［d4］<a name="D4"></a>|2018年5月|〜2018年12月|[Rootf-Datum](http://www.rootf-datum.com/) Python・Rを用いた地方金融機関向けデータサイエンティスト・コンサルタント
 ［d5］<a name="D5"></a>|2018年7月|〜2019年1月|[Preferred Networks](https://www.preferred-networks.jp/ja/)リサーチインターン・パートタイムエンジニア。異常検知。
 ［d6］<a name="D6"></a>|2019年1月|〜2019年3月|[独立行政法人経済産業研究所](https://www.rieti.go.jp/jp/)リサーチアシスタント・Stataを用いたEBPM
+
 
 
 #### 職歴
