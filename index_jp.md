@@ -25,6 +25,7 @@ layout: top
 <br>
 
 ### 更新履歴
+- 2020/X/X [j4](#J4) 直近読んだ論文は [Scrapbox](https://scrapbox.io/k1ito/) に集めています
 - 2020/12/18 [h11](#H11) 論文が国際会議AAMAS-2021に採択
 - 2020/12/02 [h10](#H10) 共著論文が国際会議AAAI-2021に採択
 - 2020/06/09 [h8,h9](#H8) 論文２本が人工知能学会に採択
@@ -33,8 +34,7 @@ layout: top
 - 2019/03/31 [d5](#D5) 東京大学大学院経済学研究科を修了しました。それに伴いすべてのインターンを終了
 - 2019/02/22 [h5](#H5) 学会発表　[JAFEE](http://www.jafee.gr.jp/01rally/rally-past.html#20190223)での発表が優秀発表賞として日本金融・証券計量・工学学会より表彰
 - 2019/01/31 [d5](#D5) インターン　株式会社Preferred Networksでのインターンを終了
-- 2019/01/24 [h4](#H4) 論文　Structural Change Point Detection Using A Large Random Matrix and Sparse Modelingが 
-[EDBT-ICDT](http://edbticdt2019.inesc-id.pt/) ワークショップ [DARLI-AP](http://dbdmg.polito.it/darli-ap2019/) に採択
+- 2019/01/24 [h4](#H4) 論文が [EDBT-ICDT](http://edbticdt2019.inesc-id.pt/) ワークショップ [DARLI-AP](http://dbdmg.polito.it/darli-ap2019/) に採択
 - 2019/01/01 [d6](#D6) インターン　独立行政法人経済産業研究所でリサーチアシスタントを開始
 - 2018/12/31 [d4](#D4) インターン　ルートエフ・データム株式会社でのインターンを終了
 - 2018/12/23 [i7](#I7) スライド　[量子プログラミング入門](https://www.slideshare.net/k1ito/ss-126565732)を公開
@@ -164,6 +164,7 @@ layout: top
 -  ［j1］<a name="J1"></a> メールアドレス: katsuya1ito[atmark]gmail.com( [atmark] の部分を @ に)
 -  ［j2］<a name="J2"></a> LinkedIn: <a href="https://www.linkedin.com/in/katsuya-ito-46348a129/">Katsuya Ito</a>
 -  ［j3］<a name="J3"></a> Slideshare: <a href="https://www.slideshare.net/k1ito">@k1ito</a>
+-  [j4]<a name="J4"></a> Scrapbox <a href="https://scrapbox.io/k1ito/">@k1ito</a>
 
 ---
 
