@@ -16,13 +16,6 @@ layout: top
 - ［a4］<a name="A4"></a>法律（民法・会社法・金商法・行政法）
 <br>
 
-### ［b］指導教官
-
-- ［b1］<a name="B1"></a>大学4年夏:三枝 洋一先生(代数的サイクルの交叉理論)<br>
-- ［b2］<a name="B2"></a>大学4年冬:齊藤 宣一先生(確率微分方程式の数値解析)<br>
-- ［b3］<a name="B3"></a>修士1年：高橋明彦先生 <br>
-- ［b4］<a name="B4"></a>修士2年：佐藤整尚先生(高頻度取引)
-<br>
 
 ### 更新履歴
 - 2020/X/X [j4](#J4) 直近読んだ論文は [Scrapbox](https://scrapbox.io/k1ito/) に集めています
@@ -56,18 +49,26 @@ layout: top
 
 ## 経歴 <a name="history"></a>
 
-### ［c］<a name="c"></a> 学歴 
+### ［b］<a name="c"></a> 学歴 
 
 番号|年|月|学歴
 --|--|--|----
-［c1］<a name="C1"></a>|2013年|3月|[白陵高等学校](http://www.hakuryo.ed.jp/) 卒業
-［c2］<a name="C2"></a>|2013年|4月|[東京大学教養学部理科一類](http://www.c.u-tokyo.ac.jp/) 入学
-［c3］<a name="C3"></a>|2015年|3月|[東京大学教養学部理科一類](http://www.c.u-tokyo.ac.jp/) 修了
-［c4］<a name="C4"></a>|2015年|4月|[東京大学理学部数学科](http://www.ms.u-tokyo.ac.jp/index-j.html) 進学
-［c5］<a name="C5"></a>|2017年|3月|[東京大学理学部数学科](http://www.ms.u-tokyo.ac.jp/index-j.html) 卒業
-［c6］<a name="C6"></a>|2017年|4月|[東京大学大学院経済学研究科](http://www.e.u-tokyo.ac.jp/) 入学
-［c7］<a name="C7"></a>|2019年|3月|[東京大学大学院経済学研究科](http://www.e.u-tokyo.ac.jp/) 修了
+［b1］<a name="B1"></a>|2013年|3月|[白陵高等学校](http://www.hakuryo.ed.jp/) 卒業
+［b2］<a name="B2"></a>|2013年|4月|[東京大学教養学部理科一類](http://www.c.u-tokyo.ac.jp/) 入学
+［b3］<a name="B3"></a>|2015年|3月|[東京大学教養学部理科一類](http://www.c.u-tokyo.ac.jp/) 修了
+［b4］<a name="B4"></a>|2015年|4月|[東京大学理学部数学科](http://www.ms.u-tokyo.ac.jp/index-j.html) 進学
+［b5］<a name="B5"></a>|2017年|3月|[東京大学理学部数学科](http://www.ms.u-tokyo.ac.jp/index-j.html) 卒業
+［b6］<a name="B6"></a>|2017年|4月|[東京大学大学院経済学研究科](http://www.e.u-tokyo.ac.jp/) 入学
+［b7］<a name="B7"></a>|2019年|3月|[東京大学大学院経済学研究科](http://www.e.u-tokyo.ac.jp/) 修了
 
+
+### ［c］指導教官
+
+- ［c1］<a name="C1"></a>大学4年夏:三枝 洋一先生(代数的サイクルの交叉理論)<br>
+- ［c2］<a name="C2"></a>大学4年冬:齊藤 宣一先生(確率微分方程式の数値解析)<br>
+- ［c3］<a name="C3"></a>修士1年：高橋明彦先生 <br>
+- ［c4］<a name="C4"></a>修士2年：佐藤整尚先生(高頻度取引)
+<br>
 
 ### ［d］<a name="d"></a>職歴
 
