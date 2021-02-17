@@ -195,12 +195,12 @@ layout: top
 - <a href="http://www.ms.u-tokyo.ac.jp/~kohno/index_j.html" target="_blank">河野俊丈先生</a>
 -->
 - ［m1］<a name="M1"></a><a href="http://www.ms.u-tokyo.ac.jp/~ichii/" target="_blank">一井信吾先生</a>　[g5](#G5)
-- ［m2］<a name="M2"></a><a href="http://www.ms.u-tokyo.ac.jp/~mieda/index-j.html" target="_blank">三枝洋一先生</a> [b1](#B1)
+- ［m2］<a name="M2"></a><a href="http://www.ms.u-tokyo.ac.jp/~mieda/index-j.html" target="_blank">三枝洋一先生</a> [c1](#B1)
 - ［m3］<a name="M3"></a><a href="https://about.me/kenichiro" target="_blank">西岡賢一郎先生</a> [d1](#D1)
-- ［m4］<a name="M4"></a><a href="http://www.infsup.jp/saito/" target="_blank">齊藤宣一先生</a> [b2](#B2)
-- ［m5］<a name="M5"></a><a href="http://park.itc.u-tokyo.ac.jp/takahashi-lab/home.html" target="_blank">高橋明彦先生</a> [b3](#B3)
+- ［m4］<a name="M4"></a><a href="http://www.infsup.jp/saito/" target="_blank">齊藤宣一先生</a> [c2](#B2)
+- ［m5］<a name="M5"></a><a href="http://park.itc.u-tokyo.ac.jp/takahashi-lab/home.html" target="_blank">高橋明彦先生</a> [c3](#B3)
 - ［m6］<a name="M6"></a><a href="https://sites.google.com/site/rsakemotohomepage/">酒本隆太先生</a> [d2](#D2) [h5](#H5)
-- ［m7］<a name="M7"></a><a href="http://tswww.ism.ac.jp/sato/index_J_SJIS.html">佐藤整尚先生</a> [b4](#B4) [h3](#H3)
+- ［m7］<a name="M7"></a><a href="http://tswww.ism.ac.jp/sato/index_J_SJIS.html">佐藤整尚先生</a> [c4](#B4) [h3](#H3)
 - ［m8］<a name="M8"></a><a href="http://rootf.co.jp/top.html">大庫直樹先生</a> [d4](#D4)
 - ［m9］<a name="M9"></a><a href="http://jp.milliman.com/Consultants/?cid=82614">岩崎宏介先生</a> [d3](#D3)
 - ［m10］<a name="M10"></a><a href="https://researchmap.jp/akinoshita/">木下僚先生</a> [d5](#D5) [h1](#H1) [h4](#H4)
