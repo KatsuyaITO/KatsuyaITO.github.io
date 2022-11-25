@@ -6,7 +6,7 @@ layout: top
 
 <img class="profile-picture" src="k1ito.png">
 
-エンジニア @ 株式会社Preferred Networks
+Project Manager @ Mitsui & Co.
 
 ### ［a］関心分野
 
@@ -21,27 +21,30 @@ layout: top
 - 2020/X/X [j4](#J4) 直近読んだ論文は [Scrapbox](https://scrapbox.io/k1ito/) に集めています
 - 2020/12/18 [h11](#H11) 論文が国際会議AAMAS-2021に採択
 - 2020/12/02 [h10](#H10) 共著論文が国際会議AAAI-2021に採択
-- 2020/06/09 [h8,h9](#H8) 論文２本が人工知能学会に採択
-- 2020/01/06 [h7](#H7) 論文がCurrent Medical Research and Opinionに採択
-- 2019/12/02 [h6](#H6) 論文がJournal Asia-Pacific Financial Marketsに採択
-- 2019/03/31 [d5](#D5) 東京大学大学院経済学研究科を修了しました。それに伴いすべてのインターンを終了
-- 2019/02/22 [h5](#H5) 学会発表　[JAFEE](http://www.jafee.gr.jp/01rally/rally-past.html#20190223)での発表が優秀発表賞として日本金融・証券計量・工学学会より表彰
-- 2019/01/31 [d5](#D5) インターン　株式会社Preferred Networksでのインターンを終了
-- 2019/01/24 [h4](#H4) 論文が [EDBT-ICDT](http://edbticdt2019.inesc-id.pt/) ワークショップ [DARLI-AP](http://dbdmg.polito.it/darli-ap2019/) に採択
-- 2019/01/01 [d6](#D6) インターン　独立行政法人経済産業研究所でリサーチアシスタントを開始
-- 2018/12/31 [d4](#D4) インターン　ルートエフ・データム株式会社でのインターンを終了
-- 2018/12/23 [i7](#I7) スライド　[量子プログラミング入門](https://www.slideshare.net/k1ito/ss-126565732)を公開
-- 2018/12/21 [h5](#H5) 学会発表　Dynamic Time Warping を用いた高頻度取引データの Lead-Lag 効果の推定が採択
-- 2018/11/15 [i6](#I6) スライド　[強化学習入門](https://www.slideshare.net/k1ito/ss-123088713)を公開
-- 2018/11/10 [h2](#H2) 論文　[ISPOR Europe](https://www.ispor.org/conferences-education/conferences/past-conferences/europe-2018)で発表
-- 2018/11/04 [h1](#H1) ポスター発表　[情報論的学習理論と機械学習 (IBISML) 研究会](http://ibisml.org/ibis2018/)で発表
-- 2018/07/25 [d5](#D5) インターン　株式会社Preferred Networksでのインターンを開始
-- 2018/06/10 [i5](#I5) スライド　[異常検知と変化点検知で復習するPRML](https://www.slideshare.net/k1ito/prml-101740429)を公開
-- 2018/05/05 [i4](#I4) スライド [ICLR 2018 Best papers 3本を紹介](https://www.slideshare.net/k1ito/iclr-2018-best-papers-3)を公開
-- 2018/05/01 [d4](#D4) インターン　ルートエフ・データム株式会社でのインターンを開始
-- 2018/05/01 [d3](#D3) インターン　Milliman Incでのインターンを開始
-
 <br>
+
+---
+
+### Trader-Companyについて
+
+Trader-Companyは2020年に伊藤がPreferred Networks在籍中に野村アセットマネジメント株式会社との共同研究で生まれた市況・時系列予測手法です。
+当該手法はメタヒューリスティクスを活用し、株式市場のドメイン知識への適合と解釈性・非定常性への対応を実現しています。
+当該手法と金融時系列予測の発展を願い関連記事についてここでまとめています。
+
+- 日本語論文 [Trader-Company法:メタヒューリスティクスを用いた株価予測](https://www.jstage.jst.go.jp/article/pjsai/JSAI2020/0/JSAI2020_4Rin167/_article/-char/ja/) 
+- 英語論文 [Trader-Company Method: A Metaheuristic for Interpretable Stock Price Prediction](https://arxiv.org/abs/2012.10215) 
+- 著者解説ブログ　[AAMAS2021:採択株価予測のためのアンサンブル・進化計算手法 : Trader-Company法](https://tech.preferred.jp/ja/blog/trader-company/)
+- 著者解説スライド [金融時系列解析入門 AAMAS2021 著者発表会 ](https://www.slideshare.net/k1ito/aamas2021) 
+- レビュー論文 [金融におけるテキストマイニングと機械学習応用](https://www.jstage.jst.go.jp/article/jjsai/36/3/36_270/_article/-char/ja/) 
+- 拡張手法 [株価予測のためのMultiple-World Trader-Company法の提案とレジーム変化に対するロバスト性の評価]() 
+- 再現実装 [株式市場予測モデルTrader-Company法を(簡単に)実装してみた](https://qiita.com/yotapoon/items/1214218c7459ad69db3e) 
+- 再現実装 [Trader-Company method　 / Logical Chicken](https://yamayou-1.hatenablog.com/entry/2021/11/20/001228) 
+- 拡張手法 [Uncertainty Aware Trader-Company Method: Interpretable Stock Price Prediction Capturing Uncertainty](https://arxiv.org/abs/2210.17030) 
+- 拡張手法 [不確実性を考慮したトレーダー・カンパニー法による解釈可能な株価予測](https://www.jstage.jst.go.jp/article/jsaisigtwo/2022/FIN-029/2022_73/_article/-char/ja/) 
+- 拡張手法 [株価予測のためのMultiple-World Trader-Company法の提案とレジーム変化に対するロバスト性の評価](https://www.jstage.jst.go.jp/article/pjsai/JSAI2022/0/JSAI2022_2J4GS1001/_article/-char/ja) 
+- 関連手法 [Power Laws and Symmetries in a Minimal Model of Financial Market Economy](https://arxiv.org/abs/2206.06802) 
+- 関連手法 [Theoretically Motivated Data Augmentation and Regularization for Portfolio Construction](https://arxiv.org/abs/2106.04114) 
+- 関連手法 [Deep Portfolio Optimization via Distributional Prediction of Residual Factors](https://arxiv.org/abs/2012.07245) 
 
 ---
 
