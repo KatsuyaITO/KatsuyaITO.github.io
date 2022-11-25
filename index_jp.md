@@ -12,8 +12,10 @@ Project Manager @ Mitsui & Co.
 
 - ［a1］<a name="A1"></a>ファイナンス（Quantitaive Finance・Computational Finance・Corporate Finance）
 - ［a2］<a name="A2"></a>数学（確率解析・代数幾何学・数値解析）
-- ［a3］<a name="A3"></a>情報科学（機械学習・深層学習・生成モデル・情報幾何学・異常検知）
+- ［a3］<a name="A3"></a>情報科学（機械学習・深層学習・生成モデル・情報幾何学・異常検知・メタヒューリスティクス・時系列予測）
 - ［a4］<a name="A4"></a>法律（民法・会社法・金商法・行政法）
+- ［a4］<a name="A5"></a>経営（ビジネスモデル開発・経営戦略・財務）
+
 <br>
 
 
