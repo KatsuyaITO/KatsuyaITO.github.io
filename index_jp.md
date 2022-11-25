@@ -33,17 +33,23 @@ Trader-Companyは2020年に伊藤がPreferred Networks在籍中に野村アセ�
 当該手法はメタヒューリスティクスを活用し、株式市場のドメイン知識への適合と解釈性・非定常性への対応を実現しています。
 当該手法と金融時系列予測の発展を願い関連記事についてここでまとめています。
 
+元論文と解説
 - 日本語論文 [Trader-Company法:メタヒューリスティクスを用いた株価予測](https://www.jstage.jst.go.jp/article/pjsai/JSAI2020/0/JSAI2020_4Rin167/_article/-char/ja/) 
 - 英語論文 [Trader-Company Method: A Metaheuristic for Interpretable Stock Price Prediction](https://arxiv.org/abs/2012.10215) 
 - 著者解説ブログ　[AAMAS2021:採択株価予測のためのアンサンブル・進化計算手法 : Trader-Company法](https://tech.preferred.jp/ja/blog/trader-company/)
 - 著者解説スライド [金融時系列解析入門 AAMAS2021 著者発表会 ](https://www.slideshare.net/k1ito/aamas2021) 
-- レビュー論文 [金融におけるテキストマイニングと機械学習応用](https://www.jstage.jst.go.jp/article/jjsai/36/3/36_270/_article/-char/ja/) 
-- 拡張手法 [株価予測のためのMultiple-World Trader-Company法の提案とレジーム変化に対するロバスト性の評価]() 
+
+再現実装
 - 再現実装 [株式市場予測モデルTrader-Company法を(簡単に)実装してみた](https://qiita.com/yotapoon/items/1214218c7459ad69db3e) 
 - 再現実装 [Trader-Company method　 / Logical Chicken](https://yamayou-1.hatenablog.com/entry/2021/11/20/001228) 
+
+拡張手法
 - 拡張手法 [Uncertainty Aware Trader-Company Method: Interpretable Stock Price Prediction Capturing Uncertainty](https://arxiv.org/abs/2210.17030) 
 - 拡張手法 [不確実性を考慮したトレーダー・カンパニー法による解釈可能な株価予測](https://www.jstage.jst.go.jp/article/jsaisigtwo/2022/FIN-029/2022_73/_article/-char/ja/) 
 - 拡張手法 [株価予測のためのMultiple-World Trader-Company法の提案とレジーム変化に対するロバスト性の評価](https://www.jstage.jst.go.jp/article/pjsai/JSAI2022/0/JSAI2022_2J4GS1001/_article/-char/ja) 
+
+関連論文
+- レビュー論文 [金融におけるテキストマイニングと機械学習応用](https://www.jstage.jst.go.jp/article/jjsai/36/3/36_270/_article/-char/ja/) 
 - 関連手法 [Power Laws and Symmetries in a Minimal Model of Financial Market Economy](https://arxiv.org/abs/2206.06802) 
 - 関連手法 [Theoretically Motivated Data Augmentation and Regularization for Portfolio Construction](https://arxiv.org/abs/2106.04114) 
 - 関連手法 [Deep Portfolio Optimization via Distributional Prediction of Residual Factors](https://arxiv.org/abs/2012.07245) 
