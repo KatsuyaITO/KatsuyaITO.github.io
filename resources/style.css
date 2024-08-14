@@ -126,7 +126,6 @@ blockquote {
 .button:hover {
     background-color: #005f99;
 }
-
 /* Table Styling */
 table {
     width: 100%;
@@ -176,13 +175,15 @@ table td {
 
     table td, table th {
         padding: 0.5em;
-        text-align: right;
+        text-align: left; /* 変更: 右寄せから左寄せに */
     }
 
     table td:before, table th:before {
         content: attr(data-label);
         font-weight: bold;
-        float: left;
+        /* float: left; 削除または調整 */
+        display: inline-block; /* 変更: floatからinline-blockに */
+        margin-right: 0.5em; /* テキストとの間にスペースを追加 */
         text-transform: uppercase;
     }
 

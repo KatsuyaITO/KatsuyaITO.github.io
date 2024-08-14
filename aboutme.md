@@ -1,9 +1,9 @@
 ---
-pagetitle: Personal Information
+pagetitle: More Personal Information / Katsuya Ito 伊藤克哉
 ---
 
 <div class="navbar">
-[Home](index.html) / Personal Information
+[Home](index.html) / Personal Information　Katsuya Ito
 </div>
 
 
@@ -48,7 +48,7 @@ My Favorites
 - [小洞天 ファーストスクエア店 / Shodoten First Square](https://tabelog.com/tokyo/A1302/A130201/13011018/)
 - [寿司 魚がし日本一 大手町グランキューブ店 / Sushi Uogashi Nihonichi Otemachi Grand Cube](https://tabelog.com/tokyo/A1302/A130201/13195444/)
 - [ディキシー デリ OOTEMORI店 / Dixie Deli OOTEMORI](https://tabelog.com/tokyo/A1302/A130201/13160879/)
-- [La Pesquera MARISQUERIA OOTEMORI]https://tabelog.com/tokyo/A1302/A130201/13160867/)
+- [La Pesquera MARISQUERIA OOTEMORI](https://tabelog.com/tokyo/A1302/A130201/13160867/)
 
 ### Japanes Idols
 - [=LOVE](https://equal-love.jp/)
