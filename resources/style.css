@@ -71,6 +71,13 @@ a:visited {
     height: auto; /* Maintain the aspect ratio */
 }
 
+@media only screen and (max-width: 600px) {
+    #profile_pic {
+        width: 100px; /* Reduce the width for smaller screens */
+    }
+}
+
+
 /* Footer */
 .footer {
     font-size: 0.8em;
