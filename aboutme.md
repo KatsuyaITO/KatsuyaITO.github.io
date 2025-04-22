@@ -6,6 +6,35 @@ pagetitle: More Personal Information / Katsuya Ito 伊藤克哉
 [Home](index.html) / Personal Information　Katsuya Ito
 </div>
 
+My Identities
+-----------------------
+
+### Places I've Lived
+- Futami, Akashi City, Hyogo Prefecture
+- Nishi-Eifuku, Suginami Ward, Tokyo
+- Kojima-cho, Chofu City, Tokyo
+- Kasuga-cho, Nerima Ward, Tokyo
+- Sendagi, Bunkyo Ward, Tokyo
+- Shimbashi, Minato Ward, Tokyo
+- Mita, Minato Ward, Tokyo
+- Hama-cho, Chuo Ward, Tokyo
+- Akasaka, Minato Ward, Tokyo
+
+### My Favorite Books
+
+- Zero to One
+- Fumo Chitai
+- Kigyo Sanbo
+- Rational Points on Elliptic Curves
+- Algebraic Cycles and Etale Cohomology
+- Options, Futures, and Other Derivatives*
+- Investor Z
+
+### My Personalities
+- MBTI : ENTP(Extroversion/Intuition/Thinking/Perceving)
+- StengthFinder : 
+
+
 
 My Favorites
 -----------------------
@@ -24,6 +53,16 @@ My Favorites
 - [うどん 丸香 (Udon Maruka)](https://tabelog.com/tokyo/A1310/A131003/13000629/)
 - [丸亀製麺 (Marugame Seimen)](https://tabelog.com/tokyo/A1303/A130301/13110627/)
 
+### Yakiniku
+- [焼肉 鶯谷園 (Yakiniku Uguisudani-en)](https://tabelog.com/tokyo/A1311/A131104/13012243/)
+- [在市 月島本店 (Zaichi Tsukishima Honten)](https://tabelog.com/tokyo/A1313/A131302/13095398/)
+- [焼肉 ジャンボ 篠崎本店 (Yakiniku Jambo Shinozaki Honten)](https://tabelog.com/tokyo/A1312/A131205/13003075/)
+- [神戸屋 (Kobeya)](https://tabelog.com/tokyo/A1304/A130402/13025600/)
+- [焼肉 ジャンボ 本郷店 (Yakiniku Jambo Hongō-ten)](https://tabelog.com/tokyo/A1310/A131004/13110601/)
+- [生粋 (Namaiki)](https://tabelog.com/tokyo/A1311/A131101/13165294/)
+- [ビーフキッチン 恵比寿店 (Beef Kitchen Ebisu-ten)](https://tabelog.com/tokyo/A1303/A130302/13262681/)
+- [SATOブリアン にごう (SATO BRIAN Nigou)](https://tabelog.com/tokyo/A1319/A131905/13159782/)
+
 ### Italian Restaurants
 - [Sabasu / サバス](https://tabelog.com/tokyo/A1308/A130801/13286782/)
 - [PASTAVOLA](https://tabelog.com/tokyo/A1314/A131402/13121025/)
@@ -32,7 +71,7 @@ My Favorites
 - [Ciao centro](https://tabelog.com/tokyo/A1311/A131106/13209959/)
 - [Cucina del NABUCCO](https://tabelog.com/tokyo/A1308/A130801/13002186/)
 
-### Lunch At Otemachi
+### Lunch at Otemachi
 
 - [サラダイス 大手町サンケイビル店 / Saladice Otemachi Sankei Building](https://tabelog.com/tokyo/A1302/A130201/13078766/)
 - [赤坂飯店 パレスサイドビル店 / Akasaka Hanten Palace Side Building](https://tabelog.com/tokyo/A1302/A130201/13000142/)
@@ -69,6 +108,8 @@ My Everyday Choices
 - **Telecom Carriers**: Rakuten Mobile
 - **Email Services**: Gmail
 - **Cloud Storage**: Google Drive, Dropbox, OneDrive, Box
+- **Virtual Meeting Platforms**: Zoom, Microsoft Teams, Google Meet, Webex
+
 
 ### Finance
 - **Credit Cards**: Visa, Mastercard, American Express
@@ -79,8 +120,8 @@ My Everyday Choices
 ### Shopping & Services
 - **Convenience Stores**: 7-Eleven, Lawson, FamilyMart
 - **Supermarkets**: Maruetsu
-- **Online Shopping Malls**: Amazon, Rakuten Ichiba, Yahoo! Shopping, ZOZOTOWN, Mercari
-- **Delivery Services**: Uber Eats, Demae-can, Rakuten Delivery, Demae-can, Wolt
+- **Online Shopping Malls**: Amazon, Rakuten
+- **Delivery Services**: Uber Eats
 
 ### Entertainment
 - **Video Streaming Services**:  Amazon Prime Video
@@ -101,5 +142,5 @@ My Everyday Choices
 - **Virtualization & Cloud Infrastructure**: VirtualBox, VMware
 - **Editors**: Vim Jupyter Notebook
 - **Design Tools**: Figma
-- **Virtual Meeting Platforms**: Zoom, Microsoft Teams, Google Meet, Webex
+
 
