@@ -102,6 +102,7 @@ April 2017|March 2019|[University of Tokyo, Graduate School of Economics](http:/
 - [YouTube動画/【マケデコ】人工知能学会 最新金融トピック勉強会 (2024/7/4 19:30-)](https://www.youtube.com/watch?v=C_bUllXXTSc)
 - [Goodfellow先生おすすめのGAN論文６つを紹介](https://www.slideshare.net/slideshow/goodfellowgan/90316073)
 - [Black-Scholesの面白さ](https://www.slideshare.net/slideshow/blackscholes-93860006/93860006)
+- [（数学ノート）エタールコホモロジーとガロア表現 / Katsuya Ito 伊藤克哉](etale.html)
 
 
 ## Links to My Profiles

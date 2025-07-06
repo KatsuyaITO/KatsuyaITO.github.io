@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>（数学ノート）エタールコホモロジーとガロア表現 / Katsuya Ito
+伊藤克哉</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="resources/style.css" />
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<div class="navbar">
+<p><a href="index.html">Home</a> / Personal Information　Katsuya Ito</p>
+</div>
+<h1
+id="数学ノートエタールコホモロジーとガロア表現">（数学ノート）エタールコホモロジーとガロア表現</h1>
+<h2 id="幾何学的設定体上の代数多様体">1.
+幾何学的設定：体上の代数多様体</h2>
+<p>出発点は、体 <span class="math inline">\(K\)</span>
+上で定義された<strong>代数多様体</strong> <span
+class="math inline">\(X\)</span>
+です。代数多様体とは、大まかに言えば、多項式方程式系の解集合のことです。体
+<span class="math inline">\(K\)</span>
+は、これらの多項式の係数が属する体です。</p>
+<p>我々の目的のために、<span class="math inline">\(K\)</span>
+を代数的閉体でない体、例えば有理数体 <span
+class="math inline">\(\mathbb{Q}\)</span>、有限体 <span
+class="math inline">\(\mathbb{F}_q\)</span>、またはp進体 <span
+class="math inline">\(\mathbb{Q}_p\)</span>
+と考えましょう。目標は、代数的数の「対称性」がその幾何学的不変量にどのように作用するかを調べることによって、<span
+class="math inline">\(X\)</span> の算術的性質を研究することです。</p>
+<p><span class="math inline">\(\bar{K}\)</span> を <span
+class="math inline">\(K\)</span>
+の<strong>分離閉包</strong>を表すものとします。これは、<span
+class="math inline">\(K\)</span>
+に係数を持つ多項式のすべての根からなる体です。<span
+class="math inline">\(K\)</span> の<strong>絶対ガロア群</strong>、記号で
+<span class="math inline">\(G_K = \text{Gal}(\bar{K}/K)\)</span>
+と表されるものは、<span class="math inline">\(K\)</span> の元を固定する
+<span class="math inline">\(\bar{K}\)</span>
+のすべての自己同型からなります。この群は、<span
+class="math inline">\(K\)</span>
+に対する代数的数の対称性を要約しています。</p>
+<p>次に、我々の多様体 <span class="math inline">\(X\)</span> の <span
+class="math inline">\(\bar{K}\)</span>
+への<strong>基底変換</strong>を考えます。これは <span
+class="math inline">\(X_{\bar{K}} = X \times_{\text{Spec}(K)}
+\text{Spec}(\bar{K})\)</span> と表されます。これは、<span
+class="math inline">\(X\)</span> の定義方程式の解をより大きな体 <span
+class="math inline">\(\bar{K}\)</span> で考えることと理解できます。</p>
+<p><span class="math display">\[
+\begin{CD}
+X_{\bar{K}} @&gt;&gt;&gt; \text{Spec}(\bar{K}) \\
+@VVV @VVV \\
+X @&gt;&gt;&gt; \text{Spec}(K)
+\end{CD}
+\]</span></p>
+<p>ここで、<span class="math inline">\(X_{\bar{K}}\)</span> は <span
+class="math inline">\(X\)</span> の <span
+class="math inline">\(\bar{K}\)</span> への引き戻し（fiber
+product）として定義されます。</p>
+<h2 id="エタールコホモロジーの構成">2. エタールコホモロジーの構成</h2>
+<p>代数多様体 <span class="math inline">\(X\)</span>
+に対して、ザリスキ位相では得られない”位相的不変量”を捉えるために、以下の手順でエタールコホモロジーを構成します。</p>
+<ol type="1">
+<li><p><strong>エタールサイトの定義</strong></p>
+<ul>
+<li>対象：エタール射 <span
+class="math inline">\(\{\,U\xrightarrow{f}X\mid f\text{
+はエタール}\}\)</span></li>
+<li>射：スキーム準同型 <span class="math inline">\(\phi:U\to V\)</span>
+で <span class="math inline">\(g\circ\phi=f\)</span> を満たすもの</li>
+<li>被覆：<span class="math inline">\(\{U_i\to U\}\)</span>
+が位相的に全体を覆う（<span
+class="math inline">\(\bigcup_i\mathrm{Im}(U_i\to U)=U\)</span>）もの
+これによりサイト <span class="math inline">\(\mathrm{Et}(X)\)</span>
+が得られ、そこに前層・層の構造を置ける。</li>
+</ul></li>
+<li><p><strong>係数層（特に定数層）の用意</strong></p>
+<ul>
+<li>有限係数：<span class="math inline">\(\mathbb{Z}/\ell^n\)</span>
+上の定数層 <span
+class="math inline">\(\underline{\mathbb{Z}/\ell^n}\)</span></li>
+<li><span class="math inline">\(\ell\)</span>-進係数：<span
+class="math inline">\(\mathbb{Q}_\ell :=
+\varprojlim_n\mathbb{Z}/\ell^n\)</span> 上の定数層 層とは、任意の被覆
+<span class="math inline">\(\{U_i\}\)</span> に対して</li>
+</ul>
+<p><span class="math display">\[
+  \mathcal{F}(U)\;\to\;\prod_i\mathcal{F}(U_i)
+   \rightrightarrows
+   \prod_{i,j}\mathcal{F}(U_i\times_UU_j)
+\]</span></p>
+<p>が等化子となる前層のこと。</p></li>
+<li><p><strong>グローバル断面関手と導来関手</strong></p>
+<ul>
+<li>関手 <span class="math inline">\(\Gamma(X_{\mathrm{et}},\mathcal{F})
+= \mathcal{F}(X\xrightarrow{\mathrm{id}}X)\)</span>
+を考えると、これは左完全加法関手</li>
+<li>右導来 <span class="math inline">\(R^i\Gamma\)</span>
+を取ることで、コホモロジー群を定義</li>
+</ul>
+<p><span class="math display">\[
+  H^i_{\mathrm{et}}(X,\mathcal{F}) \;=\;
+R^i\Gamma\bigl(X_{\mathrm{et}},\mathcal{F}\bigr).
+\]</span></p></li>
+<li><p><strong>具体的計算法</strong></p>
+<ul>
+<li><p><strong>インジェクティブ分解</strong>：層の圏におけるインジェクティブ分解を使い、<span
+class="math inline">\(\mathcal{F}\to I^\bullet\)</span> から <span
+class="math inline">\(R^i\Gamma\)</span> を計算</p></li>
+<li><p><strong>チェックコホモロジー</strong>：適切なエタール被覆 <span
+class="math inline">\(\{U_i\}\)</span> によるチェック複体</p>
+<p><span class="math display">\[
+  C^p =
+\prod_{i_0&lt;\cdots&lt;i_p}\mathcal{F}\bigl(U_{i_0}\times_X\cdots\times_XU_{i_p}\bigr),
+\]</span></p>
+<p>のコホモロジーを取って得る</p></li>
+<li><p><strong>基礎定理</strong>：Proper/Smooth Base Change や Leray
+準連続性定理を用いて、計算を簡単化</p></li>
+</ul></li>
+<li><p><strong>主要性質</strong></p>
+<ul>
+<li><strong>有界性</strong>：<span
+class="math inline">\(\dim_{\mathbb{Q}_\ell}
+H^i_{\mathrm{et}}(X,\mathbb{Q}_\ell)&lt;\infty\)</span></li>
+<li><strong>消滅</strong>：<span class="math inline">\(i&gt;2\dim
+X\)</span> のとき <span
+class="math inline">\(H^i_{\mathrm{et}}(X,\mathbb{Q}_\ell)=0\)</span></li>
+<li><strong>ファン・モノドロミー</strong>：ガロア群やフロベニウス作用が自然に入る</li>
+</ul></li>
+</ol>
+<p>これにより、エタールコホモロジー群</p>
+<p><span class="math display">\[
+  H^i_{\mathrm{et}}(X,\mathbb{Z}/\ell^n),\quad
+  H^i_{\mathrm{et}}(X,\mathbb{Q}_\ell)
+\]</span></p>
+<p>が定義され、代数多様体の算術的・幾何学的性質を強力に捉える不変量として利用できます。</p>
+<h2 id="ガロア作用算術と幾何学の橋渡し">3.
+ガロア作用：算術と幾何学の橋渡し</h2>
+<p>ガロア群 <span class="math inline">\(G_K\)</span> の算術と多様体
+<span class="math inline">\(X\)</span>
+の幾何学との橋渡しとなるのは、<strong>エタールコホモロジー群へのガロア群の作用</strong>です。</p>
+<p>元 <span class="math inline">\(\sigma \in G_K =
+\text{Gal}(\bar{K}/K)\)</span> は <span
+class="math inline">\(\bar{K}\)</span> の自己同型です。この自己同型は
+<span class="math inline">\(\bar{K}\)</span>
+上で定義された多様体上の射を誘導します： <span
+class="math display">\[\text{id} \times \text{Spec}(\sigma): X_{\bar{K}}
+\to X_{\bar{K}}\]</span></p>
+<p>この射は、関手性により、エタールコホモロジー群上の線形写像を誘導します：
+<span class="math display">\[\sigma^*: H^i_{\text{ét}}(X_{\bar{K}},
+\mathbb{Q}_{\ell}) \to H^i_{\text{ét}}(X_{\bar{K}},
+\mathbb{Q}_{\ell})\]</span> これにより、ガロア群 <span
+class="math inline">\(G_K\)</span>
+からコホモロジーベクトル空間の可逆線形変換群（一般線形群）への写像が得られます。</p>
+<p><span class="math display">\[
+\begin{CD}
+G_K @&gt;\sigma&gt;&gt; G_K \\
+@V{\mathrm{作用}}VV @VV{\mathrm{作用}}V \\
+X_{\bar K} @&gt;{\mathrm{id}\times\mathrm{Spec}(\sigma)}&gt;&gt; X_{\bar
+K} \\
+@V{H^i_{\mathrm{\acute{e}t}}\bigl(-,\mathbb{Q}_\ell\bigr)}VV
+@VV{H^i_{\mathrm{\acute{e}t}}\bigl(-,\mathbb{Q}_\ell\bigr)}V \\
+H^i_{\mathrm{\acute{e}t}}\bigl(X_{\bar K},\mathbb{Q}_\ell\bigr)
+@&gt;&gt;{\sigma^*}&gt; H^i_{\mathrm{\acute{e}t}}\bigl(X_{\bar
+K},\mathbb{Q}_\ell\bigr)
+\end{CD}
+\]</span></p>
+<h2 id="ガロア表現線形群への準同型写像">4.
+ガロア表現：線形群への準同型写像</h2>
+<p><strong>ガロア表現</strong>とは、ガロア群から行列群への連続な群準同型写像のことです。前のステップで説明した作用がまさにこれを提供します。</p>
+<p>各整数 <span class="math inline">\(i \ge 0\)</span>
+に対して、絶対ガロア群 <span class="math inline">\(G_K\)</span> の <span
+class="math inline">\(X_{\bar{K}}\)</span> の第 <span
+class="math inline">\(i\)</span> 次 <span
+class="math inline">\(\ell\)</span>
+進エタールコホモロジー群への作用は、準同型写像を定義します： <span
+class="math display">\[\rho_{X, i}: G_K \to
+\text{GL}(H^i_{\text{ét}}(X_{\bar{K}}, \mathbb{Q}_{\ell}))\]</span>
+この準同型写像 <span class="math inline">\(\rho_{X, i}\)</span> が
+<strong><span class="math inline">\(X\)</span> の第 <span
+class="math inline">\(i\)</span>
+次エタールコホモロジー群に付随するガロア表現</strong>です。</p>
+<p>ここで、<span
+class="math inline">\(\text{GL}(H^i_{\text{ét}}(X_{\bar{K}},
+\mathbb{Q}_{\ell}))\)</span> はベクトル空間 <span
+class="math inline">\(H^i_{\text{ét}}(X_{\bar{K}},
+\mathbb{Q}_{\ell})\)</span> の可逆な <span
+class="math inline">\(\mathbb{Q}_{\ell}\)</span>
+線形変換の群です。このベクトル空間の次元が <span
+class="math inline">\(d_i\)</span>
+である場合、基底を選ぶことにより、この群を <span
+class="math inline">\(\mathbb{Q}_{\ell}\)</span> の元を成分とする可逆な
+<span class="math inline">\(d_i \times d_i\)</span>
+行列の群と同一視できます。これを <span
+class="math inline">\(\text{GL}_{d_i}(\mathbb{Q}_{\ell})\)</span>
+と表します。</p>
+<p>この準同型写像の連続性は、ガロア群 <span
+class="math inline">\(G_K\)</span>
+の<strong>クルル位相</strong>と一般線形群の<strong><span
+class="math inline">\(\ell\)</span>
+進位相</strong>に関するものです。</p>
+<h2 id="例">5. 例</h2>
+<p>ガロア表現とエタールコホモロジーの互換性を、古典的で基礎的な例で説明しましょう：<strong>楕円曲線</strong>と<strong>保型形式</strong>の関係です。この例はフェルマーの最終定理の証明において中心的な役割を果たしました。</p>
+<h3 id="例1楕円曲線からのガロア表現">例1：楕円曲線からのガロア表現</h3>
+<p>具体的な楕円曲線、つまり代数多様体の一種を考えてみましょう。</p>
+<ul>
+<li><p><strong>代数多様体（<span
+class="math inline">\(X\)</span>）：</strong> 方程式 <span
+class="math inline">\(y^2 = x^3 - x\)</span> で定義される楕円曲線 <span
+class="math inline">\(E\)</span> を考えます。これは有理数体 <span
+class="math inline">\(K = \mathbb{Q}\)</span>
+上で定義された多様体です。</p></li>
+<li><p><strong>ガロア群（<span
+class="math inline">\(G_K\)</span>）：</strong> 絶対ガロア群は <span
+class="math inline">\(G_{\mathbb{Q}} =
+\text{Gal}(\bar{\mathbb{Q}}/\mathbb{Q})\)</span>
+で、これは代数的数のすべての対称性を表しています。</p></li>
+<li><p><strong>エタールコホモロジー群（<span
+class="math inline">\(H^1_{\text{ét}}\)</span>）：</strong> 第1次 <span
+class="math inline">\(\ell\)</span> 進エタールコホモロジー群 <span
+class="math inline">\(H^1_{\text{ét}}(E_{\bar{\mathbb{Q}}},
+\mathbb{Q}_{\ell})\)</span>
+に注目します。楕円曲線の場合、このベクトル空間は次元2を持ちます。このコホモロジー群は、複素数体（<span
+class="math inline">\(\bar{\mathbb{Q}}\)</span>
+を含む）上の曲線の幾何学から構成されます。この構成の重要な部分は<strong><span
+class="math inline">\(\ell\)</span> 進テート加群</strong> <span
+class="math inline">\(T_{\ell}(E)\)</span> で、これはすべての <span
+class="math inline">\(n\)</span> に対して曲線上の位数 <span
+class="math inline">\(\ell^n\)</span>
+の点から構成されます。コホモロジー群は <span
+class="math inline">\(V_{\ell}(E) = T_{\ell}(E)
+\otimes_{\mathbb{Z}_{\ell}} \mathbb{Q}_{\ell}\)</span>
+となります。</p></li>
+<li><p><strong>ガロア表現（<span class="math inline">\(\rho_{E,
+1}\)</span>）：</strong> ガロア群 <span
+class="math inline">\(G_{\mathbb{Q}}\)</span>
+は楕円曲線の有限位数の点に作用します。これらの点の座標は代数的数なので、元
+<span class="math inline">\(\sigma \in G_{\mathbb{Q}}\)</span>
+はこれらの座標に作用できます。この作用はコホモロジー群全体に拡張され、2次元のガロア表現を与えます：
+<span class="math display">\[\rho_{E, \ell}: G_{\mathbb{Q}} \to
+\text{GL}(H^1_{\text{ét}}(E_{\bar{\mathbb{Q}}}, \mathbb{Q}_{\ell}))
+\cong \text{GL}_2(\mathbb{Q}_{\ell})\]</span></p></li>
+<li><p><strong>フロベニウス元からの算術情報：</strong> 素数 <span
+class="math inline">\(p\)</span>（表現が不分岐である場合、この曲線では
+<span class="math inline">\(p \neq 2\)</span>
+のすべて）に対して、フロベニウス元 <span
+class="math inline">\(\text{Frob}_p\)</span>
+の作用を見ることができます。深い結果として、行列 <span
+class="math inline">\(\rho_{E, \ell}(\text{Frob}_p)\)</span>
+のトレースは、方程式を <span class="math inline">\(p\)</span>
+を法として還元したときの楕円曲線上の点の数と関係があります。<span
+class="math inline">\(y^2 \equiv x^3 - x \pmod{p}\)</span>
+の曲線上の点の数を <span class="math inline">\(N_p\)</span>
+とします。するとトレースは次式で与えられます： <span
+class="math display">\[\text{Tr}(\rho_{E, \ell}(\text{Frob}_p)) = p + 1
+- N_p\]</span> 例えば、<span class="math inline">\(p=5\)</span>
+を取ると、<span class="math inline">\(y^2 \equiv x^3 - x
+\pmod{5}\)</span> 上の点は <span class="math inline">\((0,0), (1,0), (2,
+\pm 1), (3, \pm 1), (4,0)\)</span> と無限遠点で、<span
+class="math inline">\(N_5 = 8\)</span>
+となります。5でのフロベニウスのトレースは <span
+class="math inline">\(5+1-8 = -2\)</span> です。</p></li>
+</ul>
+<hr />
+<h3 id="例2保型形式からのガロア表現">例2：保型形式からのガロア表現</h3>
+<p>今度は、ガロア表現の完全に異なる源を見てみましょう：保型形式です。</p>
+<ul>
+<li><p><strong>保型形式：</strong>
+具体的な保型形式を考えます。これは上半平面上の高度に対称な複素解析関数です。我々の楕円曲線に関連するものは、重さ2、レベル32のカスプ形式で、<span
+class="math inline">\(f(z)\)</span>
+と表されます。そのフーリエ級数展開（またはq展開）は： <span
+class="math display">\[f(z) = q - 2q^5 - 3q^9 + 6q^{13} + 2q^{17} -
+\dots = \sum_{n=1}^{\infty} a_n q^n\]</span> ここで <span
+class="math inline">\(q = e^{2\pi i z}\)</span> です。係数 <span
+class="math inline">\(a_n\)</span> は整数です。</p></li>
+<li><p><strong>ガロア表現（<span class="math inline">\(\rho_{f,
+\ell}\)</span>）：</strong> デリーニュは、このような保型形式に2次元の
+<span class="math inline">\(\ell\)</span>
+進ガロア表現を関連付けることができることを証明しました： <span
+class="math display">\[\rho_{f, \ell}: G_{\mathbb{Q}} \to
+\text{GL}_2(\mathbb{Q}_{\ell})\]</span></p></li>
+<li><p><strong>フロベニウス元からの算術情報：</strong>
+この表現は、不分岐な素数 <span
+class="math inline">\(p\)</span>（この場合は <span
+class="math inline">\(p \neq
+2\)</span>）に対して、フロベニウス元のトレースが単純に保型形式の第 <span
+class="math inline">\(p\)</span>
+フーリエ係数であるという顕著な性質を持ちます： <span
+class="math display">\[\text{Tr}(\rho_{f, \ell}(\text{Frob}_p)) =
+a_p\]</span> 上の級数から、<span class="math inline">\(a_5 = -2\)</span>
+であることがわかります。</p></li>
+</ul>
+<hr />
+<h3 id="互換性">互換性</h3>
+<p><strong>保型性定理</strong>（ワイルズ、テイラーらによって証明された深い結果）は、楕円曲線
+<span class="math inline">\(E\)</span> から来るガロア表現が保型形式
+<span class="math inline">\(f\)</span>
+から来るガロア表現と<strong>同型</strong>であることを述べています。</p>
+<p><span class="math display">\[\rho_{E, \ell} \cong \rho_{f,
+\ell}\]</span></p>
+<p>これは、すべての素数 <span class="math inline">\(p \neq 2\)</span>
+に対して、両方の表現におけるフロベニウス元のトレースが等しくなければならないことを意味します：</p>
+<p><span class="math display">\[\underbrace{p + 1 -
+N_p}_{\text{楕円曲線の幾何学から}} =
+\underbrace{a_p}_{\text{保型形式のフーリエ係数から}}\]</span></p>
+<p><span class="math inline">\(p=5\)</span> で確認してみましょう：
+楕円曲線からのトレースは <span class="math inline">\(5 + 1 - N_5 =
+-2\)</span> でした。 保型形式の第5係数は <span class="math inline">\(a_5
+= -2\)</span> です。</p>
+<p>これらは一致します。これはすべての素数で成り立ちます。この驚くべき互換性は、大きく異なる二つの数学的世界を結びつけています：多項式方程式の解の幾何学的世界（楕円曲線）と高度に対称な関数の解析的世界（保型形式）です。共通のガロア表現を通じて確立されたこの橋渡しは、現代数論における最も深く、最も強力なアイデアの一つです。
+ </p>
+<p> </p>
+<hr />
+<span class=footer>*Last updated on 7 06, 2025. </span>
+<script async src='https://www.googletagmanager.com/gtag/js?id=G-3789HN6BVW'></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-3789HN6BVW');</script>
+</body>
+</html>
