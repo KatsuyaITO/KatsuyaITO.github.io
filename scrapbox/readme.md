@@ -1,0 +1,127 @@
+# Katsuya Ito Notes
+
+個人の公開ノートをGitHub Pagesで配信するための、ビルド不要の静的サイトです。
+
+## サイト構成
+
+```text
+scrapbox/
+├── index.html    # ノート一覧、タグ、検索UI
+├── article.html  # 記事ページのサンプル
+├── app.js        # 検索、タグ絞り込み、並び替え
+├── styles.css    # 一覧・記事・レスポンシブ表示
+└── readme.md     # この説明書
+```
+
+HTML、CSS、JavaScriptだけで動作します。Node.jsや静的サイトジェネレーターによるビルドは不要です。
+
+## ローカルで確認する
+
+リポジトリのルートで次を実行します。
+
+```bash
+python3 -m http.server 8765
+```
+
+ブラウザで次のURLを開きます。
+
+```text
+http://127.0.0.1:8765/scrapbox/
+```
+
+終了するときは、サーバーを実行しているターミナルで `Ctrl+C` を押します。
+
+## 新しい記事を追加する
+
+1. `article.html` を複製して、記事用のHTMLファイルを作ります。
+2. `<title>`、説明文、見出し、本文、日付、タグを変更します。
+3. `index.html` の `.note-grid` 内に記事カードを追加します。
+
+記事カードの例です。
+
+```html
+<a
+  class="note-card"
+  href="new-article.html"
+  data-search-page="new-article.html"
+  data-title="記事のタイトル"
+  data-summary="記事の短い説明"
+  data-tags="AI Product"
+  data-date="2026-08-11"
+>
+  <div class="thumb thumb--map" aria-hidden="true"></div>
+  <div class="card-body">
+    <div class="card-meta">
+      <span class="card-tag">AI</span>
+      <time datetime="2026-08-11">2026.08.11</time>
+    </div>
+    <h2>記事のタイトル</h2>
+    <p>記事の短い説明</p>
+  </div>
+</a>
+```
+
+`data-tags` には、半角スペース区切りで複数のタグを指定できます。
+
+## 全文検索の仕組み
+
+検索はブラウザ上のJavaScriptだけで動作します。
+
+- タイトル: `data-title`
+- 概要: `data-summary`
+- タグ: `data-tags`
+- 記事本文: `data-search-page` で指定したHTML
+
+ページ表示時に `app.js` が同一サイト内の記事HTMLを取得し、`.article-content`、`article`、または `main` の本文を検索対象に追加します。
+
+新しい記事を全文検索へ含めるには、一覧カードへ次の属性を付けます。
+
+```html
+data-search-page="new-article.html"
+```
+
+記事を取得できない場合でも、タイトル・概要・タグの検索は利用できます。
+
+## タグを追加・変更する
+
+`index.html` の `.tags` 内にフィルターボタンを追加します。
+
+```html
+<button class="tag" type="button" data-tag="Design">
+  Design <span>3</span>
+</button>
+```
+
+`data-tag` の値は、カード側の `data-tags` と完全に一致させます。`span` 内の件数は自動計算ではないため、記事を追加したときに更新します。
+
+## サムネイルを変更する
+
+現在のサムネイルは画像ファイルではなく、`styles.css` のCSSで描画しています。カードの `thumb--...` クラスを変更すると別のデザインを利用できます。
+
+実画像を使用する場合は、画像を `scrapbox/images/` などへ保存し、次のように記述します。
+
+```html
+<div class="thumb">
+  <img src="images/example.webp" alt="記事内容を表す説明">
+</div>
+```
+
+画像はWebP形式を推奨し、表示速度のためにファイルサイズを小さくします。
+
+## GitHub Pagesで公開する
+
+このリポジトリでGitHub Pagesが有効になっていれば、変更をコミットして既定の公開ブランチへ反映すると、`/scrapbox/` 以下に公開されます。
+
+公開前に次を確認します。
+
+- メールアドレス、電話番号、住所などの個人情報が含まれていないか
+- APIキー、トークン、Cookie、社内URLが含まれていないか
+- 顧客名、契約情報、未公開の数値が含まれていないか
+- 画像、引用、文章を公開する権利があるか
+- 事実と個人的な仮説が区別されているか
+
+## 現在の制約
+
+- サンプルとして完成している記事ページは `article.html` の1件です。
+- 残りのカードは一覧デザイン確認用の仮コンテンツです。
+- 検索インデックスはブラウザで作るため、記事数が非常に多くなった場合はJSON形式の検索インデックスを事前生成する構成への移行を検討します。
