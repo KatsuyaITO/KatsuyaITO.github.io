@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="人が書きAIが手伝う文書管理から、AIが書き人が統治する文書基盤へ。文書の再利用、i18n、テスト、SVG、読者別Viewまで考える。">
+  <title>AIネイティブなドキュメントサーバーがない問題 — Katsuya Ito Notes</title>
+  <link rel="stylesheet" href="styles.css?v=20260811-4">
+</head>
+<body class="article-page">
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Katsuya Ito Notes トップ">
+      <span class="brand-mark" aria-hidden="true">KI</span>
+      <span class="brand-copy"><strong>Katsuya Ito</strong><small>Notes / 002</small></span>
+    </a>
+    <nav class="primary-nav" aria-label="メインナビゲーション">
+      <a class="is-active" href="./">Notes</a>
+      <a href="../index.html">About</a>
+      <a href="https://indx.jp/">INDX ↗</a>
+    </nav>
+  </header>
+
+  <main class="article-shell">
+    <aside class="article-rail">
+      <a class="back-link" href="./">← All notes</a>
+      <nav class="toc" aria-label="目次">
+        <span>ON THIS PAGE</span>
+        <a href="#problem">人が書く前提が残っている</a>
+        <a href="#landscape">既存サービスの現在地</a>
+        <a href="#definition">ドキュメントサーバーとは</a>
+        <a href="#document-program">文書をプログラムとして定義する</a>
+        <a href="#html-view">HTMLは原本か、Viewか</a>
+        <a href="#requirements">必要な7つの機能</a>
+        <a href="#workflow">ページではなく変更セット</a>
+        <a href="#minimum">最小構成を考える</a>
+        <a href="#conclusion">人は編集者から統治者へ</a>
+      </nav>
+    </aside>
+
+    <article class="article-content">
+      <header class="article-hero">
+        <div class="article-meta"><span>AI / Product</span><time datetime="2026-08-11">2026.08.11</time><i>15 min read</i></div>
+        <h1><em>AIネイティブ</em>な<br>ドキュメントサーバーがない問題</h1>
+        <p class="lead">NotionもGitHubもGoogle DriveもSharePointも、AIから使える。一方で、AIがすべての文書を書き、更新し続けることを前提に作られた場所ではない。</p>
+        <div class="hero-diagram" aria-label="AIが文書を作成し、機械が検査し、人が承認する流れ">
+          <div><small>01</small><strong>AI writes</strong><span>文脈から変更案を作る</span></div>
+          <b>→</b>
+          <div><small>02</small><strong>System checks</strong><span>権限・品質・根拠を検査する</span></div>
+          <b>→</b>
+          <div><small>03</small><strong>Human governs</strong><span>重要な変更を承認する</span></div>
+        </div>
+      </header>
+
+      <section class="article-section" id="problem">
+        <p class="section-label">01 — THE MISSING LAYER</p>
+        <h2>AI機能は増えた。しかし、人が書く前提は残っている</h2>
+        <p>最近、AIの記憶や参照先として、Obsidian、Notion、GitHub、Google Drive、SharePointなど、さまざまなサービスが使われている。どれも便利である。人が文書を書き、人が編集し、必要なときにAIが検索したり要約したりするなら、かなりのことができる。</p>
+        <p>ただ、ここには一つ古い前提が残っている。<strong>文書の一次著者は人間である</strong>という前提だ。</p>
+        <p>これからは、会議録、設計書、顧客別の引き継ぎ、FAQ、業務マニュアル、調査メモまで、AIが最初から書く文書が増える。新しく書くだけではない。別のデータや会話が変わるたびに、関連する文書をAIが継続的に更新するようになる。</p>
+        <p>そうなると、AIが文書を書けることだけでは足りない。誰の権限で何を読んだのか。どの情報からこの一文が生まれたのか。更新前後で矛盾がないか。誰が承認したのか。機密情報を含む段落だけ共有から外せるか。文書を作る速度より、<strong>文書の変更を安全に流す仕組み</strong>が重要になる。</p>
+        <blockquote>
+          <p>AIネイティブなドキュメントサービスとは、AIに入力欄を足したノートではない。AIが一次著者になることを前提に、変更を統治する基盤である。</p>
+        </blockquote>
+      </section>
+
+      <section class="article-section" id="landscape">
+        <p class="section-label">02 — TODAY'S TOOLS</p>
+        <h2>既存サービスは、どこまで近いのか</h2>
+        <p>既存のサービスに機能がないわけではない。むしろ、必要な部品はすでにかなり揃っている。ただし、それぞれ別の主語を中心に設計されている。</p>
+        <div class="service-matrix" role="region" aria-label="既存ドキュメントサービスの比較" tabindex="0">
+          <table>
+            <thead><tr><th>サービス</th><th>強いところ</th><th>AIを主語にしたときの摩擦</th></tr></thead>
+            <tbody>
+              <tr><th><a href="https://obsidian.md/">Obsidian ↗</a></th><td>ローカルのMarkdownで、人にもAIにも読みやすい。</td><td>サーバー側の権限、承認、監査、共有を別に組む必要がある。</td></tr>
+              <tr><th><a href="https://developers.notion.com/reference/intro">Notion ↗</a></th><td>人がページとデータベースを柔軟に編集でき、APIからも読み書きできる。</td><td>文書の原本はUI上のページとブロックであり、差分・検査・一括変更をコードのように扱いにくい。</td></tr>
+              <tr><th><a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches">GitHub ↗</a></th><td>テキスト、履歴、差分、レビュー、自動チェックが最初からつながっている。</td><td>権限と共有の基本単位がリポジトリで、文書の一部だけを顧客や部署へ見せる用途には工夫が要る。</td></tr>
+              <tr><th><a href="https://developers.google.com/workspace/drive/api/reference/rest/v3">Google Drive ↗</a></th><td>人同士の共同編集と、ファイル単位の共有・権限管理が強い。</td><td>APIはあるが、文書の構造、履歴、権限をAIの変更パイプラインとして扱うには変換層が要る。</td></tr>
+              <tr><th><a href="https://learn.microsoft.com/en-us/graph/api/resources/driveitem?view=graph-rest-1.0">SharePoint ↗</a></th><td>企業のID、権限、ファイル管理、版管理につながっている。</td><td>Graph、サイト、ライブラリ、アプリ権限をまたぎ、AIエディタから軽く反復するには接続が重い。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Notionは「プログラムから触れない」のではない。Google DriveやSharePointも「AIからアクセスできない」のではない。問題は、アクセスできるかどうかではなく、<strong>AIによる大量で継続的な変更が中心動線になっているか</strong>である。</p>
+        <p>GitHubはこの意味でかなり近い。AIはテキストを編集し、Pull Requestを作り、差分を見せ、自動チェックを通せる。一方でGitHubはコード共有のための場所であり、ある顧客にはこの章だけ、別の部署には承認済みの版だけ見せる、といった文書特有の配布には向いていない。</p>
+        <div class="note-callout"><span>NOTE</span><p>これは製品の優劣ではない。既存サービスは、人間の共同編集、コード開発、企業内ファイル管理という、それぞれの目的に最適化されている。</p></div>
+      </section>
+
+      <section class="article-section" id="definition">
+        <p class="section-label">03 — DEFINITION</p>
+        <h2>ノートアプリではなく、ドキュメントサーバー</h2>
+        <p>ここで「ドキュメントサーバー」と呼びたいのは、単にファイルを保存するサーバーではない。</p>
+        <p>プログラムにとってデータベースが、保存場所であると同時に、権限、検索、更新、整合性を引き受けるように、AIにとってのドキュメントサーバーも、文書のライフサイクルを引き受ける。雑にいうと、<strong>文書のデータベースとGitHub Actionsを一つにしたもの</strong>である。</p>
+        <div class="layer-list">
+          <div><span>01</span><h3>人間向けの表示</h3><p>普通のWebページとして読める。コメントし、承認し、必要な範囲だけ共有できる。</p></div>
+          <div><span>02</span><h3>AI向けの構造</h3><p>Markdownや構造化データとして取得できる。文書、節、根拠、ポリシーに安定したIDがある。</p></div>
+          <div><span>03</span><h3>変更を流す実行基盤</h3><p>API、CLI、Webhookから変更案を受け、検査し、レビュー後に公開する。</p></div>
+        </div>
+        <p>人間にも読みやすく、AIにも読みやすい。この両立は、リッチな画面とプレーンテキストのどちらかを選ぶ話ではない。同じ文書に、人間向けのViewとAI向けの表現を持たせる話なのだと思う。</p>
+      </section>
+
+      <section class="article-section" id="document-program">
+        <p class="section-label">04 — DOCUMENT AS PROGRAM</p>
+        <h2>文書も「書く」から「定義して生成する」へ</h2>
+        <p>ドキュメントをプログラミング可能にするとは、APIから文章を保存できることだけではない。文書の意味、部品、制約、出力先をコードのように定義し、そこから必要な文書を生成できることだと思う。</p>
+        <p>人間は同じ説明をコピーし、少しずつ書き換えてきた。AIはコピーと書き換えを非常に速くできる。一方で、その速さは、同じ意味の文章が大量に複製され、どれが正しいかわからなくなる速さでもある。だからAIが得意な生成を使うほど、原本と再利用の仕組みが必要になる。</p>
+        <div class="layer-list">
+          <div><span>01</span><h3>i18nを生成工程にする</h3><p>日本語版と英語版を別々のページとして管理せず、意味の単位、用語集、対象地域を定義する。AIが各言語版を生成し、固有名詞、数値、禁止表現をテストする。</p></div>
+          <div><span>02</span><h3>文章をマクロのように再利用する</h3><p>LaTeXのマクロのように、会社概要、免責、製品定義、手順などを名前付きの部品にする。一つの原本を更新すれば、それを使う文書へ変更案が伝播する。</p></div>
+          <div><span>03</span><h3>文書にテストを書く</h3><p>価格が料金マスタと一致するか。同じ製品のサポート時間が別ページと矛盾していないか。根拠のない数値がないか。自然言語にも守るべき条件を宣言する。</p></div>
+          <div><span>04</span><h3>図をコードとして持つ</h3><p>可能な図やグラフはSVGなどのテキスト形式で持つ。AIが要素、ラベル、色、値を直接編集でき、差分と検索の対象にもできる。</p></div>
+          <div><span>05</span><h3>読者ごとにViewを変える</h3><p>同じ原本から、顧客向け、開発者向け、経営者向けの表示を生成する。言語、前提知識、権限、端末に応じて、詳しさとインターフェースを変える。</p></div>
+        </div>
+        <div class="code-window" role="figure" aria-label="プログラミング言語的な文書定義の例">
+          <div class="code-bar"><i></i><i></i><i></i><span>product-guide.doc</span></div>
+          <pre><code><b>document</b> ProductGuide {
+  source  product://catalog
+  reuse   block://security-definition
+
+  locale  reader.locale
+  view    reader.role
+  figure  architecture as svg
+
+  test price == catalog.current_price
+  test consistent("support-hours")
+  test citations.required
+}</code></pre>
+        </div>
+        <p>もちろん、この文法そのものは仮のものである。重要なのは、自然言語をすべて形式言語にすることではない。<strong>文章は自然言語のまま、再利用、制約、生成、表示のルールを機械が扱えるようにする</strong>ことである。</p>
+      </section>
+
+      <section class="article-section" id="html-view">
+        <p class="section-label">05 — SOURCE AND VIEW</p>
+        <h2>HTMLは原本か、読者のためのViewか</h2>
+        <p>Claude Codeチームの「<a href="https://claude.com/blog/using-claude-code-the-unreasonable-effectiveness-of-html">The unreasonable effectiveness of HTML ↗</a>」という記事では、AIの出力形式としてMarkdownよりHTMLを使う理由が紹介されている。表、CSS、SVG、インタラクションを一つの成果物に含められ、レスポンシブに表示でき、共有もしやすいという主張である。</p>
+        <p>AIがHTMLを生成し、読者に合わせて情報の密度や操作方法を変えるという方向にはかなり納得できる。特に、人間が原稿を一行ずつ編集するのではなく、AIへ修正を依頼するなら、「人が直接編集しやすい」というMarkdownの利点は相対的に小さくなる。</p>
+        <p>一方で、すべての原本をHTMLにすればよい、とはまだ思わない。HTMLは表現力が高いぶん、内容、見た目、操作が一つのファイルに混ざりやすい。同じ事実を使ったHTMLが読者ごとに生成されるなら、完成したHTMLを原本にするのではなく、その手前に共通の文書モデルが必要になる。</p>
+        <blockquote>
+          <p>原本は再利用と検査に向いた構造で持ち、HTMLは読者に合わせて生成する。AIネイティブなのはファイル形式ではなく、SourceからViewを作る流れのほうである。</p>
+        </blockquote>
+        <p>MarkdownかHTMLか、という二択ではない。AIが読み書きするSource、人間が判断するView、その間にあるテストとレンダリング。この三つを分けることが、ドキュメントサーバーの役割なのだと思う。</p>
+      </section>
+
+      <section class="article-section" id="requirements">
+        <p class="section-label">06 — REQUIREMENTS</p>
+        <h2>AIネイティブに必要な7つの機能</h2>
+        <ol class="rule-list">
+          <li><div><strong>AIを主体として扱う権限管理</strong><p>人のAPIキーを使い回すのではなく、エージェントごとにID、役割、有効期限、読める情報、書ける範囲を持つ。検索結果にも権限を適用する。</p></div></li>
+          <li><div><strong>AIエディタから直接つながる接続性</strong><p>REST API、SDK、CLI、MCPなどから、文書の取得、検索、変更案の作成、レビュー依頼まで完結する。画面操作の自動化を前提にしない。</p></div></li>
+          <li><div><strong>変更案を中心にしたレビュー</strong><p>完成したページを見比べるのではなく、どの節を、なぜ、何から変更したかを差分として見る。重要度に応じて人または別のAIが承認する。</p></div></li>
+          <li><div><strong>公開前の自動チェック</strong><p>リンク切れ、表記、個人情報、機密情報、根拠のない数値、古い参照、文書間の矛盾を検査する。コードにおけるテストやLintに近い。</p></div></li>
+          <li><div><strong>一文まで戻れるリネージ</strong><p>どの会話、データ、モデル、指示から生成され、誰が承認したかを残す。誤りを見つけたとき、影響する文書を逆引きできる。</p></div></li>
+          <li><div><strong>権限を守る検索</strong><p>キーワード、意味、メタデータを合わせて検索する。検索インデックスを作る段階から権限を保ち、見えてはいけない情報の存在も漏らさない。</p></div></li>
+          <li><div><strong>文書の一部を安全に共有する機能</strong><p>原本を複製せず、承認済みの版、特定の章、顧客向けViewだけを公開する。原本の更新と配布物の関係も追跡する。</p></div></li>
+        </ol>
+        <p>人間にも同じ機能が必要だった。しかし、人間が自分の手で限られた数のページを編集する世界では、多少の手作業で吸収できた。AIが多数の文書を横断して更新するなら、手作業で吸収していた曖昧さが一気にシステムの欠陥になる。</p>
+      </section>
+
+      <section class="article-section" id="workflow">
+        <p class="section-label">07 — CHANGESET</p>
+        <h2>ページではなく、変更セットを管理する</h2>
+        <p>既存の文書管理は「このページを開いて編集する」が基本である。AIネイティブな世界では、「この事実が変わったので、影響する12文書に変更案を作る」が基本になる。</p>
+        <p>ここで管理すべき主役はページではなく、変更セットである。例えば価格が変わったとき、料金表、営業資料、FAQ、契約時の説明、社内マニュアルを別々に編集するのではない。一つの変更理由から複数文書の差分が生まれ、まとめて検査され、公開される。</p>
+        <div class="code-window" role="figure" aria-label="AIによる文書変更セットの例">
+          <div class="code-bar"><i></i><i></i><i></i><span>changeset.yaml</span></div>
+          <pre><code><b>reason:</b> "料金体系が変更された"
+<b>source:</b> decision://pricing/2026-08-11
+<b>agent:</b> docs-updater
+
+<b>targets:</b>
+  - docs/pricing.md
+  - docs/sales/overview.md
+  - docs/support/faq.md
+
+<b>checks:</b>
+  - no_stale_price
+  - evidence_required
+  - customer_view_safe
+
+<b>approval:</b> pricing-owner</code></pre>
+        </div>
+        <p>これはドキュメントをプログラミング言語にするというより、<strong>ドキュメントの変更手続きをプログラミング可能にする</strong>ということだと思う。本文は自然言語のままでよい。一方で、構造、権限、検査、配布はコードから扱える必要がある。</p>
+      </section>
+
+      <section class="article-section" id="minimum">
+        <p class="section-label">08 — MINIMUM PRODUCT</p>
+        <h2>最初に作るなら、何が必要か</h2>
+        <p>全部入りの新しいNotionを作る必要はない。編集画面は質素でもよい。一方で、構造化された原本から、変更、検査、承認を経て、読者向けのViewを生成する一周は、最初から必要になる。</p>
+        <div class="layer-list">
+          <div><span>01</span><h3>Structured source first</h3><p>文章だけでなく、節、参照、再利用する部品、公開範囲に安定したIDを付ける。i18nや読者別表示の原本になる構造を持つ。</p></div>
+          <div><span>02</span><h3>Change and test first</h3><p>AIは原本を直接上書きせず、理由と根拠を持つ変更セットを送る。矛盾、古い数値、表記、参照関係を公開前に検査する。</p></div>
+          <div><span>03</span><h3>Policy and lineage first</h3><p>誰が読めるか、何を自動公開できるか、何を人が承認するかを宣言する。生成元と承認履歴も追跡できるようにする。</p></div>
+          <div><span>04</span><h3>One view end to end</h3><p>最初からすべての読者へ対応する必要はない。まず一つの言語、一つの読者、一つのHTML Viewを、原本から最後まで生成できるようにする。SVGやインタラクションも、このViewの一部として扱う。</p></div>
+        </div>
+        <p>既存のGit、オブジェクトストレージ、検索エンジン、ID基盤を組み合わせても作れるかもしれない。重要なのは新しいエディタを作ることではない。一つの構造化された原本から、安全で検査可能な変更を経て、読者に合った文書を生成する共通基盤を作ることである。</p>
+      </section>
+
+      <section class="article-section" id="conclusion">
+        <p class="section-label">09 — CONCLUSION</p>
+        <h2>人は編集者から、統治者へ</h2>
+        <p>AIがすべての文書を書く、と言うと、人間が文書からいなくなるように聞こえる。実際には逆かもしれない。</p>
+        <p>人間は、一文ずつ書き換える作業から離れ、何を正しいとするか、誰に何を見せるか、どの変更に承認が必要かを決める。文章の編集者から、文書システムの統治者へ役割が移る。</p>
+        <p>NotionにAIを足す。SharePointをAIに読ませる。GitHubでMarkdownを管理する。しばらくは、これらの組み合わせで十分な場面も多い。</p>
+        <p>一方で、AIが組織の文書を継続的に書き換えるところまで進むと、どこかで限界が来る。そこで必要になるのは、もっと賢い文章生成ではない。<strong>権限、再利用、差分、テスト、リネージ、検索、読者別Viewを、AIの速度で扱える文書基盤</strong>である。</p>
+        <blockquote>
+          <p>AI時代の文書管理で足りないのは、エディタのAI機能ではない。AIが書き続けても、組織が壊れないためのサーバーなのだと思う。</p>
+        </blockquote>
+        <p>それが既存サービスの進化として生まれるのか、新しいカテゴリとして生まれるのかは、まだよくわからない。ただ、自分なら新しいノートアプリを考える前に、「AIによる変更をどう統治するか」から考えたい。</p>
+      </section>
+
+      <footer class="article-end">
+        <div><span>Published</span><strong>2026.08.11</strong></div>
+        <a href="./">ノート一覧へ戻る →</a>
+      </footer>
+    </article>
+  </main>
+
+  <aside class="related-notes" aria-labelledby="related-title">
+    <div class="related-heading"><span>NEXT TO READ</span><h2 id="related-title">関連するノート</h2></div>
+    <div class="related-grid">
+      <a href="ai-native-development-environment.html"><span>AI / Product</span><h3>エディタと管制塔</h3><p>AIエージェントの実行環境、文脈、報告をどう設計するか。</p></a>
+      <a href="software-industry-after-coding.html"><span>AI / Business</span><h3>ソフトウェア産業は結局どうなるのか</h3><p>コード生成が民主化した後、価値とリスクがどこへ移るかを考える。</p></a>
+      <a href="initial-members-contractors.html#interface"><span>Business</span><h3>仕事のインターフェース</h3><p>何を渡せば、何が返るか。仕事の境界をプログラムになぞらえて考える。</p></a>
+    </div>
+  </aside>
+
+  <footer class="site-footer">
+    <div><span>© 2026 Katsuya Ito</span><a href="../">Profile ↗</a></div>
+  </footer>
+</body>
+</html>

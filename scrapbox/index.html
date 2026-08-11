@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Katsuya Itoの思考、仕事、技術についての公開ノート。">
   <title>Katsuya Ito — Notes</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260811-7">
   <script src="app.js" defer></script>
 </head>
 <body class="home-page">
   <header class="site-header">
     <a class="brand" href="./" aria-label="Katsuya Ito Notes トップ">
       <span class="brand-mark" aria-hidden="true">KI</span>
-      <span class="brand-copy"><strong>Katsuya Ito</strong><small>Notes / 028</small></span>
+      <span class="brand-copy"><strong>Katsuya Ito</strong><small>Notes / 007</small></span>
     </a>
     <label class="header-search">
       <span class="sr-only">ノートを検索</span>
@@ -21,7 +21,7 @@
     </label>
     <nav class="primary-nav" aria-label="メインナビゲーション">
       <a class="is-active" href="./">Notes</a>
-      <a href="../aboutme.html">About</a>
+      <a href="../index.html">About</a>
       <a href="https://indx.jp/">INDX ↗</a>
     </nav>
   </header>
@@ -36,15 +36,14 @@
     <section class="explorer" aria-label="ノートを探す">
       <div class="filter-row">
         <div class="tags" id="tags" aria-label="タグで絞り込む">
-          <button class="tag is-active" type="button" data-tag="all">すべて <span>18</span></button>
-          <button class="tag" type="button" data-tag="AI">AI <span>8</span></button>
-          <button class="tag" type="button" data-tag="Product">Product <span>7</span></button>
-          <button class="tag" type="button" data-tag="Business">Business <span>6</span></button>
-          <button class="tag" type="button" data-tag="Math">Math <span>2</span></button>
-          <button class="tag" type="button" data-tag="Books">Books <span>4</span></button>
+          <button class="tag is-active" type="button" data-tag="all">すべて <span>7</span></button>
+          <button class="tag" type="button" data-tag="AI">AI <span>4</span></button>
+          <button class="tag" type="button" data-tag="Product">Product <span>3</span></button>
+          <button class="tag" type="button" data-tag="Business">Business <span>5</span></button>
+          <button class="tag" type="button" data-tag="Math">Math <span>1</span></button>
         </div>
         <div class="list-controls">
-          <p class="result-count" aria-live="polite"><strong id="result-count">18</strong> notes</p>
+          <p class="result-count" aria-live="polite"><strong id="result-count">7</strong> notes</p>
           <label class="sort-box">
             <span class="sr-only">並び順</span>
             <select id="sort">
@@ -58,100 +57,76 @@
     </section>
 
     <section class="note-grid" id="note-grid" aria-label="ノート一覧">
-      <a class="note-card" href="article.html" data-search-page="article.html" data-title="AIと働くためのメモの設計" data-summary="答えではなく判断の履歴を残す。チームで使えるAIノートの作り方。" data-tags="AI Product" data-date="2026-08-09">
-        <div class="thumb thumb--map" aria-hidden="true"><span>context</span><span>decision</span><span>artifact</span></div>
+      <a class="note-card" href="foundation-model-valuation.html" data-search-page="foundation-model-valuation.html" data-title="結局、生成AIのファウンデーションモデル企業の企業価値はいくらなのか" data-summary="人口、普及率、一人当たり売上、シェア、利益率、PER。五つの変数からOpenAIとAnthropicの企業価値を逆算する。" data-tags="AI Business Math" data-date="2026-08-11">
+        <div class="thumb thumb--probability" aria-hidden="true"><span>users</span><strong>6.0B</strong><small>→ value</small></div>
         <div class="card-body">
-          <div class="card-meta"><span class="card-tag">AI</span><time datetime="2026-08-09">2026.08.09</time></div>
-          <h2>AIと働くための<br>メモの設計</h2>
-          <p>答えではなく判断の履歴を残す。チームで使えるAIノートの作り方。</p>
-          <span class="read-link">サンプル記事を読む <b>↗</b></span>
+          <div class="card-meta"><span class="card-tag">AI / Business</span><time datetime="2026-08-11">2026.08.11</time></div>
+          <h2>結局、生成AIの<br>ファウンデーションモデル企業の企業価値はいくらなのか</h2>
+          <p>人口、普及率、一人当たり売上、シェア、利益率、PER。五つの変数からOpenAIとAnthropicの企業価値を逆算する。</p>
+          <span class="read-link">記事を読む <b>↗</b></span>
         </div>
       </a>
 
-      <a class="note-card" href="article.html#small-automation" data-title="小さな自動化を積み上げる" data-summary="週に15分を返してくれる仕組みを、どう見つけて育てるか。" data-tags="AI Product" data-date="2026-08-02">
-        <div class="thumb thumb--steps" aria-hidden="true"><i>01</i><i>02</i><i>03</i></div>
-        <div class="card-body"><div class="card-meta"><span class="card-tag">Product</span><time datetime="2026-08-02">2026.08.02</time></div><h2>小さな自動化を<br>積み上げる</h2><p>週に15分を返してくれる仕組みを、どう見つけて育てるか。</p></div>
+      <a class="note-card" href="hiring-a-french-engineer.html" data-search-page="hiring-a-french-engineer.html" data-title="フランス人エンジニアを雇った話。初期メンバー・言葉・文化。" data-summary="3人目の開発エンジニアとして採用してよかったこと、言葉やビザの難しさ、違う文化の人と働いて考えたこと。" data-tags="Business" data-date="2026-08-11">
+        <div class="thumb thumb--flow" aria-hidden="true"><span>採用前</span><b>→</b><span>実際</span><b>→</b><span>いま</span></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">Business</span><time datetime="2026-08-11">2026.08.11</time></div>
+          <h2>フランス人エンジニアを雇った話。<br>初期メンバー・言葉・文化。</h2>
+          <p>3人目として採用してよかったこと、言葉やビザの難しさ、違う文化の人と働いて考えたこと。</p>
+          <span class="read-link">記事を読む <b>↗</b></span>
+        </div>
       </a>
 
-      <a class="note-card" href="article.html#unstructured-data" data-title="非構造化データの地図" data-summary="企業の文書・音声・画像を価値に変えるための整理。" data-tags="AI Business" data-date="2026-07-24">
-        <div class="thumb thumb--matrix" aria-hidden="true"></div>
-        <div class="card-body"><div class="card-meta"><span class="card-tag">AI</span><time datetime="2026-07-24">2026.07.24</time></div><h2>非構造化データの地図</h2><p>企業の文書・音声・画像を価値に変えるための整理。</p></div>
+      <a class="note-card" href="fundraising-and-good-company.html" data-search-page="fundraising-and-good-company.html" data-title="資金調達とは何か。借金・株式・100人の良い会社。" data-summary="お金を集めることは、未来の何を約束することなのか。株式資金調達の期待と制約、その間にある資本を考える。" data-tags="Business" data-date="2026-08-11">
+        <div class="thumb thumb--capital-choice" aria-hidden="true"><span>売上</span><span>借入</span><span>株式</span></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">Business</span><time datetime="2026-08-11">2026.08.11</time></div>
+          <h2>資金調達とは何か。<br>借金・株式・100人の良い会社。</h2>
+          <p>お金を集めることは、未来の何を約束することなのか。株式資金調達の期待と制約、その間にある資本を考える。</p>
+          <span class="read-link">記事を読む <b>↗</b></span>
+        </div>
       </a>
 
-      <a class="note-card" href="article.html#proof" data-title="PoCで本当に証明するもの" data-summary="精度だけでなく、現場の意思決定が変わるところまで設計する。" data-tags="Business Product" data-date="2026-07-15">
-        <div class="thumb thumb--number" aria-hidden="true"><strong>03</strong><span>proofs<br>before scale</span></div>
-        <div class="card-body"><div class="card-meta"><span class="card-tag">Business</span><time datetime="2026-07-15">2026.07.15</time></div><h2>PoCで本当に<br>証明するもの</h2><p>精度だけでなく、現場の意思決定が変わるところまで設計する。</p></div>
+      <a class="note-card" href="ai-native-development-environment.html" data-search-page="ai-native-development-environment.html" data-title="エディタと管制塔。AIネイティブな開発環境の作り方。" data-summary="24時間・並列で働くAIエージェントに合わせて、開発母艦、リモート接続、実行環境、文脈、報告をどう設計するか。" data-tags="AI Product" data-date="2026-08-11">
+        <div class="thumb thumb--dev-mothership" aria-hidden="true"><span>REMOTE</span><span>CONTEXT</span><strong>24 / 7</strong><span>AGENTS</span><span>PROOF</span></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">AI / Product</span><time datetime="2026-08-11">2026.08.11</time></div>
+          <h2>エディタと管制塔。<br>AIネイティブな開発環境の作り方。</h2>
+          <p>24時間・並列で働くAIエージェントに合わせて、開発母艦、リモート接続、実行環境、文脈、報告をどう設計するか。</p>
+          <span class="read-link">記事を読む <b>↗</b></span>
+        </div>
       </a>
 
-      <a class="note-card" href="article.html#deep-work" data-title="深く考える日のつくり方" data-summary="予定を埋める前に、問いのための余白を確保する。" data-tags="Books" data-date="2026-07-03">
-        <div class="thumb thumb--quote" aria-hidden="true"><span>“</span><p>Protect<br>the blank.</p></div>
-        <div class="card-body"><div class="card-meta"><span class="card-tag">Books</span><time datetime="2026-07-03">2026.07.03</time></div><h2>深く考える日の<br>つくり方</h2><p>予定を埋める前に、問いのための余白を確保する。</p></div>
+      <a class="note-card" href="software-industry-after-coding.html" data-search-page="software-industry-after-coding.html" data-title="ソフトウェア産業は結局どうなるのか。民主化・リスク・スマイルカーブ。" data-summary="作るコストが下がった後、ボトルネックと価値はどこへ移るのか。製薬、動画、AIエージェントから考える。" data-tags="AI Business Product" data-date="2026-08-11">
+        <div class="thumb thumb--smile-value" aria-hidden="true"><strong>VALUE</strong><span>IDEA</span><span>PROOF</span><i>CODE</i></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">AI / Business</span><time datetime="2026-08-11">2026.08.11</time></div>
+          <h2>ソフトウェア産業は結局どうなるのか。<br>民主化・リスク・スマイルカーブ。</h2>
+          <p>作るコストが下がった後、ボトルネックと価値はどこへ移るのか。製薬、動画、AIエージェントから考える。</p>
+          <span class="read-link">記事を読む <b>↗</b></span>
+        </div>
       </a>
 
-      <a class="note-card" href="article.html#llm-evaluation" data-title="LLM評価を会話に戻す" data-summary="スコアの先にある、ユーザーの「使える」を観察する。" data-tags="AI Product" data-date="2026-06-28">
-        <div class="thumb thumb--chart" aria-hidden="true"><svg viewBox="0 0 300 180"><path d="M20 145 C70 132 75 85 120 108 S175 75 198 66 S245 56 280 22"/><circle cx="280" cy="22" r="7"/></svg></div>
-        <div class="card-body"><div class="card-meta"><span class="card-tag">AI</span><time datetime="2026-06-28">2026.06.28</time></div><h2>LLM評価を<br>会話に戻す</h2><p>スコアの先にある、ユーザーの「使える」を観察する。</p></div>
+      <a class="note-card" href="ai-native-document-server.html" data-search-page="ai-native-document-server.html" data-title="AIネイティブなドキュメントサーバーがない問題" data-summary="文書をコードのように再利用・検査・多言語化し、読者別のViewを生成する基盤を考える。" data-tags="AI Product" data-date="2026-08-11">
+        <div class="thumb thumb--doc-server" aria-hidden="true"><span>AI</span><b>diff</b><span>✓</span></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">AI</span><time datetime="2026-08-11">2026.08.11</time></div>
+          <h2>AIネイティブな<br>ドキュメントサーバーがない問題</h2>
+          <p>文書をコードのように再利用・検査・多言語化し、読者別のViewを生成する基盤を考える。</p>
+          <span class="read-link">記事を読む <b>↗</b></span>
+        </div>
       </a>
 
-      <a class="note-card" href="article.html#company" data-title="会社をつくるという研究" data-summary="仮説、実験、学習。スタートアップを研究活動として捉える。" data-tags="Business" data-date="2026-06-19">
-        <div class="thumb thumb--orbit" aria-hidden="true"><i></i><i></i><i></i></div>
-        <div class="card-body"><div class="card-meta"><span class="card-tag">Business</span><time datetime="2026-06-19">2026.06.19</time></div><h2>会社をつくる<br>という研究</h2><p>仮説、実験、学習。スタートアップを研究活動として捉える。</p></div>
+      <a class="note-card" href="initial-members-contractors.html" data-search-page="initial-members-contractors.html" data-title="初期メンバーは業務委託が正義なのか" data-summary="『まずは業務委託で』を、人探しではなく関係づくりの助言として読み替える。" data-tags="Business" data-date="2026-08-11">
+        <div class="thumb thumb--flow" aria-hidden="true"><span>人</span><b>→</b><span>仕事</span><b>→</b><span>契約</span></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-tag">Business</span><time datetime="2026-08-11">2026.08.11</time></div>
+          <h2>初期メンバーは<br>業務委託が正義なのか</h2>
+          <p>「まずは業務委託で」を、人探しではなく関係づくりの助言として読み替える。</p>
+          <span class="read-link">記事を読む <b>↗</b></span>
+        </div>
       </a>
 
-      <a class="note-card" href="article.html#probability" data-title="確率で考え、言葉で決める" data-summary="不確実な数字を、チームの判断へ翻訳する方法。" data-tags="Math Business" data-date="2026-06-06">
-        <div class="thumb thumb--probability" aria-hidden="true"><span>p</span><strong>0.72</strong><small>→ decide</small></div>
-        <div class="card-body"><div class="card-meta"><span class="card-tag">Math</span><time datetime="2026-06-06">2026.06.06</time></div><h2>確率で考え、<br>言葉で決める</h2><p>不確実な数字を、チームの判断へ翻訳する方法。</p></div>
-      </a>
-
-      <a class="note-card" href="article.html#good-doc" data-title="よいドキュメントの条件" data-summary="読む人が次の行動を選べる文書は、何が違うのか。" data-tags="Product Books" data-date="2026-05-26">
-        <div class="thumb thumb--document" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="card-body"><div class="card-meta"><span class="card-tag">Product</span><time datetime="2026-05-26">2026.05.26</time></div><h2>よいドキュメントの条件</h2><p>読む人が次の行動を選べる文書は、何が違うのか。</p></div>
-      </a>
-
-      <a class="note-card" href="article.html#agent" data-title="エージェントに仕事を渡す" data-summary="依頼文ではなく、完了条件と検証手段を手渡す。" data-tags="AI" data-date="2026-05-14">
-        <div class="thumb thumb--terminal" aria-hidden="true"><span>task:</span><b>ship_result</b><i>✓ verified</i></div>
-        <div class="card-body"><div class="card-meta"><span class="card-tag">AI</span><time datetime="2026-05-14">2026.05.14</time></div><h2>エージェントに<br>仕事を渡す</h2><p>依頼文ではなく、完了条件と検証手段を手渡す。</p></div>
-      </a>
-
-      <a class="note-card" href="article.html#customer-value" data-title="顧客価値を一枚で描く" data-summary="機能の説明を、負荷・KPI・成果の連鎖へ変える。" data-tags="Business Product" data-date="2026-05-01">
-        <div class="thumb thumb--flow" aria-hidden="true"><span>負荷</span><b>→</b><span>KPI</span><b>→</b><span>成果</span></div>
-        <div class="card-body"><div class="card-meta"><span class="card-tag">Business</span><time datetime="2026-05-01">2026.05.01</time></div><h2>顧客価値を<br>一枚で描く</h2><p>機能の説明を、負荷・KPI・成果の連鎖へ変える。</p></div>
-      </a>
-
-      <a class="note-card" href="article.html#model" data-title="モデルより先に見るもの" data-summary="データの生成過程を知らずに、精度の議論を始めない。" data-tags="AI Math" data-date="2026-04-20">
-        <div class="thumb thumb--layers" aria-hidden="true"><i>現場</i><i>データ</i><i>モデル</i></div>
-        <div class="card-body"><div class="card-meta"><span class="card-tag">Math</span><time datetime="2026-04-20">2026.04.20</time></div><h2>モデルより先に<br>見るもの</h2><p>データの生成過程を知らずに、精度の議論を始めない。</p></div>
-      </a>
-
-      <a class="note-card" href="article.html#prototype" data-title="プロトタイプは問いである" data-summary="完成品の縮小版ではなく、最短で仮説を壊す道具。" data-tags="Product" data-date="2026-04-08">
-        <div class="thumb thumb--prototype" aria-hidden="true"><span>?</span><i></i><i></i></div>
-        <div class="card-body"><div class="card-meta"><span class="card-tag">Product</span><time datetime="2026-04-08">2026.04.08</time></div><h2>プロトタイプは<br>問いである</h2><p>完成品の縮小版ではなく、最短で仮説を壊す道具。</p></div>
-      </a>
-
-      <a class="note-card" href="article.html#prompt" data-title="プロンプトを資産にする" data-summary="一度きりの指示から、再現できる仕事の型へ。" data-tags="AI" data-date="2026-03-27">
-        <div class="thumb thumb--prompt" aria-hidden="true"><span>01 / role</span><span>02 / context</span><span>03 / done</span></div>
-        <div class="card-body"><div class="card-meta"><span class="card-tag">AI</span><time datetime="2026-03-27">2026.03.27</time></div><h2>プロンプトを<br>資産にする</h2><p>一度きりの指示から、再現できる仕事の型へ。</p></div>
-      </a>
-
-      <a class="note-card" href="article.html#meeting" data-title="会議の前に結論を書く" data-summary="同期時間を、共有ではなく意思決定に使うために。" data-tags="Business" data-date="2026-03-12">
-        <div class="thumb thumb--meeting" aria-hidden="true"><b>DECIDE</b><span>before<br>the room.</span></div>
-        <div class="card-body"><div class="card-meta"><span class="card-tag">Business</span><time datetime="2026-03-12">2026.03.12</time></div><h2>会議の前に<br>結論を書く</h2><p>同期時間を、共有ではなく意思決定に使うために。</p></div>
-      </a>
-
-      <a class="note-card" href="article.html#reading" data-title="読書メモを閉じない" data-summary="引用を集めるだけで終わらせず、仕事の問いにつなぐ。" data-tags="Books" data-date="2026-02-25">
-        <div class="thumb thumb--books" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="card-body"><div class="card-meta"><span class="card-tag">Books</span><time datetime="2026-02-25">2026.02.25</time></div><h2>読書メモを<br>閉じない</h2><p>引用を集めるだけで終わらせず、仕事の問いにつなぐ。</p></div>
-      </a>
-
-      <a class="note-card" href="article.html#failure" data-title="失敗を再利用可能にする" data-summary="反省を感想で終わらせず、次のチェック項目へ変える。" data-tags="AI" data-date="2026-02-10">
-        <div class="thumb thumb--loop" aria-hidden="true"><span>try</span><b>↻</b><span>learn</span></div>
-        <div class="card-body"><div class="card-meta"><span class="card-tag">AI</span><time datetime="2026-02-10">2026.02.10</time></div><h2>失敗を再利用<br>可能にする</h2><p>反省を感想で終わらせず、次のチェック項目へ変える。</p></div>
-      </a>
-
-      <a class="note-card" href="article.html#first-note" data-title="この場所について" data-summary="公開ノートを始める理由と、ここに置くもの。" data-tags="Books" data-date="2026-01-24">
-        <div class="thumb thumb--hello" aria-hidden="true"><span>Hello,</span><b>world.</b></div>
-        <div class="card-body"><div class="card-meta"><span class="card-tag">Books</span><time datetime="2026-01-24">2026.01.24</time></div><h2>この場所について</h2><p>公開ノートを始める理由と、ここに置くもの。</p></div>
-      </a>
     </section>
 
     <div class="empty-state" id="empty-state" hidden>
@@ -161,7 +136,6 @@
   </main>
 
   <footer class="site-footer">
-    <p>思考は未完成のまま公開されます。</p>
     <div><span>© 2026 Katsuya Ito</span><a href="../">Profile ↗</a></div>
   </footer>
 </body>

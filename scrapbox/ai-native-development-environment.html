@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="24時間・並列で働くAIエージェントに合わせて、開発母艦、リモート接続、worktree、Dev Container、文脈、通知とレビューをどう設計するか。">
+  <title>エディタと管制塔。AIネイティブな開発環境の作り方。— Katsuya Ito Notes</title>
+  <link rel="stylesheet" href="styles.css?v=20260811-6">
+</head>
+<body class="article-page ai-dev-page">
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Katsuya Ito Notes トップ">
+      <span class="brand-mark" aria-hidden="true">KI</span>
+      <span class="brand-copy"><strong>Katsuya Ito</strong><small>Notes / 004</small></span>
+    </a>
+    <nav class="primary-nav" aria-label="メインナビゲーション">
+      <a class="is-active" href="./">Notes</a>
+      <a href="../index.html">About</a>
+      <a href="https://indx.jp/">INDX ↗</a>
+    </nav>
+  </header>
+
+  <main class="article-shell">
+    <aside class="article-rail">
+      <a class="back-link" href="./">← All notes</a>
+      <nav class="toc" aria-label="目次">
+        <span>ON THIS PAGE</span>
+        <a href="#shift">一画面から複数の委任へ</a>
+        <a href="#mothership">開発母艦を置く</a>
+        <a href="#access">接続経路を重ねる</a>
+        <a href="#isolation">並列化の前に隔離する</a>
+        <a href="#context">情報を集め、権限を分ける</a>
+        <a href="#voice">音声をタスクへ変換する</a>
+        <a href="#report">端末ではなく証拠を見る</a>
+        <a href="#practice">三段階で導入する</a>
+        <a href="#conclusion">開発環境から開発システムへ</a>
+      </nav>
+    </aside>
+
+    <article class="article-content">
+      <header class="article-hero">
+        <div class="article-meta"><span>AI / Product</span><time datetime="2026-08-11">2026.08.11</time><i>18 min read</i></div>
+        <h1><em>エディタと管制塔。</em><br>AIネイティブな開発環境の作り方。</h1>
+        <p class="lead">自分がパソコンを閉じても、開発は閉じない。複数のAIエージェントが、別々の環境で、コードを書き、Dockerを起動し、テストを回し続ける。そのとき必要なのは、より速く入力できるエディタではなく、仕事を安全に流す管制塔なのだと思う。</p>
+        <div class="ai-dev-orbit" role="img" aria-label="常時稼働する開発母艦を中心に、接続、文脈、並列エージェント、報告が循環する構成">
+          <div class="orbit-ring orbit-ring--outer"></div>
+          <div class="orbit-ring orbit-ring--inner"></div>
+          <div class="orbit-core"><small>24 / 7</small><strong>DEV<br>MOTHERSHIP</strong><span>文脈と認証の母艦</span></div>
+          <span class="orbit-node orbit-node--access"><b>ACCESS</b><small>Mobile / SSH / GUI</small></span>
+          <span class="orbit-node orbit-node--context"><b>CONTEXT</b><small>GitHub / Docs / Work</small></span>
+          <span class="orbit-node orbit-node--agents"><b>AGENTS × N</b><small>isolated worktrees</small></span>
+          <span class="orbit-node orbit-node--evidence"><b>EVIDENCE</b><small>diff / test / report</small></span>
+        </div>
+      </header>
+
+      <section class="article-section" id="shift">
+        <p class="section-label">01 — THE SHIFT</p>
+        <h2>一人が一画面で書く開発から、複数の仕事を委任する開発へ</h2>
+        <p>これまでの開発環境は、人間が目の前にいることを前提にしていた。人がエディタを開き、コードを書き、ターミナルでテストを回し、終わったらパソコンを閉じる。CPUもメモリも、その一人が待たずに作業できればよかった。</p>
+        <p>AIエージェントは、この前提を変える。人が寝ている間にも、一つのエージェントは実装し、別のエージェントは調査し、もう一つはレビューできる。OpenAIは、社内のヘビーユーザー上位1%が、2026年6月には複数エージェントを通じて一日60時間超のエージェント稼働を生み出していたと<a href="https://openai.com/index/how-agents-are-transforming-work/">報告している</a>。人間の一日は24時間のままなのに、作業時間だけが並列化される。</p>
+        <p>これは、生産性が3倍になった、というだけの話ではない。三人の開発者を同時にマネジメントするのと、一人で3倍速くキーを打つのは違う。前者には、仕事の分割、環境の分離、途中経過の監視、成果の統合が必要になる。</p>
+        <blockquote>
+          <p>AIネイティブな開発環境とは、AIが入ったエディタではない。人が離れていても、複数の仕事が衝突せず進み、必要なときだけ人が判断できる開発システムである。</p>
+        </blockquote>
+        <p>OpenAIがCodexアプリを「複数エージェントのcommand center」と呼び、AnthropicがClaude Codeの利用を「continuous orchestration」と説明しているのは象徴的である。主役がコード入力から、仕事の指揮へ移っている。</p>
+      </section>
+
+      <section class="article-section" id="mothership">
+        <p class="section-label">02 — THE MOTHERSHIP</p>
+        <h2>強い一台を「開発母艦」として置く</h2>
+        <p>まず考えたいのは、毎日持ち歩くノートPCとは別に、常時稼働できる一台を置くことである。Mac miniやMac Studioでもよいし、WindowsやLinuxのワークステーションでもよい。重要なのは製品名ではなく、場所と役割が固定されていることだ。</p>
+        <p>この一台には、いつも同じリポジトリ、Dockerイメージ、ブラウザ、開発ツール、ローカルMCP、認証済みのアプリがある。移動中のMacBookで環境を作り直す必要がない。AIエージェントから見ても、昨日の続きが同じ場所にある。</p>
+        <p>一方で、何でもこの一台で計算する必要はない。大きなテスト、独立した長時間タスク、信頼できないコードは、クラウドの一時環境や別のランナーへ逃がせる。Claude Code on the webはタスクをクラウドで動かし、Codex cloudもタスクごとに独立したsandboxを用意する。<strong>母艦に集めるべきなのは、計算量より文脈と入口</strong>なのだと思う。</p>
+        <div class="service-matrix" role="region" aria-label="開発母艦とクラウドランナーの役割分担" tabindex="0">
+          <table>
+            <thead><tr><th>役割</th><th>開発母艦</th><th>クラウド／別ランナー</th></tr></thead>
+            <tbody>
+              <tr><th>向いているもの</th><td>日常のリポジトリ、ローカルGUI、安定した認証、個人の文脈。</td><td>重いビルド、危険な実行、短時間に増やしたい並列タスク。</td></tr>
+              <tr><th>強み</th><td>環境が消えず、手元の道具とデータをそのまま使える。</td><td>タスクごとに隔離しやすく、必要な時間だけ台数を増やせる。</td></tr>
+              <tr><th>弱み</th><td>故障、停電、ディスク枯渇が全体を止める。</td><td>起動時間、利用料、認証やローカル文脈の受け渡しが必要。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>ハードウェア選びでは、瞬間的なCPU性能だけを見ないほうがよい。複数のDocker、ブラウザ、テスト、エージェントを同時に置くと、先に効くのはメモリ容量、SSDの空きとI/O、冷却、安定した有線ネットワークであることが多い。さらに24時間運用なら、UPS、自動再起動、バックアップ、ディスク使用量の通知までが開発環境になる。</p>
+        <div class="note-callout"><span>RULE</span><p>母艦は「全部を実行する巨大PC」ではなく、「文脈と認証が戻ってくるホーム」にする。重い処理は外へ増やせる構成にしておく。</p></div>
+      </section>
+
+      <section class="article-section" id="access">
+        <p class="section-label">03 — MULTIPLE DOORS</p>
+        <h2>接続経路は一つにしない。ただし、公開ポートは増やさない</h2>
+        <p>24時間動かしても、必要なときに触れなければ意味がない。ここでは、同じ入口を三つの解像度で持つのがよいと思う。</p>
+        <div class="access-stack" aria-label="リモート接続の三層">
+          <div><span>軽</span><h3>エージェント固有のRemote Control</h3><p>移動中はCodexやClaude Codeのモバイル／Web画面から、完了通知、質問、承認、方向修正だけを行う。</p></div>
+          <div><span>中</span><h3>Tailscale + SSH</h3><p>ログ、プロセス、Git、コンテナを確認する。端末をインターネットへ直接公開せず、tailnetの認証とポリシー内に置く。</p></div>
+          <div><span>重</span><h3>RustDeskなどのRemote Desktop</h3><p>ブラウザのログイン、OS設定、GUIテストのように、画面そのものが必要なときだけ使う。</p></div>
+        </div>
+        <p><a href="https://openai.com/index/work-with-codex-from-anywhere/">Codexのモバイル連携</a>は、専用のMac miniやremote environment上のセッションへ接続し、diff、テスト結果、承認まで扱える。<a href="https://code.claude.com/docs/en/remote-control">Claude Code Remote Control</a>も、ローカルのファイルやMCPを保持したまま、ブラウザやモバイルから操作できる。日常の確認は、まずこの細い入口で足りる。</p>
+        <p>SSHでは、Warpのようなエージェント指向のターミナルも便利である。ただし2026年8月時点のWarp公式資料では、SSH先でもAgent Mode、コマンド、MCP、Blocksは使える一方、remote filesystemのネイティブなindex、diff、file tree、code review panelは未対応とされる。<a href="https://docs.warp.dev/code/ssh-feature-support">できることと、ローカル時だけできること</a>を分けて使いたい。</p>
+        <p>GUIの非常口としてRustDeskを使うなら、常時フル権限にするのではなく、キーボード、clipboard、file transferなどを必要に応じて制限する。RustDeskは<a href="https://rustdesk.com/docs/en/self-host/">self-hosted server</a>も選べるが、サーバーを自分で持つことは安全性を自動的に保証しない。更新、ログ、MFA、アクセス制御まで自分の責任になる。</p>
+        <div class="note-callout"><span>SECURITY</span><p>Tailscaleでは端末承認と最小権限のaccess policyを使い、SSHやGUIのポートを公衆インターネットへ直接出さない。Remote Desktopは便利な非常口であると同時に、強い権限を持つ入口でもある。</p></div>
+      </section>
+
+      <section class="article-section" id="isolation">
+        <p class="section-label">04 — PARALLEL WITHOUT COLLISION</p>
+        <h2>並列化する前に、仕事・ファイル・実行環境を分ける</h2>
+        <p>エージェントを増やすのは簡単である。難しいのは、同じファイルを書き換え、同じポートを取り、同じデータベースを壊さないようにすることだ。</p>
+        <p>最小単位は、<strong>一つの仕事に一つのGit worktree</strong>である。Anthropicの<a href="https://www.anthropic.com/engineering/claude-code-best-practices">Claude Code Best Practices</a>も、OpenAIの<a href="https://openai.com/index/introducing-the-codex-app/">Codexアプリ</a>も、複数エージェントを並列に動かす方法としてworktreeを挙げている。ファイルの作業場所を分け、最後にdiffとcommitを通じて合流させる。</p>
+        <p>ただし、worktreeが分けるのは主にファイルである。アプリを起動すれば、ポート、Docker Composeのproject name、データベース、キャッシュ、ログ、ブラウザprofileまで衝突する。だから本気で並列化するなら、worktreeごとに実行環境も分ける。</p>
+        <ol class="rule-list">
+          <li><div><strong>一仕事・一worktree・一branch</strong><p>目的と所有者を一つにする。同じファイルを触る仕事は、無理に並列にしない。</p></div></li>
+          <li><div><strong>一worktree・一実行名前空間</strong><p>ポート、Compose project、DB、テストデータ、ログの名前をworktree IDから決める。</p></div></li>
+          <li><div><strong>環境をコードにする</strong><p><code>devcontainer.json</code>、Dockerfile、セットアップスクリプトをリポジトリに置き、エージェントが自分で再現できるようにする。</p></div></li>
+          <li><div><strong>重い準備をprebuildする</strong><p>毎回Docker imageと依存関係をゼロから作らない。VS Codeは<a href="https://code.visualstudio.com/docs/devcontainers/containers">pre-built Dev Container image</a>を推奨し、GitHub Codespacesにも<a href="https://docs.github.com/en/codespaces/prebuilding-your-codespaces/about-github-codespaces-prebuilds">prebuild</a>がある。</p></div></li>
+          <li><div><strong>並列数に上限を置く</strong><p>CPU、メモリ、ディスク、API利用量の予算を決める。空いているから起動するのではなく、完了条件が独立した仕事だけを増やす。</p></div></li>
+        </ol>
+        <p>OpenAIのagent-firstな開発事例では、アプリ、ログ、メトリクスまでworktreeごとの一時環境にし、エージェント自身がブラウザとobservabilityを使って検証できるようにしている。<a href="https://openai.com/index/harness-engineering/">人間に見えるものをAIにも見えるようにする</a>。この「見える環境」まで含めて分けることが、並列化の本体なのだと思う。</p>
+      </section>
+
+      <section class="article-section" id="context">
+        <p class="section-label">05 — CONTEXT AND PERMISSION</p>
+        <h2>情報は集める。権限は集めすぎない</h2>
+        <p>コードだけを見て、よいプロダクトは作れない。顧客がSlackで何に困っていたか。Gmailで何を約束したか。Calendarでいつ意思決定があるか。Notionの仕様がどこまで確定しているか。GitHubで過去に何を試したか。AIエージェントが仕事を完結するには、開発の外にある文脈も必要になる。</p>
+        <p>ここでMCPや各サービスのconnectorが、開発母艦の意味を大きくする。毎回人間が会話をコピーするのではなく、エージェントが必要なときに原文、issue、予定、変更履歴へ戻れる。</p>
+        <p>一方で、全部へ接続した一台は、全部の情報へ届く一台でもある。便利さとblast radiusは同じ方向に増える。だから「一つのスーパーアカウント」を作るのではなく、用途ごとに権限を分けるべきだと思う。</p>
+        <div class="service-matrix" role="region" aria-label="AIエージェントに渡す文脈と権限の設計" tabindex="0">
+          <table>
+            <thead><tr><th>情報</th><th>普段許可する操作</th><th>人の承認を残す操作</th></tr></thead>
+            <tbody>
+              <tr><th>Slack / Gmail</th><td>検索、スレッド読取、下書き。</td><td>外部への送信、広いチャンネルへの投稿。</td></tr>
+              <tr><th>Calendar / Notion</th><td>予定・仕様・決定の読取。</td><td>予定変更、ページ公開、広範囲の書換え。</td></tr>
+              <tr><th>GitHub</th><td>code、issue、CI、PRの読取とbranchへの変更。</td><td>merge、release、権限変更、本番操作。</td></tr>
+              <tr><th>Local machine</th><td>workspace内の編集、許可済みtest、browser検証。</td><td>秘密情報、workspace外、破壊的command、公開network。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>GitHubも、長期のintegrationには個人の強いtokenより、repositoryと操作を細かく限定でき、短命tokenを使う<a href="https://docs.github.com/en/apps/creating-github-apps/about-creating-github-apps/deciding-when-to-build-a-github-app">GitHub App</a>を勧めている。AIに多くの文脈を渡すことと、AIに多くの変更権限を渡すことは分けられる。</p>
+        <p>また、文脈は接続数だけでは決まらない。リポジトリの中に、目的、制約、コマンド、完了条件、設計判断が短く整理されているほうが強い。エージェントが毎回Slack全件を読み直すより、必要な判断がissueや設計文書へ着地しているほうが、速くて再現性がある。</p>
+      </section>
+
+      <section class="article-section" id="voice">
+        <p class="section-label">06 — VOICE TO CONTRACT</p>
+        <h2>音声は、長い文脈を渡す入口になる</h2>
+        <p>エージェントを複数動かすようになると、キーボードで一件ずつ細かく指示すること自体がボトルネックになる。移動中に気づいた不具合、顧客との会話で変わった優先順位、画面を見ながら感じた違和感は、音声のほうが速く、温度も含めて渡しやすい。</p>
+        <p>ただし、音声は仕様書ではない。話し言葉には、主語の省略、言い直し、途中で変わった結論が含まれる。音声のまま実装へ流すと、たくさん説明したのに違うものができる。</p>
+        <div class="voice-pipeline" aria-label="音声から検証可能な成果へ変換する流れ">
+          <div><small>RAW</small><strong>話す</strong><span>背景・違和感・優先度</span></div>
+          <b>→</b>
+          <div><small>STRUCTURE</small><strong>言い直させる</strong><span>目的・範囲・完了条件</span></div>
+          <b>→</b>
+          <div><small>EXECUTE</small><strong>委任する</strong><span>worktree・環境・期限</span></div>
+          <b>→</b>
+          <div><small>PROOF</small><strong>証拠で返す</strong><span>diff・test・画面・残課題</span></div>
+        </div>
+        <p>自分なら、音声入力の直後に、エージェントへ四つだけ言い直させる。「何を変えるのか」「何を変えないのか」「どうなれば完了か」「何を人が決める必要があるか」。ここで認識を直してから、別のエージェントや夜間タスクへ渡す。</p>
+        <p>音声エージェントの価値は、声でコードを書くことではない。<strong>人間の中にしかなかった文脈を、並列に配れる仕事へ変換すること</strong>にあるのだと思う。</p>
+      </section>
+
+      <section class="article-section" id="report">
+        <p class="section-label">07 — REPORT, DON'T WATCH</p>
+        <h2>端末を監視するのではなく、証拠をレポートさせる</h2>
+        <p>24時間動くエージェントを、24時間人が見張ることはできない。ターミナルに大量のログが流れている状態は、動いているようには見えるが、管理できている状態ではない。</p>
+        <p>必要なのは、進捗の実況ではなく、判断できる節目での報告である。Slackやモバイル通知は、長いログの転送先ではない。「終わった」「止まった」「決めてほしい」の三種類を知らせる場所にする。</p>
+        <div class="evidence-card">
+          <p class="evidence-card__label">TASK REPORT / MINIMUM CONTRACT</p>
+          <dl>
+            <div><dt>Outcome</dt><dd>何ができるようになったか</dd></div>
+            <div><dt>Change</dt><dd>どのファイル・設定・データを変えたか</dd></div>
+            <div><dt>Evidence</dt><dd>test結果、画面、計測値、再現手順</dd></div>
+            <div><dt>Risk</dt><dd>未確認、既知の副作用、rollback方法</dd></div>
+            <div><dt>Decision</dt><dd>人に決めてほしいこと。なければ明記</dd></div>
+          </dl>
+        </div>
+        <p>AIによるcode reviewも有効だが、生成したエージェントと同じ観点だけでは見落としが残る。別のエージェントに、security、test、UI、要件適合など役割を分けてレビューさせ、そのうえで人は顧客価値、取り返しのつかなさ、本番への適合を見る。</p>
+        <p>OpenAIの<a href="https://openai.com/index/harness-engineering/">harness engineering</a>で重要なのも、単にレビューをAIへ渡したことではない。ブラウザ、ログ、メトリクス、architecture ruleを、エージェント自身が読めて機械的に検査できる形へ変えたことだった。よいレポートは、文章の上手さではなく、戻れる証拠から作られる。</p>
+        <blockquote>
+          <p>コードの量が増えるほど、人間が読むべきものはコード全文ではなく、意図、差分、証拠、リスクになる。</p>
+        </blockquote>
+      </section>
+
+      <section class="article-section" id="practice">
+        <p class="section-label">08 — THREE LEVELS</p>
+        <h2>AIネイティブな環境は、三段階で作る</h2>
+        <p>最初からMac Studio、別サーバー、UPS、remote desktop、複数runnerを全部買う必要はない。運用していない機材は、能力ではなく保守対象になる。まず、今の仕事のどこが止まっているかを見る。</p>
+        <div class="maturity-grid">
+          <section><span>01</span><h3>手元を並列化する</h3><p>既存PCでCodexまたはClaude Codeを使い、一仕事一worktreeにする。完了条件とtask reportを定型化する。</p><small>得るもの：衝突しない委任</small></section>
+          <section><span>02</span><h3>母艦を常時稼働させる</h3><p>専用マシン、native Remote Control、Tailscale SSH、GUIの非常口、通知、backupを整える。</p><small>得るもの：場所と時間からの分離</small></section>
+          <section><span>03</span><h3>実行を外へ増やす</h3><p>Dev Containerとprebuildを整え、重いtaskをcloud／別runnerへ送る。権限、予算、observabilityをpolicyにする。</p><small>得るもの：安全なスケール</small></section>
+        </div>
+        <p>強いサーバーを買うべきタイミングは、エージェントが遅いと感じたときではない。メモリ不足で並列数を下げている、Docker buildが日常作業を止める、ノートPCのsleepで長時間タスクが切れる、移動のたびに環境と認証を作り直している。こうした具体的な待ち時間が見えたときである。</p>
+        <p>逆に、taskの切り方が曖昧で、同じファイルを全員が触り、testも完了条件もない状態では、マシンを強くすると失敗が速くなる。AIネイティブな開発の最初の投資は、GPUでもCPUでもなく、仕事の境界と検証可能性なのかもしれない。</p>
+      </section>
+
+      <section class="article-section" id="conclusion">
+        <p class="section-label">09 — CONCLUSION</p>
+        <h2>開発環境から、開発システムへ</h2>
+        <p>これまでの開発環境は、エンジニア一人の身体を拡張するものだった。よいキーボード、広いディスプレイ、速い補完、使い慣れたshell。すべては、目の前の一人が速く考え、速く書くためにあった。</p>
+        <p>AIエージェントが入ると、開発環境は小さな組織に近づく。誰に何を渡すか。どの情報を見せるか。作業場所をどう分けるか。いつ報告させるか。何を機械で検査し、何を人が承認するか。マシンのspecより、運用設計の差が大きくなる。</p>
+        <p>自分なら、中央に常時稼働の開発母艦を置く。携帯からはCodexやClaude CodeのRemote Controlで判断し、TailscaleとSSHで深く入り、GUIが必要なときだけRustDeskを開く。仕事はworktreeとDev Containerで分け、重い処理はcloudへ逃がす。Slack、Gmail、Calendar、Notion、GitHubの文脈は読めるようにする一方、書く権限は分ける。そして、すべての仕事をdiff、test、画面、リスクのレポートで閉じる。</p>
+        <blockquote>
+          <p>AIネイティブな開発環境は、最強の一台ではない。文脈が集まり、仕事は分かれ、証拠だけが戻ってくる構造である。</p>
+        </blockquote>
+        <p>ただし、中央に置いた一台が、いつまで個人の母艦であり続けられるのかはまだよくわからない。エージェントがさらに増えれば、母艦は物理的なPCではなく、複数の環境を束ねるcontrol planeへ変わるはずである。今作るべきなのは、その未来へ移れる小さな管制塔なのだと思う。</p>
+      </section>
+
+      <section class="article-section source-notes" id="sources">
+        <p class="section-label">SOURCES — CHECKED 2026.08.11</p>
+        <h2>参考にした海外の一次情報</h2>
+        <ul>
+          <li><a href="https://openai.com/index/introducing-the-codex-app/">OpenAI — Introducing the Codex app</a><span>複数エージェント、worktree、Automations</span></li>
+          <li><a href="https://openai.com/index/work-with-codex-from-anywhere/">OpenAI — Work with Codex from anywhere</a><span>モバイルからのremote control</span></li>
+          <li><a href="https://openai.com/index/harness-engineering/">OpenAI — Harness engineering</a><span>worktreeごとのapp、browser、logs、metrics</span></li>
+          <li><a href="https://www.anthropic.com/engineering/claude-code-best-practices">Anthropic — Claude Code: Best practices for agentic coding</a><span>並列sessionとGit worktree</span></li>
+          <li><a href="https://code.claude.com/docs/en/remote-control">Anthropic — Claude Code Remote Control</a><span>browser／mobileからlocal sessionを操作</span></li>
+          <li><a href="https://code.visualstudio.com/docs/devcontainers/containers">Visual Studio Code — Developing inside a Container</a><span>再現可能な開発環境とprebuild</span></li>
+          <li><a href="https://docs.warp.dev/code/ssh-feature-support">Warp — Feature Support over SSH</a><span>remote sessionで使える機能と制約</span></li>
+          <li><a href="https://tailscale.com/docs/reference/best-practices/security">Tailscale — Best practices to secure your tailnet</a><span>device approval、key、access policy</span></li>
+        </ul>
+      </section>
+
+      <footer class="article-end">
+        <div><span>Published</span><strong>2026.08.11</strong></div>
+        <a href="./">ノート一覧へ戻る →</a>
+      </footer>
+    </article>
+  </main>
+
+  <aside class="related-notes" aria-labelledby="related-title">
+    <div class="related-heading"><span>NEXT TO READ</span><h2 id="related-title">関連するノート</h2></div>
+    <div class="related-grid">
+      <a href="ai-native-document-server.html"><span>AI / Product</span><h3>AIネイティブなドキュメントサーバーがない問題</h3><p>AIが書き続けても、組織が壊れないための文書基盤を考える。</p></a>
+      <a href="software-industry-after-coding.html"><span>AI / Business</span><h3>ソフトウェア産業は結局どうなるのか</h3><p>コード生成が民主化した後、価値とリスクがどこへ移るかを考える。</p></a>
+      <a href="initial-members-contractors.html#interface"><span>Business</span><h3>仕事のインターフェース</h3><p>何を渡せば、何が返るか。仕事の境界をプログラムになぞらえて考える。</p></a>
+    </div>
+  </aside>
+
+  <footer class="site-footer">
+    <div><span>© 2026 Katsuya Ito</span><a href="../">Profile ↗</a></div>
+  </footer>
+</body>
+</html>

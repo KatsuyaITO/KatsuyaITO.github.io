@@ -7,7 +7,13 @@
 ```text
 scrapbox/
 ├── index.html    # ノート一覧、タグ、検索UI
-├── article.html  # 記事ページのサンプル
+├── initial-members-contractors.html # 初期メンバーと業務委託の記事
+├── ai-native-document-server.html # AIネイティブなドキュメントサーバーの記事
+├── software-industry-after-coding.html # コード生成後のソフトウェア産業の記事
+├── ai-native-development-environment.html # AIネイティブな開発環境の記事
+├── fundraising-and-good-company.html # 資金調達と100人の良い会社の記事
+├── foundation-model-valuation.html # 生成AIファウンデーションモデル企業の企業価値の記事
+├── hiring-a-french-engineer.html # フランス人エンジニアの採用と初期組織の記事
 ├── app.js        # 検索、タグ絞り込み、並び替え
 ├── styles.css    # 一覧・記事・レスポンシブ表示
 └── readme.md     # この説明書
@@ -33,7 +39,7 @@ http://127.0.0.1:8765/scrapbox/
 
 ## 新しい記事を追加する
 
-1. `article.html` を複製して、記事用のHTMLファイルを作ります。
+1. 既存の記事HTMLを複製して、記事用のHTMLファイルを作ります。
 2. `<title>`、説明文、見出し、本文、日付、タグを変更します。
 3. `index.html` の `.note-grid` 内に記事カードを追加します。
 
@@ -122,6 +128,5 @@ data-search-page="new-article.html"
 
 ## 現在の制約
 
-- サンプルとして完成している記事ページは `article.html` の1件です。
-- 残りのカードは一覧デザイン確認用の仮コンテンツです。
+- 完成している記事ページは `initial-members-contractors.html`、`ai-native-document-server.html`、`software-industry-after-coding.html`、`ai-native-development-environment.html`、`fundraising-and-good-company.html`、`foundation-model-valuation.html`、`hiring-a-french-engineer.html` の7件です。
 - 検索インデックスはブラウザで作るため、記事数が非常に多くなった場合はJSON形式の検索インデックスを事前生成する構成への移行を検討します。

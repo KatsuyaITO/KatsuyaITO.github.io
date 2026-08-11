@@ -31,6 +31,8 @@ Recently, I founded INDX, a company dedicated to organising and analysing unstru
 
 For more personal and informal insights, <a href="aboutme.html">here</a>.
 
+For public notes on AI, products, business, and mathematics, see [Katsuya Ito Notes](scrapbox/).
+
 ## Job Experience
 
 Start|End|Company name and Title
@@ -113,5 +115,4 @@ April 2017|March 2019|[University of Tokyo, Graduate School of Economics](http:/
 - [Facebook - Katsuya Ito](https://www.facebook.com/ito8080)
 - [Note - Katsuya Ito](https://note.com/k1ito/)
 - [Scrapbox - Katsuya Ito](https://scrapbox.io/k1ito/)
-
 

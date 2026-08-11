@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="世界人口、普及率、シェア、一人当たり売上、利益率、PER。同じ掛け算から、生成AIのファウンデーションモデル企業の企業価値を逆算する思考実験。">
+  <title>結局、生成AIのファウンデーションモデル企業の企業価値はいくらなのか — Katsuya Ito Notes</title>
+  <link rel="stylesheet" href="styles.css?v=20260811-8">
+</head>
+<body class="article-page">
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Katsuya Ito Notes トップ">
+      <span class="brand-mark" aria-hidden="true">KI</span>
+      <span class="brand-copy"><strong>Katsuya Ito</strong><small>Notes / 007</small></span>
+    </a>
+    <nav class="primary-nav" aria-label="メインナビゲーション">
+      <a class="is-active" href="./">Notes</a>
+      <a href="../index.html">About</a>
+      <a href="https://indx.jp/">INDX ↗</a>
+    </nav>
+  </header>
+
+  <main class="article-shell">
+    <aside class="article-rail">
+      <a class="back-link" href="./">← All notes</a>
+      <nav class="toc" aria-label="目次">
+        <span>ON THIS PAGE</span>
+        <a href="#news">踊る調達額</a>
+        <a href="#formula">一つの掛け算</a>
+        <a href="#calibration">既存企業で試す</a>
+        <a href="#current">現在地を逆算する</a>
+        <a href="#scenario">三つのシナリオ</a>
+        <a href="#limits">この式が外すもの</a>
+      </nav>
+    </aside>
+
+    <article class="article-content">
+      <header class="article-hero">
+        <div class="article-meta"><span>AI / Business</span><time datetime="2026-08-11">2026.08.11</time><i>6 min read</i></div>
+        <h1>結局、生成AIの<br><em>ファウンデーションモデル企業の企業価値はいくらなのか</em></h1>
+        <p class="lead">OpenAIやAnthropicの調達額を見ると、数字が踊っているように見える。そこで、人口、普及率、一人当たり売上、シェア、利益率、PERだけで、一度ものすごく雑に計算してみる。</p>
+        <div class="hero-diagram" aria-label="人口から企業価値までを計算する式">
+          <div><small>MARKET</small><strong>人口 × 普及率</strong><span>何人が使うか</span></div>
+          <b>×</b>
+          <div><small>REVENUE</small><strong>単価 × シェア</strong><span>誰がいくら払うか</span></div>
+          <b>×</b>
+          <div><small>VALUE</small><strong>利益率 × PER</strong><span>利益を何年分で買うか</span></div>
+        </div>
+      </header>
+
+      <section class="article-section" id="news">
+        <p class="section-label">01 — THE NUMBERS DANCE</p>
+        <h2>調達額が踊っているように見える</h2>
+        <p><a href="https://openai.com/index/accelerating-the-next-phase-ai/">OpenAIは2026年3月、1,220億ドルを調達し、ポストマネー評価額は8,520億ドルになった</a>。1ドル150円で置けば、調達額は約18.3兆円、企業価値は約127.8兆円である。<a href="https://www.anthropic.com/news/series-h">Anthropicは同年5月に650億ドルを調達し、評価額は9,650億ドル</a>。こちらは約144.8兆円になる。</p>
+        <p>ニュースを読んでも、なぜ8,520億ドルで、なぜ9,650億ドルなのかはよくわからない。そこで、将来どれだけの人が使い、一人からいくら売上が立つのかを置き、人口から企業価値を逆算してみる。</p>
+        <blockquote>
+          <p>企業価値は、これまでいくら使ったかではない。将来いくら稼げると考えるかである。だとすれば、人口から逆算できるのではないか。</p>
+        </blockquote>
+        <p>精密な予測ではない。数字が一桁違う理由を考えるためのフェルミ推定である。</p>
+      </section>
+
+      <section class="article-section" id="formula">
+        <p class="section-label">02 — THE FORMULA</p>
+        <h2>企業価値を、一つの掛け算へほどく</h2>
+        <p>まず一社の企業価値を、世界人口から一続きの掛け算で置く。</p>
+        <div class="code-window" role="figure" aria-label="市場規模と企業価値の計算式">
+          <div class="code-bar"><i></i><i></i><i></i><span>valuation.txt</span></div>
+          <pre><code><b>一社の企業価値</b>
+= 世界人口 × 対象地域比率 × ネット普及率
+× サービス普及率 × その会社のシェア
+× 一人当たり年間売上 × 定常純利益率 × PER</code></pre>
+        </div>
+        <p>ここでいう「一人当たり売上」は、利用者が直接払うサブスクリプションだけではない。広告主、勤務先、APIを組み込むソフトウェア会社が払うお金も、その利用者へ割り戻したブレンデッドARPUである。</p>
+        <div class="note-callout"><span>NOTE</span><p>以下の企業価値は、借入と現金の差、株式報酬、税率差を無視した概算時価総額である。「だいたい何桁か」を見るための式で、買収価格や投資判断にそのまま使えるものではない。</p></div>
+      </section>
+
+      <section class="article-section" id="calibration">
+        <p class="section-label">03 — CALIBRATION</p>
+        <h2>通信、広告、動画、音楽で試してみる</h2>
+        <p>この式が生成AIだけに都合のよいものになっていないか、既存企業でも試してみる。</p>
+        <div class="service-matrix valuation-matrix" role="region" aria-label="既存企業の企業価値を世界人口から因数分解した表" tabindex="0">
+          <table>
+            <thead><tr><th>企業・産業</th><th>企業価値の因数分解</th><th>推定企業価値</th><th>実際の企業価値</th></tr></thead>
+            <tbody>
+              <tr>
+                <th>Verizon<br><small>通信回線</small></th>
+                <td><div class="equation"><span><small>世界人口</small>82億人</span><b>×</b><span><small>米国人口比</small>4%</span><b>×</b><span><small>回線普及率</small>100%</span><b>×</b><span><small>企業シェア</small>45%</span><b>×</b><span><small>年ARPU</small>$900</span><b>×</b><span><small>純利益率</small>13%</span><b>×</b><span><small>PER</small>11倍</span></div></td>
+                <td class="estimated-value"><strong>$1,900億</strong><small>フェルミ推定</small></td>
+                <td class="actual-value"><strong>$1,962億</strong><small>2026.08.11 時価総額</small></td>
+              </tr>
+              <tr>
+                <th>Meta<br><small>広告</small></th>
+                <td><div class="equation"><span><small>世界人口</small>82億人</span><b>×</b><span><small>ネット普及率</small>74%</span><b>×</b><span><small>SNS普及率</small>75%</span><b>×</b><span><small>企業シェア</small>80%</span><b>×</b><span><small>年ARPU</small>$55</span><b>×</b><span><small>純利益率</small>30%</span><b>×</b><span><small>PER</small>25倍</span></div></td>
+                <td class="estimated-value"><strong>$1.50兆</strong><small>フェルミ推定</small></td>
+                <td class="actual-value"><strong>$1.53兆</strong><small>2026.08.11 時価総額</small></td>
+              </tr>
+              <tr>
+                <th>Netflix<br><small>動画</small></th>
+                <td><div class="equation"><span><small>世界人口</small>82億人</span><b>×</b><span><small>世帯換算</small>1 / 3</span><b>×</b><span><small>ネット普及率</small>74%</span><b>×</b><span><small>有料動画普及率</small>40%</span><b>×</b><span><small>企業シェア</small>40%</span><b>×</b><span><small>年ARPU</small>$140</span><b>×</b><span><small>純利益率</small>24%</span><b>×</b><span><small>PER</small>25倍</span></div></td>
+                <td class="estimated-value"><strong>$2,718億</strong><small>フェルミ推定</small></td>
+                <td class="actual-value"><strong>$3,251億</strong><small>2026.08.11 時価総額</small></td>
+              </tr>
+              <tr>
+                <th>Spotify<br><small>音楽</small></th>
+                <td><div class="equation"><span><small>世界人口</small>82億人</span><b>×</b><span><small>ネット普及率</small>74%</span><b>×</b><span><small>音楽配信普及率</small>30%</span><b>×</b><span><small>企業シェア</small>40%</span><b>×</b><span><small>年ARPU</small>$26</span><b>×</b><span><small>純利益率</small>15%</span><b>×</b><span><small>PER</small>30倍</span></div></td>
+                <td class="estimated-value"><strong>$852億</strong><small>フェルミ推定</small></td>
+                <td class="actual-value"><strong>$1,019億</strong><small>2026.08.11 時価総額</small></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>粗い仮定だけでも、実際の時価総額に近い桁まで来た。正確に当てることより、企業価値を「何人に届くか」「一人からいくら売上が立つか」「そのうちいくら利益が残るか」に分けられることが重要である。この分け方を、そのまま生成AIにも使ってみる。</p>
+      </section>
+
+      <section class="article-section" id="current">
+        <p class="section-label">04 — REVERSE THE VALUATION</p>
+        <h2>今の評価額は、将来売上をいくら要求しているか</h2>
+        <p>生成AIへ戻る。<a href="https://www.itu.int/en/mediacentre/Pages/PR-2025-11-17-Facts-and-Figures.aspx">ITUによれば、2025年にインターネットを使う人は世界で60億人</a>いる。この60億人を、生成AIが触れられる人口の上限と置く。</p>
+        <div class="service-matrix valuation-matrix ai-valuation-matrix" role="region" aria-label="OpenAIとAnthropicの企業価値を因数分解した表" tabindex="0">
+          <table>
+            <thead><tr><th>会社</th><th>企業価値の因数分解</th><th>推定企業価値</th><th>実際の評価額</th></tr></thead>
+            <tbody>
+              <tr>
+                <th>OpenAI</th>
+                <td><div class="equation"><span><small>世界人口</small>82億人</span><b>×</b><span><small>ネット普及率</small>74%</span><b>×</b><span><small>AI普及率</small>50%</span><b>×</b><span><small>企業シェア</small>40%</span><b>×</b><span><small>年ARPU</small>$180</span><b>×</b><span><small>純利益率</small>25%</span><b>×</b><span><small>PER</small>25倍</span></div></td>
+                <td class="estimated-value"><strong>$1.37兆</strong><small>フェルミ推定</small></td>
+                <td class="actual-value"><strong>$8,520億</strong><small>2026.03 ポストマネー</small></td>
+              </tr>
+              <tr>
+                <th>Anthropic</th>
+                <td><div class="equation"><span><small>世界人口</small>82億人</span><b>×</b><span><small>ネット普及率</small>74%</span><b>×</b><span><small>AI普及率</small>50%</span><b>×</b><span><small>企業シェア</small>25%</span><b>×</b><span><small>年ARPU</small>$180</span><b>×</b><span><small>純利益率</small>25%</span><b>×</b><span><small>PER</small>25倍</span></div></td>
+                <td class="estimated-value"><strong>$8,533億</strong><small>フェルミ推定</small></td>
+                <td class="actual-value"><strong>$9,650億</strong><small>2026.05 ポストマネー</small></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>OpenAIとAnthropicも同じ式である。世界人口82億人にネット普及率74%、AI普及率50%を掛け、その市場をOpenAIが40%、Anthropicが25%取ると置いた。一人当たり年間180ドル、純利益率25%、PER25倍まで同じにすると、推定企業価値はOpenAIが1.37兆ドル、Anthropicが8,533億ドルになる。</p>
+        <p>逆に実際の評価額から計算すると、必要な年ARPUはOpenAIが約112ドル、Anthropicが約204ドルになる。つまり評価額は、「このシェアなら、一人からこれだけ売上を作る」という前提でもある。</p>
+        <blockquote>
+          <p>評価額は予言ではなく、必要条件である。「8,520億ドルは高いか」より、「何人が使い、何割を取り、一人からいくら売上を作る必要があるか」と聞く方が具体的になる。</p>
+        </blockquote>
+      </section>
+
+      <section class="article-section" id="scenario">
+        <p class="section-label">05 — THREE SCENARIOS</p>
+        <h2>生成AI全体は、4,370億ドルにも22.9兆ドルにもなる</h2>
+        <p>世界人口82億人にネット普及率74%を掛け、そこからAI普及率と一人当たり年間売上を変えてみる。年間売上は、個人課金だけでなく企業契約、API、広告など、ファウンデーションモデル層が受け取る金額の合計を利用者へ割ったものとする。</p>
+        <div class="maturity-grid">
+          <section><span>CONSERVATIVE</span><h3>薄く広がる</h3><p>82億人 × 74% × 30% × 年60ドル</p><small>純利益率20% × PER20倍<br>企業価値合計 約4,370億ドル</small></section>
+          <section><span>BASE CASE</span><h3>仕事の標準道具になる</h3><p>82億人 × 74% × 50% × 年180ドル</p><small>純利益率25% × PER25倍<br>企業価値合計 約3.41兆ドル</small></section>
+          <section><span>STRESS TEST</span><h3>知的労働のインフラになる</h3><p>82億人 × 74% × 70% × 年600ドル</p><small>純利益率30% × PER30倍<br>企業価値合計 約22.94兆ドル</small></section>
+        </div>
+        <p>これは予測ではなく、前提を変えたときに企業価値がどれだけ動くかを見るための幅である。普及率、単価、利益率が同時に上がると、結果はすぐに一桁変わる。</p>
+      </section>
+
+      <section class="article-section" id="limits">
+        <p class="section-label">06 — WHERE THE FORMULA BREAKS</p>
+        <h2>人口の式で見えるもの、消えてしまうもの</h2>
+        <p>この計算で一番大きいのは、人口そのものより、一人当たり売上と利益率の置き方である。AIエージェントが人の代わりに何度もAPIを使うなら、「一人当たり」という分母自体が合わなくなるかもしれない。</p>
+        <p>逆に、モデルがコモディティ化し、価値をアプリケーションや半導体が取るなら、ファウンデーションモデル企業の取り分は小さくなる。</p>
+        <blockquote>
+          <p>結局、OpenAIが1.37兆ドル、Anthropicが8,533億ドルという数字そのものが答えではない。答えは、どの前提ならその数字になり、どの前提が崩れたら一桁変わるかを説明できることである。</p>
+        </blockquote>
+      </section>
+
+      <footer class="article-end">
+        <div><span>Published</span><strong>2026.08.11</strong></div>
+        <a href="./">ノート一覧へ戻る →</a>
+      </footer>
+    </article>
+  </main>
+
+  <aside class="related-notes" aria-labelledby="related-title">
+    <div class="related-heading"><span>NEXT TO READ</span><h2 id="related-title">関連するノート</h2></div>
+    <div class="related-grid">
+      <a href="fundraising-and-good-company.html"><span>Business</span><h3>資金調達とは何か</h3><p>売上、借入、株式。未来の何を約束して、今のお金へ変えるのか。</p></a>
+      <a href="software-industry-after-coding.html"><span>AI / Business</span><h3>ソフトウェア産業は結局どうなるのか</h3><p>作るコストが下がった後、ボトルネックと価値はどこへ移るのか。</p></a>
+      <a href="ai-native-development-environment.html"><span>AI / Product</span><h3>エディタと管制塔</h3><p>AIエージェントの実行環境、文脈、報告をどう設計するか。</p></a>
+    </div>
+  </aside>
+
+  <footer class="site-footer">
+    <div><span>© 2026 Katsuya Ito</span><a href="../">Profile ↗</a></div>
+  </footer>
+</body>
+</html>
