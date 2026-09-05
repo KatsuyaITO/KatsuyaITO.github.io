@@ -14,6 +14,7 @@ scrapbox/
 ├── fundraising-and-good-company.html # 資金調達と100人の良い会社の記事
 ├── foundation-model-valuation.html # 生成AIファウンデーションモデル企業の企業価値の記事
 ├── hiring-a-french-engineer.html # フランス人エンジニアの採用と初期組織の記事
+├── ultra-soul-new-business.html # 大企業の新規事業をB'zの例えで解く記事
 ├── app.js        # 検索、タグ絞り込み、並び替え
 ├── styles.css    # 一覧・記事・レスポンシブ表示
 └── readme.md     # この説明書
@@ -128,5 +129,5 @@ data-search-page="new-article.html"
 
 ## 現在の制約
 
-- 完成している記事ページは `initial-members-contractors.html`、`ai-native-document-server.html`、`software-industry-after-coding.html`、`ai-native-development-environment.html`、`fundraising-and-good-company.html`、`foundation-model-valuation.html`、`hiring-a-french-engineer.html` の7件です。
+- 完成している記事ページは `initial-members-contractors.html`、`ai-native-document-server.html`、`software-industry-after-coding.html`、`ai-native-development-environment.html`、`fundraising-and-good-company.html`、`foundation-model-valuation.html`、`hiring-a-french-engineer.html`、`ultra-soul-new-business.html` の8件です。
 - 検索インデックスはブラウザで作るため、記事数が非常に多くなった場合はJSON形式の検索インデックスを事前生成する構成への移行を検討します。
