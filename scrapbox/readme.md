@@ -17,6 +17,9 @@ scrapbox/
 ├── ultra-soul-new-business.html # 大企業の新規事業をB'zの例えで解く記事
 ├── app.js        # 検索、タグ絞り込み、並び替え
 ├── styles.css    # 一覧・記事・レスポンシブ表示
+├── og/           # SNS共有用のOG画像（1200x630 PNG、記事ごとに1枚）
+├── tools/
+│   └── og-image.py # OG画像を記事HTMLから生成するスクリプト
 └── readme.md     # この説明書
 ```
 
@@ -43,6 +46,8 @@ http://127.0.0.1:8765/scrapbox/
 1. 既存の記事HTMLを複製して、記事用のHTMLファイルを作ります。
 2. `<title>`、説明文、見出し、本文、日付、タグを変更します。
 3. `index.html` の `.note-grid` 内に記事カードを追加します。
+4. OG画像を生成します（`python3 tools/og-image.py new-article.html`）。
+5. `<head>` のOG・Twitter Cardメタタグを新しい記事の内容に合わせます。
 
 記事カードの例です。
 
@@ -69,6 +74,31 @@ http://127.0.0.1:8765/scrapbox/
 ```
 
 `data-tags` には、半角スペース区切りで複数のタグを指定できます。
+
+## OG・Twitter Cardメタデータ
+
+SlackやXでURLを貼ったときのリンクプレビューを、全ページの `<head>` で指定しています。
+
+- `og:type` / `og:title` / `og:description` / `og:url` / `og:site_name` / `og:locale`
+- `og:image` と `og:image:width` `og:image:height`（1200x630）、`og:image:alt`
+- `twitter:card`（`summary_large_image`）と `twitter:title` / `twitter:description` / `twitter:image`
+- `link rel="canonical"`、`article:published_time`、`article:tag`
+- JSON-LD構造化データ（一覧は `Blog`、記事は `BlogPosting`）
+
+URLは `https://katsuyaito.github.io/scrapbox/` 起点の絶対URLで書きます。SlackとXは相対URLを解決しないため、ここを相対パスにするとプレビュー画像が出ません。
+
+### OG画像を生成する
+
+画像は記事HTMLの `<h1>`、タグ、日付、ノート番号を読み取って生成します。
+
+```bash
+python3 tools/og-image.py                    # 全記事を再生成
+python3 tools/og-image.py new-article.html   # 1記事だけ生成
+```
+
+レンダリングにはインストール済みのGoogle Chromeをヘッドレスで使います。出力先は `og/<記事のファイル名>.png` です。
+
+記事のタイトルを変更したときは、画像も再生成します。SlackとXはプレビューをキャッシュするため、公開後に画像を差し替えた場合は反映まで時間がかかります。
 
 ## 全文検索の仕組み
 
@@ -129,5 +159,6 @@ data-search-page="new-article.html"
 
 ## 現在の制約
 
+- SNSプレビューの投稿者表示（`twitter:site` / `twitter:creator`）は、アカウントを指定していないため未設定です。
 - 完成している記事ページは `initial-members-contractors.html`、`ai-native-document-server.html`、`software-industry-after-coding.html`、`ai-native-development-environment.html`、`fundraising-and-good-company.html`、`foundation-model-valuation.html`、`hiring-a-french-engineer.html`、`ultra-soul-new-business.html` の8件です。
 - 検索インデックスはブラウザで作るため、記事数が非常に多くなった場合はJSON形式の検索インデックスを事前生成する構成への移行を検討します。
