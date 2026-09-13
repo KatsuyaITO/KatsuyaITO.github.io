@@ -15,6 +15,9 @@ scrapbox/
 ├── foundation-model-valuation.html # 生成AIファウンデーションモデル企業の企業価値の記事
 ├── hiring-a-french-engineer.html # フランス人エンジニアの採用と初期組織の記事
 ├── ultra-soul-new-business.html # 大企業の新規事業をB'zの例えで解く記事
+├── etale-cohomology-in-lean4.html # Lean 4でエタール・コホモロジーを定義するチュートリアル記事
+├── lean/
+│   └── Etale.lean # 上記記事の全Leanコード（Mathlib不使用、Lean 4.33.1で型検査済み）
 ├── app.js        # 検索、タグ絞り込み、並び替え
 ├── styles.css    # 一覧・記事・レスポンシブ表示
 ├── og/           # SNS共有用のOG画像（1200x630 PNG、記事ごとに1枚）
@@ -157,8 +160,12 @@ data-search-page="new-article.html"
 - 画像、引用、文章を公開する権利があるか
 - 事実と個人的な仮説が区別されているか
 
+## 数式とLeanコードを含む記事
+
+`etale-cohomology-in-lean4.html` は数式の表示に KaTeX（jsDelivr CDN）を読み込みます。CDNに接続できない環境では数式が TeX ソースのまま表示されますが、本文は読めます。記事内のLeanコードは `lean/Etale.lean` から `-- §§ 名前` の区切りで抜き出して埋め込んだものです。コードを直したときは `lean/Etale.lean` を更新し、記事側も同じ内容に揃えます。
+
 ## 現在の制約
 
 - SNSプレビューの投稿者表示（`twitter:site` / `twitter:creator`）は、アカウントを指定していないため未設定です。
-- 完成している記事ページは `initial-members-contractors.html`、`ai-native-document-server.html`、`software-industry-after-coding.html`、`ai-native-development-environment.html`、`fundraising-and-good-company.html`、`foundation-model-valuation.html`、`hiring-a-french-engineer.html`、`ultra-soul-new-business.html` の8件です。
+- 完成している記事ページは `initial-members-contractors.html`、`ai-native-document-server.html`、`software-industry-after-coding.html`、`ai-native-development-environment.html`、`fundraising-and-good-company.html`、`foundation-model-valuation.html`、`hiring-a-french-engineer.html`、`ultra-soul-new-business.html`、`etale-cohomology-in-lean4.html` の9件です。
 - 検索インデックスはブラウザで作るため、記事数が非常に多くなった場合はJSON形式の検索インデックスを事前生成する構成への移行を検討します。
