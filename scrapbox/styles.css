@@ -547,3 +547,42 @@ blockquote p { margin: 0; font-size: 16px; font-weight: 650; line-height: 1.8; }
   .home-page .card-body, .home-page .note-card--featured .card-body { min-height: 143px; padding: 12px; }
   .home-page .card-body h2, .home-page .note-card--featured h2 { font-size: 14px; }
 }
+
+/* Lean tutorial (etale-cohomology-in-lean4) */
+.article-section h3 { margin: 44px 0 16px; font-size: 17px; line-height: 1.55; letter-spacing: -.01em; }
+.article-section h3::before { content: "§ "; color: var(--blue); font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.math-block { margin: 22px 0 !important; padding: 18px 20px; overflow-x: auto; background: #f4f7f8; border-left: 3px solid #cfd8de; font-size: 15px !important; line-height: 1.6 !important; }
+.math-block .katex-display { margin: 0; }
+.article-section > p .katex { font-size: 1.02em; }
+.table-wrap { margin: 30px 0; overflow-x: auto; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.table-wrap table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 12.5px; line-height: 1.65; }
+.table-wrap th, .table-wrap td { padding: 13px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+.table-wrap thead th { color: var(--muted); font: 700 8px/1.4 ui-monospace, monospace; letter-spacing: .1em; text-transform: uppercase; }
+.table-wrap tbody td { color: #3d4850; }
+.table-wrap tr:last-child td { border-bottom: 0; }
+.table-wrap code { white-space: nowrap; }
+.badge { display: inline-block; padding: 3px 7px; vertical-align: middle; border-radius: 2px; font: 700 8px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase; }
+.badge--ex { color: #4b5563; background: #e5e9ee; }
+.badge--thm { color: #fff; background: var(--blue); }
+.badge--todo { color: #6b4a00; background: var(--yellow); }
+.badge--mathlib { color: #fff; background: #0d2936; }
+.badge--ours { color: var(--ink); background: var(--aqua); }
+.code-window .code-bar .badge { margin-left: auto; }
+.code-window .code-bar .badge + span { margin-left: 8px; }
+.code-window pre { font-size: 11.5px; line-height: 1.75; tab-size: 2; }
+.code-window pre .cm { color: #8fa3b0; }
+.code-window pre .sry { color: #ff7e76; font-weight: 700; }
+.code-window pre .kw { color: var(--aqua); font-weight: 700; }
+.code-window pre .doc { color: #c8d7a5; }
+.code-window + p, .table-wrap + p, .math-block + p { margin-top: 22px; }
+.article-section .code-window { margin: 26px 0; }
+.sources { margin-top: 30px !important; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted) !important; font-family: inherit !important; font-size: 12px !important; line-height: 1.8 !important; }
+.sources a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.article-end strong { font-size: 10px; }
+@media (max-width: 760px) { .math-block { font-size: 13px !important; padding: 14px; } .code-window pre { font-size: 11px; padding: 18px; } }
+.article-page .article-hero { margin-bottom: 64px; }
+.article-end strong a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.thumb--etale { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 18px; background: #0d2936; }
+.thumb--etale span { color: var(--aqua); white-space: nowrap; font: 700 26px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: -.04em; }
+.thumb--etale span sub { font-size: 14px; }
+.thumb--etale small { color: #8fa3b0; font: 600 8px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .1em; text-align: center; }

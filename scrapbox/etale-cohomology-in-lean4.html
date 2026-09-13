@@ -1,0 +1,1798 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Lean 4を知らない数学者向けに、可換環・スキーム・サイト・エタール射・導来関手を一段ずつ形式化しながら進み、最後にエタール・コホモロジーHⁿ(X_ét, F)をMathlibの上でセルフコンテインドに定義する。主定理（比較定理、固有基底変換、ポアンカレ双対、Lefschetz跡公式、Weil予想）も数式で整理する。">
+  <title>Lean 4でエタール・コホモロジーをセルフコンテインドに理解する。環・スキーム・層・導来関手。 — Katsuya Ito Notes</title>
+  <link rel="canonical" href="https://katsuyaito.github.io/scrapbox/etale-cohomology-in-lean4.html">
+  <meta name="author" content="Katsuya Ito">
+  <meta name="theme-color" content="#101820">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Katsuya Ito Notes">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:url" content="https://katsuyaito.github.io/scrapbox/etale-cohomology-in-lean4.html">
+  <meta property="og:title" content="Lean 4でエタール・コホモロジーをセルフコンテインドに理解する。環・スキーム・層・導来関手。">
+  <meta property="og:description" content="Lean 4を知らない数学者向けに、可換環・スキーム・サイト・エタール射・導来関手を一段ずつ形式化しながら進み、最後にエタール・コホモロジーHⁿ(X_ét, F)をMathlibの上で定義する。主定理も数式で整理する。">
+  <meta property="og:image" content="https://katsuyaito.github.io/scrapbox/og/etale-cohomology-in-lean4.png">
+  <meta property="og:image:secure_url" content="https://katsuyaito.github.io/scrapbox/og/etale-cohomology-in-lean4.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Lean 4でエタール・コホモロジーをセルフコンテインドに理解する。環・スキーム・層・導来関手。 — Katsuya Ito Notes">
+  <meta property="article:published_time" content="2026-09-13T09:00:00+09:00">
+  <meta property="article:author" content="Katsuya Ito">
+  <meta property="article:tag" content="Math">
+  <meta property="article:tag" content="Lean">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lean 4でエタール・コホモロジーをセルフコンテインドに理解する。環・スキーム・層・導来関手。">
+  <meta name="twitter:description" content="Lean 4を知らない数学者向けに、可換環・スキーム・サイト・エタール射・導来関手を一段ずつ形式化しながら進み、最後にエタール・コホモロジーHⁿ(X_ét, F)をMathlibの上で定義する。主定理も数式で整理する。">
+  <meta name="twitter:image" content="https://katsuyaito.github.io/scrapbox/og/etale-cohomology-in-lean4.png">
+  <meta name="twitter:image:alt" content="Lean 4でエタール・コホモロジーをセルフコンテインドに理解する。環・スキーム・層・導来関手。 — Katsuya Ito Notes">
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BlogPosting","headline":"Lean 4でエタール・コホモロジーをセルフコンテインドに理解する。環・スキーム・層・導来関手。","description":"Lean 4を知らない数学者向けに、可換環・スキーム・サイト・エタール射・導来関手を一段ずつ形式化しながら進み、最後にエタール・コホモロジーHⁿ(X_ét, F)をMathlibの上で定義する。主定理も数式で整理する。","image":"https://katsuyaito.github.io/scrapbox/og/etale-cohomology-in-lean4.png","datePublished":"2026-09-13T09:00:00+09:00","dateModified":"2026-09-13T09:00:00+09:00","inLanguage":"ja","keywords":["Math","Lean"],"mainEntityOfPage":{"@type":"WebPage","@id":"https://katsuyaito.github.io/scrapbox/etale-cohomology-in-lean4.html"},"author":{"@type":"Person","name":"Katsuya Ito","url":"https://indx.jp/"},"publisher":{"@type":"Person","name":"Katsuya Ito"},"isPartOf":{"@type":"Blog","name":"Katsuya Ito Notes","url":"https://katsuyaito.github.io/scrapbox/"}}
+  </script>
+  <link rel="stylesheet" href="styles.css?v=20260913-1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],ignoredTags:['script','noscript','style','textarea','pre','code'],throwOnError:false});"></script>
+</head>
+<body class="article-page">
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Katsuya Ito Notes トップ">
+      <span class="brand-mark" aria-hidden="true">KI</span>
+      <span class="brand-copy"><strong>Katsuya Ito</strong><small>Notes / 009</small></span>
+    </a>
+    <nav class="primary-nav" aria-label="メインナビゲーション">
+      <a class="is-active" href="./">Notes</a>
+      <a href="../index.html">About</a>
+      <a href="https://indx.jp/">INDX ↗</a>
+    </nav>
+  </header>
+
+  <main class="article-shell">
+    <aside class="article-rail">
+      <a class="back-link" href="./">← All notes</a>
+      <nav class="toc" aria-label="目次">
+        <span>ゴール</span>
+        <a href="#goal">00 先に結論のコードを置く</a>
+        <a href="#lean">01 Lean 4の基礎文法</a>
+        <span>可換環からスキームへ</span>
+        <a href="#rings">02 可換環</a>
+        <a href="#homs">03 環準同型</a>
+        <a href="#ideals">04 イデアル・素イデアル・局所環</a>
+        <a href="#spec">05 Spec とザリスキ位相</a>
+        <a href="#localization">06 局所化</a>
+        <a href="#sheaves">07 前層と層</a>
+        <a href="#stalks">08 茎</a>
+        <a href="#structure-sheaf">09 環の層と構造層</a>
+        <a href="#lrs">10 局所環付き空間</a>
+        <a href="#schemes">11 スキーム</a>
+        <span>位相を差し替える</span>
+        <a href="#sites">12 圏・篩・グロタンディーク位相</a>
+        <a href="#site-sheaves">13 サイト上の層</a>
+        <a href="#etale-alg">14 エタール代数</a>
+        <a href="#etale-mor">15 エタール射とエタールサイト</a>
+        <span>コホモロジー</span>
+        <a href="#abelian">16 アーベル層・完全列・入射的対象</a>
+        <a href="#cohomology">17 複体のコホモロジー</a>
+        <a href="#definition">18 エタール・コホモロジーの定義</a>
+        <a href="#coefficients">19 係数層と Kummer 列</a>
+        <span>主定理</span>
+        <a href="#theorems">20 比較・基底変換・双対・Weil</a>
+        <a href="#gap">21 Mathlib にあるもの、ないもの</a>
+        <a href="#postscript">22 蛇足</a>
+      </nav>
+    </aside>
+
+    <article class="article-content">
+      <header class="article-hero">
+        <div class="article-meta"><span>Math / Lean</span><time datetime="2026-09-13">2026.09.13</time><i>90 min read</i></div>
+        <h1>Lean 4でエタール・コホモロジーを<br>セルフコンテインドに理解する。<br><em>環・スキーム・層・導来関手。</em></h1>
+        <p class="lead">エタール・コホモロジーは、勉強しようとすると前提が多すぎて途中で挫折しやすい。可換環、スキーム、層、グロタンディーク位相、エタール射、導来関手。どれも一冊ずつ本がある。<strong>このノートでは、その全部をLean 4の型として一つずつ書き下す</strong>ことで、何がどれに依存しているかを機械に確認させながら進む。読者として想定しているのは、数学は知っているがLeanは触ったことがない人である。最後に、Mathlibの上で \(H^n(X_{\mathrm{ét}}, \mathcal F)\) が定義できたところで終わる。</p>
+        <blockquote>
+          <p>証明支援系の良いところは、「わかった気になる」ことができない点である。定義が一つ抜けていれば、次の行が型検査を通らない。</p>
+        </blockquote>
+      </header>
+
+      <section class="article-section" id="goal">
+        <p class="section-label">00 — GOAL</p>
+        <h2>先に結論のコードを置く</h2>
+        <p>このノートは長い。だから到達地点を先に見せる。最後の章で、エタール・コホモロジーはこう定義される。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 最終章</span></div>
+          <pre><code><span class="doc">/-- 定理（十分な入射的対象の存在）: すべてのアーベル層は入射的分解を持つ。 -/</span>
+<span class="kw">theorem</span> exists_injectiveResolution {X : Scheme} (F : AbSheaf (etaleSite X)) :
+    Nonempty (InjectiveResolution F) := <span class="sry">sorry</span>
+
+<span class="doc">/-- **エタール・コホモロジー** `Hⁿ(X_ét, F)`。</span>
+<span class="doc">入射的分解 `F → I•` を一つ選び、大域切断の複体 `Γ(X, I•)` の `n` 次コホモロジーを取る。 -/</span>
+<span class="kw">noncomputable</span> def etaleCohomology (X : Scheme) (F : AbSheaf (etaleSite X)) (n : Nat) : Type :=
+  (globalSections (Classical.choice (exists_injectiveResolution F))).H n</code></pre>
+        </div>
+
+        <p>数式で書けば、グロタンディークの定義そのものである。アーベル層 \(\mathcal F\) の入射的分解 \(0 \to \mathcal F \to \mathcal I^0 \to \mathcal I^1 \to \cdots\) を取り、大域切断を取ってから複体のコホモロジーを取る。</p>
+        <p class="math-block">\[ H^n(X_{\mathrm{ét}}, \mathcal F) \;:=\; H^n\bigl(\Gamma(X, \mathcal I^{\bullet})\bigr) \;=\; \frac{\ker\bigl(\Gamma(X,\mathcal I^n) \to \Gamma(X,\mathcal I^{n+1})\bigr)}{\operatorname{im}\bigl(\Gamma(X,\mathcal I^{n-1}) \to \Gamma(X,\mathcal I^{n})\bigr)}. \]</p>
+        <p>たった数行である。一方で、この数行が型検査を通るためには、その手前で <code>Scheme</code>、<code>etaleSite</code>、<code>AbSheaf</code>、<code>InjectiveResolution</code>、<code>Cocomplex.H</code> がすべて定義されていなければならない。しかもそれぞれが、さらに手前の <code>CommRing</code>、<code>Ideal</code>、<code>PrimeSpectrum</code>、<code>Sheaf</code>、<code>Sieve</code> に依存している。<strong>このノートの残りは、その依存の鎖を一番下の「可換環」から順に、一つずつ自分の手で書いていく作業である。</strong></p>
+
+        <h3>方針: Mathlibを使わない</h3>
+        <p>Lean 4には Mathlib という巨大な数学ライブラリがあり、実はスキームもエタール射もその上の層コホモロジーも、すでに定義されている（最後の章で対応表を付ける）。しかし、このノートでは <strong>Mathlib を一行も <code>import</code> しない</strong>。使うのは Lean 4 本体に入っている <code>Type</code>、<code>Prop</code>、<code>Nat</code>、<code>Int</code>、<code>Fin</code>、<code>List</code>、<code>Quot</code> だけである。理由は二つある。</p>
+        <ol class="rule-list">
+          <li><div><strong>依存を隠さないため</strong><p>ライブラリの <code>Scheme</code> を呼んだ瞬間、その裏にある数千行が見えなくなる。「セルフコンテインド」とは、必要な定義がすべて一つのファイルの中に、読める順番で並んでいる状態のことである。</p></div></li>
+          <li><div><strong>定義の骨格だけを見るため</strong><p>Mathlibの定義は一般性と効率のために複雑になっている。教科書の定義をそのまま写した素朴な版のほうが、数学者には読みやすい。</p></div></li>
+        </ol>
+        <p>このノートに出てくるLeanコードは、全部で一つのファイル <a href="lean/Etale.lean"><code>Etale.lean</code></a>（約1000行）になっていて、<strong>Lean 4.33.1 で型検査が通ることを確認している</strong>。ただし、すべてを証明したわけではない。ファイルには78個の <code>sorry</code>（証明の穴）がある。穴は二種類に分けてラベルを付けた。</p>
+        <ol class="rule-list">
+          <li><div><strong><span class="badge badge--ex">演習</span> 定義に伴う routine な検証</strong><p>「局所化の足し算が代表元の取り方によらない」「制限写像が合成を保つ」など。数学的には自明だが、Leanで書くと数十行になる。証明の穴として残し、定義そのものの見通しを優先した。</p></div></li>
+          <li><div><strong><span class="badge badge--thm">定理</span> 本物の定理</strong><p>「エタール被覆はファイバー積で保たれる」「アーベル層の圏は十分な入射的対象を持つ」「Kummer列は完全」など。これらは教科書で数ページから数十ページの証明を要する。ノートでは「命題の型だけを正確に書き」、証明は <code>sorry</code> にしている。</p></div></li>
+        </ol>
+        <p>「定義はすべて自分の手で書いてあり、定理は正確に述べられているが証明はない」。これがこのノートの到達点である。定義が正しく型検査を通るということは、少なくとも<strong>「エタール・コホモロジーとは何か」を言うために必要な概念がすべて揃っていて、依存関係に穴がない</strong>ことを機械が確認したことになる。</p>
+
+        <h3>三段階で書く</h3>
+        <p>各章は同じ構成で進む。まず日常語でその概念が「何をしたいのか」を言い、次に数式で定義し、最後にLeanで書く。そして Lean の各フィールドが数式のどの部分に対応するかを読み解く。冗長に見えるかもしれないが、Lean のコードが読めるようになるのは、「この記号はあの引数」という対応が見えたときだけだからである。</p>
+      </section>
+      <section class="article-section" id="lean">
+        <p class="section-label">01 — LEAN PRIMER</p>
+        <h2>数学者のためのLean 4の基礎文法</h2>
+        <p>Lean 4は、プログラミング言語であり、同時に証明支援系である。数学者向けに雑にいうと、<strong>「集合」の代わりに「型」を使う集合論の方言</strong>で、しかも命題も型の一種として扱う。この一点を飲み込めば、あとは記法の問題である。以下、このノートを読むのに必要な最小限だけを説明する。</p>
+
+        <h3>1. すべては「項 : 型」</h3>
+        <p>数学で \(x \in \mathbb N\) と書くところを、Leanでは <code>x : ℕ</code> と書く。コロンの右が型、左がその型の項（要素）である。関数 \(f : \mathbb N \to \mathbb N\) も <code>f : Nat → Nat</code> で、\(f(x)\) は括弧なしで <code>f x</code> と書く。二変数関数は <code>f x y</code>。</p>
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>primer.lean</span></div>
+          <pre><code><b>def</b> double (n : Nat) : Nat := 2 * n      -- 定義。n ↦ 2n
+#eval double 21                            -- 42
+
+<b>def</b> compose {α β γ : Type} (g : β → γ) (f : α → β) : α → γ :=
+  <b>fun</b> x => g (f x)                          -- λ記法。x ↦ g(f(x))</code></pre>
+        </div>
+        <p>波括弧 <code>{α β γ : Type}</code> は<strong>暗黙引数</strong>で、使うときに書かなくてよい（\(g\) と \(f\) の型から推論される）。数学で「明らかな添字は省略する」のと同じ習慣を、機械にやらせている。</p>
+
+        <h3>2. 部分集合は述語、存在は ∃</h3>
+        <p>このノートでは <strong>\(X\) の部分集合を、述語 <code>X → Prop</code> として表す</strong>。「\(x \in U\)」は <code>U x</code>（\(U\) が \(x\) で真）と書く。数学では \(U \subseteq X\) と \(\chi_U : X \to \{0,1\}\) を同一視するが、それを常に後者で書く、ということである。「\(U\) を満たす \(x\) の型」は <code>{ x : X // U x }</code>（部分型）と書く。</p>
+        <p class="math-block">\[ U \subseteq X \;\leftrightarrow\; \texttt{U : X → Prop}, \qquad \{x \in X \mid U(x)\} \;\leftrightarrow\; \texttt{\{ x : X // U x \}} \]</p>
+        <p>存在命題 \(\exists x,\ P(x)\) は <code>∃ x, P x</code>。証明項は <code>⟨x, h⟩</code>（証人と、その証人が条件を満たす証明の組）。「ただ一つ存在する」は Lean 本体には記法がないので、このノートでは <code>∃ t, P t ∧ ∀ t', P t' → t' = t</code> と展開して書く。</p>
+
+        <h3>3. 命題は型、証明は項</h3>
+        <p>ここが一番の飛躍である。Leanでは命題 \(P\) も一つの型 <code>P : Prop</code> であり、<strong>\(P\) の証明とは、型 <code>P</code> の項のこと</strong>である。だから「定理」とは、ある型の項を一つ作って見せることに他ならない。</p>
+        <p class="math-block">\[ \underbrace{h}_{\text{証明}} : \underbrace{\forall n : \mathbb N,\ n + 0 = n}_{\text{命題（型）}} \]</p>
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>primer.lean</span></div>
+          <pre><code><b>theorem</b> add_zero' (n : Nat) : n + 0 = n := <b>rfl</b>
+-- `rfl` は「定義により両辺が同じ」という証明項。
+
+<b>example</b> : ∀ n : Nat, n + 0 = n := <b>by</b>
+  <b>intro</b> n        -- ∀ を剥がして n を固定する
+  <b>rfl</b>
+
+<b>theorem</b> two_mul' (n : Nat) : 2 * n = n + n := <b>by</b> <b>omega</b>   -- 線形算術は自動</code></pre>
+        </div>
+        <p><code>by</code> 以下は<strong>タクティク</strong>と呼ばれる。「証明項を直接書く」のではなく、「証明項を組み立てる手順を指示する」モードである。数学の証明を口述するときの「\(n\) を任意に取る」「両辺を書き換える」「仮定を適用する」が、そのまま <code>intro</code>、<code>rw</code>、<code>exact</code> に対応する。このノートで使うものだけ表にしておく。</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>タクティク</th><th>数学での口述</th><th>使う場面</th></tr></thead>
+            <tbody>
+              <tr><td><code>intro x</code></td><td>「\(x\) を任意に取る」</td><td>\(\forall\) や \(\Rightarrow\) を剥がす</td></tr>
+              <tr><td><code>exact h</code></td><td>「これは \(h\) そのものである」</td><td>ゴールと一致する証明項がある</td></tr>
+              <tr><td><code>apply f</code></td><td>「補題 \(f\) を適用すればよい」</td><td>ゴールが \(f\) の結論と一致</td></tr>
+              <tr><td><code>rw [h]</code></td><td>「\(h : a = b\) で書き換える」</td><td>等式による置換（<code>← h</code> で逆向き）</td></tr>
+              <tr><td><code>show P</code></td><td>「示すべきは \(P\) である」</td><td>ゴールを定義に沿って言い換える</td></tr>
+              <tr><td><code>rcases h with a | b</code></td><td>「場合分けする」</td><td>\(\lor\) や \(\exists\) の分解</td></tr>
+              <tr><td><code>induction h</code></td><td>「帰納法で」</td><td>帰納的に定義された対象</td></tr>
+              <tr><td><code>omega</code></td><td>「計算すればわかる」</td><td>整数の線形算術</td></tr>
+              <tr><td><code>sorry</code></td><td>「証明は読者に任せる」</td><td>穴を開けたまま先へ進む（警告が出る）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>4. 構造と型クラス: 「\(R\) を可換環とする」の書き方</h3>
+        <p>数学の教科書は「\(R\) を可換環とする」と一行で言う。Leanでこれに当たるのが <code>structure</code> と <code>class</code> である。<code>structure</code> は「データの束」で、フィールドを持つ。たとえば「点 \(x\) の近傍で定義された切断」は、開集合 \(U\)、\(x \in U\) の証明、\(U\) 上の切断 \(s\) の三つ組であり、これを三つのフィールドを持つ構造体として書く。</p>
+        <p><code>class</code> は「型に載せる構造」で、角括弧 <code>[CommRing R]</code> で引数に書くと、Leanは<strong>その構造を勝手に探して持ち回ってくれる</strong>。これを型クラスの<strong>インスタンス解決</strong>と呼ぶ。「\(a + b\)」と書いたとき、どの足し算かをいちいち書かなくてよいのはこの仕組みのおかげである。</p>
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>primer.lean</span></div>
+          <pre><code>-- 「三つ組」を表す構造体。フィールドは `.U` `.mem` `.s` で取り出す。
+<b>structure</b> Triple (X : Type) (P : X → Prop) <b>where</b>
+  U   : X
+  mem : P U
+  s   : Nat
+
+-- 型クラス。`[Foo α]` と書けば、Lean が `Foo α` のインスタンスを探す。
+<b>class</b> Foo (α : Type) <b>where</b>
+  op : α → α → α
+
+<b>instance</b> : Foo Nat := ⟨fun a b => a + b⟩     -- Nat に Foo 構造を与える
+
+<b>example</b> {α : Type} [Foo α] (a : α) : α := Foo.op a a</code></pre>
+        </div>
+        <p>命題だけからなる構造体は <code>Prop</code> 値になる。「\(P\) が素イデアルである」のような<strong>性質</strong>は、フィールドがすべて命題の構造体か、単に <code>def ... : Prop</code> で書く。</p>
+
+        <h3>5. 商: <code>Quot</code></h3>
+        <p>数学では同値関係で割る操作を日常的に使う。局所化 \(S^{-1}R\)、茎 \(\mathcal F_x\)、コホモロジー \(Z^n/B^n\) はすべて商である。Lean 4 本体には <code>Quot r</code> がある。<code>r : α → α → Prop</code> を関係とするとき、<code>Quot r</code> は「\(\alpha\) を \(r\) の生成する同値関係で割った型」で、次の三つの操作を持つ。</p>
+        <ol class="rule-list">
+          <li><div><strong><code>Quot.mk r a</code></strong><p>\(a\) の同値類 \([a]\)。</p></div></li>
+          <li><div><strong><code>Quot.sound : r a b → Quot.mk r a = Quot.mk r b</code></strong><p>関係している元は同じ類になる。</p></div></li>
+          <li><div><strong><code>Quot.lift f h : Quot r → β</code></strong><p>「代表元によらない」写像 \(f\)（証明 <code>h : ∀ a b, r a b → f a = f b</code> 付き）を商から定義する。数学で「well-defined」を確認する作業がここに対応する。</p></div></li>
+        </ol>
+
+        <h3>6. 宇宙: <code>Type</code> と <code>Type 1</code></h3>
+        <p>「すべてのスキームの型」は集合ではない。Leanでは、<code>Type</code> の要素（普通の型）を集めた型は一つ上の <code>Type 1</code> に住む。このノートでは、可換環や位相空間の台は <code>Type</code>、「スキーム全体」や「\(X\) 上エタールなスキーム全体」は <code>Type 1</code> になる。圏の定義に <code>universe u</code> と <code>Type u</code> が出てくるのはそのためで、グロタンディーク宇宙と同じ話だと思ってよい。</p>
+        <p>これで道具はそろった。以下は、この記法で数学を一段ずつ書いていく。</p>
+      </section>
+      <section class="article-section" id="rings">
+        <p class="section-label">02 — COMMUTATIVE RINGS</p>
+        <h2>可換環を定義する</h2>
+        <p>一番下から始める。可換環とは、雑にいうと<strong>「足し算・引き算・掛け算ができて、掛け算の順序を気にしなくてよい数の体系」</strong>である。整数 \(\mathbb Z\)、多項式 \(\mathbb Z[x]\)、\(\mathbb Z/n\mathbb Z\)、関数の環 \(C(X)\)。これから作るスキームとは、「可換環を幾何学的な空間だと思い直したもの」なので、環の定義が土台になる。</p>
+        <p>数式で書けば、集合 \(R\) と演算 \(+, \cdot\)、元 \(0, 1\)、写像 \(-\) であって次を満たすもの。</p>
+        <p class="math-block">\[ \begin{aligned} &(a+b)+c = a+(b+c),\quad a+b=b+a,\quad 0+a=a,\quad (-a)+a=0,\\ &(ab)c=a(bc),\quad ab=ba,\quad 1\cdot a=a,\quad a(b+c)=ab+ac. \end{aligned} \]</p>
+        <p>Leanではこれをそのまま <code>class</code> として書く。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 02 可換環</span></div>
+          <pre><code><span class="doc">/-- 可換環。台となる型 `R` に、足し算・掛け算・マイナス・0・1 と、8つの公理を載せたもの。 -/</span>
+<span class="kw">class</span> CommRing (R : Type) <span class="kw">extends</span> Add R, Mul R, Neg R, Zero R, One R <span class="kw">where</span>
+  add_assoc : ∀ a b c : R, a + b + c = a + (b + c)
+  add_comm  : ∀ a b : R, a + b = b + a
+  zero_add  : ∀ a : R, 0 + a = a
+  neg_add_cancel : ∀ a : R, -a + a = 0
+  mul_assoc : ∀ a b c : R, a * b * c = a * (b * c)
+  mul_comm  : ∀ a b : R, a * b = b * a
+  one_mul   : ∀ a : R, 1 * a = a
+  mul_add   : ∀ a b c : R, a * (b + c) = a * b + a * c</code></pre>
+        </div>
+
+        <p>読み方。<code>extends Add R, Mul R, Neg R, Zero R, One R</code> は「\(R\) には <code>+</code>、<code>*</code>、<code>-</code>、<code>0</code>、<code>1</code> の記号が使える」と宣言する部分で、Lean 本体にある記号用の小さな型クラスを継承している。その下の8行が公理で、一行が数式の一つに対応している。<strong>可換環とは、この8つの命題の証明を持った型のこと</strong>である。それ以上でも以下でもない。</p>
+        <p>8つで足りるのか、と思うかもしれない。\(a + 0 = a\) や \(a \cdot 0 = 0\) が抜けている。それらは<strong>定理</strong>であって公理ではない。次のブロックで証明する。</p>
+
+        <h3>整数は可換環である</h3>
+        <p>定義したら、まず例を一つ作る。\(\mathbb Z\) に <code>CommRing</code> 構造を与えるには、8つの公理の証明を用意すればよい。Lean 本体には整数の基本補題が入っているので、名前を並べるだけで済む。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 02 ℤ の例</span></div>
+          <pre><code><span class="doc">/-- 整数 `ℤ` は可換環である。公理はすべて Lean コアの補題で埋まる。 -/</span>
+<span class="kw">instance</span> : CommRing Int <span class="kw">where</span>
+  add_assoc := Int.add_assoc
+  add_comm  := Int.add_comm
+  zero_add  := Int.zero_add
+  neg_add_cancel := Int.add_left_neg
+  mul_assoc := Int.mul_assoc
+  mul_comm  := Int.mul_comm
+  one_mul   := Int.one_mul
+  mul_add   := Int.mul_add
+
+<span class="kw">example</span> : (2 : Int) * 3 + -6 = 0 := rfl
+<span class="kw">example</span> (R : Type) [CommRing R] (a : R) : a * 1 = 1 * a := CommRing.mul_comm a 1</code></pre>
+        </div>
+
+        <p><code>example : (2 : Int) * 3 + -6 = 0 := rfl</code> は、具体的な整数の計算が「定義により明らか」（<code>rfl</code>）で通ることを示している。二つ目の <code>example</code> は、任意の可換環 \(R\) で \(a \cdot 1 = 1 \cdot a\) が、公理 <code>mul_comm</code> を \(a, 1\) に適用するだけで出ることを示す。<strong>公理は「関数」であり、具体的な元を渡すと証明が返ってくる</strong>という感覚をここで掴んでほしい。</p>
+
+        <h3>公理から出る基本補題</h3>
+        <p>次に、後で必要になる補題を公理から導く。\(a + 0 = a\)、\(a\cdot 0 = 0\)、\(-(a+b) = -a + -b\) など。ここは数学的には全く面白くないが、<strong>「公理を8つに絞った代償として、これだけの補題を自分で埋める必要がある」</strong>ことを一度見ておく価値はある。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 02 基本補題</span></div>
+          <pre><code><span class="kw">section</span> RingLemmas
+<span class="kw">variable</span> {R : Type} [CommRing R]
+<span class="kw">open</span> CommRing
+
+<span class="kw">theorem</span> add_zero (a : R) : a + 0 = a := <span class="kw">by</span> <span class="kw">rw</span> [add_comm, zero_add]
+<span class="kw">theorem</span> add_neg_cancel (a : R) : a + -a = 0 := <span class="kw">by</span> <span class="kw">rw</span> [add_comm, neg_add_cancel]
+<span class="kw">theorem</span> mul_one (a : R) : a * 1 = a := <span class="kw">by</span> <span class="kw">rw</span> [mul_comm, one_mul]
+<span class="kw">theorem</span> add_mul (a b c : R) : (a + b) * c = a * c + b * c := <span class="kw">by</span>
+  <span class="kw">rw</span> [mul_comm, mul_add, mul_comm c, mul_comm c]
+
+<span class="kw">theorem</span> add_left_cancel {a b c : R} (h : a + b = a + c) : b = c := <span class="kw">by</span>
+  have h&#x27; : -a + (a + b) = -a + (a + c) := congrArg (<span class="kw">fun</span> x =&gt; -a + x) h
+  <span class="kw">rwa</span> [← add_assoc, ← add_assoc, neg_add_cancel, zero_add, zero_add] at h&#x27;
+
+<span class="kw">theorem</span> mul_zero (a : R) : a * 0 = 0 := <span class="kw">by</span>
+  <span class="kw">apply</span> add_left_cancel (a := a * 0)
+  <span class="kw">rw</span> [← mul_add, zero_add, add_zero]
+<span class="kw">theorem</span> zero_mul (a : R) : 0 * a = 0 := <span class="kw">by</span> <span class="kw">rw</span> [mul_comm, mul_zero]
+<span class="kw">theorem</span> neg_eq_of_add_eq_zero {a b : R} (h : a + b = 0) : -a = b := <span class="kw">by</span>
+  <span class="kw">apply</span> add_left_cancel (a := a)
+  <span class="kw">rw</span> [h, add_neg_cancel]
+<span class="kw">theorem</span> mul_neg (a b : R) : a * -b = -(a * b) := <span class="kw">by</span>
+  symm; <span class="kw">apply</span> neg_eq_of_add_eq_zero
+  <span class="kw">rw</span> [← mul_add, add_neg_cancel, mul_zero]
+<span class="kw">theorem</span> neg_add (a b : R) : -(a + b) = -a + -b := <span class="kw">by</span>
+  <span class="kw">apply</span> neg_eq_of_add_eq_zero
+<span class="cm">  -- ゴール: (a + b) + (-a + -b) = 0</span>
+  <span class="kw">rw</span> [add_assoc, add_comm b, add_assoc, neg_add_cancel, add_zero, add_neg_cancel]
+<span class="kw">end</span> RingLemmas</code></pre>
+        </div>
+
+        <p>たとえば <code>mul_zero</code> の証明を読む。示したいのは \(a \cdot 0 = 0\)。<code>add_left_cancel</code>（\(a + b = a + c \Rightarrow b = c\)）を \(a \cdot 0\) について適用すると、ゴールは \(a\cdot 0 + a \cdot 0 = a \cdot 0 + 0\) になる。左辺は分配法則を逆に使って \(a \cdot (0 + 0)\)、これは \(a \cdot 0\)。右辺も \(a \cdot 0\)。数学の教科書の最初の演習問題と、寸分違わない議論である。<code>rw [← mul_add, zero_add, add_zero]</code> という一行が、その三ステップにそれぞれ対応している。</p>
+      </section>
+
+      <section class="article-section" id="homs">
+        <p class="section-label">03 — RING HOMOMORPHISMS</p>
+        <h2>環準同型と、その核</h2>
+        <p>環を定義したら、環と環の間の「正しい写像」を定義する。環準同型とは<strong>足し算・掛け算・1 を保つ写像</strong>である。</p>
+        <p class="math-block">\[ f : R \to S,\qquad f(a+b)=f(a)+f(b),\quad f(ab)=f(a)f(b),\quad f(1)=1. \]</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 03 環準同型</span></div>
+          <pre><code><span class="doc">/-- 環準同型。写像であって、足し算・掛け算・1 を保つもの。 -/</span>
+<span class="kw">structure</span> RingHom (R S : Type) [CommRing R] [CommRing S] <span class="kw">where</span>
+  toFun   : R → S
+  map_add : ∀ a b, toFun (a + b) = toFun a + toFun b
+  map_mul : ∀ a b, toFun (a * b) = toFun a * toFun b
+  map_one : toFun 1 = 1
+
+<span class="kw">infixr</span>:25 &quot; →ᵣ &quot; =&gt; RingHom
+
+<span class="kw">instance</span> {R S : Type} [CommRing R] [CommRing S] : CoeFun (R →ᵣ S) (<span class="kw">fun</span> _ =&gt; R → S) :=
+  ⟨RingHom.toFun⟩
+
+<span class="kw">section</span> HomLemmas
+<span class="kw">variable</span> {R S T : Type} [CommRing R] [CommRing S] [CommRing T]
+
+<span class="kw">theorem</span> RingHom.map_zero (f : R →ᵣ S) : f 0 = 0 := <span class="kw">by</span>
+  <span class="kw">apply</span> add_left_cancel (a := f 0)
+  <span class="kw">rw</span> [← f.map_add, CommRing.zero_add, add_zero]
+
+<span class="kw">theorem</span> RingHom.map_neg (f : R →ᵣ S) (a : R) : f (-a) = -(f a) := <span class="kw">by</span>
+  symm; <span class="kw">apply</span> neg_eq_of_add_eq_zero
+  <span class="kw">rw</span> [← f.map_add, add_neg_cancel, f.map_zero]
+
+<span class="doc">/-- 恒等写像は環準同型。 -/</span>
+<span class="kw">def</span> RingHom.id (R : Type) [CommRing R] : R →ᵣ R :=
+  ⟨<span class="kw">fun</span> a =&gt; a, <span class="kw">fun</span> _ _ =&gt; rfl, <span class="kw">fun</span> _ _ =&gt; rfl, rfl⟩
+
+<span class="doc">/-- 環準同型の合成。 -/</span>
+<span class="kw">def</span> RingHom.comp (g : S →ᵣ T) (f : R →ᵣ S) : R →ᵣ T <span class="kw">where</span>
+  toFun a := g (f a)
+  map_add a b := <span class="kw">by</span> <span class="kw">rw</span> [f.map_add, g.map_add]
+  map_mul a b := <span class="kw">by</span> <span class="kw">rw</span> [f.map_mul, g.map_mul]
+  map_one := <span class="kw">by</span> <span class="kw">rw</span> [f.map_one, g.map_one]
+
+<span class="doc">/-- 環準同型の相等は写像の相等で決まる。 -/</span>
+<span class="kw">theorem</span> RingHom.ext {f g : R →ᵣ S} (h : ∀ a, f a = g a) : f = g := <span class="kw">by</span>
+  cases f; cases g
+  have : _ = _ := funext h
+  simp only at this
+  subst this
+  rfl
+<span class="kw">end</span> HomLemmas</code></pre>
+        </div>
+
+        <p>読み方。<code>structure RingHom</code> は「写像 <code>toFun</code> と三つの性質の証明」の束である。<code>infixr:25 " →ᵣ "</code> は記法の宣言で、以後 <code>R →ᵣ S</code> と書ける。<code>CoeFun</code> のインスタンスは、<code>f : R →ᵣ S</code> を関数のように <code>f a</code> と書くための約束である。数学で \(f\) と「\(f\) の台となる写像」を区別しないのと同じことを、Leanでは明示的に宣言する。</p>
+        <p>\(f(0) = 0\) が公理に入っていないことに注意。これも定理である（<code>RingHom.map_zero</code>）。証明は「\(f(0) = f(0+0) = f(0)+f(0)\) から消去」で、前章の <code>add_left_cancel</code> をそのまま使っている。</p>
+        <p>一方で、恒等写像と合成は定義である。<code>RingHom.comp g f</code> は \(g \circ f\)。三つの性質は、\(f\) と \(g\) の性質を順に書き換えれば出る（<code>rw [f.map_add, g.map_add]</code>）。</p>
+      </section>
+
+      <section class="article-section" id="ideals">
+        <p class="section-label">04 — IDEALS</p>
+        <h2>イデアル、素イデアル、局所環</h2>
+        <p>イデアルは、雑にいうと<strong>「0 の仲間」の集まり</strong>である。環 \(R\) から商環 \(R/I\) を作るとき、\(I\) の元はすべて 0 になる。だから \(I\) は 0 を含み、足し算で閉じ、何を掛けても閉じていなければならない。</p>
+        <p class="math-block">\[ 0 \in I,\qquad a, b \in I \Rightarrow a + b \in I,\qquad r \in R,\ a \in I \Rightarrow ra \in I. \]</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 04 イデアル</span></div>
+          <pre><code><span class="kw">section</span> Ideals
+<span class="kw">variable</span> {R : Type} [CommRing R]
+
+<span class="doc">/-- イデアル。0 を含み、足し算で閉じ、環の元を掛けても閉じている部分集合。 -/</span>
+<span class="kw">structure</span> Ideal (R : Type) [CommRing R] <span class="kw">where</span>
+  carrier  : R → Prop
+  zero_mem : carrier 0
+  add_mem  : ∀ {a b}, carrier a → carrier b → carrier (a + b)
+  mul_mem  : ∀ (r : R) {a}, carrier a → carrier (r * a)
+
+<span class="kw">instance</span> : Membership R (Ideal R) := ⟨<span class="kw">fun</span> I a =&gt; I.carrier a⟩</code></pre>
+        </div>
+
+        <p><code>carrier : R → Prop</code> が「\(I\) の元であるという述語」で、前章で述べた「部分集合は述語」の約束に沿っている。<code>instance : Membership</code> は、以後 <code>a ∈ I</code> と書けるようにする宣言である。</p>
+
+        <h3>素イデアルは「点」になる</h3>
+        <p>次が、代数幾何の最初の飛躍である。素イデアルとは、「積が入っていればどちらかが入っている」イデアルであり、これを<strong>空間の点</strong>だと思う。なぜか。関数環 \(C(X)\) では、点 \(x\) に対して「\(x\) で消える関数全体」\(\mathfrak m_x = \{f \mid f(x)=0\}\) は素イデアルになる（\(f(x)g(x)=0\) なら \(f(x)=0\) か \(g(x)=0\)）。この対応を逆に使って、<strong>任意の環に対して「点とは素イデアルのことである」と定義してしまう</strong>。</p>
+        <p class="math-block">\[ \mathfrak p \text{ が素イデアル } \iff 1 \notin \mathfrak p \ \text{かつ}\ \bigl(ab \in \mathfrak p \Rightarrow a \in \mathfrak p \lor b \in \mathfrak p\bigr). \]</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 04 素イデアル・局所環</span></div>
+          <pre><code><span class="doc">/-- 素イデアル。全体ではなく、`ab ∈ P` なら `a ∈ P` か `b ∈ P`。 -/</span>
+<span class="kw">def</span> Ideal.IsPrime (P : Ideal R) : Prop :=
+  (1 : R) ∉ P ∧ ∀ {a b : R}, a * b ∈ P → a ∈ P ∨ b ∈ P
+
+<span class="doc">/-- 可逆元（単元）。 -/</span>
+<span class="kw">def</span> IsUnit (a : R) : Prop := ∃ b, a * b = 1
+
+<span class="doc">/-- 局所環。`0 ≠ 1` で、任意の `a` について `a` か `1 - a` が可逆。</span>
+<span class="doc">（「非可逆元全体がイデアルになる」「極大イデアルがただ一つ」と同値。） -/</span>
+<span class="kw">def</span> IsLocalRing (R : Type) [CommRing R] : Prop :=
+  (0 : R) ≠ 1 ∧ ∀ a : R, IsUnit a ∨ IsUnit (1 + -a)
+
+<span class="doc">/-- 局所準同型。非可逆元を非可逆元へ送る（同じことだが、`φ a` が可逆なら `a` も可逆）。 -/</span>
+<span class="kw">def</span> RingHom.IsLocal {S : Type} [CommRing S] (φ : R →ᵣ S) : Prop :=
+  ∀ a : R, IsUnit (φ a) → IsUnit a</code></pre>
+        </div>
+
+        <p>ここで一緒に、<strong>可逆元</strong>と<strong>局所環</strong>も定義している。局所環とは極大イデアルがただ一つの環で、幾何学的には「一点の近くだけを見た環」である。教科書の定義は「極大イデアルがただ一つ」だが、それを言うには極大イデアルの定義と存在定理が要る。ここでは同値な、より初等的な条件を採用した。</p>
+        <p class="math-block">\[ R \text{ が局所環 } \iff 0 \ne 1 \ \text{かつ}\ \forall a \in R,\ a \in R^\times \ \lor\ 1 - a \in R^\times. \]</p>
+        <p>直感はこうである。局所環では「非可逆元全体」がちょうど唯一の極大イデアル \(\mathfrak m\) になる。だから \(a\) と \(1-a\) が両方非可逆なら、両方 \(\mathfrak m\) に入り、和 \(1\) も \(\mathfrak m\) に入ってしまい矛盾する。逆も同様に示せる。<code>RingHom.IsLocal</code> は局所環の間の<strong>局所準同型</strong>で、「極大イデアルを極大イデアルに送る」ことを「非可逆元を非可逆元に送る」と言い換えたものである。これはスキームの射の定義で本当に使う。</p>
+
+        <h3>核と、有限生成</h3>
+        <p>準同型の核 \(\ker f = \{a \mid f(a) = 0\}\) はイデアルである。また有限個の元 \(x_1, \dots, x_n\) が生成するイデアル \((x_1,\dots,x_n)\) は、有限和 \(\sum r_i x_i\) 全体である。有限生成は、後で「有限表示」を定義するときに使う。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 04 核・有限生成</span></div>
+          <pre><code><span class="doc">/-- 環準同型の核 `ker f = {a | f a = 0}` はイデアル。 -/</span>
+<span class="kw">def</span> RingHom.ker {S : Type} [CommRing S] (f : R →ᵣ S) : Ideal R <span class="kw">where</span>
+  carrier a := f a = 0
+  zero_mem := f.map_zero
+  add_mem {a b} ha hb := <span class="kw">by</span>
+    <span class="kw">show</span> f (a + b) = 0
+    <span class="kw">rw</span> [f.map_add, ha, hb, add_zero]
+  mul_mem r {a} ha := <span class="kw">by</span>
+    <span class="kw">show</span> f (r * a) = 0
+    <span class="kw">rw</span> [f.map_mul, ha, mul_zero]
+
+<span class="doc">/-- 有限個の元 `l = [x₁, …, xₙ]` が生成するイデアルの元、すなわち有限和 `Σ rᵢ xᵢ`。 -/</span>
+<span class="kw">inductive</span> InSpan (l : List R) : R → Prop
+  | zero : InSpan l 0
+  | add {a b} : InSpan l a → InSpan l b → InSpan l (a + b)
+  | smul (r : R) {x} : x ∈ l → InSpan l (r * x)
+
+<span class="doc">/-- `span l = (x₁, …, xₙ)`。 -/</span>
+<span class="kw">def</span> Ideal.span (l : List R) : Ideal R <span class="kw">where</span>
+  carrier := InSpan l
+  zero_mem := InSpan.zero
+  add_mem := InSpan.add
+  mul_mem r {a} ha := <span class="kw">by</span>
+    <span class="kw">induction</span> ha with
+    | zero =&gt; <span class="kw">rw</span> [mul_zero]; <span class="kw">exact</span> InSpan.zero
+    | add _ _ iha ihb =&gt; <span class="kw">rw</span> [CommRing.mul_add]; <span class="kw">exact</span> InSpan.add iha ihb
+    | smul s hx =&gt; <span class="kw">rw</span> [← CommRing.mul_assoc]; <span class="kw">exact</span> InSpan.smul (r * s) hx
+
+<span class="doc">/-- 有限生成イデアル。 -/</span>
+<span class="kw">def</span> Ideal.IsFG (I : Ideal R) : Prop := ∃ l : List R, ∀ a, a ∈ I ↔ InSpan l a
+<span class="kw">end</span> Ideals</code></pre>
+        </div>
+
+        <p><code>InSpan</code> は<strong>帰納的に定義された述語</strong>で、「0 は入っている」「入っているものの和は入っている」「生成元の \(r\) 倍は入っている」の三つの規則で生成される最小の述語である。これは \(\sum r_i x_i\) という有限和の、集合を使わない言い換えになっている。有限集合の代わりに <code>List R</code>（元のリスト）を使うのは、Lean 本体だけで済ませるための素朴な選択である。<code>Ideal.span</code> の <code>mul_mem</code> の証明は、この帰納的定義に対する帰納法で、三つの場合をそれぞれ潰している。</p>
+      </section>
+      <section class="article-section" id="spec">
+        <p class="section-label">05 — SPECTRUM</p>
+        <h2>Spec R と、ザリスキ位相</h2>
+        <p>前章で「点とは素イデアル」と決めた。すると環 \(R\) から空間が一つ決まる。それが<strong>素スペクトル</strong> \(\operatorname{Spec} R\) である。</p>
+        <p class="math-block">\[ \operatorname{Spec} R := \{\, \mathfrak p \subseteq R \mid \mathfrak p \text{ は素イデアル} \,\}. \]</p>
+        <p>雑にいうと、<strong>環 \(R\) の元 \(a\) を「\(\operatorname{Spec} R\) 上の関数」だと思い、\(a \in \mathfrak p\) を「\(a\) は点 \(\mathfrak p\) で消える」と読む</strong>。この読み替えで、\(E \subseteq R\) の「零点集合」\(V(E)\) と、\(f\) の「消えない場所」\(D(f)\) が定義できる。</p>
+        <p class="math-block">\[ V(E) := \{\mathfrak p \mid E \subseteq \mathfrak p\},\qquad D(f) := \{\mathfrak p \mid f \notin \mathfrak p\} = \operatorname{Spec} R \setminus V(\{f\}). \]</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 05 素スペクトル</span></div>
+          <pre><code><span class="kw">section</span> Spectrum
+<span class="kw">variable</span> (R : Type) [CommRing R]
+
+<span class="doc">/-- 素スペクトル `Spec R`。点は `R` の素イデアル。 -/</span>
+<span class="kw">def</span> PrimeSpectrum : Type := { P : Ideal R // P.IsPrime }
+
+<span class="kw">variable</span> {R}
+
+<span class="doc">/-- 零点集合 `V(E) = { 𝔭 | E ⊆ 𝔭 }`。「E の元がすべて消える点」。 -/</span>
+<span class="kw">def</span> zeroLocus (E : R → Prop) : PrimeSpectrum R → Prop :=
+  <span class="kw">fun</span> P =&gt; ∀ a, E a → a ∈ P.1
+
+<span class="doc">/-- 基本開集合 `D(f) = { 𝔭 | f ∉ 𝔭 }`。「f が消えない点」。 -/</span>
+<span class="kw">def</span> basicOpen (f : R) : PrimeSpectrum R → Prop :=
+  <span class="kw">fun</span> P =&gt; f ∉ P.1</code></pre>
+        </div>
+
+        <p><code>PrimeSpectrum R</code> は部分型 <code>{ P : Ideal R // P.IsPrime }</code>、つまり「素イデアルであることの証明付きのイデアル」の型である。<code>P.1</code> でイデアル本体、<code>P.2</code> で素であることの証明が取れる。<code>zeroLocus E</code> と <code>basicOpen f</code> は <code>PrimeSpectrum R → Prop</code>、すなわち部分集合である。</p>
+
+        <h3>環準同型は逆向きの写像を誘導する</h3>
+        <p>\(\varphi : R \to S\) があると、\(S\) の素イデアル \(\mathfrak q\) の逆像 \(\varphi^{-1}(\mathfrak q)\) は \(R\) の素イデアルになる。だから写像 \(\operatorname{Spec} S \to \operatorname{Spec} R\) が得られる。<strong>矢印の向きが反転する</strong>。「環 = 関数の集まり、空間 = 点の集まり」と思えば、関数の引き戻しが空間の写像と逆向きなのは自然である。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 05 Spec の関手性</span></div>
+          <pre><code><span class="doc">/-- 環準同型 `φ : R → S` は、逆向きの写像 `Spec S → Spec R`, `𝔮 ↦ φ⁻¹(𝔮)` を誘導する。</span>
+<span class="doc">素イデアルの逆像は素イデアル。矢印の向きが反転することに注意。 -/</span>
+<span class="kw">def</span> PrimeSpectrum.comap {S : Type} [CommRing S] (φ : R →ᵣ S) (Q : PrimeSpectrum S) : PrimeSpectrum R :=
+  ⟨⟨<span class="kw">fun</span> a =&gt; φ a ∈ Q.1,
+    <span class="kw">by</span> <span class="kw">show</span> φ 0 ∈ Q.1; <span class="kw">rw</span> [φ.map_zero]; <span class="kw">exact</span> Q.1.zero_mem,
+    <span class="kw">fun</span> {a b} ha hb =&gt; <span class="kw">by</span> <span class="kw">show</span> φ (a + b) ∈ Q.1; <span class="kw">rw</span> [φ.map_add]; <span class="kw">exact</span> Q.1.add_mem ha hb,
+    <span class="kw">fun</span> r {a} ha =&gt; <span class="kw">by</span> <span class="kw">show</span> φ (r * a) ∈ Q.1; <span class="kw">rw</span> [φ.map_mul]; <span class="kw">exact</span> Q.1.mul_mem _ ha⟩,
+   ⟨<span class="kw">fun</span> h =&gt; Q.2.1 (<span class="kw">by</span> <span class="kw">rw</span> [← φ.map_one]; <span class="kw">exact</span> h),
+    <span class="kw">fun</span> {a b} h =&gt; Q.2.2 (<span class="kw">by</span> <span class="kw">rw</span> [← φ.map_mul]; <span class="kw">exact</span> h)⟩⟩
+<span class="kw">end</span> Spectrum</code></pre>
+        </div>
+
+        <p>この定義は証明が全部埋まっている。<code>⟨⟨…⟩, ⟨…⟩⟩</code> という入れ子の角括弧は、「イデアルの4フィールド」と「素であることの2条件」を順に埋めている。たとえば「\(1 \notin \varphi^{-1}(\mathfrak q)\)」は、\(\varphi(1) = 1 \in \mathfrak q\) なら \(\mathfrak q\) が素であることに矛盾する、という一行である。</p>
+
+        <h3>位相を定義する</h3>
+        <p>\(V(E)\) を閉集合とする位相が<strong>ザリスキ位相</strong>である。位相そのものも Lean 本体にはないので定義する。開集合の族が「全体を含み、有限交叉で閉じ、任意和で閉じる」というだけの構造体である。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 05 位相空間・開集合</span></div>
+          <pre><code><span class="doc">/-- 位相。「開集合」と呼ばれる部分集合の族で、全体・有限交叉・任意和で閉じるもの。</span>
+<span class="doc">部分集合は述語 `X → Prop` で表す。 -/</span>
+<span class="kw">structure</span> Topology (X : Type) <span class="kw">where</span>
+  IsOpen : (X → Prop) → Prop
+  isOpen_univ : IsOpen (<span class="kw">fun</span> _ =&gt; True)
+  isOpen_inter : ∀ {U V}, IsOpen U → IsOpen V → IsOpen (<span class="kw">fun</span> x =&gt; U x ∧ V x)
+  isOpen_sUnion : ∀ (𝒰 : (X → Prop) → Prop), (∀ U, 𝒰 U → IsOpen U) →
+    IsOpen (<span class="kw">fun</span> x =&gt; ∃ U, 𝒰 U ∧ U x)
+
+<span class="doc">/-- 位相空間 = 型 + 位相。 -/</span>
+<span class="kw">structure</span> TopSpace <span class="kw">where</span>
+  carrier : Type
+  top : Topology carrier
+
+<span class="kw">instance</span> : CoeSort TopSpace Type := ⟨TopSpace.carrier⟩
+
+<span class="doc">/-- 開集合の型。 -/</span>
+<span class="kw">def</span> Opens (X : TopSpace) : Type := { U : X → Prop // X.top.IsOpen U }
+
+<span class="kw">namespace</span> Opens
+<span class="kw">variable</span> {X : TopSpace}
+
+<span class="kw">instance</span> : LE (Opens X) := ⟨<span class="kw">fun</span> V U =&gt; ∀ x, V.1 x → U.1 x⟩
+
+<span class="kw">theorem</span> le_refl (U : Opens X) : U ≤ U := <span class="kw">fun</span> _ h =&gt; h
+<span class="kw">theorem</span> le_trans {U V W : Opens X} (h₁ : W ≤ V) (h₂ : V ≤ U) : W ≤ U :=
+  <span class="kw">fun</span> x h =&gt; h₂ x (h₁ x h)
+
+<span class="doc">/-- 二つの開集合の交わり。 -/</span>
+<span class="kw">def</span> inter (U V : Opens X) : Opens X :=
+  ⟨<span class="kw">fun</span> x =&gt; U.1 x ∧ V.1 x, X.top.isOpen_inter U.2 V.2⟩
+
+<span class="kw">theorem</span> inter_le_left (U V : Opens X) : inter U V ≤ U := <span class="kw">fun</span> _ h =&gt; h.1
+<span class="kw">theorem</span> inter_le_right (U V : Opens X) : inter U V ≤ V := <span class="kw">fun</span> _ h =&gt; h.2
+
+<span class="doc">/-- 全体集合。 -/</span>
+<span class="kw">def</span> univ : Opens X := ⟨<span class="kw">fun</span> _ =&gt; True, X.top.isOpen_univ⟩
+<span class="kw">theorem</span> le_univ (U : Opens X) : U ≤ univ := <span class="kw">fun</span> _ _ =&gt; trivial
+<span class="kw">end</span> Opens</code></pre>
+        </div>
+
+        <p><code>Opens X</code> は開集合の型である。<code>V ≤ U</code> で包含 \(V \subseteq U\) を表し、後の「制限写像」で頻繫に使う。<code>Opens.inter</code> は交わり \(U \cap V\)。ここまでは位相空間論の教科書の1ページ目をそのまま書いている。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 05 ザリスキ位相</span></div>
+          <pre><code><span class="doc">/-- ザリスキ位相。閉集合を零点集合 `V(E)` とする。開集合は `V(E)` の補集合。 -/</span>
+<span class="kw">def</span> zariskiTopology (R : Type) [CommRing R] : Topology (PrimeSpectrum R) <span class="kw">where</span>
+  IsOpen U := ∃ E : R → Prop, ∀ P, U P ↔ ¬ zeroLocus E P
+  isOpen_univ := ⟨<span class="kw">fun</span> a =&gt; a = 1, <span class="kw">fun</span> P =&gt; <span class="kw">by</span>
+    <span class="kw">constructor</span>
+    · <span class="kw">intro</span> _ h; <span class="kw">exact</span> P.2.1 (h 1 rfl)
+    · <span class="kw">intro</span> _; trivial⟩
+  isOpen_inter := <span class="sry">sorry</span>  <span class="cm"> -- 演習: V(E) ∪ V(E&#x27;) = V(E · E&#x27;)</span>
+  isOpen_sUnion := <span class="sry">sorry</span> <span class="cm"> -- 演習: ⋂ V(Eᵢ) = V(⋃ Eᵢ)</span>
+
+<span class="doc">/-- 位相空間としての `Spec R`。 -/</span>
+<span class="kw">def</span> SpecTop (R : Type) [CommRing R] : TopSpace := ⟨PrimeSpectrum R, zariskiTopology R⟩</code></pre>
+        </div>
+
+        <p>ザリスキ位相の定義は「\(U\) が開 \(\iff\) ある \(E\) について \(U = \operatorname{Spec} R \setminus V(E)\)」である。全体が開であることは \(E = \{1\}\) で確認できる（\(V(\{1\}) = \emptyset\)、なぜなら \(1\) はどの素イデアルにも入らない）。この証明は埋めてある。有限交叉と任意和は、\(V(E) \cup V(E') = V(EE')\) と \(\bigcap V(E_i) = V(\bigcup E_i)\) という古典的な計算で、<span class="badge badge--ex">演習</span>として <code>sorry</code> のままにした。</p>
+        <p>直感を一つ。ザリスキ位相はとても<strong>粗い</strong>。\(\operatorname{Spec} \mathbb Z\) の開集合は「有限個の素数を除いた全体」か空集合だけである。この粗さが、後で「ザリスキ位相のコホモロジーでは定数層が何も見えない」という問題を引き起こし、エタール位相へ乗り換える動機になる。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 05 連続写像</span></div>
+          <pre><code><span class="doc">/-- 連続写像。開集合の逆像が開集合。 -/</span>
+<span class="kw">structure</span> ContinuousMap (X Y : TopSpace) <span class="kw">where</span>
+  toFun : X → Y
+  isOpen_preimage : ∀ U : Opens Y, Y.top.IsOpen U.1 → X.top.IsOpen (<span class="kw">fun</span> x =&gt; U.1 (toFun x))
+
+<span class="doc">/-- 連続写像による開集合の逆像。 -/</span>
+<span class="kw">def</span> ContinuousMap.preimage {X Y : TopSpace} (f : ContinuousMap X Y) (U : Opens Y) : Opens X :=
+  ⟨<span class="kw">fun</span> x =&gt; U.1 (f.toFun x), f.isOpen_preimage U U.2⟩</code></pre>
+        </div>
+      </section>
+
+      <section class="article-section" id="localization">
+        <p class="section-label">06 — LOCALIZATION</p>
+        <h2>局所化: 分母を許す</h2>
+        <p>局所化は、雑にいうと<strong>「ある元たちで割ることを許した環」</strong>である。\(\mathbb Z\) で \(2\) のべきで割ることを許せば \(\mathbb Z[1/2]\)、素数 \(p\) 以外のすべてで割ることを許せば \(\mathbb Z_{(p)}\)（分母が \(p\) で割れない分数）。幾何学的には、\(R[1/f]\) は「\(f\) が消えない場所 \(D(f)\) 上の関数環」、\(R_{\mathfrak p}\) は「点 \(\mathfrak p\) のごく近くだけで定義された関数の環」である。</p>
+        <p>構成は分数と同じである。乗法的部分集合 \(S\)（\(1\) を含み積で閉じる）を取り、組 \((a, s)\)、\(s \in S\) を「\(a/s\)」と読む。二つの分数が等しいことを</p>
+        <p class="math-block">\[ \frac{a}{s} = \frac{b}{t} \iff \exists u \in S,\ u(at - bs) = 0 \]</p>
+        <p>で定める（\(u\) が要るのは零因子があるときのため）。局所化 \(S^{-1}R\) はこの同値関係による商である。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 06 局所化の構成</span></div>
+          <pre><code><span class="kw">section</span> Localization
+<span class="kw">variable</span> {R : Type} [CommRing R]
+
+<span class="doc">/-- 乗法的部分集合。1 を含み、掛け算で閉じる。 -/</span>
+<span class="kw">structure</span> Submonoid (R : Type) [CommRing R] <span class="kw">where</span>
+  carrier : R → Prop
+  one_mem : carrier 1
+  mul_mem : ∀ {a b}, carrier a → carrier b → carrier (a * b)
+
+<span class="doc">/-- 「分数」`a / s` の表示。分子 `a : R` と、分母 `s ∈ S`。 -/</span>
+<span class="kw">structure</span> Fraction (S : Submonoid R) <span class="kw">where</span>
+  num : R
+  den : R
+  den_mem : S.carrier den
+
+<span class="doc">/-- 二つの分数が等しい: `a/s = b/t ⇔ ∃ u ∈ S, u (a t - b s) = 0`。 -/</span>
+<span class="kw">def</span> Fraction.rel {S : Submonoid R} (x y : Fraction S) : Prop :=
+  ∃ u, S.carrier u ∧ u * (x.num * y.den + -(y.num * x.den)) = 0
+
+<span class="doc">/-- 局所化 `S⁻¹R`。分数の表示を、上の同値関係で割った商。 -/</span>
+<span class="kw">def</span> Localization (S : Submonoid R) : Type := Quot (Fraction.rel (S := S))
+
+<span class="doc">/-- 分数 `a / s` を局所化の元として見る。 -/</span>
+<span class="kw">def</span> Localization.mk {S : Submonoid R} (a s : R) (hs : S.carrier s) : Localization S :=
+  Quot.mk _ ⟨a, s, hs⟩</code></pre>
+        </div>
+
+        <p>ここで前章の <code>Quot</code> が初めて登場する。<code>Fraction S</code> は分数の「表示」（分子、分母、分母が \(S\) に入る証明）、<code>Fraction.rel</code> が同値関係、<code>Localization S := Quot rel</code> がその商である。<code>Localization.mk a s hs</code> が \(a/s\) を表す。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 06 局所化の環構造</span></div>
+          <pre><code><span class="doc">/-- 分数の足し算 `a/s + b/t = (at + bs)/(st)`。代表元の取り方によらないこと（`sorry`）は演習。 -/</span>
+<span class="kw">def</span> Localization.add {S : Submonoid R} : Localization S → Localization S → Localization S :=
+  Quot.lift (<span class="kw">fun</span> x =&gt; Quot.lift
+    (<span class="kw">fun</span> y =&gt; Localization.mk (x.num * y.den + y.num * x.den) (x.den * y.den) (S.mul_mem x.den_mem y.den_mem))
+    <span class="sry">sorry</span>) <span class="sry">sorry</span>
+
+<span class="doc">/-- 分数の掛け算 `(a/s)(b/t) = ab/st`。 -/</span>
+<span class="kw">def</span> Localization.mul {S : Submonoid R} : Localization S → Localization S → Localization S :=
+  Quot.lift (<span class="kw">fun</span> x =&gt; Quot.lift
+    (<span class="kw">fun</span> y =&gt; Localization.mk (x.num * y.num) (x.den * y.den) (S.mul_mem x.den_mem y.den_mem))
+    <span class="sry">sorry</span>) <span class="sry">sorry</span>
+
+<span class="doc">/-- `S⁻¹R` は可換環。公理の検証（`sorry`）は分数計算の演習。 -/</span>
+<span class="kw">instance</span> (S : Submonoid R) : CommRing (Localization S) <span class="kw">where</span>
+  add := Localization.add
+  mul := Localization.mul
+  neg := Quot.lift (<span class="kw">fun</span> x =&gt; Localization.mk (-x.num) x.den x.den_mem) <span class="sry">sorry</span>
+  zero := Localization.mk 0 1 S.one_mem
+  one  := Localization.mk 1 1 S.one_mem
+  add_assoc := <span class="sry">sorry</span>
+  add_comm := <span class="sry">sorry</span>
+  zero_add := <span class="sry">sorry</span>
+  neg_add_cancel := <span class="sry">sorry</span>
+  mul_assoc := <span class="sry">sorry</span>
+  mul_comm := <span class="sry">sorry</span>
+  one_mul := <span class="sry">sorry</span>
+  mul_add := <span class="sry">sorry</span></code></pre>
+        </div>
+
+        <p>足し算は \(\frac{a}{s} + \frac{b}{t} = \frac{at + bs}{st}\)。<code>Quot.lift</code> を二重に使っているのは「二変数の写像を商から定義する」ためで、二つの <code>sorry</code> は「代表元の取り方によらない」ことの証明である。<strong>数学の教科書が「well-defined であることは容易に確かめられる」と一行で済ませる箇所が、Leanでは明示的な証明義務として現れる</strong>。ここでは <span class="badge badge--ex">演習</span>として残した。環の公理も同様である。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 06 R_𝔭 と R[1/f]</span></div>
+          <pre><code><span class="doc">/-- 素イデアルの補集合 `R ∖ 𝔭` は乗法的部分集合。 -/</span>
+<span class="kw">def</span> Ideal.primeCompl (P : Ideal R) (hP : P.IsPrime) : Submonoid R <span class="kw">where</span>
+  carrier a := a ∉ P
+  one_mem := hP.1
+  mul_mem {a b} ha hb hab := <span class="kw">by</span>
+    <span class="kw">rcases</span> hP.2 hab with h | h
+    · <span class="kw">exact</span> ha h
+    · <span class="kw">exact</span> hb h
+
+<span class="doc">/-- 素イデアル `𝔭` における局所化 `R_𝔭`。 -/</span>
+<span class="kw">def</span> localizationAt (P : PrimeSpectrum R) : Type := Localization (P.1.primeCompl P.2)
+
+<span class="kw">instance</span> (P : PrimeSpectrum R) : CommRing (localizationAt P) :=
+  inferInstanceAs (CommRing (Localization (P.1.primeCompl P.2)))
+
+<span class="doc">/-- べき `fⁿ`。 -/</span>
+<span class="kw">def</span> npow (f : R) : Nat → R
+  | 0 =&gt; 1
+  | n + 1 =&gt; npow f n * f
+
+<span class="doc">/-- `f` のべきからなる乗法的部分集合 `{1, f, f², …}`。 -/</span>
+<span class="kw">def</span> Submonoid.powers (f : R) : Submonoid R <span class="kw">where</span>
+  carrier a := ∃ n : Nat, a = npow f n
+  one_mem := ⟨0, rfl⟩
+  mul_mem := <span class="sry">sorry</span> <span class="cm"> -- 演習: fⁿ · fᵐ = fⁿ⁺ᵐ</span>
+
+<span class="doc">/-- 標準的な写像 `R → S⁻¹R`, `a ↦ a / 1`。 -/</span>
+<span class="kw">def</span> Localization.algebraMap (S : Submonoid R) : R →ᵣ Localization S :=
+  ⟨<span class="kw">fun</span> a =&gt; Localization.mk a 1 S.one_mem, <span class="sry">sorry</span>, <span class="sry">sorry</span>, rfl⟩
+
+<span class="doc">/-- `R[1/f]`。 -/</span>
+<span class="kw">def</span> Away (f : R) : Type := Localization (Submonoid.powers f)
+
+<span class="kw">end</span> Localization</code></pre>
+        </div>
+
+        <p>二つの重要な例を定義している。<code>localizationAt P</code> は素イデアル \(\mathfrak p\) での局所化 \(R_{\mathfrak p} = (R \setminus \mathfrak p)^{-1} R\)。\(R \setminus \mathfrak p\) が乗法的であることは、まさに素イデアルの定義そのものである（<code>Ideal.primeCompl</code> の証明を見ると、素イデアルの条件を対偶で使っているだけだとわかる）。<code>Away f</code> は \(R[1/f] = \{1, f, f^2, \dots\}^{-1}R\)。</p>
+        <p>\(R_{\mathfrak p}\) は局所環である。極大イデアルは \(\mathfrak p R_{\mathfrak p}\)、つまり「分子が \(\mathfrak p\) に入る分数」で、それ以外の分数は分母分子を逆にすれば可逆になる。<strong>この局所環 \(R_{\mathfrak p}\) が、次章で構造層の茎になる。</strong></p>
+      </section>
+      <section class="article-section" id="sheaves">
+        <p class="section-label">07 — PRESHEAVES AND SHEAVES</p>
+        <h2>前層と層: 「局所的なデータを貼り合わせる」の定式化</h2>
+        <p>層は、雑にいうと<strong>「各開集合ごとに何かの集まり（関数、切断、解）があって、小さい開集合に制限でき、局所的に与えたものが一意に貼り合う」という状況の公理化</strong>である。連続関数、正則関数、ベクトル場、微分方程式の解。すべて層をなす。</p>
+        <p>まず<strong>前層</strong>。位相空間 \(X\) の開集合 \(U\) ごとに集合 \(\mathcal F(U)\) があり、\(V \subseteq U\) ごとに制限写像 \(\rho_{UV} : \mathcal F(U) \to \mathcal F(V)\) があって、</p>
+        <p class="math-block">\[ \rho_{UU} = \mathrm{id},\qquad \rho_{VW}\circ\rho_{UV} = \rho_{UW}\quad (W \subseteq V \subseteq U). \]</p>
+        <p>圏論の言葉では、開集合の順序集合を圏と見た反変関手 \(\mathrm{Open}(X)^{\mathrm{op}} \to \mathbf{Set}\) である。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 07 前層</span></div>
+          <pre><code><span class="doc">/-- 位相空間 `X` 上の（集合値の）前層。開集合ごとに「切断の集合」`obj U` を対応させ、</span>
+<span class="doc">`V ⊆ U` に対して制限写像 `res : obj U → obj V` を与える。恒等と合成を保つ。 -/</span>
+<span class="kw">structure</span> Presheaf (X : TopSpace) <span class="kw">where</span>
+  obj : Opens X → Type
+  res : ∀ {U V : Opens X}, V ≤ U → obj U → obj V
+  res_id : ∀ (U : Opens X) (s : obj U), res (Opens.le_refl U) s = s
+  res_comp : ∀ {U V W : Opens X} (h₁ : V ≤ U) (h₂ : W ≤ V) (s : obj U),
+    res h₂ (res h₁ s) = res (Opens.le_trans h₂ h₁) s</code></pre>
+        </div>
+
+        <p><code>obj U</code> が \(\mathcal F(U)\)、<code>res h</code> が \(\rho_{UV}\)（<code>h : V ≤ U</code> は包含の証明）。<code>res_id</code>、<code>res_comp</code> が二つの関手性の公理である。制限写像の引数に「包含の証明」を渡すのが Lean らしいところで、これによって「\(V \subseteq U\) でないのに制限する」という書き間違いが型エラーになる。</p>
+
+        <h3>層の条件</h3>
+        <p>前層が<strong>層</strong>であるとは、開被覆 \(U = \bigcup_i V_i\) に対して次の二つが成り立つことである。</p>
+        <ol class="rule-list">
+          <li><div><strong>局所性（分離性）</strong><p>\(s, t \in \mathcal F(U)\) がすべての \(V_i\) 上で一致すれば \(s = t\)。「関数は局所的に決まる」。</p></div></li>
+          <li><div><strong>貼り合わせ</strong><p>\(s_i \in \mathcal F(V_i)\) が交わり \(V_i \cap V_j\) 上で一致していれば、\(s|_{V_i} = s_i\) となる \(s \in \mathcal F(U)\) がある。「局所的に整合するデータは大域的なデータから来る」。</p></div></li>
+        </ol>
+        <p>一つの式で書けば、次の図式が等化子（equalizer）であること。</p>
+        <p class="math-block">\[ \mathcal F(U) \longrightarrow \prod_i \mathcal F(V_i) \rightrightarrows \prod_{i,j} \mathcal F(V_i \cap V_j). \]</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 07 層</span></div>
+          <pre><code><span class="doc">/-- 開被覆。`U` を覆う開集合の族 `V i ⊆ U`。 -/</span>
+<span class="kw">structure</span> OpenCover {X : TopSpace} (U : Opens X) <span class="kw">where</span>
+  ι : Type
+  V : ι → Opens X
+  le : ∀ i, V i ≤ U
+  covers : ∀ x, U.1 x → ∃ i, (V i).1 x
+
+<span class="doc">/-- 層。前層であって、「局所性」と「貼り合わせ」を満たすもの。 -/</span>
+<span class="kw">structure</span> Sheaf (X : TopSpace) <span class="kw">extends</span> Presheaf X <span class="kw">where</span>
+<span class="doc">  /-- 局所性: 各 `V i` への制限が一致する二つの切断は等しい。 -/</span>
+  locality : ∀ (U : Opens X) (𝒱 : OpenCover U) (s t : obj U),
+    (∀ i, res (𝒱.le i) s = res (𝒱.le i) t) → s = t
+<span class="doc">  /-- 貼り合わせ: 交わりの上で一致する切断の族は、`U` 上の一つの切断から来る。 -/</span>
+  gluing : ∀ (U : Opens X) (𝒱 : OpenCover U) (s : ∀ i, obj (𝒱.V i)),
+    (∀ i j, res (Opens.inter_le_left (𝒱.V i) (𝒱.V j)) (s i)
+          = res (Opens.inter_le_right (𝒱.V i) (𝒱.V j)) (s j)) →
+    ∃ t : obj U, ∀ i, res (𝒱.le i) t = s i</code></pre>
+        </div>
+
+        <p><code>OpenCover U</code> は被覆の型で、添字型 <code>ι</code>、開集合の族 <code>V</code>、各 <code>V i ⊆ U</code> の証明、被覆していることの証明からなる。<code>locality</code> と <code>gluing</code> が二条件で、<code>gluing</code> の仮定にある <code>res (inter_le_left …) (s i) = res (inter_le_right …) (s j)</code> が「\(V_i \cap V_j\) 上で一致」である。<code>Opens.inter_le_left</code> は \(V_i \cap V_j \subseteq V_i\) の証明で、制限写像に渡している。</p>
+        <p>この定義は、集合値の層である。「環の層」「アーベル群の層」は、この上に「各 \(\mathcal F(U)\) が環で、制限が環準同型」という条件を重ねる。それは二章先で行う。</p>
+      </section>
+
+      <section class="article-section" id="stalks">
+        <p class="section-label">08 — STALKS</p>
+        <h2>茎: 一点の近くだけを見る</h2>
+        <p>点 \(x\) における層の<strong>茎</strong> \(\mathcal F_x\) は、雑にいうと<strong>「\(x\) のどんなに小さい近傍でもよいから、そこで定義された切断」の集まり</strong>である。二つの切断は、\(x\) の十分小さい近傍で一致すれば同じとみなす。関数でいえば、\(x\) におけるテイラー展開の全情報のようなものである。</p>
+        <p class="math-block">\[ \mathcal F_x := \varinjlim_{U \ni x} \mathcal F(U) = \Bigl\{ (U, s) \mid x \in U,\ s \in \mathcal F(U) \Bigr\} \Big/ \bigl((U,s)\sim(V,t) \iff \exists W \ni x,\ s|_W = t|_W\bigr). \]</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 08 茎</span></div>
+          <pre><code><span class="kw">section</span> Stalk
+<span class="kw">variable</span> {X : TopSpace} (F : Presheaf X) (x : X)
+
+<span class="doc">/-- 点 `x` の近傍で定義された切断 `(U, s)`。 -/</span>
+<span class="kw">structure</span> Germ <span class="kw">where</span>
+  U : Opens X
+  mem : U.1 x
+  s : F.obj U
+
+<span class="doc">/-- 二つの切断が `x` の近くで一致する。 -/</span>
+<span class="kw">def</span> Germ.equiv (a b : Germ F x) : Prop :=
+  ∃ (W : Opens X) (_ : W.1 x) (h₁ : W ≤ a.U) (h₂ : W ≤ b.U), F.res h₁ a.s = F.res h₂ b.s
+
+<span class="doc">/-- 茎 `F_x = colim_{U ∋ x} F(U)`。切断の芽（germ）全体。 -/</span>
+<span class="kw">def</span> Stalk : Type := Quot (Germ.equiv F x)
+
+<span class="doc">/-- 切断 `s ∈ F(U)` の `x` における芽。 -/</span>
+<span class="kw">def</span> Presheaf.germ {U : Opens X} (hx : U.1 x) (s : F.obj U) : Stalk F x :=
+  Quot.mk _ ⟨U, hx, s⟩
+<span class="kw">end</span> Stalk</code></pre>
+        </div>
+
+        <p><code>Germ F x</code> は「\(x\) を含む開集合 \(U\) と \(U\) 上の切断 \(s\)」の組、<code>Germ.equiv</code> が「\(x\) の近くで一致する」という関係、<code>Stalk F x</code> がその <code>Quot</code>。<code>F.germ hx s</code> は切断 \(s\) の \(x\) における芽 \(s_x\) である。局所化のときと同じパターンで、<strong>「有向極限（順極限）」を、Lean 本体だけで <code>Quot</code> を使って構成している</strong>。</p>
+        <p>なぜ茎が要るのか。次章で「局所環付き空間」を定義するときに、<strong>構造層の茎が局所環である</strong>という条件を課すからである。\(\operatorname{Spec} R\) の場合、点 \(\mathfrak p\) における茎は \(R_{\mathfrak p}\) になり、前章で見たようにこれは局所環である。</p>
+      </section>
+
+      <section class="article-section" id="structure-sheaf">
+        <p class="section-label">09 — STRUCTURE SHEAF</p>
+        <h2>環の層と、Spec R の構造層</h2>
+        <p>ここまでで「空間 \(\operatorname{Spec} R\)」と「層」が別々に定義された。次に \(\operatorname{Spec} R\) の上に<strong>環の層</strong> \(\mathcal O\) を載せる。これが「\(\operatorname{Spec} R\) 上の関数の環」の役割を果たし、環 \(R\) を完全に復元できる（\(\mathcal O(\operatorname{Spec} R) = R\)）。</p>
+        <p>まず、環の層の定義。各 \(\mathcal O(U)\) が可換環で、制限写像がすべて環準同型であればよい。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 09 環の層</span></div>
+          <pre><code><span class="doc">/-- 環の層。各 `obj U` が可換環で、制限写像が環準同型。 -/</span>
+<span class="kw">structure</span> SheafOfRings (X : TopSpace) <span class="kw">extends</span> Sheaf X <span class="kw">where</span>
+  ring : ∀ U, CommRing (obj U)
+  res_add : ∀ {U V : Opens X} (h : V ≤ U) (s t : obj U), res h (s + t) = res h s + res h t
+  res_mul : ∀ {U V : Opens X} (h : V ≤ U) (s t : obj U), res h (s * t) = res h s * res h t
+  res_one : ∀ {U V : Opens X} (h : V ≤ U), res h (1 : obj U) = 1
+
+<span class="kw">attribute</span> [instance] SheafOfRings.ring
+
+<span class="doc">/-- 制限写像を環準同型として取り出す。 -/</span>
+<span class="kw">def</span> SheafOfRings.resHom {X : TopSpace} (𝒪 : SheafOfRings X) {U V : Opens X} (h : V ≤ U) :
+    𝒪.obj U →ᵣ 𝒪.obj V :=
+  ⟨𝒪.res h, 𝒪.res_add h, 𝒪.res_mul h, 𝒪.res_one h⟩
+
+<span class="doc">/-- 環の層の茎は環になる（演習）。 -/</span>
+<span class="kw">noncomputable</span> instance {X : TopSpace} (𝒪 : SheafOfRings X) (x : X) :
+    CommRing (Stalk 𝒪.toPresheaf x) := <span class="sry">sorry</span></code></pre>
+        </div>
+
+        <p><code>ring : ∀ U, CommRing (obj U)</code> が「各 \(\mathcal O(U)\) は環」、<code>res_add</code> 以下が「制限は準同型」である。<code>attribute [instance]</code> は、以後 <code>obj U</code> の元に <code>+</code> や <code>*</code> を自動で使えるようにする宣言である。茎が環になることは <span class="badge badge--ex">演習</span>とした（芽の代表元を共通の近傍に制限して演算する）。</p>
+
+        <h3>構造層 \(\mathcal O_{\operatorname{Spec} R}\)</h3>
+        <p>\(\operatorname{Spec} R\) の開集合 \(U\) 上の「関数」とは何か。答えはこうである。<strong>各点 \(\mathfrak p \in U\) に \(R_{\mathfrak p}\) の元 \(s(\mathfrak p)\) を割り当てる写像で、局所的には一つの分数 \(a/f\) で書けるもの</strong>。</p>
+        <p class="math-block">\[ \mathcal O(U) := \Bigl\{\, s : \prod_{\mathfrak p \in U} R_{\mathfrak p} \ \Bigm|\ \forall \mathfrak p \in U,\ \exists V \ni \mathfrak p,\ \exists a, f \in R,\ \forall \mathfrak q \in V:\ f \notin \mathfrak q,\ s(\mathfrak q) = a/f \in R_{\mathfrak q} \Bigr\}. \]</p>
+        <p>これは複素解析で「正則関数とは、局所的に収束べき級数で書ける関数」と定義するのと同じ形をしている。「局所的に \(a/f\) で書ける」が「局所的にべき級数で書ける」に当たる。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 09 Spec の構造層</span></div>
+          <pre><code><span class="kw">section</span> StructureSheaf
+<span class="kw">variable</span> (R : Type) [CommRing R]
+
+<span class="doc">/-- 開集合 `U ⊆ Spec R` 上の「関数」: 各点 `𝔭 ∈ U` に `R_𝔭` の元を割り当てる写像であって、</span>
+<span class="doc">局所的には一つの分数 `a / f` で書けるもの。 -/</span>
+<span class="kw">def</span> IsLocallyFraction (U : Opens (SpecTop R))
+    (s : ∀ P : PrimeSpectrum R, U.1 P → localizationAt P) : Prop :=
+  ∀ (P : PrimeSpectrum R) (_ : U.1 P),
+    ∃ (V : Opens (SpecTop R)) (_ : V.1 P) (hVU : V ≤ U) (a f : R),
+      ∀ (Q : PrimeSpectrum R) (hQ : V.1 Q),
+        ∃ hf : f ∉ Q.1, s Q (hVU Q hQ) = Localization.mk a f hf
+
+<span class="doc">/-- `Spec R` の構造層 `𝒪_{Spec R}`。`𝒪(U)` は `U` 上の局所的に分数で書ける関数の環。 -/</span>
+<span class="kw">noncomputable</span> def specSheaf : SheafOfRings (SpecTop R) <span class="kw">where</span>
+  obj U := { s : ∀ P : PrimeSpectrum R, U.1 P → localizationAt P // IsLocallyFraction R U s }
+  res h s := ⟨<span class="kw">fun</span> P hP =&gt; s.1 P (h P hP), <span class="sry">sorry</span>⟩
+  res_id := <span class="sry">sorry</span>
+  res_comp := <span class="sry">sorry</span>
+  locality := <span class="sry">sorry</span>
+  gluing := <span class="sry">sorry</span>
+  ring := <span class="sry">sorry</span>    <span class="cm"> -- 各点ごとの足し算・掛け算</span>
+  res_add := <span class="sry">sorry</span>
+  res_mul := <span class="sry">sorry</span>
+  res_one := <span class="sry">sorry</span>
+<span class="kw">end</span> StructureSheaf</code></pre>
+        </div>
+
+        <p><code>IsLocallyFraction U s</code> が上の条件を一字一句そのまま書いたものである。Lean の <code>∀ (P) (_ : U.1 P), ∃ (V) (_ : V.1 P) (hVU : V ≤ U) (a f : R), ∀ (Q) (hQ : V.1 Q), ∃ hf : f ∉ Q.1, s Q … = Localization.mk a f hf</code> を、数式の量化子と一つずつ対応させてほしい。最後の <code>Localization.mk a f hf</code> は \(R_{\mathfrak q}\) の元 \(a/f\) で、<code>hf</code> は「\(f \notin \mathfrak q\) なので分母として許される」証明である。</p>
+        <p><code>specSheaf</code> の各フィールドは <code>sorry</code> が多い。制限写像そのものは定義してある（\(s\) を小さい開集合に絞るだけ）。層であること、各 \(\mathcal O(U)\) が環であること（点ごとの演算）は <span class="badge badge--ex">演習</span>である。<strong>重要なのは、この定義が型検査を通ること</strong>、つまり「局所的に分数で書ける関数」という概念が、それまでに定義した素スペクトル・ザリスキ位相・局所化だけで書けている、という事実である。</p>
+        <p>そして、この層について次が成り立つ（Hartshorne II.2.2）。これらは本物の定理であり、このノートでは述べるだけにする。</p>
+        <p class="math-block">\[ \mathcal O_{\mathfrak p} \cong R_{\mathfrak p},\qquad \mathcal O(D(f)) \cong R[1/f],\qquad \mathcal O(\operatorname{Spec} R) \cong R. \]</p>
+      </section>
+      <section class="article-section" id="lrs">
+        <p class="section-label">10 — LOCALLY RINGED SPACES</p>
+        <h2>局所環付き空間と、その射</h2>
+        <p>\(\operatorname{Spec} R\) は「位相空間 + 環の層」という組になった。この組の一般形が<strong>環付き空間</strong>で、さらに「各茎が局所環」という条件を付けたのが<strong>局所環付き空間</strong>である。</p>
+        <p>なぜ茎が局所環である必要があるのか。局所環 \(\mathcal O_x\) の唯一の極大イデアル \(\mathfrak m_x\) が「\(x\) で消える関数」の役割を果たし、\(\mathcal O_x / \mathfrak m_x\) が「\(x\) における値の体」になる。<strong>この構造があるからこそ、「関数を点で評価する」という操作が、点集合を一切使わずに定義できる。</strong></p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 10 局所環付き空間</span></div>
+          <pre><code><span class="doc">/-- 環付き空間: 位相空間と、その上の環の層。 -/</span>
+<span class="kw">structure</span> RingedSpace <span class="kw">where</span>
+  X : TopSpace
+  𝒪 : SheafOfRings X
+
+<span class="doc">/-- 局所環付き空間: すべての茎 `𝒪_x` が局所環である環付き空間。 -/</span>
+<span class="kw">structure</span> LocallyRingedSpace <span class="kw">extends</span> RingedSpace <span class="kw">where</span>
+  isLocal : ∀ x : X, IsLocalRing (Stalk 𝒪.toPresheaf x)
+
+<span class="doc">/-- アフィンスキーム `Spec R`（局所環付き空間として）。茎 `𝒪_𝔭 ≅ R_𝔭` が局所環であることは演習。 -/</span>
+<span class="kw">noncomputable</span> def Spec (R : Type) [CommRing R] : LocallyRingedSpace <span class="kw">where</span>
+  X := SpecTop R
+  𝒪 := specSheaf R
+  isLocal := <span class="sry">sorry</span></code></pre>
+        </div>
+
+        <p><code>Spec R</code> が局所環付き空間になることは、茎 \(\mathcal O_{\mathfrak p} \cong R_{\mathfrak p}\) が局所環であることに帰着し、<span class="badge badge--ex">演習</span>とした。</p>
+
+        <h3>射</h3>
+        <p>局所環付き空間の射 \((f, f^\sharp) : X \to Y\) は、連続写像 \(f : X \to Y\) と、各開集合 \(V \subseteq Y\) ごとの環準同型</p>
+        <p class="math-block">\[ f^\sharp_V : \mathcal O_Y(V) \longrightarrow \mathcal O_X(f^{-1}V) \]</p>
+        <p>の組で、制限と両立し、さらに各点 \(x\) で誘導される茎の準同型 \(f^\sharp_x : \mathcal O_{Y, f(x)} \to \mathcal O_{X, x}\) が<strong>局所準同型</strong>であるものである。</p>
+        <p>直感はこうである。\(f^\sharp\) は「\(Y\) 上の関数を \(f\) で引き戻す」操作 \(g \mapsto g \circ f\) である。局所準同型の条件は、「\(g\) が \(f(x)\) で消えるなら、\(g \circ f\) は \(x\) で消える」、つまり<strong>関数の引き戻しが、点の値を正しく引き戻す</strong>ことを保証する。この条件を落とすと、\(\operatorname{Spec}\) の射と環準同型の対応（\(\operatorname{Hom}(\operatorname{Spec} S, \operatorname{Spec} R) \cong \operatorname{Hom}(R, S)\)）が壊れる。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 10 射・恒等・合成・同型</span></div>
+          <pre><code><span class="doc">/-- 局所環付き空間の射 `(f, f♯) : X → Y`。</span>
+<span class="doc">連続写像 `f` と、各開集合 `V ⊆ Y` ごとの環準同型 `f♯_V : 𝒪_Y(V) → 𝒪_X(f⁻¹V)`。</span>
+<span class="doc">制限と両立し、茎に誘導される準同型 `𝒪_{Y,f(x)} → 𝒪_{X,x}` が局所準同型。 -/</span>
+<span class="kw">structure</span> LRSHom (X Y : LocallyRingedSpace) <span class="kw">where</span>
+  base : ContinuousMap X.X Y.X
+  sharp : ∀ V : Opens Y.X, Y.𝒪.obj V →ᵣ X.𝒪.obj (base.preimage V)
+  sharp_res : ∀ {V W : Opens Y.X} (h : W ≤ V) (s : Y.𝒪.obj V),
+    X.𝒪.res (<span class="kw">fun</span> _ hx =&gt; h _ hx) (sharp V s) = sharp W (Y.𝒪.res h s)
+  stalk_local : ∀ (x : X.X) (V : Opens Y.X) (hx : V.1 (base.toFun x)) (s : Y.𝒪.obj V),
+    IsUnit (X.𝒪.germ x hx (sharp V s)) → IsUnit (Y.𝒪.germ (base.toFun x) hx s)
+
+<span class="kw">infixr</span>:10 &quot; ⟶ &quot; =&gt; LRSHom
+
+<span class="doc">/-- 恒等射。 -/</span>
+<span class="kw">def</span> LRSHom.id (X : LocallyRingedSpace) : X ⟶ X <span class="kw">where</span>
+  base := ⟨<span class="kw">fun</span> x =&gt; x, <span class="kw">fun</span> U hU =&gt; hU⟩
+  sharp V := RingHom.id _
+  sharp_res := <span class="sry">sorry</span>
+  stalk_local := <span class="sry">sorry</span>
+
+<span class="doc">/-- 合成。 -/</span>
+<span class="kw">def</span> LRSHom.comp {X Y Z : LocallyRingedSpace} (f : X ⟶ Y) (g : Y ⟶ Z) : X ⟶ Z <span class="kw">where</span>
+  base := ⟨<span class="kw">fun</span> x =&gt; g.base.toFun (f.base.toFun x), <span class="sry">sorry</span>⟩
+  sharp W := RingHom.comp (f.sharp (g.base.preimage W)) (g.sharp W)
+  sharp_res := <span class="sry">sorry</span>
+  stalk_local := <span class="sry">sorry</span>
+
+<span class="doc">/-- 同型。互いに逆な射の組。 -/</span>
+<span class="kw">structure</span> LRSIso (X Y : LocallyRingedSpace) <span class="kw">where</span>
+  hom : X ⟶ Y
+  inv : Y ⟶ X
+  hom_inv : LRSHom.comp hom inv = LRSHom.id X
+  inv_hom : LRSHom.comp inv hom = LRSHom.id Y</code></pre>
+        </div>
+
+        <p><code>stalk_local</code> の書き方に注意。茎の写像を構成する代わりに、「\(V\) 上の切断 \(s\) について、\(f^\sharp(s)\) の \(x\) での芽が可逆なら \(s\) の \(f(x)\) での芽も可逆」と述べている。これは茎の局所準同型性を、芽のレベルで書き下したものである。茎の写像を <code>Quot.lift</code> で作る手間を避けつつ、数学的には同じ内容になっている。</p>
+        <p><code>LRSIso</code> は同型で、互いに逆な射の組である。次章のスキームの定義で「\(\operatorname{Spec} R\) と同型」を言うために使う。</p>
+
+        <h3>開集合への制限</h3>
+        <p>「\(X\) の開集合 \(U\) は、それ自身が局所環付き空間である」。層を \(U\) の開集合だけに絞ればよい。これも定義しておく。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 10 開集合への制限</span></div>
+          <pre><code><span class="kw">section</span> Restrict
+<span class="kw">variable</span> (X : LocallyRingedSpace) (U : Opens X.X)
+
+<span class="doc">/-- 開集合 `U` を部分空間として位相空間にする。 -/</span>
+<span class="kw">def</span> Opens.toTopSpace : TopSpace <span class="kw">where</span>
+  carrier := { x : X.X // U.1 x }
+  top :=
+    { IsOpen := <span class="kw">fun</span> V =&gt; ∃ W : Opens X.X, ∀ x, V x ↔ W.1 x.1
+      isOpen_univ := ⟨Opens.univ, <span class="kw">fun</span> _ =&gt; ⟨<span class="kw">fun</span> _ =&gt; trivial, <span class="kw">fun</span> _ =&gt; trivial⟩⟩
+      isOpen_inter := <span class="sry">sorry</span>
+      isOpen_sUnion := <span class="sry">sorry</span> }
+
+<span class="doc">/-- 部分空間 `U` の開集合を `X` の開集合として見る（`U` が開なので開になる）。 -/</span>
+<span class="kw">def</span> Opens.ofSub (V : Opens (Opens.toTopSpace X U)) : Opens X.X :=
+  ⟨<span class="kw">fun</span> x =&gt; ∃ h : U.1 x, V.1 ⟨x, h⟩, <span class="sry">sorry</span>⟩
+
+<span class="doc">/-- 局所環付き空間を開集合 `U` に制限したもの `(U, 𝒪_X|_U)`。 -/</span>
+<span class="kw">noncomputable</span> def LocallyRingedSpace.restrict : LocallyRingedSpace <span class="kw">where</span>
+  X := Opens.toTopSpace X U
+  𝒪 := { obj := <span class="kw">fun</span> V =&gt; X.𝒪.obj (Opens.ofSub X U V),
+          res := <span class="kw">fun</span> h s =&gt; X.𝒪.res (<span class="sry">sorry</span>) s,
+          res_id := <span class="sry">sorry</span>, res_comp := <span class="sry">sorry</span>, locality := <span class="sry">sorry</span>, gluing := <span class="sry">sorry</span>,
+          ring := <span class="kw">fun</span> _ =&gt; X.𝒪.ring _,
+          res_add := <span class="sry">sorry</span>, res_mul := <span class="sry">sorry</span>, res_one := <span class="sry">sorry</span> }
+  isLocal := <span class="sry">sorry</span>
+<span class="kw">end</span> Restrict</code></pre>
+        </div>
+
+        <p>部分空間の位相、部分空間の開集合を \(X\) の開集合と見なす操作、層の制限、の三段構えである。証明はほとんど <code>sorry</code> だが、<strong>データの流れ</strong>（\(U\) の開集合 \(V\) に対して \(\mathcal O_X|_U(V) := \mathcal O_X(V)\)、ただし \(V\) を \(X\) の開集合として読む）は書いてある。</p>
+      </section>
+
+      <section class="article-section" id="schemes">
+        <p class="section-label">11 — SCHEMES</p>
+        <h2>スキーム: 局所的に Spec であるもの</h2>
+        <p>ようやくスキームである。定義は一行で言える。<strong>スキームとは、局所環付き空間であって、各点が、あるアフィンスキーム \(\operatorname{Spec} R\) と同型な開近傍を持つもの</strong>。多様体が「局所的に \(\mathbb R^n\)」であるのと同じ形の定義である。</p>
+        <p class="math-block">\[ \forall x \in X,\ \exists U \ni x \text{ 開},\ \exists R,\quad (U, \mathcal O_X|_U) \cong \operatorname{Spec} R. \]</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 11 スキーム</span></div>
+          <pre><code><span class="doc">/-- スキーム。局所環付き空間であって、各点が、あるアフィンスキーム `Spec R` と同型な</span>
+<span class="doc">開近傍を持つもの。 -/</span>
+<span class="kw">structure</span> Scheme <span class="kw">extends</span> LocallyRingedSpace <span class="kw">where</span>
+  local_affine : ∀ x : X, ∃ (U : Opens X) (_ : U.1 x) (R : Type) (_ : CommRing R),
+    Nonempty (LRSIso (toLocallyRingedSpace.restrict U) (Spec R))
+
+<span class="doc">/-- スキームの射は局所環付き空間の射。 -/</span>
+<span class="kw">def</span> Scheme.Hom (X Y : Scheme) : Type := X.toLocallyRingedSpace ⟶ Y.toLocallyRingedSpace
+
+<span class="doc">/-- アフィン開集合: `U` の上への制限が、ある `Spec R` と同型。 -/</span>
+<span class="kw">def</span> Scheme.IsAffineOpen (X : Scheme) (U : Opens X.X) : Prop :=
+  ∃ (R : Type) (_ : CommRing R), Nonempty (LRSIso (X.toLocallyRingedSpace.restrict U) (Spec R))
+
+<span class="doc">/-- `f : X → Y`、`U ⊆ Y`、`V ⊆ f⁻¹U` に対する環準同型 `𝒪_Y(U) → 𝒪_X(f⁻¹U) → 𝒪_X(V)`。 -/</span>
+<span class="kw">def</span> Scheme.Hom.appLE {X Y : Scheme} (f : Scheme.Hom X Y) (U : Opens Y.X) (V : Opens X.X)
+    (h : V ≤ f.base.preimage U) : Y.𝒪.obj U →ᵣ X.𝒪.obj V :=
+  RingHom.comp (X.𝒪.resHom h) (f.sharp U)</code></pre>
+        </div>
+
+        <p><code>local_affine</code> がその一行である。<code>∃ (U) (_ : U.1 x) (R) (_ : CommRing R), Nonempty (LRSIso (restrict U) (Spec R))</code>——「\(x\) を含む開集合 \(U\)、環 \(R\)、そして \(U\) への制限と \(\operatorname{Spec} R\) の同型が存在する」。<code>Nonempty</code> は「同型が少なくとも一つある」という命題で、特定の同型を選ばないために使っている。</p>
+        <p>ここで振り返ると、<strong>スキームの定義に必要なものが全部、前の章で自分の手で定義されている</strong>ことがわかる。可換環（02）、素イデアル（04）、\(\operatorname{Spec}\) と位相（05）、局所化（06）、層（07）、茎（08）、構造層（09）、局所環付き空間と射と制限（10）。どれか一つが抜けていれば、この <code>structure Scheme</code> は型検査を通らない。</p>
+
+        <h3>スキームの射と、アフィン開集合</h3>
+        <p>スキームの射は、局所環付き空間の射そのものである（追加の条件はない）。後でエタール射を定義するために、二つの道具を用意しておく。「開集合 \(U\) がアフィン」とは \(U\) への制限が何かの \(\operatorname{Spec} R\) と同型であること。そして \(f : X \to Y\)、\(U \subseteq Y\)、\(V \subseteq f^{-1}U\) に対する環準同型</p>
+        <p class="math-block">\[ f^\sharp_{U,V} : \mathcal O_Y(U) \xrightarrow{\ f^\sharp_U\ } \mathcal O_X(f^{-1}U) \xrightarrow{\ \text{制限}\ } \mathcal O_X(V). \]</p>
+        <p>これは <code>Scheme.Hom.appLE</code> として、\(f^\sharp_U\) と制限写像の合成で定義してある。<strong>エタール射とは、\(U, V\) がアフィンのとき、この環準同型 \(f^\sharp_{U,V}\) がつねにエタールであるような射</strong>、と定義することになる。つまり幾何の条件を、環準同型の条件に帰着させる。そのために、次はいったん幾何を離れて、圏とサイトの一般論を書く。</p>
+      </section>
+      <section class="article-section" id="sites">
+        <p class="section-label">12 — GROTHENDIECK TOPOLOGIES</p>
+        <h2>圏、篩、グロタンディーク位相</h2>
+        <p>ここで一度立ち止まって、<strong>なぜ位相を差し替えるのか</strong>を言っておく。前章までで、スキームとその上の層は定義できた。ザリスキ位相で層コホモロジーを取ることもできる。しかしそれは、定数層 \(\mathbb Z/n\) に対して<strong>ほとんど何も見えない</strong>。理由は、ザリスキ位相の開集合が大きすぎて（既約なスキームでは任意の二つの空でない開集合が交わる）、定数層の高次コホモロジーが消えてしまうからである。複素多様体の特異コホモロジー \(H^i(X(\mathbb C), \mathbb Z/n)\) に対応するものを代数的に作りたいのに、ザリスキ位相ではそれができない。</p>
+        <p>グロタンディークの答えは、<strong>「開集合 \(U \subseteq X\)」の代わりに「エタール射 \(U \to X\)」を使う</strong>ことだった。エタール射は「局所同相の代数版」で、開埋め込みだけでなく、たとえば \(\mathbb C^\times \to \mathbb C^\times,\ z \mapsto z^n\) のような被覆写像も含む。被覆写像を「開被覆」の仲間に入れてやると、定数層が非自明なコホモロジーを持つようになる。</p>
+        <p>ただしそのためには、「開集合の族」を「対象への射の族」に一般化し、「被覆」の公理を書き直さなければならない。これが<strong>グロタンディーク位相</strong>である。以下、圏・篩・被覆の三段で定義する。</p>
+
+        <h3>圏</h3>
+        <p>圏は、対象の型、各対象の組ごとの射の型、恒等射、合成、そして単位律と結合律である。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 12 圏</span></div>
+          <pre><code><span class="kw">universe</span> u
+
+<span class="doc">/-- （小さいとは限らない）圏。対象の型、射の型、恒等射、合成、公理。 -/</span>
+<span class="kw">structure</span> Category <span class="kw">where</span>
+  Obj : Type u
+  Hom : Obj → Obj → Type
+  id : ∀ X, Hom X X
+  comp : ∀ {X Y Z}, Hom X Y → Hom Y Z → Hom X Z
+  id_comp : ∀ {X Y} (f : Hom X Y), comp (id X) f = f
+  comp_id : ∀ {X Y} (f : Hom X Y), comp f (id Y) = f
+  assoc : ∀ {W X Y Z} (f : Hom W X) (g : Hom X Y) (h : Hom Y Z),
+    comp (comp f g) h = comp f (comp g h)</code></pre>
+        </div>
+
+        <p><code>Obj : Type u</code> と宇宙変数 <code>u</code> が付いているのは、後でエタールサイトの対象（スキーム）が <code>Type 1</code> に住むためである。合成 <code>comp f g</code> は図式順（\(f\) の次に \(g\)、数学の \(g \circ f\)）で書いている。</p>
+
+        <h3>篩（ふるい）</h3>
+        <p>「開集合 \(U\) の部分開集合の族で、さらに小さい開集合を取っても閉じているもの」を圏の言葉に翻訳したのが<strong>篩</strong>である。対象 \(U\) 上の篩 \(S\) とは、\(U\) に向かう射の集まりであって、前から何を合成しても閉じているもの。</p>
+        <p class="math-block">\[ (f : V \to U) \in S,\ (g : W \to V) \ \Longrightarrow\ f \circ g \in S. \]</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 12 篩</span></div>
+          <pre><code><span class="kw">section</span> Sieves
+<span class="kw">variable</span> {C : Category.{u}}
+
+<span class="doc">/-- 対象 `U` 上の篩（ふるい）。`U` に向かう射の集まりで、前から射を合成しても閉じているもの。</span>
+<span class="doc">「開集合 U の部分開集合の族で、さらに小さい開集合を取っても閉じているもの」の一般化。 -/</span>
+<span class="kw">structure</span> Sieve (U : C.Obj) <span class="kw">where</span>
+  arrows : ∀ {V : C.Obj}, C.Hom V U → Prop
+  downward_closed : ∀ {V W : C.Obj} {f : C.Hom V U}, arrows f → ∀ (g : C.Hom W V), arrows (C.comp g f)
+
+<span class="doc">/-- 篩の引き戻し `f⁎S = { g | g ≫ f ∈ S }`。「開集合の族を f⁻¹ で引き戻す」に対応。 -/</span>
+<span class="kw">def</span> Sieve.pullback {U V : C.Obj} (S : Sieve U) (f : C.Hom V U) : Sieve V <span class="kw">where</span>
+  arrows g := S.arrows (C.comp g f)
+  downward_closed {_ _ g} hg h := <span class="kw">by</span>
+    <span class="kw">show</span> S.arrows (C.comp (C.comp h g) f)
+    <span class="kw">rw</span> [C.assoc]; <span class="kw">exact</span> S.downward_closed hg h
+
+<span class="doc">/-- 最大の篩: すべての射。 -/</span>
+<span class="kw">def</span> Sieve.top (U : C.Obj) : Sieve U := ⟨<span class="kw">fun</span> _ =&gt; True, <span class="kw">fun</span> _ _ =&gt; trivial⟩</code></pre>
+        </div>
+
+        <p><code>Sieve.pullback S f</code> は篩の引き戻し \(f^*S = \{g \mid f \circ g \in S\}\) で、「開集合の族を \(f^{-1}\) で引き戻す」に対応する。<code>Sieve.top U</code> はすべての射からなる最大の篩で、「\(U\) 自身一つで \(U\) を覆う」に対応する。</p>
+
+        <h3>グロタンディーク位相</h3>
+        <p>グロタンディーク位相とは、各対象 \(U\) に対して「被覆篩」と呼ぶ篩の集まり \(J(U)\) を指定したもので、次の三公理を満たす。</p>
+        <ol class="rule-list">
+          <li><div><strong>(T1) 最大篩は被覆</strong><p>\(U\) 自身で \(U\) は覆える。</p></div></li>
+          <li><div><strong>(T2) 引き戻しで安定</strong><p>\(S \in J(U)\)、\(f : V \to U\) なら \(f^*S \in J(V)\)。「\(U\) の被覆を \(V\) に引き戻せば \(V\) の被覆」。</p></div></li>
+          <li><div><strong>(T3) 局所性（推移性）</strong><p>\(S \in J(U)\) で、\(S\) の各 \(f : V \to U\) について \(f^*T \in J(V)\) なら \(T \in J(U)\)。「被覆の各ピースの上で被覆なら、全体でも被覆」。</p></div></li>
+        </ol>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 12 グロタンディーク位相</span></div>
+          <pre><code><span class="doc">/-- グロタンディーク位相。各対象 `U` に「被覆篩」の集まり `covering U` を指定したもので、</span>
+<span class="doc">(T1) 最大篩は被覆、(T2) 被覆篩の引き戻しは被覆、(T3) 局所的に被覆なら被覆、を満たす。 -/</span>
+<span class="kw">structure</span> GrothendieckTopology (C : Category.{u}) <span class="kw">where</span>
+  covering : ∀ (U : C.Obj), Sieve U → Prop
+  top_mem : ∀ U, covering U (Sieve.top U)
+  pullback_stable : ∀ {U V : C.Obj} (S : Sieve U) (f : C.Hom V U), covering U S → covering V (S.pullback f)
+  transitive : ∀ {U : C.Obj} (S : Sieve U) (T : Sieve U), covering U S →
+    (∀ {V : C.Obj} (f : C.Hom V U), S.arrows f → covering V (T.pullback f)) → covering U T
+<span class="kw">end</span> Sieves</code></pre>
+        </div>
+
+        <p>位相空間の開被覆の公理（05章の <code>Topology</code>）と見比べてほしい。「全体は開」「交叉で閉じる」「和で閉じる」が、それぞれ (T1)(T2)(T3) に化けている。しかし決定的な違いは、<strong>もはや「点」も「部分集合」も出てこない</strong>ことである。すべてが射で書かれている。だからこそ、開埋め込みでない射（エタール射）を「被覆」に含めることができる。</p>
+      </section>
+
+      <section class="article-section" id="site-sheaves">
+        <p class="section-label">13 — SHEAVES ON A SITE</p>
+        <h2>サイト上の層</h2>
+        <p>圏とグロタンディーク位相の組を<strong>サイト</strong>と呼ぶ。サイト上の層を定義するには、07章の層の条件を篩の言葉に書き直せばよい。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 13 サイト</span></div>
+          <pre><code><span class="doc">/-- サイト = 圏 + グロタンディーク位相。 -/</span>
+<span class="kw">structure</span> Site <span class="kw">where</span>
+  C : Category.{u}
+  J : GrothendieckTopology C
+
+<span class="kw">section</span> SiteSheaf
+<span class="kw">variable</span> {C : Category.{u}}</code></pre>
+        </div>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 13 圏上の前層</span></div>
+          <pre><code><span class="doc">/-- 圏 `C` 上の（集合値の）前層。反変関手 `Cᵒᵖ → Set`。 -/</span>
+<span class="kw">structure</span> CPresheaf (C : Category.{u}) <span class="kw">where</span>
+  obj : C.Obj → Type
+  map : ∀ {U V : C.Obj}, C.Hom V U → obj U → obj V
+  map_id : ∀ (U : C.Obj) (s : obj U), map (C.id U) s = s
+  map_comp : ∀ {U V W : C.Obj} (f : C.Hom V U) (g : C.Hom W V) (s : obj U),
+    map g (map f s) = map (C.comp g f) s</code></pre>
+        </div>
+
+        <p>圏上の前層は、単に反変関手 \(C^{\mathrm{op}} \to \mathbf{Set}\) である。07章の <code>Presheaf</code> と比べると、<code>res (h : V ≤ U)</code> が <code>map (f : Hom V U)</code> に置き換わっただけである。「包含の証明」が「射」になった。</p>
+
+        <h3>層条件を篩で書く</h3>
+        <p>07章の層の条件は「被覆 \(\{V_i \to U\}\) の上の整合的な切断の族は、ただ一つの切断に貼り合う」だった。篩 \(S\) について同じことを言う。</p>
+        <p class="math-block">\[ \text{切断の族: } x = (x_f)_{f \in S},\ x_f \in \mathcal F(V) \text{ for } f : V \to U. \]</p>
+        <p class="math-block">\[ \text{両立: } \forall (f : V \to U) \in S,\ \forall (g : W \to V),\quad g^* x_f = x_{f \circ g}. \]</p>
+        <p class="math-block">\[ \text{貼り合わせ } t \in \mathcal F(U):\quad \forall f \in S,\ f^* t = x_f. \]</p>
+        <p>層であるとは、すべての被覆篩 \(S \in J(U)\) について、両立する族がただ一つの貼り合わせを持つことである。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 13 篩に対する層条件</span></div>
+          <pre><code><span class="doc">/-- 篩 `S` に沿った「切断の族」: `S` に属する各射 `f : V → U` に切断 `x f ∈ F(V)` を割り当てたもの。 -/</span>
+<span class="kw">def</span> FamilyOfElements (F : CPresheaf C) {U : C.Obj} (S : Sieve U) : Type u :=
+  ∀ {V : C.Obj} (f : C.Hom V U), S.arrows f → F.obj V
+
+<span class="doc">/-- 両立する族: 射をさらに合成しても割り当てが整合する（開集合の言葉では「交わりの上で一致」）。 -/</span>
+<span class="kw">def</span> FamilyOfElements.Compatible {F : CPresheaf C} {U : C.Obj} {S : Sieve U}
+    (x : FamilyOfElements F S) : Prop :=
+  ∀ {V W : C.Obj} (f : C.Hom V U) (hf : S.arrows f) (g : C.Hom W V),
+    F.map g (x f hf) = x (C.comp g f) (S.downward_closed hf g)
+
+<span class="doc">/-- `t ∈ F(U)` が族 `x` の貼り合わせ（融合）であること。 -/</span>
+<span class="kw">def</span> FamilyOfElements.IsAmalgamation {F : CPresheaf C} {U : C.Obj} {S : Sieve U}
+    (x : FamilyOfElements F S) (t : F.obj U) : Prop :=
+  ∀ {V : C.Obj} (f : C.Hom V U) (hf : S.arrows f), F.map f t = x f hf
+
+<span class="doc">/-- 前層 `F` が篩 `S` について層条件を満たす: 両立する族はただ一つの貼り合わせを持つ。 -/</span>
+<span class="kw">def</span> IsSheafFor (F : CPresheaf C) {U : C.Obj} (S : Sieve U) : Prop :=
+  ∀ x : FamilyOfElements F S, x.Compatible →
+    ∃ t : F.obj U, x.IsAmalgamation t ∧ ∀ t&#x27;, x.IsAmalgamation t&#x27; → t&#x27; = t
+
+<span class="doc">/-- サイト上の層: すべての被覆篩について層条件を満たす前層。 -/</span>
+<span class="kw">structure</span> CSheaf (𝒳 : Site.{u}) <span class="kw">extends</span> CPresheaf 𝒳.C <span class="kw">where</span>
+  isSheaf : ∀ (U : 𝒳.C.Obj) (S : Sieve U), 𝒳.J.covering U S → IsSheafFor toCPresheaf S
+<span class="kw">end</span> SiteSheaf</code></pre>
+        </div>
+
+        <p>読み方。<code>FamilyOfElements F S</code> は「\(S\) の各射 \(f\) に \(\mathcal F(V)\) の元を割り当てる関数」（依存関数型 <code>∀ {V} (f : Hom V U), S.arrows f → F.obj V</code>）。<code>Compatible</code> の条件 <code>F.map g (x f hf) = x (C.comp g f) …</code> は「\(x_f\) を \(g\) で引き戻したものは \(x_{f\circ g}\) に等しい」。07章の「\(V_i \cap V_j\) の上で一致」が、ここでは「任意の \(g\) で引き戻して一致」に一般化されている。交わり \(V_i \cap V_j\) は、圏の言葉ではファイバー積 \(V_i \times_U V_j\) であり、篩の定式化を使うとファイバー積の存在を仮定せずに層条件が書ける、というのが技術的な利点である。</p>
+        <p><code>IsSheafFor</code> の結論 <code>∃ t, IsAmalgamation t ∧ ∀ t', IsAmalgamation t' → t' = t</code> が「ただ一つ」の展開形である。<code>CSheaf 𝒳</code> は、この条件をすべての被覆篩に課した前層である。</p>
+        <p>これでサイトの一般論は終わりである。あとは<strong>「\(X\) 上エタールなスキームの圏」に「全射な族を被覆とする位相」を載せる</strong>だけで、エタールサイトができる。そのために、エタール射を定義する。</p>
+      </section>
+      <section class="article-section" id="etale-alg">
+        <p class="section-label">14 — ÉTALE ALGEBRAS</p>
+        <h2>エタール代数: 「局所同相」の代数版</h2>
+        <p>エタール射は、雑にいうと<strong>「微分が同型な写像」の代数幾何版</strong>である。複素解析なら、\(f'(z) \ne 0\) のとき \(f\) は局所的に双正則写像になる（逆関数定理）。\(z \mapsto z^n\) は原点以外でエタールである。代数幾何ではザリスキ位相が粗すぎて「局所的に同型」にはならないが、「無限小のレベルでは同型」という条件を課すことができる。それが<strong>形式的エタール</strong>である。</p>
+
+        <h3>無限小持ち上げ条件</h3>
+        <p>\(R\)-代数 \(A\) が形式的エタールであるとは、任意の \(R\)-代数 \(B\) と、二乗すると \(0\) になるイデアル \(I \subseteq B\)（\(I^2 = 0\)）について、次の持ち上げがただ一通りに存在することである。</p>
+        <p class="math-block">\[ \begin{array}{ccc} A & \xrightarrow{\ \ g\ \ } & B/I \\ & {\scriptstyle \exists!\, f\ \nearrow} & \big\uparrow \pi \\ & & B \end{array} \qquad\text{つまり}\qquad \operatorname{Hom}_R(A, B) \xrightarrow{\ \pi\circ -\ } \operatorname{Hom}_R(A, B/I) \text{ は全単射}. \]</p>
+        <p>直感はこうである。\(B/I\) は \(B\) の「一次近似」で、\(B \to B/I\) は無限小の情報を落とす。\(A\) が形式的エタールとは、<strong>\(A\) から \(B/I\) への写像が与えられれば、それを無限小の分だけ「ただ一通りに」延長できる</strong>、ということ。存在だけ（「少なくとも一つ」）なら<strong>形式的スムーズ</strong>、一意性だけ（「高々一つ」）なら<strong>形式的不分岐</strong>である。逆関数定理で「\(f'\ne0\) なら局所的に逆が一意に存在する」と言うのと同じ構造である。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 14 R-代数</span></div>
+          <pre><code><span class="kw">section</span> Algebras
+<span class="kw">variable</span> {R : Type} [CommRing R]
+
+<span class="doc">/-- `R`-代数: 可換環 `A` と環準同型 `R → A`（構造射）。 -/</span>
+<span class="kw">structure</span> Algebra (R A : Type) [CommRing R] [CommRing A] <span class="kw">where</span>
+  algebraMap : R →ᵣ A
+
+<span class="doc">/-- `R`-代数の準同型: 構造射と両立する環準同型。 -/</span>
+<span class="kw">structure</span> AlgHom {A B : Type} [CommRing A] [CommRing B] (𝒜 : Algebra R A) (ℬ : Algebra R B) <span class="kw">where</span>
+  toRingHom : A →ᵣ B
+  commutes : ∀ r, toRingHom (𝒜.algebraMap r) = ℬ.algebraMap r</code></pre>
+        </div>
+
+        <p>\(R\)-代数とは、環 \(A\) と構造射 \(R \to A\) の組である。\(R\)-代数の準同型は構造射と両立する環準同型（<code>commutes</code>）。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 14 形式的エタール・不分岐・スムーズ</span></div>
+          <pre><code><span class="doc">/-- 「二乗零の核を持つ全射」: `π : B → C` 全射で、`ker π · ker π = 0`。</span>
+<span class="doc">`C = B / I`, `I² = 0` という状況を、商環を構成せずに表現している。 -/</span>
+<span class="kw">structure</span> SquareZeroExt {B C : Type} [CommRing B] [CommRing C] (π : B →ᵣ C) : Prop <span class="kw">where</span>
+  surj : Function.Surjective π.toFun
+  sq_zero : ∀ a b, π a = 0 → π b = 0 → a * b = 0
+
+<span class="doc">/-- 形式的エタール: 任意の二乗零拡大 `π : B → C` に対し、`A → C` は `A → B` にただ一通りに持ち上がる。</span>
+<span class="doc">図式: A ⟶ C を、A ⟶ B ⟶ C と分解する仕方が「ちょうど一つ」。 -/</span>
+<span class="kw">def</span> Algebra.FormallyEtale {A : Type} [CommRing A] (𝒜 : Algebra R A) : Prop :=
+  ∀ (B C : Type) [CommRing B] [CommRing C] (ℬ : Algebra R B) (𝒞 : Algebra R C)
+    (π : AlgHom ℬ 𝒞), SquareZeroExt π.toRingHom →
+    ∀ (g : AlgHom 𝒜 𝒞),
+      ∃ (f : AlgHom 𝒜 ℬ), (∀ a, π.toRingHom (f.toRingHom a) = g.toRingHom a) ∧
+        ∀ (f&#x27; : AlgHom 𝒜 ℬ), (∀ a, π.toRingHom (f&#x27;.toRingHom a) = g.toRingHom a) → f&#x27; = f
+
+<span class="doc">/-- 形式的不分岐: 持ち上げは高々一つ。 -/</span>
+<span class="kw">def</span> Algebra.FormallyUnramified {A : Type} [CommRing A] (𝒜 : Algebra R A) : Prop :=
+  ∀ (B C : Type) [CommRing B] [CommRing C] (ℬ : Algebra R B) (𝒞 : Algebra R C)
+    (π : AlgHom ℬ 𝒞), SquareZeroExt π.toRingHom →
+    ∀ (f₁ f₂ : AlgHom 𝒜 ℬ), (∀ a, π.toRingHom (f₁.toRingHom a) = π.toRingHom (f₂.toRingHom a)) → f₁ = f₂
+
+<span class="doc">/-- 形式的スムーズ: 持ち上げが少なくとも一つ。 -/</span>
+<span class="kw">def</span> Algebra.FormallySmooth {A : Type} [CommRing A] (𝒜 : Algebra R A) : Prop :=
+  ∀ (B C : Type) [CommRing B] [CommRing C] (ℬ : Algebra R B) (𝒞 : Algebra R C)
+    (π : AlgHom ℬ 𝒞), SquareZeroExt π.toRingHom →
+    ∀ (g : AlgHom 𝒜 𝒞), ∃ (f : AlgHom 𝒜 ℬ), ∀ a, π.toRingHom (f.toRingHom a) = g.toRingHom a
+<span class="kw">end</span> Algebras</code></pre>
+        </div>
+
+        <p>技術的な工夫を一つ。商環 \(B/I\) を構成する代わりに、<strong>「二乗零の核を持つ全射 \(\pi : B \to C\)」</strong>という形で状況を表現している（<code>SquareZeroExt</code>）。\(\ker \pi = I\)、\(C \cong B/I\) なので数学的には同じであり、商環の構成（<code>Quot</code> による環構造と well-definedness の証明）を丸ごと省ける。</p>
+        <p><code>Algebra.FormallyEtale 𝒜</code> の本文を読む。「任意の \(B, C\)、\(R\)-代数構造、\(R\)-代数準同型 \(\pi\)、\(\pi\) が二乗零拡大、任意の \(g : A \to C\) について、\(\pi \circ f = g\) となる \(f : A \to B\) がただ一つ存在する」。<code>FormallyUnramified</code> は同じ設定で「\(\pi\circ f_1 = \pi\circ f_2 \Rightarrow f_1 = f_2\)」、<code>FormallySmooth</code> は「\(f\) が存在する」。<strong>エタール = 不分岐 + スムーズ</strong>という関係が、定義の形からそのまま見える。</p>
+
+        <h3>有限表示</h3>
+        <p>形式的エタールだけでは、たとえば \(R \to \widehat R\)（完備化）のような「無限に大きい」拡大も含んでしまう。幾何学的に意味のある「有限型」の条件を足す必要がある。<strong>有限表示</strong>とは、有限個の変数の多項式環を、有限個の関係式で割ったものと同型であること。</p>
+        <p class="math-block">\[ A \cong R[X_1, \dots, X_n] / (f_1, \dots, f_m). \]</p>
+        <p>そのために、まず多項式環 \(R[X_1,\dots,X_n]\) を作らなければならない。Lean 本体には多項式がないので、<strong>「多項式の式」を項として帰納的に定義し、環の公理で生成される合同関係で割る</strong>という、最も素朴な構成を採る。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 14 多項式環 R[X₁,…,Xₙ]</span></div>
+          <pre><code><span class="kw">section</span> FreeAlgebra
+<span class="kw">variable</span> (R : Type) [CommRing R] (n : Nat)
+
+<span class="doc">/-- 多項式の「式」。変数 `Xᵢ`、定数、和、積、マイナスから作られる項。 -/</span>
+<span class="kw">inductive</span> Term
+  | var : Fin n → Term
+  | const : R → Term
+  | add : Term → Term → Term
+  | mul : Term → Term → Term
+  | neg : Term → Term
+
+<span class="doc">/-- 式の間の同値関係: 可換環の公理と「定数は環準同型」で生成される最小の合同関係。</span>
+<span class="doc">`R[X₁,…,Xₙ]` はこれで式を割ったもの。 -/</span>
+<span class="kw">inductive</span> Term.Rel : Term R n → Term R n → Prop
+  | refl (t) : Rel t t
+  | symm {s t} : Rel s t → Rel t s
+  | trans {s t u} : Rel s t → Rel t u → Rel s u
+  | add_congr {s s&#x27; t t&#x27;} : Rel s s&#x27; → Rel t t&#x27; → Rel (.add s t) (.add s&#x27; t&#x27;)
+  | mul_congr {s s&#x27; t t&#x27;} : Rel s s&#x27; → Rel t t&#x27; → Rel (.mul s t) (.mul s&#x27; t&#x27;)
+  | neg_congr {s s&#x27;} : Rel s s&#x27; → Rel (.neg s) (.neg s&#x27;)
+  | add_assoc (a b c) : Rel (.add (.add a b) c) (.add a (.add b c))
+  | add_comm (a b) : Rel (.add a b) (.add b a)
+  | zero_add (a) : Rel (.add (.const 0) a) a
+  | neg_add_cancel (a) : Rel (.add (.neg a) a) (.const 0)
+  | mul_assoc (a b c) : Rel (.mul (.mul a b) c) (.mul a (.mul b c))
+  | mul_comm (a b) : Rel (.mul a b) (.mul b a)
+  | one_mul (a) : Rel (.mul (.const 1) a) a
+  | mul_add (a b c) : Rel (.mul a (.add b c)) (.add (.mul a b) (.mul a c))
+  | const_add (r s : R) : Rel (.const (r + s)) (.add (.const r) (.const s))
+  | const_mul (r s : R) : Rel (.const (r * s)) (.mul (.const r) (.const s))
+
+<span class="doc">/-- 多項式環 `R[X₁, …, Xₙ]`。式を同値関係で割ったもの。 -/</span>
+<span class="kw">def</span> FreeCommAlg : Type := Quot (Term.Rel R n)
+
+<span class="doc">/-- `R[X₁,…,Xₙ]` は可換環（演習: 各演算が同値関係と両立し、公理は `Rel` の生成元から出る）。 -/</span>
+<span class="kw">noncomputable</span> instance : CommRing (FreeCommAlg R n) := <span class="sry">sorry</span>
+
+<span class="doc">/-- 構造射 `R → R[X₁,…,Xₙ]`, `r ↦ 定数 r`。 -/</span>
+<span class="kw">noncomputable</span> def FreeCommAlg.algebra : Algebra R (FreeCommAlg R n) := ⟨⟨<span class="kw">fun</span> r =&gt; Quot.mk _ (.const r), <span class="sry">sorry</span>, <span class="sry">sorry</span>, <span class="sry">sorry</span>⟩⟩
+
+<span class="kw">end</span> FreeAlgebra</code></pre>
+        </div>
+
+        <p><code>Term R n</code> は、変数 \(X_i\)、定数 \(r\)、和、積、マイナスから作られる式の型である。<code>Term.Rel</code> は「二つの式が多項式として等しい」という関係で、（1）同値関係であること、（2）演算と両立すること、（3）可換環の8公理、（4）定数の埋め込みが環準同型であること、の規則で生成される。<code>FreeCommAlg R n := Quot Rel</code> がこれで割った商である。</p>
+        <p>これは「自由可換 \(R\)-代数」の普遍性からの構成で、\(R[X_1,\dots,X_n]\) の元を「係数の有限列」で表す通常の構成とは異なる。しかし普遍性（\(A\) への \(R\)-代数準同型は変数の行き先 \(x_1, \dots, x_n \in A\) で決まる）は同じであり、定義の見通しはこちらの方がよい。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 14 有限表示とエタール</span></div>
+          <pre><code><span class="kw">section</span> Etale
+<span class="kw">variable</span> {R : Type} [CommRing R]
+
+<span class="doc">/-- 有限表示: 有限変数の多項式環からの全射で、核が有限生成のもの。</span>
+<span class="doc">`A ≅ R[X₁,…,Xₙ] / (f₁,…,fₘ)`。 -/</span>
+<span class="kw">def</span> Algebra.FinitePresentation {A : Type} [CommRing A] (𝒜 : Algebra R A) : Prop :=
+  ∃ (n : Nat) (φ : AlgHom (FreeCommAlg.algebra R n) 𝒜),
+    Function.Surjective φ.toRingHom.toFun ∧ φ.toRingHom.ker.IsFG
+
+<span class="doc">/-- エタール代数 = 形式的エタール + 有限表示。 -/</span>
+<span class="kw">def</span> Algebra.Etale {A : Type} [CommRing A] (𝒜 : Algebra R A) : Prop :=
+  𝒜.FormallyEtale ∧ 𝒜.FinitePresentation
+
+<span class="doc">/-- 環準同型 `φ : R → S` がエタール: `S` を `φ` で `R`-代数と見てエタール。 -/</span>
+<span class="kw">def</span> RingHom.IsEtale {S : Type} [CommRing S] (φ : R →ᵣ S) : Prop :=
+  Algebra.Etale (⟨φ⟩ : Algebra R S)
+
+<span class="doc">/-- 恒等写像はエタール。 -/</span>
+<span class="kw">theorem</span> RingHom.id_isEtale : (RingHom.id R).IsEtale := <span class="sry">sorry</span>
+
+<span class="doc">/-- 例: 局所化 `R → R[1/f]` はエタール（開埋め込み `D(f) ↪ Spec R` に対応）。 -/</span>
+<span class="kw">theorem</span> localization_isEtale (f : R) : (Localization.algebraMap (Submonoid.powers f)).IsEtale := <span class="sry">sorry</span>
+<span class="kw">end</span> Etale</code></pre>
+        </div>
+
+        <p><code>Algebra.FinitePresentation</code>：「ある \(n\) と、全射な \(R\)-代数準同型 \(\varphi : R[X_1,\dots,X_n] \to A\) があって、\(\ker\varphi\) が有限生成」。<code>Algebra.Etale</code> はその二条件の連言である。<code>RingHom.IsEtale φ</code> は環準同型 \(\varphi : R \to S\) を「\(S\) を \(\varphi\) で \(R\)-代数と見たとき」に読み替えたもので、次章のスキームの射で使う形である。</p>
+        <p>例として、恒等写像と局所化 \(R \to R[1/f]\) がエタールであることを定理として述べた（<span class="badge badge--thm">定理</span>）。局所化のエタール性は、幾何学的には「開埋め込み \(D(f) \hookrightarrow \operatorname{Spec} R\) はエタール」を意味する。他の典型例を数式だけで挙げておく。</p>
+        <ol class="rule-list">
+          <li><div><strong>標準エタール代数</strong><p>\(R[x]_g / (f)\) で、\(f\) はモニック、\(f'\) が \(R[x]_g/(f)\) で可逆。「\(f'\ne0\) なら局所同相」の代数版で、実はすべてのエタール代数は局所的にこの形である（局所構造定理）。</p></div></li>
+          <li><div><strong>体の分離拡大</strong><p>\(k \to L\) がエタール \(\iff\) \(L\) は \(k\) の有限分離拡大（の有限積）。分離性が「不分岐」、有限性が「有限表示」に対応する。</p></div></li>
+          <li><div><strong>反例: \(\mathbb Z \to \mathbb Z[i]\)</strong><p>\(2\) で分岐する（\((2) = (1+i)^2\)）ので不分岐でない。一方 \(\mathbb Z[1/2] \to \mathbb Z[1/2][i]\) はエタール。</p></div></li>
+        </ol>
+      </section>
+
+      <section class="article-section" id="etale-mor">
+        <p class="section-label">15 — THE ÉTALE SITE</p>
+        <h2>エタール射と、エタールサイト</h2>
+        <p>スキームの射 \(f : X \to Y\) がエタールであることを、環準同型のエタール性に帰着させて定義する。11章で用意した \(f^\sharp_{U,V} : \mathcal O_Y(U) \to \mathcal O_X(V)\) を使う。</p>
+        <p class="math-block">\[ f \text{ がエタール } :\iff \forall\, U \subseteq Y \text{ アフィン開},\ \forall\, V \subseteq f^{-1}U \text{ アフィン開},\quad f^\sharp_{U,V} : \mathcal O_Y(U) \to \mathcal O_X(V) \text{ はエタール}. \]</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 15 エタール射</span></div>
+          <pre><code><span class="doc">/-- スキームの射 `f : X → Y` がエタール: `Y` のアフィン開集合 `U` と、`f⁻¹U` に含まれる `X` の</span>
+<span class="doc">アフィン開集合 `V` のすべてについて、環準同型 `𝒪_Y(U) → 𝒪_X(V)` がエタール。 -/</span>
+<span class="kw">def</span> Scheme.Hom.IsEtale {X Y : Scheme} (f : Scheme.Hom X Y) : Prop :=
+  ∀ (U : Opens Y.X) (V : Opens X.X) (h : V ≤ f.base.preimage U),
+    Y.IsAffineOpen U → X.IsAffineOpen V → (f.appLE U V h).IsEtale
+
+<span class="doc">/-- 恒等射はエタール（演習: `R → R` は形式的エタールかつ有限表示）。 -/</span>
+<span class="kw">theorem</span> Scheme.id_isEtale (X : Scheme) :
+    Scheme.Hom.IsEtale (X := X) (Y := X) (LRSHom.id X.toLocallyRingedSpace) := <span class="sry">sorry</span></code></pre>
+        </div>
+
+        <p>この定義は「すべてのアフィン開の組で成り立つ」と要求している。実際には「あるアフィン開被覆で成り立てばよい」ことが定理として示せる（エタール性は局所化で保たれ、局所的な性質だから）。その定理はここでは扱わない。恒等射がエタールであることは、環の言葉では「\(R \to R\) はエタール」であり、<span class="badge badge--thm">定理</span>として述べた。</p>
+
+        <h3>小エタールサイト \(X_{\mathrm{ét}}\)</h3>
+        <p>いよいよエタールサイトである。対象は「\(X\) 上エタールなスキーム」\((U, f : U \to X)\)、射は \(X\) 上の射、そして被覆は<strong>「像が合わさって全体になる射の族」</strong>（jointly surjective）である。</p>
+        <p class="math-block">\[ \{U_i \to U\}_i \text{ が被覆 } :\iff \bigcup_i \operatorname{im}(U_i \to U) = U. \]</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 15 エタールサイトの圏</span></div>
+          <pre><code><span class="doc">/-- `X` 上エタールなスキーム `(U, f : U → X)`。小エタールサイトの対象。 -/</span>
+<span class="kw">structure</span> EtaleOver (X : Scheme) <span class="kw">where</span>
+  U : Scheme
+  f : Scheme.Hom U X
+  etale : f.IsEtale
+
+<span class="doc">/-- `X` 上の射: `X` への射と両立するスキームの射。 -/</span>
+<span class="kw">structure</span> EtaleOver.Hom {X : Scheme} (V U : EtaleOver X) <span class="kw">where</span>
+  g : Scheme.Hom V.U U.U
+  w : LRSHom.comp g U.f = V.f
+
+<span class="doc">/-- `X` 上エタールなスキームの圏 `Ét(X)`。 -/</span>
+<span class="kw">noncomputable</span> abbrev etaleCategory (X : Scheme) : Category.{1} <span class="kw">where</span>
+  Obj := EtaleOver X
+  Hom := EtaleOver.Hom
+  id U := ⟨LRSHom.id _, <span class="sry">sorry</span>⟩
+  comp g h := ⟨LRSHom.comp g.g h.g, <span class="sry">sorry</span>⟩
+  id_comp := <span class="sry">sorry</span>
+  comp_id := <span class="sry">sorry</span>
+  assoc := <span class="sry">sorry</span></code></pre>
+        </div>
+
+        <p><code>EtaleOver X</code> が対象の型（<code>Type 1</code> に住むことに注意——スキーム全体は大きい）。<code>EtaleOver.Hom V U</code> は \(V \to U\) であって \(X\) への射と両立するもの（<code>w</code> が三角形の可換性）。<code>etaleCategory X</code> はこれらを 12章の <code>Category</code> 構造にまとめたもので、単位律・結合律は局所環付き空間の射のそれに帰着する（<span class="badge badge--ex">演習</span>）。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 15 エタール位相</span></div>
+          <pre><code><span class="doc">/-- エタール位相。`U` 上の篩が被覆 ⇔ 篩に属する射たちの像が `U` を覆う（jointly surjective）。 -/</span>
+<span class="kw">noncomputable</span> def etaleTopology (X : Scheme) : GrothendieckTopology (etaleCategory X) <span class="kw">where</span>
+  covering U S := ∀ x : U.U.X, ∃ (V : EtaleOver X) (g : EtaleOver.Hom V U) (y : V.U.X),
+    S.arrows g ∧ g.g.base.toFun y = x
+  top_mem := <span class="sry">sorry</span>         <span class="cm"> -- 恒等射一本で覆える</span>
+  pullback_stable := <span class="sry">sorry</span> <span class="cm"> -- 定理: エタール射はファイバー積で保たれ、全射性も保たれる</span>
+  transitive := <span class="sry">sorry</span>      <span class="cm"> -- 被覆の被覆は被覆</span>
+
+<span class="doc">/-- 小エタールサイト `X_ét`。 -/</span>
+<span class="kw">noncomputable</span> abbrev etaleSite (X : Scheme) : Site.{1} := ⟨etaleCategory X, etaleTopology X⟩
+
+<span class="doc">/-- `X` 自身（恒等射）はエタールサイトの終対象。層の「大域切断」はここでの値。 -/</span>
+<span class="kw">noncomputable</span> def EtaleOver.self (X : Scheme) : EtaleOver X := ⟨X, LRSHom.id _, X.id_isEtale⟩</code></pre>
+        </div>
+
+        <p><code>covering U S</code> の定義を読む。「\(U\) の各点 \(x\) に対して、\(S\) に属する射 \(g : V \to U\) と \(V\) の点 \(y\) があって \(g(y) = x\)」。これが jointly surjective を篩の言葉で書いたものである。</p>
+        <p>三つの公理はすべて <code>sorry</code> で、これは <span class="badge badge--thm">定理</span>である。特に (T2) 引き戻し安定性は、<strong>「エタール射の族のファイバー積による基底変換はエタールで、全射性は基底変換で保たれる」</strong>という本物の定理（エタール射は基底変換で安定。Stacks Project, Étale Morphisms of Schemes）に依存する。位相空間の開被覆では「\(f^{-1}\) で引き戻せば被覆」が自明だったが、エタール射では「ファイバー積 \(V \times_U U_i\) がまたエタールで、それらが \(V\) を覆う」ことを示さなければならない。</p>
+        <p>最後に、\(X\) 自身（恒等射）はこの圏の終対象で、層の「大域切断」\(\mathcal F(X)\) はここでの値である。これは次章以降で使う。</p>
+      </section>
+      <section class="article-section" id="abelian">
+        <p class="section-label">16 — ABELIAN SHEAVES</p>
+        <h2>アーベル層、完全列、入射的対象</h2>
+        <p>コホモロジーを取るには、層の値が集合ではなく<strong>アーベル群</strong>でなければならない。「切断を足したり引いたりできる」ことが、核や像、ひいては「どれだけ貼り合わせに失敗したか」を測る道具になる。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 16 アーベル群</span></div>
+          <pre><code><span class="doc">/-- アーベル群。 -/</span>
+<span class="kw">class</span> AddCommGroup (A : Type) <span class="kw">extends</span> Add A, Neg A, Zero A <span class="kw">where</span>
+  add_assoc : ∀ a b c : A, a + b + c = a + (b + c)
+  add_comm  : ∀ a b : A, a + b = b + a
+  zero_add  : ∀ a : A, 0 + a = a
+  neg_add_cancel : ∀ a : A, -a + a = 0
+
+<span class="doc">/-- 可換環は（足し算について）アーベル群。 -/</span>
+<span class="kw">instance</span> {R : Type} [CommRing R] : AddCommGroup R <span class="kw">where</span>
+  add_assoc := CommRing.add_assoc
+  add_comm := CommRing.add_comm
+  zero_add := CommRing.zero_add
+  neg_add_cancel := CommRing.neg_add_cancel
+
+<span class="doc">/-- アーベル群の準同型。 -/</span>
+<span class="kw">structure</span> AddHom (A B : Type) [AddCommGroup A] [AddCommGroup B] <span class="kw">where</span>
+  toFun : A → B
+  map_add : ∀ a b, toFun (a + b) = toFun a + toFun b
+
+<span class="kw">instance</span> {A B : Type} [AddCommGroup A] [AddCommGroup B] : CoeFun (AddHom A B) (<span class="kw">fun</span> _ =&gt; A → B) :=
+  ⟨AddHom.toFun⟩</code></pre>
+        </div>
+
+        <p>可換環と同じ流儀で、公理4つの型クラスとして定義する。可換環は加法についてアーベル群である、というインスタンスも付けた。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 16 アーベル層とその射</span></div>
+          <pre><code><span class="kw">section</span> AbelianSheaves
+<span class="kw">variable</span> {𝒳 : Site.{u}}
+
+<span class="doc">/-- アーベル群の前層: 各対象にアーベル群、各射に群準同型。 -/</span>
+<span class="kw">structure</span> AbPresheaf (C : Category.{u}) <span class="kw">where</span>
+  obj : C.Obj → Type
+  grp : ∀ U, AddCommGroup (obj U)
+  map : ∀ {U V : C.Obj}, C.Hom V U → obj U → obj V
+  map_add : ∀ {U V : C.Obj} (f : C.Hom V U) (s t : obj U), map f (s + t) = map f s + map f t
+  map_id : ∀ (U : C.Obj) (s : obj U), map (C.id U) s = s
+  map_comp : ∀ {U V W : C.Obj} (f : C.Hom V U) (g : C.Hom W V) (s : obj U),
+    map g (map f s) = map (C.comp g f) s
+
+<span class="kw">attribute</span> [instance] AbPresheaf.grp
+
+<span class="doc">/-- 群構造を忘れて集合値の前層と見る。 -/</span>
+<span class="kw">def</span> AbPresheaf.toCPresheaf {C : Category.{u}} (F : AbPresheaf C) : CPresheaf C :=
+  ⟨F.obj, F.map, F.map_id, F.map_comp⟩
+
+<span class="doc">/-- サイト上のアーベル群の層。 -/</span>
+<span class="kw">structure</span> AbSheaf (𝒳 : Site.{u}) <span class="kw">extends</span> AbPresheaf 𝒳.C <span class="kw">where</span>
+  isSheaf : ∀ (U : 𝒳.C.Obj) (S : Sieve U), 𝒳.J.covering U S → IsSheafFor toAbPresheaf.toCPresheaf S
+
+<span class="doc">/-- アーベル層の射: 各対象で群準同型、制限と両立（自然変換）。 -/</span>
+<span class="kw">structure</span> AbSheaf.Hom (F G : AbSheaf 𝒳) <span class="kw">where</span>
+  app : ∀ U, F.obj U → G.obj U
+  app_add : ∀ U (a b : F.obj U), app U (a + b) = app U a + app U b
+  naturality : ∀ {U V : 𝒳.C.Obj} (f : 𝒳.C.Hom V U) (s : F.obj U), app V (F.map f s) = G.map f (app U s)
+
+<span class="doc">/-- 零射。 -/</span>
+<span class="kw">def</span> AbSheaf.Hom.zero (F G : AbSheaf 𝒳) : F.Hom G := ⟨<span class="kw">fun</span> _ _ =&gt; 0, <span class="sry">sorry</span>, <span class="sry">sorry</span>⟩</code></pre>
+        </div>
+
+        <p><code>AbPresheaf</code> は「各対象にアーベル群、各射に群準同型」で、13章の <code>CPresheaf</code> に群構造を足したものである。<code>AbSheaf 𝒳</code> は、群構造を忘れた前層（<code>toCPresheaf</code>）が層条件を満たすもの。層の条件は集合値のときと同じでよく、群構造は「切断の集合に加法がある」という追加のデータに過ぎない、というのがここでの整理である。</p>
+        <p><code>AbSheaf.Hom F G</code> は層の射（自然変換）で、各対象で群準同型 <code>app U</code> をなし、制限と可換（<code>naturality</code>）。</p>
+
+        <h3>完全列を「局所的に」定義する</h3>
+        <p>ここに層の理論の核心がある。アーベル群の列 \(A \to B \to C\) が完全とは「像 = 核」だが、層の列 \(\mathcal F \xrightarrow{\varphi} \mathcal G \xrightarrow{\psi} \mathcal H\) では、<strong>各 \(U\) で \(\mathcal F(U) \to \mathcal G(U) \to \mathcal H(U)\) が完全であることを要求してはいけない</strong>。要求してよいのは「茎で完全」または「局所的に完全」であり、\(\ker \psi_U\) の元は \(U\) 上では \(\varphi\) の像に入らなくても、<strong>\(U\) のある被覆の上では</strong>入る、という形になる。</p>
+        <p class="math-block">\[ \psi\circ\varphi = 0,\quad\text{かつ}\quad \forall s \in \mathcal G(U),\ \psi(s)=0 \Rightarrow \exists\, \{U_i \to U\} \in J(U),\ \exists\, t_i \in \mathcal F(U_i),\ \varphi(t_i) = s|_{U_i}. \]</p>
+        <p>なぜ「局所的」でなければならないか。指数関数列 \(0 \to \mathbb Z \to \mathcal O \xrightarrow{\exp} \mathcal O^\times \to 0\) を思い出すとよい。\(\mathbb C^\times\) 上の関数 \(z\) は \(\mathcal O^\times\) の切断だが、大域的な対数を持たない。しかし局所的には持つ。層の完全性とは、まさにこの「局所的には解ける」を公理化したものである。<strong>そして「局所的に解けるのに大域的に解けない度合い」を測るのがコホモロジーである。</strong></p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 16 単射と完全性</span></div>
+          <pre><code><span class="doc">/-- 単射（モノ射）: 各対象の上で単射。 -/</span>
+<span class="kw">def</span> AbSheaf.Hom.IsMono {F G : AbSheaf 𝒳} (φ : F.Hom G) : Prop :=
+  ∀ U, Function.Injective (φ.app U)
+
+<span class="doc">/-- `F →φ→ G →ψ→ H` が `G` で完全。</span>
+<span class="doc">(1) `ψ ∘ φ = 0`、(2) `ψ(s) = 0` なる切断 `s ∈ G(U)` は、`U` のある被覆の上で局所的に `φ` の像に入る。</span>
+<span class="doc">（層の圏では「像 = 核」を各切断ごとには要求できないので、被覆の上での持ち上げで言い換える。） -/</span>
+<span class="kw">def</span> AbSheaf.IsExactAt {F G H : AbSheaf 𝒳} (φ : F.Hom G) (ψ : G.Hom H) : Prop :=
+  (∀ U (s : F.obj U), ψ.app U (φ.app U s) = 0) ∧
+  ∀ (U : 𝒳.C.Obj) (s : G.obj U), ψ.app U s = 0 →
+    ∃ S : Sieve U, 𝒳.J.covering U S ∧
+      ∀ {V : 𝒳.C.Obj} (f : 𝒳.C.Hom V U), S.arrows f → ∃ t : F.obj V, φ.app V t = G.map f s</code></pre>
+        </div>
+
+        <p><code>IsExactAt φ ψ</code> の第二成分が上の式である。<code>∃ S : Sieve U, covering U S ∧ ∀ {V} (f : Hom V U), S.arrows f → ∃ t : F.obj V, φ.app V t = G.map f s</code>——「被覆篩 \(S\) があって、\(S\) の各射 \(f : V \to U\) について、\(s\) の \(V\) への引き戻しが \(\varphi\) の像に入る」。位相空間の場合の茎による定義（\(\mathcal F_x \to \mathcal G_x \to \mathcal H_x\) が完全）を、点を使わずに書いたものである。エタールサイトにも「点」（幾何学的点 \(\operatorname{Spec}\bar k \to X\)）はあり、茎による定義も可能だが、被覆による定義の方が一般的である。</p>
+        <p>この定義には<strong>層化</strong>（前層を層にする操作）が出てこない。教科書では「像の層 = 像の前層の層化」を定義してから完全性を言うが、上の定式化は層化を経由せずに同じ内容を述べている。層化の構成を省けたのは、このノートの構成上の小さな利点である。</p>
+
+        <h3>入射的対象と入射的分解</h3>
+        <p>導来関手の定義には<strong>入射的対象</strong>が要る。層 \(\mathcal I\) が入射的とは、任意の単射 \(\iota : \mathcal A \hookrightarrow \mathcal B\) と射 \(\alpha : \mathcal A \to \mathcal I\) に対して、\(\alpha\) が \(\mathcal B\) まで延長できること。</p>
+        <p class="math-block">\[ \begin{array}{ccc} \mathcal A & \xrightarrow{\ \iota\ } & \mathcal B \\ {\scriptstyle\alpha}\big\downarrow & \swarrow{\scriptstyle \exists\,\beta} & \\ \mathcal I & & \end{array} \qquad \beta\circ\iota = \alpha. \]</p>
+        <p>直感的には、入射的対象は「十分に大きくて柔らかく、どこからでも写像を延長して受け止められる」対象である。アーベル群では \(\mathbb Q\) や \(\mathbb Q/\mathbb Z\) が入射的（可除群）。層では、各点で入射的群を立てた「摩天楼層の積」が入射的になる。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 16 入射的対象・入射的分解</span></div>
+          <pre><code><span class="doc">/-- 入射的対象: 単射 `A ↪ B` に沿って、`A → I` はいつでも `B → I` に延長できる。 -/</span>
+<span class="kw">def</span> AbSheaf.IsInjective (I : AbSheaf 𝒳) : Prop :=
+  ∀ (A B : AbSheaf 𝒳) (ι : A.Hom B), ι.IsMono →
+    ∀ (α : A.Hom I), ∃ β : B.Hom I, ∀ U (a : A.obj U), β.app U (ι.app U a) = α.app U a
+
+<span class="doc">/-- 入射的分解 `0 → F → I⁰ → I¹ → I² → ⋯`（完全列で、各 `Iⁿ` が入射的）。 -/</span>
+<span class="kw">structure</span> InjectiveResolution (F : AbSheaf 𝒳) <span class="kw">where</span>
+  I : Nat → AbSheaf 𝒳
+  injective : ∀ n, (I n).IsInjective
+  ε : F.Hom (I 0)
+  d : ∀ n, (I n).Hom (I (n + 1))
+  ε_mono : ε.IsMono
+  exact₀ : AbSheaf.IsExactAt ε (d 0)
+  <span class="kw">exact</span> : ∀ n, AbSheaf.IsExactAt (d n) (d (n + 1))
+<span class="kw">end</span> AbelianSheaves</code></pre>
+        </div>
+
+        <p><code>InjectiveResolution F</code> は、層の列 \(0 \to \mathcal F \xrightarrow{\varepsilon} \mathcal I^0 \xrightarrow{d^0} \mathcal I^1 \xrightarrow{d^1} \cdots\) で、各 \(\mathcal I^n\) が入射的、\(\varepsilon\) が単射、各所で完全なもの。<code>exact₀</code> が \(\mathcal I^0\) での完全性、<code>exact n</code> が \(\mathcal I^{n+1}\) での完全性である。</p>
+        <p>このデータが<strong>常に存在する</strong>こと（アーベル層の圏は十分な入射的対象を持つ）は、グロタンディークの Tôhoku 論文の定理で、証明はやさしくない。次章で定理として述べる。</p>
+      </section>
+
+      <section class="article-section" id="cohomology">
+        <p class="section-label">17 — COHOMOLOGY OF A COMPLEX</p>
+        <h2>複体のコホモロジーと、大域切断</h2>
+        <p>最後の部品は、アーベル群の余鎖複体とそのコホモロジーである。複体 \(A^0 \xrightarrow{d^0} A^1 \xrightarrow{d^1} A^2 \to \cdots\)、\(d^{n+1}\circ d^n = 0\) に対して</p>
+        <p class="math-block">\[ Z^n := \ker d^n,\qquad B^n := \operatorname{im} d^{n-1}\ (B^0 := 0),\qquad H^n(A^\bullet) := Z^n / B^n. \]</p>
+        <p>\(d\circ d = 0\) より \(B^n \subseteq Z^n\) であり、\(H^n\) は「閉じているが、境界ではないもの」を測る。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 17 余鎖複体とコホモロジー</span></div>
+          <pre><code><span class="doc">/-- アーベル群の余鎖複体 `A⁰ → A¹ → A² → ⋯`, `d ∘ d = 0`。 -/</span>
+<span class="kw">structure</span> Cocomplex <span class="kw">where</span>
+  A : Nat → Type
+  grp : ∀ n, AddCommGroup (A n)
+  d : ∀ n, AddHom (A n) (A (n + 1))
+  d_d : ∀ n (a : A n), d (n + 1) (d n a) = 0
+
+<span class="kw">attribute</span> [instance] Cocomplex.grp
+
+<span class="kw">namespace</span> Cocomplex
+<span class="kw">variable</span> (K : Cocomplex)
+
+<span class="doc">/-- 余輪体 `Zⁿ = ker dⁿ`。 -/</span>
+<span class="kw">def</span> Cocycles (n : Nat) : Type := { a : K.A n // K.d n a = 0 }
+
+<span class="doc">/-- 余境界 `Bⁿ = im dⁿ⁻¹`（`n = 0` では `0`）。 -/</span>
+<span class="kw">def</span> IsCoboundary : ∀ n : Nat, K.A n → Prop
+  | 0 =&gt; <span class="kw">fun</span> a =&gt; a = 0
+  | n + 1 =&gt; <span class="kw">fun</span> a =&gt; ∃ b : K.A n, K.d n b = a
+
+<span class="doc">/-- コホモロジー `Hⁿ(K) = Zⁿ / Bⁿ`。二つの余輪体は差が余境界なら同一視する。 -/</span>
+<span class="kw">def</span> H (n : Nat) : Type :=
+  Quot (<span class="kw">fun</span> a b : K.Cocycles n =&gt; K.IsCoboundary n (a.1 + -b.1))
+<span class="kw">end</span> Cocomplex</code></pre>
+        </div>
+
+        <p><code>Cocycles n</code> が \(Z^n\)（部分型）、<code>IsCoboundary n a</code> が「\(a \in B^n\)」で、\(n = 0\) と \(n+1\) で場合分けしている（Lean では \(A^{-1}\) がないので、\(B^0 = 0\) を別に書く必要がある）。<code>H n</code> は「二つの余輪体は差が余境界なら同一視する」という関係による <code>Quot</code>。これで \(Z^n/B^n\) になる。これも局所化・茎と同じ <code>Quot</code> のパターンである。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 17 大域切断の複体</span></div>
+          <pre><code><span class="doc">/-- 入射的分解の各項を `X` 自身で評価した複体 `Γ(X, I⁰) → Γ(X, I¹) → ⋯`。 -/</span>
+<span class="kw">noncomputable</span> def globalSections {X : Scheme} {F : AbSheaf (etaleSite X)}
+    (I : InjectiveResolution F) : Cocomplex <span class="kw">where</span>
+  A n := (I.I n).obj (EtaleOver.self X)
+  grp n := (I.I n).grp _
+  d n := ⟨(I.d n).app _, (I.d n).app_add _⟩
+  d_d n a := (I.<span class="kw">exact</span> n).1 _ a</code></pre>
+        </div>
+
+        <p>入射的分解 \(\mathcal I^\bullet\) の各項を \(X\) 自身（エタールサイトの終対象）で評価すると、アーベル群の複体 \(\Gamma(X, \mathcal I^0) \to \Gamma(X, \mathcal I^1) \to \cdots\) ができる。<code>d_d</code>（\(d\circ d = 0\)）は、層の完全性の第一成分 \(\psi\circ\varphi=0\) をそのまま \(X\) で評価したもので、証明が埋まっている（<code>(I.exact n).1 _ a</code>）。</p>
+        <p>大事な点を一つ。<strong>層の列は完全でも、大域切断の列 \(\Gamma(X,\mathcal I^\bullet)\) は完全とは限らない</strong>。\(\Gamma(X, -)\) は左完全だが右完全ではない。この「完全性の崩れ」がコホモロジーであり、入射的分解を取るのは、その崩れ具合を「分解の取り方によらない」形で取り出すための標準的な手続きである。</p>
+      </section>
+
+      <section class="article-section" id="definition">
+        <p class="section-label">18 — THE DEFINITION</p>
+        <h2>エタール・コホモロジーの定義</h2>
+        <p>部品が全部そろった。定義を書く。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 18 エタール・コホモロジー</span></div>
+          <pre><code><span class="doc">/-- 定理（十分な入射的対象の存在）: すべてのアーベル層は入射的分解を持つ。 -/</span>
+<span class="kw">theorem</span> exists_injectiveResolution {X : Scheme} (F : AbSheaf (etaleSite X)) :
+    Nonempty (InjectiveResolution F) := <span class="sry">sorry</span>
+
+<span class="doc">/-- **エタール・コホモロジー** `Hⁿ(X_ét, F)`。</span>
+<span class="doc">入射的分解 `F → I•` を一つ選び、大域切断の複体 `Γ(X, I•)` の `n` 次コホモロジーを取る。 -/</span>
+<span class="kw">noncomputable</span> def etaleCohomology (X : Scheme) (F : AbSheaf (etaleSite X)) (n : Nat) : Type :=
+  (globalSections (Classical.choice (exists_injectiveResolution F))).H n</code></pre>
+        </div>
+
+        <p>読み方。<code>exists_injectiveResolution F</code> は「\(\mathcal F\) の入射的分解が存在する」という<span class="badge badge--thm">定理</span>（証明は <code>sorry</code>）。<code>Classical.choice</code> でその一つを選び、<code>globalSections</code> で大域切断の複体にし、<code>.H n</code> で \(n\) 次コホモロジーを取る。</p>
+        <p class="math-block">\[ H^n(X_{\mathrm{ét}}, \mathcal F) \;=\; H^n\bigl(\Gamma(X, \mathcal I^\bullet)\bigr),\qquad 0 \to \mathcal F \to \mathcal I^\bullet \text{ 入射的分解}. \]</p>
+        <p>これが <code>Type</code>（普通のサイズの型）に住むことにも注意してほしい。エタールサイトの対象は <code>Type 1</code> に住むが、切断の群はすべて <code>Type</code> であり、その商も <code>Type</code> である。00章で「Ext群は集合である」と言ったことが、この構成では自動的に成り立っている。</p>
+
+        <h3>定義に付随する定理</h3>
+        <p>定義が「定義として意味を持つ」ためには、次が成り立たなければならない。いずれも <span class="badge badge--thm">定理</span>として述べ、証明は <code>sorry</code> にした。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 18 良定義性と H⁰</span></div>
+          <pre><code><span class="doc">/-- 二つの型の間の全単射。 -/</span>
+<span class="kw">structure</span> Bijection (α β : Type) <span class="kw">where</span>
+  toFun : α → β
+  invFun : β → α
+  left_inv : ∀ a, invFun (toFun a) = a
+  right_inv : ∀ b, toFun (invFun b) = b
+
+<span class="doc">/-- 定理（分解の取り方によらない）: 別の入射的分解を使っても同じ群が得られる。 -/</span>
+<span class="kw">theorem</span> etaleCohomology_independent {X : Scheme} (F : AbSheaf (etaleSite X)) (n : Nat)
+    (I I&#x27; : InjectiveResolution F) :
+    Nonempty (Bijection ((globalSections I).H n) ((globalSections I&#x27;).H n)) := <span class="sry">sorry</span>
+
+<span class="doc">/-- 定理: `H⁰(X_ét, F) = F(X)`（大域切断）。 -/</span>
+<span class="kw">theorem</span> etaleCohomology_zero (X : Scheme) (F : AbSheaf (etaleSite X)) :
+    Nonempty (Bijection (etaleCohomology X F 0) (F.obj (EtaleOver.self X))) := <span class="sry">sorry</span></code></pre>
+        </div>
+
+        <ol class="rule-list">
+          <li><div><strong>分解の取り方によらない</strong><p>二つの入射的分解は鎖ホモトピー同値であり、大域切断のコホモロジーは同型になる。これが「導来関手は well-defined」の内容で、<code>Classical.choice</code> でどの分解を選んでも同じ群が得られることを保証する。</p></div></li>
+          <li><div><strong>\(H^0(X_{\mathrm{ét}}, \mathcal F) = \mathcal F(X)\)</strong><p>\(0 \to \mathcal F \to \mathcal I^0 \to \mathcal I^1\) の完全性と \(\Gamma\) の左完全性から、\(\ker(\Gamma(\mathcal I^0)\to\Gamma(\mathcal I^1)) = \Gamma(\mathcal F)\)。0 次コホモロジーは大域切断である。</p></div></li>
+        </ol>
+        <p>ここで一度、依存の鎖を最下段から振り返っておく。<code>CommRing</code>（02）→ <code>RingHom</code>（03）→ <code>Ideal</code>、<code>IsPrime</code>（04）→ <code>PrimeSpectrum</code>、<code>Topology</code>（05）→ <code>Localization</code>（06）→ <code>Presheaf</code>、<code>Sheaf</code>（07）→ <code>Stalk</code>（08）→ <code>SheafOfRings</code>、<code>specSheaf</code>（09）→ <code>LocallyRingedSpace</code>、<code>LRSHom</code>（10）→ <code>Scheme</code>（11）→ <code>Category</code>、<code>Sieve</code>、<code>GrothendieckTopology</code>（12）→ <code>IsSheafFor</code>（13）→ <code>Algebra.Etale</code>（14）→ <code>etaleSite</code>（15）→ <code>AbSheaf</code>、<code>IsExactAt</code>、<code>InjectiveResolution</code>（16）→ <code>Cocomplex.H</code>、<code>globalSections</code>（17）→ <code>etaleCohomology</code>（18）。<strong>約1000行、外部ライブラリなし。</strong>これが「セルフコンテインド」の具体的な意味である。</p>
+      </section>
+      <section class="article-section" id="coefficients">
+        <p class="section-label">19 — COEFFICIENTS</p>
+        <h2>係数層: 定数層、𝔾ₘ、μₙ と Kummer 列</h2>
+        <p>定義ができたので、何を係数にして計算するのかを見る。エタール・コホモロジーで最も重要な係数は<strong>定数層 \(\mathbb Z/n\mathbb Z\)</strong>（\(n\) が \(X\) 上可逆のとき）である。ザリスキ位相では見えなかったものが、エタール位相では見える。</p>
+        <p>定数層 \(\underline{A}\) は「\(U\) 上の局所定数関数 \(U \to A\)」の層である。位相空間の言葉でいえば、\(A\) に離散位相を入れた連続関数。</p>
+        <p class="math-block">\[ \underline{A}(U) := \{\, s : U \to A \mid s \text{ は局所定数} \,\} = C(U, A_{\mathrm{disc}}). \]</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 19 定数層 ℤ/n</span></div>
+          <pre><code><span class="kw">section</span> Coefficients
+<span class="kw">variable</span> (X : Scheme)
+
+<span class="doc">/-- 局所定数関数: 各点の近傍で一定。 -/</span>
+<span class="kw">def</span> IsLocallyConstant {T : TopSpace} {α : Type} (s : T → α) : Prop :=
+  ∀ x, ∃ W : Opens T, W.1 x ∧ ∀ y, W.1 y → s y = s x
+
+<span class="doc">/-- 定数層 `ℤ/nℤ`: `U ↦ { U → ℤ/nℤ : 局所定数 }`。 `Fin n` を `ℤ/nℤ` として使う。 -/</span>
+<span class="kw">noncomputable</span> def constantSheaf (n : Nat) : AbSheaf (etaleSite X) <span class="kw">where</span>
+  obj (U : EtaleOver X) := { s : U.U.X → Fin (n + 1) // IsLocallyConstant s }
+  grp _ := <span class="sry">sorry</span>
+  map {U V : EtaleOver X} (g : EtaleOver.Hom V U) s := ⟨<span class="kw">fun</span> y =&gt; s.1 (g.g.base.toFun y), <span class="sry">sorry</span>⟩
+  map_add := <span class="sry">sorry</span>
+  map_id := <span class="sry">sorry</span>
+  map_comp := <span class="sry">sorry</span>
+  isSheaf := <span class="sry">sorry</span> <span class="cm"> -- 定理: 局所定数関数はエタール被覆に沿って貼り合う</span></code></pre>
+        </div>
+
+        <p><code>Fin (n+1)</code> を \(\mathbb Z/(n+1)\mathbb Z\) として使っている（Lean 本体の <code>Fin</code> には mod の足し算が入っている）。層であることは <span class="badge badge--thm">定理</span>である：エタール射は開写像で、jointly surjective な族に沿って局所定数関数が貼り合うことを示す必要がある。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 19 𝔾ₘ と μₙ</span></div>
+          <pre><code><span class="doc">/-- 乗法群 `𝔾ₘ`: `U ↦ 𝒪(U)ˣ`。群演算は掛け算。 -/</span>
+<span class="kw">noncomputable</span> def Gm : AbSheaf (etaleSite X) <span class="kw">where</span>
+  obj (U : EtaleOver X) := { a : U.U.𝒪.obj Opens.univ // IsUnit a }
+  grp _ := <span class="sry">sorry</span>   <span class="cm"> -- 単元群（掛け算をアーベル群の「+」として使う）</span>
+  map {U V : EtaleOver X} (g : EtaleOver.Hom V U) a := ⟨g.g.sharp Opens.univ a.1, <span class="sry">sorry</span>⟩
+  map_add := <span class="sry">sorry</span>
+  map_id := <span class="sry">sorry</span>
+  map_comp := <span class="sry">sorry</span>
+  isSheaf := <span class="sry">sorry</span> <span class="cm"> -- 定理（エタール降下）: `𝒪` はエタール位相で層</span>
+
+<span class="doc">/-- 自然数 `n` を環の元 `n · 1` と見る。 -/</span>
+<span class="kw">def</span> ofNat&#x27; {R : Type} [CommRing R] : Nat → R
+  | 0 =&gt; 0
+  | n + 1 =&gt; ofNat&#x27; n + 1
+
+<span class="doc">/-- `n` 乗写像 `𝔾ₘ → 𝔾ₘ`。 -/</span>
+<span class="kw">noncomputable</span> def Gm.pow (n : Nat) : (Gm X).Hom (Gm X) := ⟨<span class="kw">fun</span> U a =&gt; ⟨npow a.1 n, <span class="sry">sorry</span>⟩, <span class="sry">sorry</span>, <span class="sry">sorry</span>⟩
+
+<span class="doc">/-- `n` 乗根の層 `μₙ = ker(𝔾ₘ →ⁿ 𝔾ₘ)`。 -/</span>
+<span class="kw">noncomputable</span> def mu (n : Nat) : AbSheaf (etaleSite X) <span class="kw">where</span>
+  obj (U : EtaleOver X) := { a : (Gm X).obj U // npow a.1 n = 1 }
+  grp _ := <span class="sry">sorry</span>
+  map {U V : EtaleOver X} (g : EtaleOver.Hom V U) a := ⟨(Gm X).map g a.1, <span class="sry">sorry</span>⟩
+  map_add := <span class="sry">sorry</span>
+  map_id := <span class="sry">sorry</span>
+  map_comp := <span class="sry">sorry</span>
+  isSheaf := <span class="sry">sorry</span>
+
+<span class="doc">/-- 包含 `μₙ → 𝔾ₘ`。 -/</span>
+<span class="kw">noncomputable</span> def mu.incl (n : Nat) : (mu X n).Hom (Gm X) := ⟨<span class="kw">fun</span> _ a =&gt; a.1, <span class="sry">sorry</span>, <span class="sry">sorry</span>⟩</code></pre>
+        </div>
+
+        <p>乗法群 \(\mathbb G_m(U) := \mathcal O(U)^\times\) と、その部分層 \(\mu_n(U) := \{a \in \mathcal O(U)^\times \mid a^n = 1\}\)。\(\mathbb G_m\) がエタール位相で層であることは、<strong>構造層 \(\mathcal O\) がエタール位相（実は fpqc 位相）で層である</strong>という降下理論の基本定理（Grothendieck の忠実平坦降下）による。</p>
+
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Etale.lean — 19 Kummer 完全列</span></div>
+          <pre><code><span class="doc">/-- **Kummer 完全列** `0 → μₙ → 𝔾ₘ →ⁿ 𝔾ₘ → 0`（`n` が `X` 上可逆のとき、エタール位相で完全）。 -/</span>
+<span class="kw">theorem</span> kummer_exact (n : Nat) (hn : IsUnit (ofNat&#x27; n : X.𝒪.obj Opens.univ)) :
+    (mu.incl X n).IsMono ∧ AbSheaf.IsExactAt (mu.incl X n) (Gm.pow X n) ∧
+    ∀ (U : EtaleOver X) (a : (Gm X).obj U), ∃ S : Sieve U, (etaleTopology X).covering U S ∧
+      ∀ {V : EtaleOver X} (f : EtaleOver.Hom V U), S.arrows (C := etaleCategory X) f →
+        ∃ b : (Gm X).obj V, (Gm.pow X n).app V b = (Gm X).map f a := <span class="sry">sorry</span>
+<span class="kw">end</span> Coefficients</code></pre>
+        </div>
+
+        <p><strong>Kummer 列</strong> \(0 \to \mu_n \to \mathbb G_m \xrightarrow{\ n\ } \mathbb G_m \to 0\) は、\(n\) が \(X\) 上可逆のとき、エタール位相で完全である。特に右側の全射性（\(n\) 乗根がエタール局所的に取れる）は<strong>ザリスキ位相では成り立たない</strong>。\(a \in \mathcal O(U)^\times\) の \(n\) 乗根を取る操作は、\(U' = U[t]/(t^n - a) \to U\) というエタール被覆を取れば可能になるが、これは開埋め込みではない。まさにこの一点のために、エタール位相が必要だった。</p>
+        <p>Kummer 列の長完全列から、ただちに次が得られる（Hilbert の定理 90 の層版 \(H^1(X_{\mathrm{ét}}, \mathbb G_m) = \operatorname{Pic}(X)\) と合わせて）。</p>
+        <p class="math-block">\[ 0 \to \mathcal O(X)^\times / n \to H^1(X_{\mathrm{ét}}, \mu_n) \to \operatorname{Pic}(X)[n] \to 0. \]</p>
+        <p>これがエタール・コホモロジーの最初の「計算」であり、\(X\) が体 \(k\) のとき \(H^1(k_{\mathrm{ét}}, \mu_n) = k^\times / (k^\times)^n\) というクンマー理論そのものになる。</p>
+      </section>
+
+      <section class="article-section" id="theorems">
+        <p class="section-label">20 — MAIN THEOREMS</p>
+        <h2>主定理: 比較・基底変換・双対・Weil 予想</h2>
+        <p>定義が書けたので、この理論が「何を成し遂げるのか」を、主定理の形で整理する。以下はすべて <span class="badge badge--todo">NOT YET</span>、つまりこのノートの Lean ファイルには入っていない。数式で正確に述べ、参照先を付ける。文献は英語で確認した（Milne <em>Lectures on Étale Cohomology</em>、Stacks Project、Deligne <em>La conjecture de Weil I</em>、Freitag–Kiehl）。</p>
+        <p>以下、\(\Lambda = \mathbb Z/\ell^m\) または \(\mathbb Q_\ell\)、\(\ell\) は \(X\) 上可逆な素数、\(k\) は分離閉体とする。</p>
+
+        <h3>1. 点のコホモロジー = ガロア・コホモロジー</h3>
+        <p class="math-block">\[ H^i\bigl((\operatorname{Spec} k)_{\mathrm{ét}}, \mathcal F\bigr) \;\cong\; H^i\bigl(\operatorname{Gal}(k^{\mathrm{s}}/k),\ \mathcal F_{\bar k}\bigr). \]</p>
+        <p>体のエタールサイト上の層は、絶対ガロア群の離散モジュールと同じものである。エタール・コホモロジーはガロア・コホモロジーの「幾何学的な広がりを持った版」であり、この定理がその架け橋になる。数論的な応用（Brauer 群、類体論との関係）はここを通る。</p>
+
+        <h3>2. Artin の比較定理</h3>
+        <p>\(X\) を \(\mathbb C\) 上有限型のスキーム、\(\mathcal F\) を構成可能層（有限係数）とする。</p>
+        <p class="math-block">\[ H^i(X_{\mathrm{ét}}, \mathcal F) \;\cong\; H^i\bigl(X(\mathbb C)^{\mathrm{an}},\ \mathcal F^{\mathrm{an}}\bigr). \]</p>
+        <p>右辺は複素解析的な空間の（特異）コホモロジーである。<strong>これが「エタール位相は正しい位相である」ことの証拠</strong>であり、グロタンディークの構想（純代数的な手段で位相不変量を復元する）が実現したことを意味する。有限係数が必要で、\(\mathbb Z\) 係数では成り立たない（たとえば正規なスキームでは \(H^1(X_{\mathrm{ét}}, \mathbb Z) = 0\) になってしまう）。</p>
+
+        <h3>3. 有限性と固有基底変換</h3>
+        <p>\(f : X \to Y\) を固有射、\(\mathcal F\) を \(X\) 上の構成可能層（ねじれ係数）とする。</p>
+        <p class="math-block">\[ R^i f_* \mathcal F \text{ は構成可能},\qquad (R^i f_* \mathcal F)_{\bar y} \;\cong\; H^i\bigl(X_{\bar y},\ \mathcal F|_{X_{\bar y}}\bigr). \]</p>
+        <p>右の式が<strong>固有基底変換</strong>で、「固有射の高次順像の茎は、ファイバーのコホモロジー」である。トポロジーの固有写像に対する同様の定理の類似で、理論全体の技術的な要石になっている。有限性（\(X\) が \(k\) 上固有なら \(H^i(X_{\mathrm{ét}}, \mathcal F)\) は有限群）もここから出る。</p>
+
+        <h3>4. スムーズ基底変換と純粋性</h3>
+        <p>ファイバー積の図式で \(f : Y' \to Y\) がスムーズ、\(g : X \to Y\) が準コンパクト準分離、\(\mathcal F\) がねじれ層のとき、</p>
+        <p class="math-block">\[ f^* R^i g_* \mathcal F \;\xrightarrow{\ \sim\ }\; R^i g'_* (f'^* \mathcal F). \]</p>
+        <p>また \(Z \hookrightarrow X\) が余次元 \(c\) の正則閉埋め込み（スムーズなスキームの中のスムーズな閉部分スキーム）のとき、局所コホモロジー層 \(\mathcal H^i_Z(\Lambda)\) は \(i = 2c\) 以外で消え、\(\mathcal H^{2c}_Z(\Lambda) \cong \Lambda(-c)\)（<strong>コホモロジー的純粋性</strong>）。ここで \(\Lambda(r) = \mu_{\ell^m}^{\otimes r}\) は Tate ひねりである。</p>
+
+        <h3>5. 消滅定理</h3>
+        <p>\(X\) を \(k\) 上有限型で次元 \(d\) とする。</p>
+        <p class="math-block">\[ H^i(X_{\mathrm{ét}}, \mathcal F) = 0\quad (i > 2d),\qquad X \text{ アフィンなら } H^i(X_{\mathrm{ét}}, \mathcal F) = 0\quad (i > d). \]</p>
+        <p>後者が <strong>Artin の消滅定理</strong>で、アフィン多様体が \(d\) 次元 CW 複体のホモトピー型を持つという Andreotti–Frankel の定理の代数版である。</p>
+
+        <h3>6. ポアンカレ双対と Künneth</h3>
+        <p>\(X\) を \(k\) 上スムーズで次元 \(d\) とする。跡写像 \(H^{2d}_c(X, \Lambda(d)) \to \Lambda\) があり、次のペアリングは完全である。</p>
+        <p class="math-block">\[ H^i(X_{\mathrm{ét}}, \Lambda) \times H^{2d-i}_c(X_{\mathrm{ét}}, \Lambda(d)) \longrightarrow H^{2d}_c(X_{\mathrm{ét}}, \Lambda(d)) \xrightarrow{\ \mathrm{tr}\ } \Lambda. \]</p>
+        <p>また \(X, Y\) が固有なら Künneth 公式 \(H^n(X \times Y) \cong \bigoplus_{i+j=n} H^i(X) \otimes H^j(Y)\) が成り立つ。Tate ひねり \((d)\) が現れるのが、位相幾何との唯一の違いである。</p>
+
+        <h3>7. ℓ 進コホモロジーと Lefschetz 跡公式</h3>
+        <p>有限係数を極限で束ねると \(\ell\) 進コホモロジーになる。</p>
+        <p class="math-block">\[ H^i(X, \mathbb Z_\ell) := \varprojlim_m H^i(X_{\mathrm{ét}}, \mathbb Z/\ell^m),\qquad H^i(X, \mathbb Q_\ell) := H^i(X, \mathbb Z_\ell)\otimes_{\mathbb Z_\ell}\mathbb Q_\ell. \]</p>
+        <p>\(X_0\) を \(\mathbb F_q\) 上の分離有限型スキーム、\(X = X_0 \otimes \bar{\mathbb F}_q\)、\(F\) を Frobenius とする。<strong>Grothendieck–Lefschetz 跡公式</strong>：</p>
+        <p class="math-block">\[ \#X_0(\mathbb F_{q^n}) \;=\; \sum_{i=0}^{2d} (-1)^i\, \operatorname{Tr}\bigl(F^n \,\big|\, H^i_c(X, \mathbb Q_\ell)\bigr). \]</p>
+        <p>有理点の個数が、コホモロジー上の Frobenius の跡で書ける。トポロジーの Lefschetz 固定点定理の類似で、「Frobenius の固定点 = \(\mathbb F_q\)-有理点」という観察がすべての出発点である。</p>
+
+        <h3>8. Weil 予想（Deligne, 1974）</h3>
+        <p>\(X_0\) を \(\mathbb F_q\) 上スムーズ射影的で次元 \(d\) とする。ゼータ関数は跡公式から</p>
+        <p class="math-block">\[ Z(X_0, t) = \prod_{i=0}^{2d} \det\bigl(1 - F t \,\big|\, H^i(X, \mathbb Q_\ell)\bigr)^{(-1)^{i+1}} = \frac{P_1(t) P_3(t)\cdots P_{2d-1}(t)}{P_0(t) P_2(t) \cdots P_{2d}(t)} \]</p>
+        <p>と有理関数になり（有理性）、ポアンカレ双対から関数等式 \(Z(X_0, 1/(q^d t)) = \pm q^{d\chi/2} t^{\chi} Z(X_0, t)\) が出る。そして Deligne の定理：</p>
+        <p class="math-block">\[ P_i(t) \in \mathbb Z[t],\qquad P_i(t) = \prod_j (1 - \alpha_{ij} t),\qquad |\alpha_{ij}| = q^{i/2}\ \text{（すべての複素埋め込みで）}. \]</p>
+        <p>Frobenius の固有値の絶対値がちょうど \(q^{i/2}\)。これが「有限体上のリーマン予想」で、\(P_i\) の次数が \(X_0\) の複素持ち上げのベッチ数に一致する（比較定理）。<strong>エタール・コホモロジーは、この一連の予想を証明するために設計された道具であり、20 年かけてその目的を達した。</strong></p>
+
+        <h3>形式化の距離感</h3>
+        <p>これらを Lean で述べるのに何が足りないかを書いておく。定理 1 にはガロア群の連続コホモロジー、定理 2 には複素解析空間と特異コホモロジー、定理 3–6 には高次順像 \(R^i f_*\)、コンパクト台コホモロジー \(H^i_c\)、構成可能層、Tate ひねり、跡写像、定理 7–8 には射影極限・Frobenius 作用・\(\ell\) 進層が要る。<strong>定義（18章）から主定理までの距離は、可換環から定義までの距離より、おそらく一桁長い。</strong>それでも、定義が機械で書けたことは、その道の最初の一歩が確定したことを意味する。</p>
+        <p class="sources">参照した文献: J. S. Milne, <a href="https://www.jmilne.org/math/CourseNotes/LEC.pdf">Lectures on Étale Cohomology</a> (v2.21) · <a href="https://stacks.math.columbia.edu/download/etale-cohomology.pdf">Stacks Project, Étale Cohomology</a> · <a href="https://stacks.math.columbia.edu/download/etale.pdf">Stacks Project, Étale Morphisms of Schemes</a> · P. Deligne, <a href="https://www.jmilne.org/math/Documents/DeligneWeilI.pdf">La conjecture de Weil I</a> (英訳) · <a href="https://ncatlab.org/nlab/show/proper+base+change+theorem">nLab: proper base change theorem</a> · <a href="https://encyclopediaofmath.org/wiki/Etale_cohomology">Encyclopedia of Mathematics: Étale cohomology</a> · <a href="https://en.wikipedia.org/wiki/Grothendieck_trace_formula">Grothendieck trace formula</a></p>
+      </section>
+
+      <section class="article-section" id="gap">
+        <p class="section-label">21 — MATHLIB</p>
+        <h2>Mathlibにあるもの、ないもの</h2>
+        <p>最後に、実務の話をする。このノートは Mathlib を使わずに書いたが、Mathlib（2026年9月時点の <code>master</code>）には、ここで手書きした概念のほぼすべてが、はるかに一般的な形で入っている。対応表を付けておく。</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>このノート</th><th>Mathlib の対応物</th><th>備考</th></tr></thead>
+            <tbody>
+              <tr><td><code>Tutorial.CommRing</code></td><td><code>CommRing</code></td><td>半環・モノイドの階層の上に載っている</td></tr>
+              <tr><td><code>PrimeSpectrum</code>, <code>zariskiTopology</code></td><td><code>PrimeSpectrum</code>, <code>PrimeSpectrum.zariskiTopology</code></td><td>スペクトル空間の理論つき</td></tr>
+              <tr><td><code>Localization</code></td><td><code>Localization</code>, <code>IsLocalization</code></td><td>普遍性で特徴づける <code>IsLocalization</code> が主役</td></tr>
+              <tr><td><code>Sheaf</code>（位相空間上）</td><td><code>TopCat.Sheaf</code></td><td>圏論の <code>Sheaf</code> の特殊化</td></tr>
+              <tr><td><code>specSheaf</code>, <code>Spec</code></td><td><code>AlgebraicGeometry.Spec</code></td><td><code>Γ ⊣ Spec</code> の随伴まで</td></tr>
+              <tr><td><code>Scheme</code>, <code>Scheme.Hom</code></td><td><code>AlgebraicGeometry.Scheme</code></td><td>定義の形はほぼ同じ（局所環付き空間 + 局所アフィン）</td></tr>
+              <tr><td><code>Algebra.FormallyEtale</code>, <code>Algebra.Etale</code></td><td><code>Algebra.FormallyEtale</code>, <code>Algebra.Etale</code></td><td>Mathlib は \(\Omega_{A/R} = 0\) かつ \(H^1(L_{A/R}) = 0\) で定義し、持ち上げ条件は定理</td></tr>
+              <tr><td><code>Scheme.Hom.IsEtale</code></td><td><code>AlgebraicGeometry.Etale f</code></td><td>アフィン局所の定義、「スムーズかつ相対次元 0」と同値</td></tr>
+              <tr><td><code>etaleSite X</code></td><td><code>X.Etale</code>, <code>X.smallEtaleTopology</code></td><td>2024–26 年に Christian Merten らが整備</td></tr>
+              <tr><td><code>AbSheaf</code>, <code>InjectiveResolution</code></td><td><code>Sheaf J Ab</code>, <code>InjectiveResolution</code></td><td>Mathlib はエタール層の圏がグロタンディーク・アーベル圏であることまで証明済み</td></tr>
+              <tr><td><code>etaleCohomology</code></td><td><code>Sheaf.H F n</code>（Ext による）</td><td>Joël Riou の導来圏の上に定義。\(H^n = \operatorname{Ext}^n(\underline{\mathbb Z}, F)\)</td></tr>
+              <tr><td>\(\ell\) 進コホモロジー</td><td><code>Scheme.EllAdicCohomology</code></td><td>2026 年に追加。プロエタールサイト上の \(\mathbb Z_\ell\) 層で定義</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>だから、Mathlib の上でなら、エタール・コホモロジーの定義は次の数行になる。</p>
+        <div class="code-window">
+          <div class="code-bar"><i></i><i></i><i></i><span>Mathlib 版（参考）</span></div>
+          <pre><code><b>import</b> Mathlib
+<b>open</b> CategoryTheory AlgebraicGeometry
+
+/-- `X` 上のエタール層: 小エタールサイト上の、アーベル群の層。 -/
+<b>abbrev</b> EtaleSheaf (X : Scheme.{u}) := Sheaf X.smallEtaleTopology Ab.{u}
+
+/-- エタール・コホモロジー。定数層 `ℤ` からの `n` 次 Ext 群。 -/
+<b>noncomputable def</b> etaleCohomology (X : Scheme.{u}) (F : EtaleSheaf X) (n : ℕ) : Type u :=
+  F.H n</code></pre>
+        </div>
+        <p>このノートの1000行と、この数行は、同じ対象を指している。違いは、Mathlib 版が数万行のライブラリに依存していて、その中で「十分な入射的対象の存在」「Ext の良定義性」などがすべて<strong>証明済み</strong>だという点である。このノートで <code>sorry</code> にした定理は、Mathlib では定理として埋まっている。一方で Mathlib にもまだないものがある。比較定理、固有基底変換、ポアンカレ双対、跡公式、Weil 予想。Mathlib の \(\ell\) 進コホモロジーのファイル冒頭には「古典的なエタール・コホモロジーによる定義との比較は今後の課題」と書かれている。</p>
+        <p>自分の中では、こう整理している。<strong>定義を自分の手で書くのは「理解」のため、Mathlib を使うのは「先へ進む」ため</strong>である。両方見たときに初めて、ライブラリの一行が何を圧縮しているかがわかる。そして、次に形式化されるべき定理が何か（おそらく固有基底変換）も見えてくる。</p>
+      </section>
+
+      <section class="article-section" id="postscript">
+        <p class="section-label">22 — POSTSCRIPT</p>
+        <h2>蛇足</h2>
+        <p>このノートを書いて一番印象に残ったのは、<strong>「定義の依存関係を機械に確認させる」という作業が、思ったより数学の理解そのものだった</strong>ことである。たとえば「層の完全性は局所的に定義しなければならない」という事実は、教科書で読んだときは技術的な注意に見えたが、Lean で書くと「層化を定義していないので、像の層が作れない。どう書く？」という切迫した問題として現れ、被覆による定式化に自然に到達した。定義を書くことが、定義を選ぶことになる。</p>
+        <p>もう一つ。78 個の <code>sorry</code> のうち、本物の定理は十数個で、残りは routine な検証である。数学の教科書が「容易に確かめられる」と書く箇所の総量が、ここで初めて数値になった。それは思ったより多く、そして思ったより本当に routine だった。</p>
+        <p>次にやりたいのは、このファイルの <code>sorry</code> を Mathlib の定理で埋めていくことである。自前の <code>Scheme</code> と Mathlib の <code>Scheme</code> の間に関手を作り、自前の <code>etaleCohomology</code> が <code>Sheaf.H</code> と同型であることを示す。それができれば、このノートの「セルフコンテインド」と Mathlib の「証明済み」が繋がる。どこまで行けるかは、まだよくわからない。</p>
+      </section>
+
+      <footer class="article-end">
+        <div><span>SOURCE</span><strong><a href="lean/Etale.lean">Etale.lean</a> — 1,000 lines, Lean 4.33.1, no imports</strong></div>
+        <a href="./">ノート一覧へ戻る →</a>
+      </footer>
+    </article>
+  </main>
+
+  <aside class="related-notes" aria-labelledby="related-title">
+    <div class="related-heading"><span>NEXT TO READ</span><h2 id="related-title">関連するノート</h2></div>
+    <div class="related-grid">
+      <a href="foundation-model-valuation.html"><span>AI / Business / Math</span><h3>結局、生成AIのファウンデーションモデル企業の企業価値はいくらなのか</h3><p>五つの変数から企業価値を逆算する。</p></a>
+      <a href="ai-native-document-server.html"><span>AI / Product</span><h3>AIネイティブなドキュメントサーバーがない問題</h3><p>文書をコードのように再利用・検査する基盤を考える。</p></a>
+      <a href="software-industry-after-coding.html"><span>AI / Business</span><h3>ソフトウェア産業は結局どうなるのか</h3><p>作るコストが下がった後、価値はどこへ移るのか。</p></a>
+    </div>
+  </aside>
+
+  <footer class="site-footer">
+    <div><span>© 2026 Katsuya Ito</span><a href="../">Profile ↗</a></div>
+  </footer>
+</body>
+</html>
