@@ -16,6 +16,9 @@ scrapbox/
 ├── hiring-a-french-engineer.html # フランス人エンジニアの採用と初期組織の記事
 ├── ultra-soul-new-business.html # 大企業の新規事業をB'zの例えで解く記事
 ├── etale-cohomology-in-lean4.html # Lean 4でエタール・コホモロジーを定義するチュートリアル記事
+├── software-factory.html # 社内勉強会スライドを埋め込んだソフトウェアファクトリー解説記事
+├── decks/
+│   └── software-factory.html # 上記記事に埋め込むスライド（単体HTML、iframeで表示）
 ├── lean/
 │   └── Etale.lean # 上記記事の全Leanコード（Mathlib不使用、Lean 4.33.1で型検査済み）
 ├── app.js        # 検索、タグ絞り込み、並び替え
@@ -167,5 +170,5 @@ data-search-page="new-article.html"
 ## 現在の制約
 
 - SNSプレビューの投稿者表示（`twitter:site` / `twitter:creator`）は、アカウントを指定していないため未設定です。
-- 完成している記事ページは `initial-members-contractors.html`、`ai-native-document-server.html`、`software-industry-after-coding.html`、`ai-native-development-environment.html`、`fundraising-and-good-company.html`、`foundation-model-valuation.html`、`hiring-a-french-engineer.html`、`ultra-soul-new-business.html`、`etale-cohomology-in-lean4.html` の9件です。
+- 完成している記事ページは `initial-members-contractors.html`、`ai-native-document-server.html`、`software-industry-after-coding.html`、`ai-native-development-environment.html`、`fundraising-and-good-company.html`、`foundation-model-valuation.html`、`hiring-a-french-engineer.html`、`ultra-soul-new-business.html`、`etale-cohomology-in-lean4.html`、`software-factory.html` の10件です。
 - 検索インデックスはブラウザで作るため、記事数が非常に多くなった場合はJSON形式の検索インデックスを事前生成する構成への移行を検討します。
