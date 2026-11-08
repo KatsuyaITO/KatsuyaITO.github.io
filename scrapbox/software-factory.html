@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="社内勉強会で使ったソフトウェアファクトリーのスライドを埋め込み、定義、11のステーション、StrongDMやStripeなどの事例、ダークかライトかの論点、そして暗黙知とボトルネックの移動という自分の見方までを日本語で解説する。">
+  <title>ソフトウェアファクトリーとは何か。エージェントのループで組む工場と、その外にある暗黙知。 — Katsuya Ito Notes</title>
+  <link rel="canonical" href="https://katsuyaito.github.io/scrapbox/software-factory.html">
+  <meta name="author" content="Katsuya Ito">
+  <meta name="theme-color" content="#101820">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Katsuya Ito Notes">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:url" content="https://katsuyaito.github.io/scrapbox/software-factory.html">
+  <meta property="og:title" content="ソフトウェアファクトリーとは何か。エージェントのループで組む工場と、その外にある暗黙知。">
+  <meta property="og:description" content="社内勉強会で使ったソフトウェアファクトリーのスライドを埋め込み、定義、11のステーション、事例、論点、そして暗黙知とボトルネックの移動という自分の見方までを日本語で解説する。">
+  <meta property="og:image" content="https://katsuyaito.github.io/scrapbox/og/software-factory.png">
+  <meta property="og:image:secure_url" content="https://katsuyaito.github.io/scrapbox/og/software-factory.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="ソフトウェアファクトリーとは何か。 — Katsuya Ito Notes">
+  <meta property="article:published_time" content="2026-11-08T09:00:00+09:00">
+  <meta property="article:author" content="Katsuya Ito">
+  <meta property="article:tag" content="AI">
+  <meta property="article:tag" content="Business">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ソフトウェアファクトリーとは何か。エージェントのループで組む工場と、その外にある暗黙知。">
+  <meta name="twitter:description" content="社内勉強会で使ったソフトウェアファクトリーのスライドを埋め込み、定義、11のステーション、事例、論点、そして暗黙知とボトルネックの移動という自分の見方までを日本語で解説する。">
+  <meta name="twitter:image" content="https://katsuyaito.github.io/scrapbox/og/software-factory.png">
+  <meta name="twitter:image:alt" content="ソフトウェアファクトリーとは何か。 — Katsuya Ito Notes">
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BlogPosting","headline":"ソフトウェアファクトリーとは何か。エージェントのループで組む工場と、その外にある暗黙知。","description":"社内勉強会で使ったソフトウェアファクトリーのスライドを埋め込み、定義、11のステーション、事例、論点、そして暗黙知とボトルネックの移動という自分の見方までを日本語で解説する。","image":"https://katsuyaito.github.io/scrapbox/og/software-factory.png","datePublished":"2026-11-08T09:00:00+09:00","dateModified":"2026-11-08T09:00:00+09:00","inLanguage":"ja","keywords":["AI","Business"],"mainEntityOfPage":{"@type":"WebPage","@id":"https://katsuyaito.github.io/scrapbox/software-factory.html"},"author":{"@type":"Person","name":"Katsuya Ito","url":"https://indx.jp/"},"publisher":{"@type":"Person","name":"Katsuya Ito"},"isPartOf":{"@type":"Blog","name":"Katsuya Ito Notes","url":"https://katsuyaito.github.io/scrapbox/"}}
+  </script>
+  <link rel="stylesheet" href="styles.css?v=20261108-2">
+</head>
+<body class="article-page">
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Katsuya Ito Notes トップ">
+      <span class="brand-mark" aria-hidden="true">KI</span>
+      <span class="brand-copy"><strong>Katsuya Ito</strong><small>Notes / 010</small></span>
+    </a>
+    <nav class="primary-nav" aria-label="メインナビゲーション">
+      <a class="is-active" href="./">Notes</a>
+      <a href="../index.html">About</a>
+      <a href="https://indx.jp/">INDX ↗</a>
+    </nav>
+  </header>
+
+  <main class="article-shell">
+    <aside class="article-rail">
+      <a class="back-link" href="./">← All notes</a>
+      <nav class="toc" aria-label="目次">
+        <span>スライド</span>
+        <a href="#deck">勉強会スライド（75枚）</a>
+        <span>調査</span>
+        <a href="#define">ソフトウェアファクトリーとは</a>
+        <a href="#levels">5つのレベルと明るさ</a>
+        <a href="#why-now">なぜ今なのか</a>
+        <a href="#blueprint">11のステーション</a>
+        <a href="#cases">事例</a>
+        <a href="#debates">論点</a>
+        <a href="#stack">技術スタック</a>
+        <span>私見</span>
+        <a href="#tacit">暗黙知は工場に届かない</a>
+        <a href="#practice">ずれを小さく保つ</a>
+        <a href="#money">儲かるのか</a>
+        <span>まとめ</span>
+        <a href="#summary">まとめと問い</a>
+      </nav>
+    </aside>
+
+    <article class="article-content">
+      <figure class="deck-embed" id="deck">
+        <iframe name="deck-frame" src="decks/software-factory.html" title="Software Factories 勉強会スライド" loading="lazy" allowfullscreen></iframe>
+        <figcaption>← → キーかスワイプでめくれます。<b>N</b> で発表者ノート。<a href="decks/software-factory.html" target="_blank" rel="noopener">別タブで全画面表示 ↗</a></figcaption>
+      </figure>
+
+      <header class="article-hero">
+        <div class="article-meta"><span>AI / Business</span><time datetime="2026-11-08">2026.11.08</time><i>13 min read</i></div>
+        <h1>ソフトウェアファクトリーとは何か。<br><em>エージェントのループで組む工場と、その外にある暗黙知。</em></h1>
+        <p class="lead">上のスライドは、2026年10月23日に社内勉強会で使った資料である。ブログ、各社のエンジニアリング記事、OSSのリポジトリ、HNやXのスレッドなど、<strong>約130のソースを10月に集めて</strong>作った。スライドは英語で75枚あるので、この記事では日本語で、流れに沿って何を言っているのかを説明する。前半の5部は他人の調査、最後の第6部だけが自分の意見である。</p>
+        <blockquote>
+          <p>ソフトウェアファクトリーは、意図を検証済みのソフトウェアに変える、エージェントのループの生産ラインである。</p>
+        </blockquote>
+      </header>
+
+      <section class="article-section" id="define">
+        <p class="section-label">01 — DEFINE</p>
+        <h2>ソフトウェアファクトリーとは、エージェントの周りにある仕組みである</h2>
+        <p class="metaphor-line"><strong><a class="slide-jump" href="decks/software-factory.html#s3" target="deck-frame" onclick="document.getElementById('deck').scrollIntoView({behavior:'smooth'})">▶ SLIDES 3–9</a></strong>定義、二度の誕生、「である／ではない」、Claude Code・Ralphループ・CI/CDとの比較。</p>
+        <p>「ソフトウェアファクトリー」という言葉は、HNやXでかなり雑に使われている。10月には「個人のソフトウェアファクトリーは時間の無駄だ」というスレッドが立ったが、議論の大半は定義のすれ違いだった。だから最初に定義を一つに固定する。</p>
+        <p>人間が<strong>意図</strong>を決める。それが仕様（計画、シナリオ、受け入れテスト）になり、キューでタスクに分けられ、サンドボックスの中で複数のエージェントが並列にループを回す。出てきた変更はテストやCIや判定器で<strong>検証</strong>され、リスクに応じたゲートを通ってから出荷される。本番のインシデントや失敗した実行は仕様に戻ってくる。最後に、人間が結果を受け入れてリスクを負う。Addy Osmaniの短い言い方を借りると、<strong>「ループでできた組織図」</strong>である。</p>
+        <p>大事なのは、エージェントは部品の一つにすぎないということだ。キュー、サンドボックス、検証、ゲート、フィードバックが揃って初めて工場になる。逆に言えば、次のものはソフトウェアファクトリーではない。</p>
+        <ul>
+          <li>賢いエージェント一体、大きなプロンプト、長いチャット</li>
+          <li><code>while true</code> のループ単体</li>
+          <li>チャットボットを足しただけのCI/CD</li>
+          <li>「人間がいない」こと。ダークはあくまで設定値の一つ</li>
+          <li>品質の証明。テストが緑でも、読めないコードは隠れている</li>
+        </ul>
+        <p>ある仕組みが工場かどうかを見分ける問いは一つでいい。<strong>誰が「この変更は完了した」と決めるのか。そしてその判定が間違っていたら何が起きるのか。</strong></p>
+
+        <h3>Claude Codeは、ラインの一つの持ち場である</h3>
+        <p>Claude CodeやCodexは、工場の中の「ハーネス」という一つの持ち場にあたる。Thorsten Ballの言葉では、コーディングエージェントは「LLMとループと十分なトークン」で、400行足らずで書ける。Spotifyはわかりやすい例で、既存のFleet Management（対象リポジトリの選定、PR、レビュー、マージ）はそのまま残し、変換ステップだけをエージェント、のちにClaude Codeに差し替えた。</p>
+        <p>Geoffrey Huntleyの「Ralphループ」は、同じプロンプトを毎回新しいコンテキストで流し続けるBashループである。状態はspecs、計画ファイル、gitというディスク上に置く。これは一つの持ち場を繰り返す部品であって、工場は複数のループを仕様とゲートにつなぐ。比べると次のようになる。</p>
+        <ul>
+          <li><strong>Claude Codeのセッション</strong>：人間が毎ターン見ている。上限は一人の注意力</li>
+          <li><strong>Ralphループ</strong>：人間は実行の合間にプロンプトを調整する。上限は1リポジトリ1プロセス</li>
+          <li><strong>CI/CD</strong>：コードを書くのは人間。上限は人間のコーディング時間</li>
+          <li><strong>ソフトウェアファクトリー</strong>：多数のエージェントが並列に書く。上限は<strong>変更をどれだけ速く検証できるか</strong></li>
+        </ul>
+        <p>つまり新しい製品は「チェック」そのものである。仕様、シナリオ、検証器が、無人の出力を信じていいかを決める。</p>
+
+        <h3>工場は二度生まれた</h3>
+        <p>言葉自体は新しくない。1968年にBemerが「software factory」と言い、翌1969年に日立がソフトウェア専用の工場を作った。1991年にはCusumanoが『Japan's Software Factories』で再利用・品質保証・標準化を論じ、2004年にはMicrosoftがモデルとDSLから生成する「Software Factories」を出した。2017〜22年の米国防総省Kessel Runも同じ系譜にある。これらが解こうとしたのは<strong>人間の仕事のばらつきと再利用</strong>で、働き手は人間だった。</p>
+        <p>二度目の誕生は2026年である。1月にDan Shapiroが「ダークファクトリー」を語り、2月にStrongDMがマニフェストを出し、7月にはAI Engineer World's Fairのメインテーマになった。今回の問題は、<strong>人が見ていない出力をどう信じるか</strong>である。</p>
+      </section>
+
+      <section class="article-section" id="levels">
+        <p class="section-label">02 — LEVELS</p>
+        <h2>ほとんどの会社はレベル3にいる。人間がまだ差分を読んでいる</h2>
+        <p class="metaphor-line"><strong><a class="slide-jump" href="decks/software-factory.html#s10" target="deck-frame" onclick="document.getElementById('deck').scrollIntoView({behavior:'smooth'})">▶ SLIDES 10–11</a></strong>Shapiroの5つのレベル、ライト・トワイライト・ダーク。</p>
+        <p>Shapiroは自動運転のレベル分けを借りて、AIと開発者の関係を6段階にした。L0は全部手書き、L1はAIインターン（補完と小さなタスク）、L2はジュニアの相棒（ペアプロ、開発者の約9割がここ）。<strong>L3はマネージャー</strong>で、AIが書いた差分を人間がレビューする。<strong>L4はプロダクトマネージャー</strong>で、人間は仕様を書き、結果を確認する。<strong>L5がダークファクトリー</strong>で、仕様を入れるとコードが出てきて、誰もコードを読まない。</p>
+        <p>各社の記事を読んで配置すると、Stripe、Ramp、Uber、CloudflareはL3、Spotify、OpenAI、AWS Kiro CrewはL4、StrongDM、Steve YeggeのGas Town、AnthropicのC compilerはL5になる（配置は自分の読みである）。<strong>ほぼ全員がL3で頭打ちになっている。</strong></p>
+        <p>もう一つの軸が「明るさ」だ。<strong>ライト</strong>は人間がコードを読む。<strong>トワイライト</strong>はエージェントが必要なときに人間を呼ぶ。<strong>ダーク</strong>は誰もコードを読まない。ここで大事なのは、明るさは会社ごとではなく<strong>ループごとに決める</strong>ということだ。Osmaniのルールは明快で、そのループのチェックが<strong>安く、ごまかしにくく、安定している</strong>ときだけダークにしていい。認証、課金、公開APIには人間を残す。</p>
+      </section>
+
+      <section class="article-section" id="why-now">
+        <p class="section-label">03 — WHY NOW</p>
+        <h2>2025年に、長く走るエージェントと安いサンドボックスが揃った</h2>
+        <p class="metaphor-line"><strong><a class="slide-jump" href="decks/software-factory.html#s12" target="deck-frame" onclick="document.getElementById('deck').scrollIntoView({behavior:'smooth'})">▶ SLIDE 12</a></strong>3つの条件と、PR数という結果。</p>
+        <p>条件は三つある。一つ目は<strong>モデルが長いタスクを持てるようになった</strong>こと。METRの計測では、モデルがこなせるタスクの長さは約7か月ごとに倍になっており、OpenAIはCodexの1回の実行が6時間を超える例を報告している。二つ目は<strong>サンドボックスが安く速くなった</strong>こと。Stripeは開発環境を約10秒で立ち上げ、RampはModal上でエージェントごとにフルスタックを用意する。三つ目は<strong>ハーネスがヘッドレスで動く</strong>ようになったこと。Claude Code SDKやCodex execで、パイプラインがエージェントをビルドステップのように呼べる。</p>
+        <p>結果として数字が出ている。Stripeではエージェント（Minion）が作ったPRが<strong>週1,300件以上</strong>マージされ、UberではPRの<strong>70%以上</strong>がエージェントに帰属し、Rampではマージ済みPRの<strong>約半分</strong>が社内エージェントInspectから始まっている。OpenAIは5か月で<strong>約100万行</strong>を、一行も手で書かずに作った。いずれも各社の自己申告である。</p>
+      </section>
+
+      <section class="article-section" id="blueprint">
+        <p class="section-label">04 — BLUEPRINT</p>
+        <h2>工場は9つの持ち場の直列と、フィードバックと統制でできている</h2>
+        <p class="metaphor-line"><strong><a class="slide-jump" href="decks/software-factory.html#s13" target="deck-frame" onclick="document.getElementById('deck').scrollIntoView({behavior:'smooth'})">▶ SLIDES 13–25</a></strong>全体の地図、ステーションごとの技術・研究・未解決の問い。</p>
+        <p>調査から組み立てた設計図は、11のステーションに分かれる。これはどこか一社が公開している標準ではなく、約130のソースから自分たちがまとめたものである。</p>
+        <ol class="rule-list">
+          <li><div><strong>Intake（受付）</strong><p>Slackでのメンション、Linearのチケット、本番アラート、フリート全体の変更依頼。何が実行を始めるかを決める。</p></div></li>
+          <li><div><strong>Spec（仕様）</strong><p>何を作るか、どう作るか、どの手順で作るかをファイルにする。GitHub Spec KitやAWS Kiroなど。薄すぎるとエージェントが推測し、厚すぎると遅いコーディングと変わらない。</p></div></li>
+          <li><div><strong>Context（文脈）</strong><p>文脈は予算である。約100行のAGENTS.mdという地図を常に渡し、それ以外は必要なときに読ませる。OpenAIの言葉では「1,000ページのマニュアルではなく地図を」。</p></div></li>
+          <li><div><strong>Orchestrate（編成）</strong><p>作業をタスクグラフに分け、多数のエージェントを走らせる。ただしOsmaniの「オーケストレーション税」のとおり、エージェントは増やせても人間の注意は並列化できない。</p></div></li>
+          <li><div><strong>Sandbox（隔離環境）</strong><p>エージェントごとに使い捨ての開発環境を与え、本番・秘密情報・インターネットから切り離す。Stripeが言う「監督する人間がいない」状態を安全にするのは、この隔離である。</p></div></li>
+          <li><div><strong>Harness（作業者）</strong><p>モデルがツールを使って読み、編集し、実行し、テストするループ。Princetonの SWE-agent は、モデルを変えずにコマンド設計だけで成績を上げた。道具が腕を決める。</p></div></li>
+          <li><div><strong>Verify（検証）</strong><p>エージェントは検証器が見ているものを解く。だからlint、テスト、LLM判定、隠しシナリオと、ごまかしにくいチェックを積み上げる。Carliniいわく「検証器はほぼ完璧でなければ、Claudeは間違った問題を解く」。</p></div></li>
+          <li><div><strong>Review（レビュー）</strong><p>新しいボトルネック。人間が承認する会社、AIレビューと人間を組み合わせる会社、シナリオで置き換えて人間が見ない会社に分かれる。</p></div></li>
+          <li><div><strong>Ship（出荷）</strong><p>フィーチャーフラグ、カナリア、テレメトリーで影響範囲を小さくし、異常があればラインを止める。DORA 2025では、AI利用はスループット向上と同時に安定性低下と結びついていた。</p></div></li>
+          <li><div><strong>Feedback（還流）</strong><p>エラーを下書きPRにして受付に戻し、AGENTS.mdやスキルやテストを直して工場そのものを直す。</p></div></li>
+          <li><div><strong>Govern（統制）</strong><p>すべての持ち場の下にある。エージェントごとのIDと責任者となる人間、権限、トークン予算、PR数以外の指標。METRのRCTでは、熟練開発者16人がAIを使うと<strong>19%遅くなり</strong>、本人たちは20%速くなったと感じていた。</p></div></li>
+        </ol>
+        <p>第2部の一行要約はこうなる。<strong>生成が安くなると、渋滞は上流の仕様と下流のレビューに移る。</strong>上流では「これは正しいものか」が、下流では「これは正しく作られているか」が詰まる。HumanLayerは、10〜100倍ではなく<strong>安全な2〜3倍</strong>を狙い、ラインの一番遅いところに投資しろと言っている。</p>
+      </section>
+
+      <section class="article-section" id="cases">
+        <p class="section-label">05 — CASES</p>
+        <h2>大企業はL3〜L4、L5を名乗るのは小さなチームである</h2>
+        <p class="metaphor-line"><strong><a class="slide-jump" href="decks/software-factory.html#s26" target="deck-frame" onclick="document.getElementById('deck').scrollIntoView({behavior:'smooth'})">▶ SLIDES 26–37</a></strong>8つの工場をスイムレーンで描き、6つを一覧にし、共通点を抜き出す。</p>
+        <p>スライドでは、人間・エージェント・機械のレーンに分けて各社の工場を描いている。数字はすべて各社の自己申告である。</p>
+        <ul>
+          <li><strong>StrongDM（L5）</strong>：「コードは人間が書いてはならない」。人間はレビューもしない。代わりに、Okta、Jira、Slackなど6サービスのデジタルツインの上で、エージェントから隠したシナリオを走らせ、LLMが満足度を採点する。トークンは<strong>エンジニア1人1日1,000ドル</strong>が下限。</li>
+          <li><strong>Stripe Minions（L3）</strong>：Slackでボットを呼ぶと、温めておいた開発環境が約10秒で立ち上がり、goose（の社内フォーク）が実装し、CIは最大2回まで回してPRになる。<strong>人間が全PRをレビューする。</strong></li>
+          <li><strong>Spotify Honk（L4）</strong>：フリート管理のパイプラインはそのまま、スクリプトだけをClaude Codeに置き換えた。LLM判定がセッションの約4分の1を差し戻し、移行作業の時間を60〜90%削減した。</li>
+          <li><strong>OpenAI（L4）</strong>：Codexが読むために作られたリポジトリと、LinearのチケットをCodexの実行に変えるSymphony。「人間が舵を取り、エージェントが実行する」。</li>
+          <li><strong>Anthropic C compiler（L5）</strong>：16体のClaudeがDocker内で、gitのロックファイルでタスクを取り合いながら、テストだけを頼りに10万行のCコンパイラを作った。Linux 6.9が起動する。API費用は2万ドル未満。</li>
+          <li><strong>Ralph、Gas Town（個人）</strong>：Huntleyのループと、Yeggeの「町」。Gas Townでは人間はMayorとだけ話し、20〜30体のエージェントの作業状態はgit上の台帳に残る。</li>
+          <li><strong>HumanLayer（L3）</strong>：2025年7月に完全にライトを消し、11月頃の3度目の障害の後に手で書き直した。今は人間が仕様を見て、コードを読む。合言葉は「Read the dang code」。</li>
+        </ul>
+        <p>共通しているのは、<strong>タスクごとのサンドボックス</strong>と、<strong>人間より先に機械のチェックを通すこと</strong>、そして<strong>状態をエージェントの記憶ではなくファイルに置くこと</strong>である。違うのは最後のゲートだけで、スコアだけの会社、人間がPRを読む会社、安全なら自動マージする会社、人間が証拠を見て承認する会社に分かれる。</p>
+      </section>
+
+      <section class="article-section" id="debates">
+        <p class="section-label">06 — DEBATES</p>
+        <h2>作る人は「もっと進め」、測る人と保守する人は「落ち着け」と言う</h2>
+        <p class="metaphor-line"><strong><a class="slide-jump" href="decks/software-factory.html#s38" target="deck-frame" onclick="document.getElementById('deck').scrollIntoView({behavior:'smooth'})">▶ SLIDES 38–48</a></strong>6つの論点の両論と、各立場に必要な技術。</p>
+        <p>六つの論点のどれでも、作っている側は前に進めたがり、計測している側と保守している側はブレーキを踏む、という構図になっている。</p>
+        <h3>ダークか、ライトか</h3>
+        <p>ダーク派は「コードではなく振る舞いを検証しろ」と言う。エージェントはコードに合わせてテストを書き換えられるので、StrongDMはシナリオをリポジトリの外に置く。反対派は「テストが通っている間に設計が腐る」と言う。HumanLayerの原因分析は「保守性を壊しても罰がない」だった。<strong>両者とも限界は検証だと認めていて、分かれるのは設計の質に人間の読解が要るかどうか</strong>である。落としどころはトワイライトで、チェックが信頼できるループだけを自動化し、意図・設計・リスクには人を残す。</p>
+        <h3>レビューはどうするか</h3>
+        <p>使われている方法は六つある。人間が全差分を読む（Stripe）、設計を先に見てからコードを小分けで見る（HumanLayer）、AIが全変更をレビューし人間が署名する（Cloudflare、Uber）、リスクで深さを変える、CIやビデオなどの作業証拠を人間が見る（Symphony、Ramp）、シナリオだけで誰も読まない（StrongDM）。違いは<strong>人間がどれだけコードを読むか</strong>に尽きる。</p>
+        <h3>生産性は本物か</h3>
+        <p>会社の数字はAIの出力量を数えている。一方、統制された研究の結果は小さく、まちまちで、ときにマイナスである。METRの2025年のRCTでは作業時間が19%増え、Farosの2.2万人のデータではAI採用度が高いとPRあたりのインシデントが242.7%増えた。そもそも「触った」「書いた」「生成した」「マージした」が混ざっているので、会社間の数字は比べられない。</p>
+        <h3>仕様駆動はMDDの再来か、歴史は繰り返すか、トークン代は見合うか</h3>
+        <p>仕様を「ソースそのもの」に近づけるほど、モデル駆動開発（MDD）と同じ問題を抱える、とBöckelerは指摘する。歴史を見ても、日立もSDCもMicrosoftもKessel Runも、品質は上げたが広がらずに止まった。そこから借りるべきはトヨタの<strong>自働化とアンドン</strong>、つまり異常があれば機械が自分で止まり、すぐに人を呼ぶというルールである。お金の面では、StrongDMの1日1,000ドルを250営業日で掛けると年25万ドルで、給料並みになる。今のところ「見合う」証拠は、支出額と企業価値が中心である。</p>
+        <p>最後のスライドの結論はこうだ。<strong>暗くすることは決断ではなく能力である。</strong>一段暗くするたびに人間のチェックが一つ消えるので、その分を何かで置き換えられなければならない。</p>
+      </section>
+
+      <section class="article-section" id="stack">
+        <p class="section-label">07 — STACK</p>
+        <h2>重要度が上がるのは、エージェントとmainブランチの間の層である</h2>
+        <p class="metaphor-line"><strong><a class="slide-jump" href="decks/software-factory.html#s49" target="deck-frame" onclick="document.getElementById('deck').scrollIntoView({behavior:'smooth'})">▶ SLIDES 49–58</a></strong>8つの層と製品、サンドボックス、CI、ハーネス、編成、検証、IDとコスト。</p>
+        <p>工場はモデル、ハーネス、文脈とツール、編成、サンドボックス、検証とCI、レビューとマージ、デプロイと観測の8層でできていて、IDと権限とコストがそれらを横断する。スライドではそれぞれの層の実際の製品を並べた。</p>
+        <p>いくつか印象に残った点を挙げる。サンドボックスのベンダーは隔離だけでなく、<strong>スナップショット、フォーク、再開</strong>といった状態の扱いで競っている。CIはエージェントがループの中で呼ぶ道具になるので、速く、キャッシュされ、回数に上限がなければならない（Stripeは2回まで、Dropboxはflaky testの修正を5回まで）。数時間かかるエージェントの作業をクラッシュで失わないために、TemporalやCloudflare Workflowsのような<strong>永続実行</strong>が下に入る。統制では、エージェントごとに人間のスポンサー、短命なトークン、セッションあたりのコストモデルを持たせる。Uberのコスト式は「ユーザー数 × セッション × ターン × リクエスト × トークン × 単価」で、因数ごとに削る手段がある。</p>
+        <p>今後重要になると自分たちが読んでいるのは、モデルのルーティング、ヘッドレスなハーネス、MCPゲートウェイ、チケット駆動の永続ワークフロー、タスクごとのマイクロVM、エージェントの道具としてのCI、隠しシナリオとデジタルツインである。どれも<strong>エージェントとmainブランチの間</strong>にある。</p>
+      </section>
+
+      <section class="article-section" id="tacit">
+        <p class="section-label">08 — OUR VIEW: TACIT KNOWLEDGE</p>
+        <h2>ここから私見。顧客が知っていることの8割は、水面の下にある</h2>
+        <p class="metaphor-line"><strong><a class="slide-jump" href="decks/software-factory.html#s59" target="deck-frame" onclick="document.getElementById('deck').scrollIntoView({behavior:'smooth'})">▶ SLIDES 59–61</a></strong>氷山、そして工場が受け取るもの。</p>
+        <p>ここまでは調査の報告だった。ここからは自分の意見である。結論から言うと、<strong>工場が儲かるかどうかは暗黙知で決まる</strong>と思っている。</p>
+        <p>工場に「打刻ボタンを作って」「CRMを作って」と頼めば作ってくれる。しかし顧客一社一社は、膨大な暗黙知を抱えている。マニュアル、仕様書、既存のデータとして書かれているのは、感覚的にはせいぜい2割である。残りの8割は現場にしかない。誰が実際に使うのか。毎日何に困っているのか。使いながらどう考えているのか。どの作業が一番多いのか。その人たちが自分の顧客と何を話しているのか。（80/20は自分の大まかな見積もりで、計測した値ではない。）</p>
+        <p>工場が受け取れるのは、細いパイプを通ってくる<strong>依頼文と、存在する文書だけ</strong>である。その左側にある、顧客が知っているが書いていないことは、入り口ですべて失われる。だから工場は、技術的には動くが<strong>その現場には合わない汎用的な答え</strong>を作る。HumanLayerの処方箋も、コードを書く前の製品レビューから始まっている。</p>
+      </section>
+
+      <section class="article-section" id="practice">
+        <p class="section-label">09 — OUR VIEW: PRACTICE</p>
+        <h2>レーンで育て、定期的に直し、一枚の図面を共有する</h2>
+        <p class="metaphor-line"><strong><a class="slide-jump" href="decks/software-factory.html#s62" target="deck-frame" onclick="document.getElementById('deck').scrollIntoView({behavior:'smooth'})">▶ SLIDES 62–67</a></strong>レーン、1%のずれ、ケイデンス、3つの文書、図面、2種類の暗黙知。</p>
+        <h3>需要に合わせてレーンを足す</h3>
+        <p>工場は使うほど扱うタスクの種類が増える。何でもやる一本のレーンではなく、デザインとエンジニアのエージェントを持つフロントエンドのレーン、自分のエージェントを持つバックエンドのレーン、というように専門のレーンに分け、<strong>需要が見えたときに初めて新しいレーンを足す</strong>。各レーンには人間のオーナーを一人置き、工場が大きくなっても一人あたりの認知負荷を平らに保つ。</p>
+        <h3>1%のずれは複利で効く</h3>
+        <p>暗黙知の小さなずれ、たとえば1%は、自動化が走るほど大きくなる。人間のチェックなしに200ステップ走ると 1.01<sup>200</sup> ≈ 7.3倍、25ステップごとにチェックすれば 1.01<sup>25</sup> ≈ 1.28倍で済む。これはデータではなく算数の例えだが、無人で長く走るほど戻るのが難しくなり、AI特有の雑な成果物（AIスロップ）が溜まっていく感覚には合っている。</p>
+        <p>だから答えは、思い出したときではなく<strong>決まったリズムで</strong>、レビューし、開発し、現場からフィードバックをもらうことだ。そして、おかしいと思ったらラインを止める。ここでもトヨタの自働化とアンドンが参考になる。自分たちにとってのアンドンは、<strong>エージェントがいつ人間を呼ぶべきか</strong>のルールである。</p>
+        <h3>3つの文書を共通言語にする</h3>
+        <p>今の自分たちのやり方では、<strong>UXフロー</strong>（誰が何をどの順でやるか）、<strong>設計書</strong>（システムがどう動くか）、<strong>実装計画</strong>（エージェントが従う手順）の三つを、それぞれレビューしてから次を書く。レビューする人は一度に短い一層だけを読めばいいので、認知負荷が下がる。HumanLayerも、製品レビュー、システム設計、プログラム設計、縦切りの実装と、同じ形を取っている。意図、構造、コードレベルの計画の順に合意してから、エージェントに作らせる。</p>
+        <p>なぜ何千人もの人が一つのロケットを作れるのか。工場、マンション、超高層ビル、潜水艦でもいい。<strong>全員が、きちんとレビューされた一枚の図面から作るから</strong>である。試作や3Dプリントの実験も図面の中にあり、チェック用の文書は図面から派生し、レビュー会議が重ねられる。図面がずれないから、誰が作っても結果がぶれない。ソフトウェアファクトリーでは、三つの文書が図面で、エージェントが100人の作り手である。</p>
+        <h3>2種類の暗黙知をつなぐ</h3>
+        <p>ただし、レビューを増やして厳しくするだけでは足りない。暗黙知は二種類ある。<strong>人間の暗黙知</strong>は、顧客が本当に意図したこと、現場が実際にどう回っているか、なぜその選択をしたか。<strong>AIの暗黙知</strong>は、モデルが置いた前提、黙って選んだデフォルト、まだ誰も読んでいないコード。レビューはこの二つが出会う場所であり、共有された文書の上で、両側が自分の前提を表に出すときに一番うまく働く。</p>
+      </section>
+
+      <section class="article-section" id="money">
+        <p class="section-label">10 — OUR VIEW: DOES IT PAY?</p>
+        <h2>コーディングが簡単になると、ボトルネックは売る・入れる・広げるに移る</h2>
+        <p class="metaphor-line"><strong><a class="slide-jump" href="decks/software-factory.html#s68" target="deck-frame" onclick="document.getElementById('deck').scrollIntoView({behavior:'smooth'})">▶ SLIDES 68–72</a></strong>単一プロダクト、10の工場、ボトルネックの移動、ブランドか希少性か、4つの礎石。</p>
+        <p>一つのプロダクトに対しては、工場は確実に<strong>コストを下げ、機能を増やす</strong>。疑わしいのは、機能が増えると使いやすさや顧客の成果が良くなるのか、という点である。そこは利用者を理解しているかどうか、つまり氷山の水面下で決まる。YCのGarry Tanも、Railsで約50万行を生成した後に、量を追う「Foxconn工場」を作るなと警告している。</p>
+        <p>エンタープライズでは話が変わる。10社のために工場を作るということは、10社それぞれの暗黙知を吸収するということなので、<strong>共有の工場一つではなく、専用の工場が10個</strong>になると予想している。それぞれが現場で使われ、データと文脈が溜まり、次の出力が良くなる。使うほど良くなる複利がここにある。（まだ予想であって、測ったわけではない。）</p>
+        <p>結局、ソフトウェアファクトリーとは<strong>ボトルネックの移動</strong>である。コーディングが簡単になると、制約は営業、カスタマーサクセス、企画、コンサルティングに移る。エンタープライズなら営業、稟議、組織への定着、現場への展開。SMBなら営業、マーケティング、価格競争、差別化。日本では特に、オンボーディング、カスタマーサクセス、エバンジェリスト型のマーケティング、ブランディングが効いてくると思う。</p>
+        <p>まだ答えが出ていない問いもある。誰にとってもコードが安くなったとき、<strong>ブランドに全振りする</strong>のか、それとも<strong>希少性とボトルネックが移る先を追い続ける</strong>のか。自分はまだ決めていない。</p>
+        <p>長い目で見た問いは、作るほど文脈が溜まる工場を作れば、いずれAIが<strong>すべての部署に正しいアプリを正確に</strong>作れるようになるか、である。そのためには四つの礎石が要る。文脈を集めて保ち再利用すること。ソフトウェアファクトリーを設計する力。顧客が本当に言いたいことをつかむ力（これはまた氷山の問題である）。それをテンプレートにして展開する力。</p>
+      </section>
+
+      <section class="article-section" id="summary">
+        <p class="section-label">11 — SUMMARY</p>
+        <h2>まとめと、勉強会で投げた問い</h2>
+        <p class="metaphor-line"><strong><a class="slide-jump" href="decks/software-factory.html#s73" target="deck-frame" onclick="document.getElementById('deck').scrollIntoView({behavior:'smooth'})">▶ SLIDES 73–75</a></strong>まとめ、議論の問い、参考文献。</p>
+        <ol class="rule-list">
+          <li><div><strong>定義</strong><p>ソフトウェアファクトリーとは、仕様・チェック・レビューゲートのパイプラインの中で、エージェントが作る仕組みである。</p></div></li>
+          <li><div><strong>現場</strong><p>人間がレビューするライトから、誰もコードを読まないダークまで幅がある。そしてHumanLayerはライトを点け直した。</p></div></li>
+          <li><div><strong>暗黙知（私見）</strong><p>顧客が知っていることの大半は書かれていない。工場は与えられたものからしか作れない。</p></div></li>
+          <li><div><strong>実践（私見）</strong><p>需要に合わせてレーンを足し、決まったリズムで直し、UXフロー・設計書・実装計画というレビュー済みの文書を共有する。</p></div></li>
+          <li><div><strong>お金（私見）</strong><p>安いコードはボトルネックを営業、導入、展開に移す。価値もそこに行く。</p></div></li>
+        </ol>
+        <p>勉強会の最後には、自分たちの工場を作る前に話し合いたい問いを五つ置いた。読んでいる人の会社でも、そのまま使えると思う。</p>
+        <ul>
+          <li><strong>水面の下</strong>：いまの顧客について、現場にいたからこそ知っていることは何か。それをどう書き下すか。</li>
+          <li><strong>最初のレーン</strong>：どのレーンを最初に作り、誰がオーナーになるか。</li>
+          <li><strong>ケイデンス</strong>：どのくらいの頻度でレビューするか。何が起きたらエージェントは止まって人を呼ぶべきか。</li>
+          <li><strong>自分たちの図面</strong>：UXフロー、設計書、実装計画で足りているか。何が欠けているか。</li>
+          <li><strong>ブランドか希少性か</strong>：誰にとってもコードが安いなら、ブランドに賭けるか、次のボトルネックへ移り続けるか。</li>
+        </ul>
+        <blockquote>
+          <p>工場はコードを安くする。しかし、何を作るべきかは、いまも現場にしか書かれていない。</p>
+        </blockquote>
+        <p>参考文献の12本はスライドの最後（75枚目）にまとめてある。特にHumanLayerの「Why Software Factories Fail」、StrongDMの「Software Factories and the Agentic Moment」、Shapiroの「The Five Levels」、Osmaniの「Software Factories, Light and Dark」の四本は、最初に読むといい。</p>
+      </section>
+
+      <footer class="article-end">
+        <a href="./">ノート一覧へ戻る →</a>
+      </footer>
+    </article>
+  </main>
+
+  <aside class="related-notes" aria-labelledby="related-title">
+    <div class="related-heading"><span>NEXT TO READ</span><h2 id="related-title">関連するノート</h2></div>
+    <div class="related-grid">
+      <a href="software-industry-after-coding.html"><span>AI / Business</span><h3>ソフトウェア産業は結局どうなるのか</h3><p>作るコストが下がった後、ボトルネックと価値はどこへ移るのか。</p></a>
+      <a href="ai-native-development-environment.html"><span>AI</span><h3>AIネイティブな開発環境</h3><p>エージェントが働く場所をどう作るか。</p></a>
+      <a href="ai-native-document-server.html"><span>AI</span><h3>AIネイティブなドキュメントサーバー</h3><p>人とAIが同じ文書を読む前提で考える。</p></a>
+    </div>
+  </aside>
+
+  <footer class="site-footer">
+    <div><span>© 2026 Katsuya Ito</span><a href="../">Profile ↗</a></div>
+  </footer>
+</body>
+</html>

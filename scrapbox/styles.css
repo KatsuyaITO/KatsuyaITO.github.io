@@ -345,7 +345,7 @@ blockquote p { margin: 0; font-size: 16px; font-weight: 650; line-height: 1.8; }
 .code-window b { color: var(--aqua); }
 .rule-list { margin: 0 0 40px; padding: 0; list-style: none; counter-reset: rules; border-top: 1px solid var(--ink); }
 .rule-list li { counter-increment: rules; display: grid; grid-template-columns: 55px 1fr; padding: 25px 0; border-bottom: 1px solid var(--line); }
-.rule-list li::before { content: "0" counter(rules); color: var(--blue); font: 700 12px/1 ui-monospace, monospace; }
+.rule-list li::before { content: counter(rules, decimal-leading-zero); color: var(--blue); font: 700 12px/1 ui-monospace, monospace; }
 .rule-list strong { display: block; margin-bottom: 7px; font-size: 17px; }
 .rule-list p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
 .article-end { display: flex; align-items: end; justify-content: space-between; gap: 30px; padding-top: 30px; border-top: 1px solid var(--ink); }
@@ -586,3 +586,11 @@ blockquote p { margin: 0; font-size: 16px; font-weight: 650; line-height: 1.8; }
 .thumb--etale span { color: var(--aqua); white-space: nowrap; font: 700 26px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: -.04em; }
 .thumb--etale span sub { font-size: 14px; }
 .thumb--etale small { color: #8fa3b0; font: 600 8px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .1em; text-align: center; }
+.deck-embed { margin: 0 0 56px; }
+.deck-embed iframe { display: block; width: 100%; aspect-ratio: 16 / 10; border: 1px solid var(--ink); box-shadow: 10px 10px 0 #dce2e6; background: #eef0f2; }
+.deck-embed figcaption { margin-top: 18px; color: var(--muted); font-size: 11px; line-height: 1.75; }
+.deck-embed figcaption a { color: var(--blue); font-weight: 700; margin-left: 6px; }
+.article-section > ul { margin: 0 0 28px; padding-left: 1.3em; color: #3d4850; font-size: 15px; line-height: 1.9; }
+.article-section > ul li { margin-bottom: 8px; }
+.metaphor-line .slide-jump { color: var(--blue); text-decoration: none; }
+.metaphor-line .slide-jump:hover { text-decoration: underline; }
